@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Benjamin</title>
+  <style>
+    :root {
+      --bg: #0f0f12;
+      --surface: #1a1a1f;
+      --border: #2a2a32;
+      --text: #e8e8ed;
+      --text-dim: #8888a0;
+      --accent: #6366f1;
+      --accent-hover: #818cf8;
+      --error: #f87171;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'SF Pro Display', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+    .container {
+      max-width: 920px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    h1 {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin: 0 0 0.5rem 0;
+    }
+    .subtitle {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      margin-bottom: 2rem;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 1.25rem;
+    }
+    @media (min-width: 980px) {
+      .grid {
+        grid-template-columns: 1.3fr 0.9fr;
+        align-items: start;
+      }
+    }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem;
+    }
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+    label {
+      display: block;
+      font-size: 0.85rem;
+      font-weight: 500;
+      margin-bottom: 0.4rem;
+      color: var(--text-dim);
+    }
+    textarea {
+      width: 100%;
+      min-height: 120px;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      resize: vertical;
+    }
+    input[type="text"], select {
+      width: 100%;
+      padding: 0.65rem 0.9rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+    }
+    textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    input[type="text"]:focus, select:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    textarea::placeholder {
+      color: var(--text-dim);
+      opacity: 0.7;
+    }
+    .row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+    @media (max-width: 640px) {
+      .row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .radio-group {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+    .radio-group label {
+      display: flex;
+      align-items: center;
+      gap: 0.35rem;
+      color: var(--text);
+      margin: 0;
+      font-size: 0.9rem;
+    }
+    .file-area {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.75rem 1rem;
+      background: var(--surface);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .file-area:hover { border-color: var(--accent); }
+    .file-area.has-file { border-style: solid; }
+    .file-area input[type="file"] { display: none; }
+    .file-name {
+      color: var(--text-dim);
+      font-size: 0.9rem;
+      flex: 1;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .file-name.has-file { color: var(--accent); }
+    .file-clear {
+      background: none;
+      border: none;
+      color: var(--text-dim);
+      cursor: pointer;
+      font-size: 0.85rem;
+      padding: 0.25rem;
+    }
+    .file-clear:hover { color: var(--error); }
+    button[type="submit"] {
+      background: var(--accent);
+      color: white;
+      border: none;
+      padding: 0.65rem 1.5rem;
+      border-radius: 8px;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button[type="submit"]:hover { background: var(--accent-hover); }
+    button[type="submit"]:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+    .response {
+      margin-top: 2rem;
+      padding: 1.25rem;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      font-size: 0.95rem;
+    }
+    .response.error { border-color: var(--error); color: var(--error); }
+    .response-header {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-bottom: 0.75rem;
+    }
+    .usage {
+      font-size: 0.8rem;
+      color: var(--text-dim);
+      margin-top: 0.75rem;
+    }
+    .sources {
+      margin-top: 1rem;
+      padding-top: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .sources h4 {
+      margin: 0 0 0.6rem 0;
+      font-size: 0.9rem;
+      color: var(--text-dim);
+      font-weight: 500;
+    }
+    .sources ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: grid;
+      gap: 0.45rem;
+    }
+    .sources li {
+      font-size: 0.88rem;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.5rem 0.6rem;
+    }
+    .doc-toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 0.8rem;
+    }
+    .doc-toolbar h3 {
+      font-size: 1rem;
+      margin: 0;
+    }
+    .btn-small {
+      background: transparent;
+      color: var(--text-dim);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 0.35rem 0.6rem;
+      font-size: 0.8rem;
+      cursor: pointer;
+    }
+    .btn-small:hover {
+      color: var(--text);
+      border-color: var(--accent);
+    }
+    .doc-list {
+      display: grid;
+      gap: 0.55rem;
+    }
+    .doc-item {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.55rem 0.65rem;
+      font-size: 0.85rem;
+      color: var(--text-dim);
+    }
+    .doc-item strong {
+      color: var(--text);
+      display: block;
+      margin-bottom: 0.2rem;
+      font-weight: 500;
+      word-break: break-word;
+    }
+    .hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Benjamin</h1>
+    <p class="subtitle">Claude Sonnet 4.5 via OpenRouter (Bedrock + ZDR). Use direct mode for uploaded files or RAG mode for ingested vertical collections.</p>
+
+    <div class="grid">
+      <div class="card">
+        <form id="chatForm">
+          <div class="form-group">
+            <label>Objective</label>
+            <select id="objective" name="objective">
+              <option value="expert_network_brief">Expert Network Brief (V1)</option>
+              <option value="interview_guide">Interview Guide (V2)</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label>Mode</label>
+            <div class="radio-group">
+              <label><input type="radio" name="mode" value="direct" checked> Direct</label>
+              <label><input type="radio" name="mode" value="rag"> RAG</label>
+            </div>
+          </div>
+
+          <div id="directSection">
+            <div class="form-group">
+              <label for="file">File (optional)</label>
+              <div class="file-area" id="fileArea" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" name="file" accept=".txt,.md,.py,.json,.csv,.log,.xml,.html,.yaml,.yml,.docx,.pdf">
+                <span class="file-name" id="fileName">Click to select a supported file</span>
+                <button type="button" class="file-clear" id="fileClear" style="display:none">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="ragSection" class="hidden">
+            <div class="row">
+              <div class="form-group">
+                <label for="industry">Industry</label>
+                <input id="industry" type="text" placeholder="e.g. semiconductors">
+              </div>
+              <div class="form-group">
+                <label for="stakeholderType">Stakeholder Type</label>
+                <input id="stakeholderType" type="text" placeholder="e.g. enterprise customer">
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="projectObjectives">Project Objectives</label>
+              <textarea id="projectObjectives" placeholder="Describe the engagement objective"></textarea>
+            </div>
+            <div class="form-group">
+              <label for="keyQuestions">Key Questions</label>
+              <textarea id="keyQuestions" placeholder="List key hypotheses or questions"></textarea>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea id="message" name="message" placeholder="Enter your request." required></textarea>
+          </div>
+
+          <button type="submit" id="submitBtn">Send</button>
+        </form>
+
+        <div id="response" class="response" style="display:none"></div>
+      </div>
+
+      <div class="card">
+        <div class="doc-toolbar">
+          <h3>Document Library</h3>
+          <button class="btn-small" id="refreshDocsBtn" type="button">Refresh</button>
+        </div>
+        <div id="docList" class="doc-list"></div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const form = document.getElementById('chatForm');
+    const objective = document.getElementById('objective');
+    const message = document.getElementById('message');
+    const modeInputs = document.querySelectorAll('input[name="mode"]');
+    const directSection = document.getElementById('directSection');
+    const ragSection = document.getElementById('ragSection');
+    const projectObjectives = document.getElementById('projectObjectives');
+    const keyQuestions = document.getElementById('keyQuestions');
+    const industry = document.getElementById('industry');
+    const stakeholderType = document.getElementById('stakeholderType');
+    const fileInput = document.getElementById('fileInput');
+    const fileArea = document.getElementById('fileArea');
+    const fileName = document.getElementById('fileName');
+    const fileClear = document.getElementById('fileClear');
+    const submitBtn = document.getElementById('submitBtn');
+    const responseEl = document.getElementById('response');
+    const docList = document.getElementById('docList');
+    const refreshDocsBtn = document.getElementById('refreshDocsBtn');
+
+    function currentMode() {
+      return [...modeInputs].find(i => i.checked)?.value || 'direct';
+    }
+
+    function toggleModeUI() {
+      const mode = currentMode();
+      const isRag = mode === 'rag';
+      directSection.classList.toggle('hidden', isRag);
+      ragSection.classList.toggle('hidden', !isRag);
+    }
+
+    modeInputs.forEach(input => input.addEventListener('change', toggleModeUI));
+    toggleModeUI();
+
+    fileInput.addEventListener('change', () => {
+      if (fileInput.files.length) {
+        fileName.textContent = fileInput.files[0].name;
+        fileName.classList.add('has-file');
+        fileArea.classList.add('has-file');
+        fileClear.style.display = 'block';
+      }
+    });
+
+    fileClear.addEventListener('click', (e) => {
+      e.stopPropagation();
+      fileInput.value = '';
+      fileName.textContent = 'Click to select a text file';
+      fileName.classList.remove('has-file');
+      fileArea.classList.remove('has-file');
+      fileClear.style.display = 'none';
+    });
+
+    async function loadDocuments() {
+      docList.innerHTML = '<div class="doc-item">Loading…</div>';
+      try {
+        const res = await fetch('/api/documents');
+        const docs = await res.json().catch(() => []);
+        if (!res.ok) {
+          docList.innerHTML = `<div class="doc-item">Error ${res.status}</div>`;
+          return;
+        }
+        if (!docs.length) {
+          docList.innerHTML = '<div class="doc-item">No ingested documents.</div>';
+          return;
+        }
+        docList.innerHTML = docs.map(d => `
+          <div class="doc-item">
+            <strong>${escapeHtml(d.filename || 'unknown')}</strong>
+            vertical=${escapeHtml(d.vertical || '-')} | chunks=${d.chunk_count ?? 0}
+          </div>
+        `).join('');
+      } catch (err) {
+        docList.innerHTML = `<div class="doc-item">${escapeHtml(err.message)}</div>`;
+      }
+    }
+
+    refreshDocsBtn.addEventListener('click', loadDocuments);
+    loadDocuments();
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const mode = currentMode();
+      submitBtn.disabled = true;
+      responseEl.style.display = 'block';
+      responseEl.classList.remove('error');
+      responseEl.innerHTML = '<span class="response-header">Sending…</span>';
+
+      const fd = new FormData();
+      fd.append('mode', mode);
+      fd.append('objective', objective.value);
+
+      let userMessage = message.value.trim();
+      if (mode === 'rag') {
+        const ragContextParts = [];
+        if (projectObjectives.value.trim()) ragContextParts.push(`Project objectives: ${projectObjectives.value.trim()}`);
+        if (keyQuestions.value.trim()) ragContextParts.push(`Key questions: ${keyQuestions.value.trim()}`);
+        if (industry.value.trim()) ragContextParts.push(`Industry: ${industry.value.trim()}`);
+        if (stakeholderType.value.trim()) ragContextParts.push(`Stakeholder type: ${stakeholderType.value.trim()}`);
+        ragContextParts.push(`User request: ${userMessage}`);
+        userMessage = ragContextParts.join('\n');
+      }
+      fd.append('message', userMessage);
+
+      if (mode === 'direct' && fileInput.files.length) {
+        fd.append('file', fileInput.files[0]);
+      }
+
+      try {
+        const res = await fetch('/api/chat', {
+          method: 'POST',
+          body: fd,
+        });
+        const data = await res.json().catch(() => ({}));
+
+        if (!res.ok) {
+          responseEl.classList.add('error');
+          responseEl.innerHTML = `<span class="response-header">Error ${res.status}</span>${data.detail || res.statusText}`;
+          return;
+        }
+
+        let html = `<span class="response-header">Response</span>${escapeHtml(data.content)}`;
+        if (data.usage) {
+          html += `<div class="usage">${data.usage.prompt_tokens} prompt + ${data.usage.completion_tokens} completion tokens</div>`;
+        }
+        if (Array.isArray(data.sources) && data.sources.length) {
+          html += '<div class="sources"><h4>Sources</h4><ul>';
+          html += data.sources.map(s => {
+            const filename = s.filename || 'unknown';
+            const chunk = s.chunk_id ?? '?';
+            const score = Number.isFinite(s.score) ? s.score.toFixed(3) : 'n/a';
+            return `<li>doc=${escapeHtml(s.doc_id || '-')}, file=${escapeHtml(filename)}, chunk=${chunk}, score=${score}</li>`;
+          }).join('');
+          html += '</ul></div>';
+        }
+        responseEl.innerHTML = html;
+        loadDocuments();
+      } catch (err) {
+        responseEl.classList.add('error');
+        responseEl.innerHTML = `<span class="response-header">Error</span>${escapeHtml(err.message)}`;
+      } finally {
+        submitBtn.disabled = false;
+      }
+    });
+
+    function escapeHtml(s) {
+      const div = document.createElement('div');
+      div.textContent = s;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>

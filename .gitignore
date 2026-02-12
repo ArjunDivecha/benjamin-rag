@@ -1,0 +1,14 @@
+# Python
+.venv/
+.venv*_archived/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Local RAG data
+chroma_db/
+uploaded_docs/
+
+# Secrets / local config
+.env
+.env.*
