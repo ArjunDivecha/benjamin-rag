@@ -28,6 +28,149 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 
 ---
 
+## TL;DR: Add/Update RAG Data (Copy/Paste)
+
+```bash
+# 1) Go to project
+cd "/Users/arjundivecha/Dropbox/AAA Backup/A Working/Benjamin"
+
+# 2) First-time setup only (skip if already done)
+python3.12 -m venv .venv
+./.venv/bin/pip install -r requirements.txt
+
+# 3) Create data folders
+mkdir -p real_data/V1 real_data/V2
+
+# 4) Put your real files into:
+#    real_data/V1  (expert network brief content)
+#    real_data/V2  (interview guide content)
+
+# 5) Ingest / update RAG
+./.venv/bin/python preprocess.py --vertical V1 --dir real_data/V1
+./.venv/bin/python preprocess.py --vertical V2 --dir real_data/V2
+
+# 6) Verify
+./.venv/bin/python preprocess.py --list
+./.venv/bin/python preprocess.py --stats
+```
+
+If you edit or add files later, run Step 5 again.
+
+---
+
+## Add or Update Real Project Data (Beginner Guide)
+
+Use this exact workflow when your friend wants to add real files or update the RAG later.
+
+### Step 0: Open terminal in the project folder
+
+```bash
+cd "/Users/arjundivecha/Dropbox/AAA Backup/A Working/Benjamin"
+```
+
+### Step 1: One-time setup (only first time on a new machine)
+
+```bash
+python3.12 -m venv .venv
+./.venv/bin/pip install -r requirements.txt
+```
+
+Create `.env` in this folder with:
+
+```bash
+OPENROUTER_API_KEY=your_openrouter_api_key_here
+```
+
+### Step 2: Create data folders
+
+```bash
+mkdir -p real_data/V1 real_data/V2
+```
+
+Use:
+- `real_data/V1` for Objective 1 content (expert network briefs, screening examples, past briefs)
+- `real_data/V2` for Objective 2 content (interview guides, stakeholder question banks, methodology)
+
+### Step 3: Add files into the correct folder
+
+Supported file types:
+- `.txt`
+- `.md`
+- `.docx`
+- `.pdf`
+- `.csv`
+- `.json`
+- `.xml`
+- `.yaml`
+- `.yml`
+
+Format expectations:
+- Keep files text-heavy (the pipeline reads text, not images).
+- For PDFs, prefer text-based PDFs (scanned/image-only PDFs often extract little or no text).
+- Very short files may ingest as `0 chunks` and not help retrieval (chunks under 100 tokens are discarded).
+- `--dir` is non-recursive (it only ingests files directly inside that folder).
+
+### Step 4: Ingest into the RAG (this is the update command)
+
+Run these commands every time you want the RAG to pick up new/changed files:
+
+```bash
+./.venv/bin/python preprocess.py --vertical V1 --dir real_data/V1
+./.venv/bin/python preprocess.py --vertical V2 --dir real_data/V2
+```
+
+You can also ingest specific files (useful if files are outside `real_data/`):
+
+```bash
+./.venv/bin/python preprocess.py --vertical V1 --files "/full/path/file1.docx" "/full/path/file2.pdf"
+```
+
+### Step 5: Confirm what is in the RAG
+
+```bash
+./.venv/bin/python preprocess.py --list
+./.venv/bin/python preprocess.py --list V1
+./.venv/bin/python preprocess.py --list V2
+./.venv/bin/python preprocess.py --stats
+```
+
+What to expect in output:
+- `ingested (...)` means the file was processed and vectors were updated.
+- `skipped (unchanged)` means that exact file content was already ingested in that vertical.
+- `skipped (unsupported file type)` means extension is not supported.
+- `skipped (read error: ...)` means parsing failed for that file.
+
+### Step 6: How to update data later
+
+Common scenarios:
+
+1. Replace an existing document with a newer version:
+   - Keep the same filename in the same vertical folder.
+   - Overwrite the file with new content.
+   - Re-run Step 4 command for that vertical.
+   - Result: old chunks for that filename are replaced automatically.
+
+2. Add a brand-new document:
+   - Drop it into `real_data/V1` or `real_data/V2`.
+   - Re-run Step 4 command for that vertical.
+
+3. Remove a document from the RAG:
+   - Find its `doc_id`:
+     ```bash
+     ./.venv/bin/python preprocess.py --list
+     ```
+   - Remove by `doc_id`:
+     ```bash
+     ./.venv/bin/python preprocess.py --remove <doc_id>
+     ```
+
+4. Move a document from V1 to V2 (or V2 to V1):
+   - Remove old entry by `doc_id`.
+   - Put file in the new vertical folder.
+   - Re-run Step 4 for the new vertical.
+
+---
+
 ## 1. Product Vision
 
 Benjamin is an internal AI tool for a boutique strategy consulting firm that competes with McKinsey, BCG, and Bain. It accelerates repetitive components of client engagements — specifically **expert network briefs** and **interview guide drafting** — by combining curated knowledge bases (RAGs) with Claude Sonnet 4.5 and domain-specific system prompts.
@@ -162,7 +305,7 @@ LOCAL (M2 Mac - 24GB)                    CLOUD (only network call)
 | No telemetry | No analytics, no usage tracking to external services |
 | ZDR enforcement | `provider.zdr: true` on every OpenRouter call |
 | Bedrock-only routing | `provider.order: ["amazon-bedrock"]`, `allow_fallbacks: false` |
-| Credential security | API keys via 1Password or local env file only |
+| Credential security | API key via local `.env` file or environment variable only |
 
 ---
 
@@ -217,7 +360,7 @@ Each objective uses a dedicated system prompt stored as a local markdown file. B
 
 | Component | Technology |
 |---|---|
-| **Runtime** | Python 3.11+, M2 Mac (24GB) |
+| **Runtime** | Python 3.12, M2 Mac (24GB) |
 | **Web framework** | FastAPI + Uvicorn |
 | **Frontend** | HTML/CSS/JS (single-page, served by FastAPI) |
 | **LLM** | Claude Sonnet 4.5 via OpenRouter → Amazon Bedrock (ZDR) |
