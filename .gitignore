@@ -12,3 +12,4 @@ uploaded_docs/
 # Secrets / local config
 .env
 .env.*
+!.env.example

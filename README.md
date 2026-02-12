@@ -4,6 +4,30 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 
 ---
 
+## Quick Start (Local)
+
+1. Use Python 3.12.
+2. Install dependencies:
+   ```bash
+   python3.12 -m venv .venv
+   ./.venv/bin/pip install -r requirements.txt
+   ```
+3. Create `.env` in the repo root:
+   ```bash
+   OPENROUTER_API_KEY=your_openrouter_api_key_here
+   ```
+4. Optional: ingest synthetic starter corpus:
+   ```bash
+   ./.venv/bin/python preprocess.py --vertical V1 --dir synthetic_data/V1
+   ./.venv/bin/python preprocess.py --vertical V2 --dir synthetic_data/V2
+   ```
+5. Start app:
+   ```bash
+   ./.venv/bin/uvicorn backend:app --port 8000
+   ```
+
+---
+
 ## 1. Product Vision
 
 Benjamin is an internal AI tool for a boutique strategy consulting firm that competes with McKinsey, BCG, and Bain. It accelerates repetitive components of client engagements — specifically **expert network briefs** and **interview guide drafting** — by combining curated knowledge bases (RAGs) with Claude Sonnet 4.5 and domain-specific system prompts.
@@ -201,7 +225,7 @@ Each objective uses a dedicated system prompt stored as a local markdown file. B
 | **Vector store** | ChromaDB (persistent, local) |
 | **Metadata store** | SQLite |
 | **Document parsing** | python-docx, pypdf, plain text |
-| **Credentials** | 1Password CLI / env vars / local `.env.txt` |
+| **Credentials** | `OPENROUTER_API_KEY` via local `.env` or environment variable |
 
 ---
 

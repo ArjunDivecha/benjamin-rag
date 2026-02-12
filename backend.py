@@ -25,17 +25,8 @@ Then open http://localhost:8000
 """
 
 import os
-import sys
 from pathlib import Path
 from typing import Optional
-
-# Add python_utils for 1Password
-sys.path.insert(0, "/Users/arjundivecha/python_utils")
-try:
-    from onepassword_credentials import load_credentials, OnePasswordError
-except ImportError:
-    load_credentials = None
-    OnePasswordError = Exception
 
 import requests
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
@@ -77,24 +68,46 @@ app.add_middleware(
 # -----------------------------------------------------------------------------
 # Credentials
 # -----------------------------------------------------------------------------
+def _load_key_from_env_file(path: Path) -> Optional[str]:
+    """Extract OPENROUTER_API_KEY from a dotenv-style file."""
+    if not path.exists():
+        return None
+
+    for raw_line in path.read_text(encoding="utf-8").splitlines():
+        line = raw_line.strip()
+        if not line or line.startswith("#"):
+            continue
+        if line.startswith("export "):
+            line = line[len("export ") :].strip()
+        if not line.startswith("OPENROUTER_API_KEY="):
+            continue
+        value = line.split("=", 1)[1].strip().strip('"\'')
+        if value:
+            return value
+    return None
+
+
 def _load_openrouter_key() -> str:
-    """Load OpenRouter API key from 1Password or fallback."""
-    if load_credentials:
-        try:
-            load_credentials(["OpenRouter"], verbose=False)
-        except OnePasswordError:
-            pass
-    key = os.environ.get("OPENROUTER_API_KEY")
+    """Load OpenRouter API key from environment or local dotenv files."""
+    key = os.environ.get("OPENROUTER_API_KEY", "").strip()
     if key:
         return key
-    env_path = "/Users/arjundivecha/Dropbox/AAA Backup/.env.txt"
-    if os.path.exists(env_path):
-        with open(env_path) as f:
-            for line in f:
-                line = line.strip()
-                if line.startswith("OPENROUTER_API_KEY=") and not line.startswith("#"):
-                    return line.split("=", 1)[1].strip().strip('"\'')
-    raise RuntimeError("OPENROUTER_API_KEY not found")
+
+    env_candidates = [
+        Path(APP_DIR) / ".env",
+        Path.cwd() / ".env",
+        Path(APP_DIR) / ".env.txt",
+        Path.cwd() / ".env.txt",
+    ]
+    for env_file in env_candidates:
+        value = _load_key_from_env_file(env_file)
+        if value:
+            return value
+
+    raise RuntimeError(
+        "OPENROUTER_API_KEY not found. Create a local .env file with "
+        "OPENROUTER_API_KEY=your_key"
+    )
 
 
 # -----------------------------------------------------------------------------
