@@ -41,6 +41,8 @@ APP_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(APP_DIR, "static")
 OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
 MODEL = "anthropic/claude-sonnet-4.5"
+OLLAMA_BASE_URL = "http://localhost:11434"
+LOCAL_RAG_MODEL = "qwen2.5:32b"
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2MB
 TEXT_ENCODINGS = ["utf-8", "latin-1", "cp1252"]
 VECTOR_DB_PATH = os.path.join(APP_DIR, "chroma_db")
@@ -48,6 +50,12 @@ UPLOADED_DOCS_PATH = os.path.join(APP_DIR, "uploaded_docs")
 OBJECTIVE_TO_COLLECTION = {
     "expert_network_brief": "V1",
     "interview_guide": "V2",
+    "insights_qa": "V3",
+}
+OBJECTIVE_TO_PROVIDER = {
+    "expert_network_brief": "openrouter",
+    "interview_guide": "openrouter",
+    "insights_qa": "ollama",
 }
 
 _vector_store = None
@@ -196,6 +204,56 @@ def _openrouter_chat(api_key: str, messages: list[dict]) -> dict:
     return resp.json()
 
 
+def _load_local_model_config() -> tuple[str, str]:
+    base_url = os.environ.get("OLLAMA_BASE_URL", OLLAMA_BASE_URL).strip().rstrip("/")
+    model = os.environ.get("LOCAL_RAG_MODEL", LOCAL_RAG_MODEL).strip()
+    if not base_url:
+        base_url = OLLAMA_BASE_URL
+    if not model:
+        model = LOCAL_RAG_MODEL
+    return base_url, model
+
+
+def _ollama_chat(messages: list[dict]) -> dict:
+    base_url, model = _load_local_model_config()
+    payload = {
+        "model": model,
+        "messages": messages,
+        "stream": False,
+        "options": {
+            "temperature": 0.1,
+        },
+    }
+
+    try:
+        resp = requests.post(f"{base_url}/api/chat", json=payload, timeout=240)
+    except requests.RequestException as exc:
+        raise HTTPException(
+            status_code=502,
+            detail=f"Local LLM request failed: {exc}",
+        ) from exc
+
+    if resp.status_code != 200:
+        try:
+            err = resp.json()
+            msg = err.get("error") or err.get("message") or resp.text
+        except Exception:
+            msg = resp.text
+        raise HTTPException(status_code=resp.status_code, detail=msg)
+
+    data = resp.json()
+    message = data.get("message", {}) if isinstance(data, dict) else {}
+    content = str(message.get("content", "")).strip()
+    return {
+        "content": content,
+        "usage": {
+            "prompt_tokens": int(data.get("prompt_eval_count") or 0),
+            "completion_tokens": int(data.get("eval_count") or 0),
+        },
+        "model": model,
+    }
+
+
 # -----------------------------------------------------------------------------
 # Routes
 # -----------------------------------------------------------------------------
@@ -217,12 +275,12 @@ async def chat(
     if mode not in {"direct", "rag"}:
         raise HTTPException(status_code=400, detail="mode must be 'direct' or 'rag'")
 
-    try:
-        api_key = _load_openrouter_key()
-    except RuntimeError as e:
-        raise HTTPException(status_code=500, detail=str(e))
-
     if mode == "direct":
+        try:
+            api_key = _load_openrouter_key()
+        except RuntimeError as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
         # Build user content: optional file context + message
         user_content_parts = []
 
@@ -259,7 +317,7 @@ async def chat(
     if not objective or objective not in OBJECTIVE_TO_COLLECTION:
         raise HTTPException(
             status_code=400,
-            detail="objective must be 'expert_network_brief' or 'interview_guide' in rag mode",
+            detail="objective must be 'expert_network_brief', 'interview_guide', or 'insights_qa' in rag mode",
         )
 
     try:
@@ -292,16 +350,36 @@ async def chat(
         f"User request:\n{message.strip()}"
     )
 
-    data = _openrouter_chat(
-        api_key=api_key,
-        messages=[
-            {"role": "system", "content": system_prompt},
-            {"role": "user", "content": user_content},
-        ],
-    )
-    choice = data.get("choices", [{}])[0]
-    content = choice.get("message", {}).get("content", "").strip()
-    usage = data.get("usage", {})
+    provider = OBJECTIVE_TO_PROVIDER.get(objective, "openrouter")
+    model_name = MODEL
+    if provider == "openrouter":
+        try:
+            api_key = _load_openrouter_key()
+        except RuntimeError as e:
+            raise HTTPException(status_code=500, detail=str(e))
+
+        data = _openrouter_chat(
+            api_key=api_key,
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_content},
+            ],
+        )
+        choice = data.get("choices", [{}])[0]
+        content = choice.get("message", {}).get("content", "").strip()
+        usage = data.get("usage", {})
+    elif provider == "ollama":
+        local = _ollama_chat(
+            messages=[
+                {"role": "system", "content": system_prompt},
+                {"role": "user", "content": user_content},
+            ]
+        )
+        content = local.get("content", "")
+        usage = local.get("usage", {})
+        model_name = local.get("model", LOCAL_RAG_MODEL)
+    else:
+        raise HTTPException(status_code=500, detail=f"Unsupported provider: {provider}")
 
     return {
         "content": content,
@@ -309,6 +387,8 @@ async def chat(
             "prompt_tokens": usage.get("prompt_tokens", 0),
             "completion_tokens": usage.get("completion_tokens", 0),
         },
+        "provider": provider,
+        "model": model_name,
         "sources": [
             {
                 "doc_id": c.get("metadata", {}).get("doc_id"),
@@ -328,6 +408,30 @@ def documents(vertical: Optional[str] = None):
     except RuntimeError as exc:
         raise HTTPException(status_code=500, detail=str(exc))
     return doc_manager.list_documents(vertical=vertical)
+
+
+@app.get("/api/documents/{doc_id}/file")
+def document_file(doc_id: str):
+    try:
+        _, doc_manager = _ensure_rag_services()
+    except RuntimeError as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+
+    doc = doc_manager.get_document(doc_id)
+    if not doc:
+        raise HTTPException(status_code=404, detail=f"Document '{doc_id}' not found")
+
+    stored_path = Path(str(doc.get("stored_path", "")))
+    if not stored_path.exists() or not stored_path.is_file():
+        raise HTTPException(
+            status_code=404,
+            detail=f"Stored file missing for document '{doc_id}'",
+        )
+
+    return FileResponse(
+        path=str(stored_path),
+        filename=doc.get("filename") or stored_path.name,
+    )
 
 
 @app.get("/api/stats")

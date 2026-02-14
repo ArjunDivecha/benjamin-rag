@@ -8,6 +8,7 @@ from pathlib import Path
 PROMPT_FILES = {
     "expert_network_brief": "expert_network_brief.md",
     "interview_guide": "interview_guide.md",
+    "insights_qa": "insights_qa.md",
 }
 
 

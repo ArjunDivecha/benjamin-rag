@@ -36,6 +36,21 @@ def _seed_v1_doc(tmp_path: Path, monkeypatch):
     return doc_id
 
 
+def _seed_v3_doc(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    vs, dm = backend._ensure_rag_services()
+    content = b" a" * 200
+    doc_id = dm.save_document(content, "interview_notes.txt", "V3", chunk_count=1)
+    vs.upsert_document(
+        collection_name="V3",
+        doc_id=doc_id,
+        chunks=["Interviewee A said the market is growing fast despite volatility."],
+        embeddings=[[1.0, 0.0, 0.0]],
+        metadata={"filename": "interview_notes.txt", "vertical": "V3"},
+    )
+    return doc_id
+
+
 def test_chat_direct_mode_with_file_still_works(tmp_path: Path, monkeypatch):
     _configure_rag_paths(tmp_path, monkeypatch)
     captured = {}
@@ -121,6 +136,44 @@ def test_chat_rag_empty_vertical_returns_error(tmp_path: Path, monkeypatch):
     assert "No relevant context" in resp.json()["detail"]
 
 
+def test_chat_rag_insights_qa_uses_local_provider(tmp_path: Path, monkeypatch):
+    _seed_v3_doc(tmp_path, monkeypatch)
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+    captured = {}
+
+    def fake_post(url, *args, **kwargs):
+        captured["url"] = url
+        captured["payload"] = kwargs.get("json", {})
+        return _DummyResponse(
+            200,
+            {
+                "message": {"content": "insights ok"},
+                "prompt_eval_count": 17,
+                "eval_count": 9,
+            },
+        )
+
+    monkeypatch.setattr(backend.requests, "post", fake_post)
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat",
+        data={
+            "message": "Who mentioned market growth?",
+            "mode": "rag",
+            "objective": "insights_qa",
+        },
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["content"] == "insights ok"
+    assert data["provider"] == "ollama"
+    assert data["usage"]["prompt_tokens"] == 17
+    assert data["usage"]["completion_tokens"] == 9
+    assert data["sources"]
+    assert captured["url"].endswith("/api/chat")
+    assert "messages" in captured["payload"]
+
+
 def test_documents_endpoint_returns_list(tmp_path: Path, monkeypatch):
     _seed_v1_doc(tmp_path, monkeypatch)
     client = TestClient(backend.app)
@@ -130,6 +183,23 @@ def test_documents_endpoint_returns_list(tmp_path: Path, monkeypatch):
     assert isinstance(docs, list)
     assert len(docs) == 1
     assert docs[0]["vertical"] == "V1"
+
+
+def test_document_file_endpoint_returns_file(tmp_path: Path, monkeypatch):
+    doc_id = _seed_v1_doc(tmp_path, monkeypatch)
+    client = TestClient(backend.app)
+    resp = client.get(f"/api/documents/{doc_id}/file")
+    assert resp.status_code == 200
+    assert resp.content == (b" a" * 200)
+    assert "seed.txt" in resp.headers.get("content-disposition", "")
+
+
+def test_document_file_endpoint_missing_doc_returns_404(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    client = TestClient(backend.app)
+    resp = client.get("/api/documents/doc_missing/file")
+    assert resp.status_code == 404
+    assert "not found" in resp.json()["detail"].lower()
 
 
 def test_stats_endpoint_returns_expected_keys(tmp_path: Path, monkeypatch):
