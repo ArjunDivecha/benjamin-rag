@@ -8,6 +8,7 @@ __pycache__/
 # Local RAG data
 chroma_db/
 uploaded_docs/
+/Data/
 
 # Secrets / local config
 .env
