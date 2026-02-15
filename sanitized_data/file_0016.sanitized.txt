@@ -1,0 +1,999 @@
+[Page 1]
+July 7, 2023
+CONFIDENTIAL
+Phase 1 Wrap-Up Discussion
+AI Services – Growth Strategy
+
+
+[Page 2]
+[ORG]
+Table of ContentIntroduction1Executive Summary2Market Dynamics3Customers4
+Implications for Welocalize7Appendix8
+CONFIDENTIAL
+2
+5Competitive Landscape6Welocalize FP&A
+
+[Page 3]
+[ORG]
+Context and Objectives•[ORG] has commissioned [PERSON] to assess the global market for AI services and co-design AIS’ strategy, alongside the [ORG] team•The project is conducted in two phases:•Phase 1: Market Assessment•Phase 2: Growth Strategy•In Phase 1, we are assessing:•Market dynamics, including value chain, use cases, trends, and directional estimates of size, growth and profitability by segment•Customer segmentation and needs, including buyer profiles, purchasing behavior and key purchasing criteria•Competitive landscape, including key players, relative strengths and weaknesses, areas of differentiation and trends•Implications for [ORG]: •Which market segments are the most attractive for [ORG]? •What customer needs are underserved and what opportunities exist for [ORG] to leverage its unique strengths? •What are key success factors for [ORG] to succeed in those segments?•This Phase 1 final report has been prepared in ~5 weeks
+1Introduction CONFIDENTIAL
+3
+
+[Page 4]
+[ORG]
+CONFIDENTIAL
+[ORG] would like to better understand the AI data services market and how to win in it, with a view to building a 2-3-year strategic plan
+Phase 2:Growth Strategy
+Project Scope
+4
+Phase 1:Market Assessment
+1234
+Market dynamics: value chain, use cases, trends, directional estimates of size, growth and profitability by segmentCustomer segmentation and needs, buyer profiles, purchasing behavior / key purchasing criteria, distribution channels  Competitive landscape, including key players, relative strengths and weaknesses, areas of differentiation and trendsStrategic implications for [ORG]•Which market segments are the most attractive for [ORG]?•What customer needs are underserved and what opportunities exist for [ORG] to leverage its unique strengths? •What are key success factors for [ORG] to succeed in those segments?123
+What is our winning aspiration? •What does success look like for [ORG] (e.g. revenue/profitability metrics, ROI, additional benefits/value created)?Where will we play? •What service/product/customer/geographic segments will we compete and win in, and why?How will we win?•What are our strategic positioning, unique value proposition and competitive advantages? •How will we grow in this market?•What is our “4P” strategy: Product, Pricing, Placement (Distribution), Promotion?•What structures and capabilities must be in place? •What investments are required and what return on investment can we expect?
+1IntroductionRECALL FROM KICK-OFF MEETING
+
+[Page 5]
+[ORG]
+CONFIDENTIAL
+Phase 1 is completed; we have started to gear up for Phase 2
+Steerco Discussion 4 (e.g. Fri Aug 4)Steerco Discussion 2(Fri Jul 7)Prep Meeting(Wed May 31)
+Weeks 1-2(Jun 5-16)Weeks 3-5(Jun 19 – Jul 7)Weeks 6-7(Jul 10-21)Weeks 7-8(Jul 24 – Aug 4)
+•Begin desk research to collect market, customer and competitor insights•Schedule and conduct first expert interviews•Analyze [ORG] data (e.g. financial data from PowerBI)•Share initial findings
+•Finalize desk research & analysis and expert interviews to assess market / customer / competitor landscape•Share findings informing AIS’ growth strategy (attractive segments to focus on / where to play)•Align on next steps
+•Align on Phase 2 approach•Align on winning aspiration / what success would look like•Align on where we will play (services, buyer segments, geographies, etc.)•Continuously collaborate with [ORG] Team on these topics
+•Align on how we will win (strategic positioning, “4P” strategy, team and structure to put in place)•Potentially quantify investments required and return on investment•Provide clear, actionable roadmap•Discuss potential next steps
+Plan
+Touch-points
+Phases 21Market AssessmentGrowth Strategy
+5
+Steerco Discussion 1(Tue Jun 20)
+Additional touchpoints / updates (via meetings and/or emails) as needed. More frequent touchpoints may be needed in Phase 2
+Steerco Discussion 3 (e.g. Tue Jul 25)
+•Gather stakeholder input + review [ORG] material•Develop / agree on approach and plan•Set up project team•Onboard to [ORG] systems•Launch expert requests + draft interview guides
+Week 0(May 25– Jun 2)0Preparation
+Team Workshop(May 26-27)
+Project Plan - Updated 
+1Introduction
+
+[Page 6]
+[ORG]
+Key Phase 1 workstreams are completePhase 1Work Streams Main Next Steps (Phase 2)DetailsCompletionMarket Dynamics
+Competitive Landscape
+6
+CONFIDENTIAL
+•Market segmentation and sizing complete
+•Competitive landscape overview and deep dives on key players complete
+•n/a
+•Crystallize [ORG]’s positioning and edge in the competitive landscape
+1Introduction
+Implications for [ORG]•Implications from Phase 1 drafted•Discuss findings and implications with [ORG] leadership•Agree on project next steps (Phase 2)
+[ORG] FP&A•Cost benchmark complete•Framework for gross margin improvement drafted; met with key stakeholders to discuss levers
+•Finalize discussion on levers with key stakeholders
+Customers•Customer segmentation and analysis of purchasing behavior complete•Speak with AIS account teams and key accounts•If needed, refine analysis of non-tech enterprise customers by vertical (e.g. pharma/healthcare, financial services, retail)
+
+[Page 7]
+[ORG]
+7
+We’ve conducted 24 interviews to date with 13 buyers and 11 competitors/ partners, and have met with 9 members of the [ORG] leadership teamExternal Interviews Conducted (24)Buyers (13)
+CONFIDENTIAL1Introduction
+Competitors and/or Partners (11)•[ORG],Managing Director / West Hybrid Cloud & Edge and Technology Transformation Campaign Leader•[ORG], Former Vice President – Product Management•[ORG], Senior Vice President / Chief Globalization Officer•[ORG], Director – Enterprise Solutions Group•[ORG], Former Director, AI Solutions•[ORG],Director of Strategic Internal Partnerships•[ORG], Former Board Member•[ORG], Chief Product and Marketing Officer•[ORG], Former Head of Studio•[ORG], Former VP of Operations and Growth•[ORG],VP & Managing Director, AI & Machine Learning
+•[ORG], Sr. Engineering Leader - Head of Cloud Technology, Tools, Observability and Developer Platform (Large Tech)•Credit Suisse Group, Global Head of Big Data & AI/ML Cloud Platform (Banking)•[ORG], Director of Machine Learning / Principal Scientist (Indep. LLM provider)•[ORG], Former AI Product Manager (AI “Startup”)•Google, Head of Program Management and Operations – Speech ([ORG])•Johnson & Johnson, Global Procurement Digital, Data Science & Analytics Director (Pharmaceuticals & Medical Devices)•[ORG], VP of Engineering & Product Group Lead – AI ([ORG])•[ORG],Head of Data Strategy, Architecture & Data Governance (Insurance)•[ORG], Global Program Director, Insights Strategy and Design (Pharmaceuticals)•[ORG], Former Senior Product Manager (Large Tech)•[ORG], Lead Product Manager / Walmart, Fmr. Sr. PM (Large Tech / Retail)•[ORG], Former Director of Data Science / Zuora, Chief Data Scientist (Large Tech)•Yext, Director of Data Science (AI “Startup”)Key Internal Stakeholders Met (9)•[PERSON], Chief Executive Officer•ReganDelaney, Head of Product•ChrisGrebisz, Chief Innovation Officer•TiarneHawkins, AI Services Director•DougKnoll, Former VP of Engineering•[PERSON], Senior Solutions Architect (AI)•[PERSON], Head of AI Services•CarmeTronchoni, Director – Talent Development•[PERSON], Chief Customer Officer
+If needed, we could interview more buyers in specific verticals (e.g. pharma/healthcare, retail, financial services)
+
+[Page 8]
+[ORG]
+8
+Documents from [ORG] and NEP (7+)•AI Growth Strategy by [ORG]•[ORG] – Information Memorandum•[ORG]. – WelocalizeGrowthStrategy•Project Oregon – Information Memorandum, Dataset and Data Services Overview•WelocalizeAI Data Services Overview•Welocalizeand AI - Customer Presentation Template•Welocalizeand AI - BOD Presentation (May 2023)
+We’ve consulted over 65 secondary sources to date
+Competitor Websites and Filings* (30+)•Alegion•[ORG] (public)•[ORG] (parent company is public)•[ORG]•[ORG]•[ORG]•[ORG]•[ORG] (public)•[ORG]•[ORG]•Mindy Support•[ORG] (public)•[ORG]•[ORG]•[ORG]•[ORG](public)•[ORG] / [ORG] (public)•[ORG]•Etc.
+External Sources (60+)General Market Research Providers (11)•Allied Market Research•CB Insights•[ORG]•Fortune Business Insights•Frost & Sullivan•Grand View Research
+CONFIDENTIAL
+Specialized Publications (10)•AI News•AIthority•[ORG]•CSA•Gartner
+1Introduction
+Secondary Sources (67+)
+Interview Transcripts & Podcasts (3)•AI & Data Today•SlatorPod•Third Bridge transcripts (x5)Company Data Providers(4)•Capital IQ•Crunchbase•Techcrunch•SacraBroker Reports(2)•Jefferies•Canaccord Genuity
+•KPMG•Markets & Markets•PrecedenceResearch•Research & Markets•Straits Research
+•IDC•Informa (AI Business, Tractica)•Nimdzi•Slator•State of AI
+*Public company filings and investor presentations where available
+
+[Page 9]
+Executive Summary
+
+[Page 10]
+[ORG]
+CONFIDENTIAL
+Executive Summary (1/5)
+10
+•The global data collection and annotation for AI market is estimated at USD ~5.5 billion in 2022, projected to grow at an average of 30+% per year over the next 5 years, to reach USD ~22 billion by 2027•Computer vision (video, image, sensor fusion), which is language-agnostic, represents the majority of the market by data type, while language-dependent annotation (text, audio) represents over a third of the market. However, text is projected to grow faster than other data types – largely thanks to the advent of Large Language Models (LLMs)•By geography, the US and Canada represent ~60% of the global market, followed by Europe (~15%), China (~10%) and Asia-Pacific ex China (~10%)•By offering category, Computer Vision annotation (excluding Relevance) and Relevance & Discovery (e.g. search / ad / product / map relevance) and represent the majority of the market (~35% and ~30%, respectively), although Conversational AI (~10%) and LLM Training (~7.5%) are growing fast•Within language-dependent annotation, non-English annotation represents a minority of the overall market (~30%). However, clients typically prefer having one vendor cover both English and non-English annotation, especially if the workflow is the same – making multi-lingual capabilities an important differentiator•Most customers are expected to continue outsourcing the majority of their AI data annotation – although some (e.g. [ORG], LLM builders and AI startups) may in-source part of their spend due to concerns over privacy/security, data quality and/or cost•With the rise of generative AI and increased automation in data labeling, market demand is shifting towards higher quality, more complex work that requires more qualified / specialized annotators (e.g. prompt engineering / response writing, domain knowledge in law / finance / medicine / coding / etc.)
+Market Dynamics
+2Executive SummaryFOR DISCUSSION
+
+[Page 11]
+[ORG]
+CONFIDENTIAL
+Executive Summary (2/5)
+11
+•Large companies (defined as companies with over USD 2 billion in annual revenue and/or part of the Global 2000 list) account for ~70% of the global external data collection and annotation spend•[ORG] companies (Google, [ORG], [ORG], [ORG], [ORG]) are by far the largest segment (~45% of the market), each spending hundreds of millions annually on data services•The second biggest segment is non-tech enterprises (~18% of the market) – split across multiple verticals, with the largest being retail, financial services and healthcare. Spend is usually concentrated in the top 3-5 players per industry, who each spend millions (or tens of millions) annually•Large automotive and autonomous driving companies (Toyota, Tesla, GM Cruise, Honda, etc.) account for ~16% of the market, with companies typically spending tens of millions annually (mostly on computer vision projects)•Large tech companies (defined as tech companies with annual revenue over USD 2 billion, excluding [ORG]) are another significant segment (~11% of the market), with companies each spending in the millions (or tens of millions) annually•AI startups typically have limited and volatile budgets; they are best served in a “self-serve” way as a bet on their future•Outside of [ORG], most clients prefer AI data service providers to use their own labeling platforms (rather than clients’ tools); this represents an opportunity for [ORG] to improve margins through increased automation and control over delivery•Customers’ purchasing process vary based on company size/sophistication, use case and volume purchased, but for enterprise customers it usually involves seven main stages. A key stage, which [ORG] does not seem to perform well in due to lack of brand awareness / industry reputation, is vendor pre-selection – during which, once needs are defined, customers decide which vendors to consider. This is typically not a sophisticated process, and is influenced by existing vendor relationships, vendor reputation for the target use case, recommendations from colleagues and industry peers, and/or a cursory online search. This pre-selection is typically driven by the technology and/or product team in charge of deploying the model.
+Customers 
+2Executive SummaryFOR DISCUSSION
+
+[Page 12]
+[ORG]
+CONFIDENTIAL
+Executive Summary (3/5)
+12
+•Direct sales represent the vast majority (~95%) of today’s market, though indirect sales are expected to gain some share•Partnering with technology consultancies (e.g. [ORG], [ORG], [ORG]) may present an interesting opportunity to penetrate non-technology enterprise accounts. [ORG], for instance, recently signed a partnership agreement with [ORG]•Partnering with technology companies such as [ORG], the large cloud vendors ([ORG], [ORG], [ORG] , [ORG]) or [ORG] – for instance by offering labeling products/services through their marketplaces – may represent an opportunity. [ORG], for instance, signed a partnership with [ORG]. Cloud platforms, however, have gained limited traction to date: they also reduce vendors’ control over the customer experience and lead to commoditization (compared with having a portal on [ORG]’s own website)
+Channels
+2Executive SummaryFOR DISCUSSION
+•Competition can be segmented based on technology and workforce capability, with leading players trying to build strength in both•Scale, [ORG] and [ORG] are the largest players in this space, with relevant revenue* in the USD 250-400 million range•[ORG] and [ORG] operate large labeling workforces, and have some degree of technology platform•Scale started as a technology company, and has expanded into developing its own workforce•There is a large number of service-focused companies, including public companies ([ORG], [ORG]), mid-sized players in the USD 20-50+ million revenue range (e.g. [ORG], [ORG], [ORG]) and smaller companies
+Competitive Landscape
+*In 2022, [ORG]’s total revenue was USD ~2.5 billion of which ~14% (USD 340+ million) related to AI services
+Customers(continued)•Once vendors meet table stakes (i.e. supporting a specific use case / data type, and meeting compliance / security requirements for enterprise buyers), customers’ top 5 Key Purchasing Criteria are data quality/accuracy, scalability (volume and/or speed), variety of data, price and vendor reputation. Price can rank higher, depending on customer size, volume of data purchased, project criticality, program maturity and task complexity / vendor competition
+
+[Page 13]
+[ORG]
+CONFIDENTIAL
+Executive Summary (4/5)
+13
+Implications for [ORG]
+2Executive Summary
+•Some technology platforms have remained focused on technology (e.g. [ORG], Snorkel), while others have expanded into offering workforce solutions (e.g. [ORG], [ORG])•[ORG] participates in this market in several ways: [ORG] SageMaker offers both a labeling platform and optional workforce solution (Ground Truth Plus); [ORG] was [ORG]’s original crowdsourcing service offering (which powers Ground Truth Plus); and [ORG] Marketplace enables other product and/or service vendors to provide data-related services•Global technology consultancies (e.g. [ORG], [ORG]) may present a growing competitive threat: their labeling service offering grew as an offshoot to content moderation and represents a fast-growing market for them (e.g. recent USD 3 billion investment announcement from [ORG])
+Competitive Landscape(continued)
+•Market overall is booming, presenting opportunities for AIS’ growth and facilitating market share gain•Customers: 1/ Focus on [ORG] for volume, followed by Large Tech; 2/ Cross-sell into existing non-tech enterprise accounts to increase margins; 3/ Develop self-serve portal which AI startups (and other customers) can use•Offering:1/ Focus on text (fast-growing LLM work / conversational AI, and large relevance market), followed by audio annotation (e.g. conversational AI) though the latter is lower-growth, 2/ Developing audio collection capabilities is not a priority; computer vision even less (competitive, lower margin)•Geography: Focus primarily on North America (~60% of the market), followed by Europe (~20% of the market) – in terms of allocating sales / account management resources•Building [ORG]’s own annotation platform may help penetrate accounts outside of [ORG], while increasing gross margin (through automation) and quality (through customized controls)•Increasing brand awareness is key to make it onto customers’ “pre-selection” lists: this can be done through account management (existing accounts), proactive enterprise sales outreach (for potential new accounts) and marketing initiatives (to appear in online search results)
+FOR DISCUSSION
+
+[Page 14]
+[ORG]
+CONFIDENTIAL
+Executive Summary (5/5)
+14
+•Key next steps for Phase 2 include:•Aligning on objectives / key questions / approach•Set up meetings with AIS key account teams ([ORG], Google) and key accounts themselves (“customer satisfaction survey” + understand how we can expand)•Discuss / review “revenue bridge to 2025”•Discuss levers for gross margin improvement with account and finance teams (scheduled for July 12)•Discuss/refine positioning and unique value proposition•Discuss/refine offering•Discuss sales/marketing, delivery/operations and technology capabilities needed to deliver on “revenue and gross margin bridge” to 2025 (+ investments required)•Any other topics?
+Phase 2Next Steps
+2Executive SummaryFOR DISCUSSION
+
+[Page 15]
+Market Dynamics
+
+[Page 16]
+[ORG]
+CONFIDENTIAL
+In the AI data lifecycle, most customers seek vendors only for data collection and annotation, while less mature customers may want end-to-end support
+16Sources:[ORG], BM Interviews and Analysis
+3Market Dynamics – Value Chain 
+Machine Learning Operations / Artificial Intelligence Data Lifecycle
+[ORG] Focus
+•Problem Definition•Model Selection•Model Development•Feature Engineering*•Data Sourcing (collection and/or creation)•Data Preparation•Data Cleaning•Annotation/Labeling Framework Development•Annotation/Labeling•Annotation/Labeling QA•Model Evaluation by Humans•Annotation/Labeling Framework Development•Annotation/Labeling•Annotation/Labeling QA•Evaluation Process•Evaluation Scoring•Model Fine-Tuning•Model Deployment•Model Monitoring and Maintenance•Model Re-Training
+Model Input
+Model Output
+•“Our customers tend to have their own data science and ML Ops organization. They don’t come to us to design and build their AI. We really focus on providing high quality human-enriched datasets” – [ORG], VP & Managing Director, AI & Machine Learning •“Tech companies, like Google, [ORG], [ORG] and Netflix, don’t hire us to build the model. But we do provide content moderation for some of these clients, and those contracts extend into data annotation / labeling. We’re not building / fine-tuning models. There’s no end-to-endservice. In less mature industries, like healthcare, consumer product firms like [ORG], industrial product firms like [ORG] and [ORG], or utilities which are very immature, they may give us more control over the end-to-end project because they can’t attract the right tech talent. Banking is very sophisticated when it comes to their core business, like fraud and analytics, but they’ll outsource non-core areas like IT and HR helpdesk” – [ORG], Managing Director•“Building and deploying the model is done in-house. We only go to vendors to get good data” – [ORG], Former Director of Data Science•“For the most part, we do things in-house, but we work with vendors for data” –  [ORG], Former Senior Product Manager*Feature Engineering is conducted multiple times throughout the ML Ops lifecycle, e.g. before data sourcing, during and after data preparation 
+
+[Page 17]
+[ORG]
+CONFIDENTIAL
+We combined primary and secondary research to size our addressable marketInput
+17
+Output•Existing Market Research (e.g. [ORG] report)•Bottom-Up Triangulation from Market Players’ Revenue•List 100+ players•Find their revenue where available•Estimate revenue for the long-tail•Expert Interviews
+12
+3
+Global Data Labeling Market Sizing by Player Category•Full Service Providers (tech + labor: e.g. [ORG], [ORG])•Managed Labor Providers (e.g. [ORG], [ORG])•Crowdsourced Providers (e.g. [ORG], [ORG])•Labeling Tools Providers (e.g. [ORG], [ORG])•Synthetic Data Providers (e.g. [ORG], [ORG], [ORG])
+Global Data Labeling Market Sizing by Additional Segments (estimates)•By Data Type (Text, Audio, Image, Video, etc.)•By Customer Size (Enterprise, Mid-Market, SMB)•[Potentially] By Industry and by Geography
+•Expert Interviews•Additional Secondary Research, where available12
+Market Sizing Methodology
+3Market Dynamics – Addressable Market
+
+[Page 18]
+[ORG]
+CONFIDENTIAL
+We segmented the labeling solutions market into five categories of players
+18
+3Market Dynamics – Addressable Market
+Sources:[ORG], CompanyWebsites, BM Interviews, Research & Analysis
+Vendor CategoryDescription Sample CompaniesFull ServiceVendors who provide a turnkey solution for data labeling, including their own technology platforms to manage the full data labeling lifecycle and provision of training data. May sub-contract part of the labeling to managed labeling service vendorsManaged LaborIn contrast with crowdsourcing, vendors who provide and manage a more predictable labor pool, often with more domain, geographical or language-specific characteristics and knowledge. Vendors often rely on customers to provide dataCrowdsourcedVendors who coordinate, assign and manage labeling results from individuals who can sign up through a website and are paid on a microwork per-task basis (general knowledge)Labeling ToolsVendors who provide software for customers (or other vendors) to manage their own data labeling, with varying degrees of automation
+Synthetic DataVendors who provide computer-generated data to augment real-world data for labeling and annotation
+
+
+[Page 19]
+[ORG]
+CONFIDENTIAL
+The global market size for data collection & labeling solutions exceeded USD 5 billion in 2022, and is projected to grow by 30+% p.a. in the next few years
+19
+Global Market Size for Data Collection & Labeling Solutions – by Vendor Type  [USD b]
+3Market Dynamics – Addressable Market
+[ID].[ID].010.6
+[ID].[ID].3
+[ID].[ID]
+2.2
+[ID].[ID].6
+3.7
+[ID].20.20.4
+1.2
+[ID].83.2
+2021
+4.22.5
+0.5
+5.5
+[PHONE]
+0.8
+[ID]
+20252024
+16.6
+22.0
+2026
+0.8Labeling ToolsCrowdsourcedManaged LaborFull Service
+Synthetic Data
+CAGR ‘22-’27
+48%44%22%
+Total
+28%32%
+Comments•We triangulated this market size with 1/ a bottom-up estimate of revenue from major players (low billions as a conservative estimate), 2/ expert interviews (e.g. quotes left / below) and 3/ other market reports (e.g. Grand View Research – low billions)•“Based on data I have, the current market size is around $2-3 billion and will grow at a 20-30% CAGR” – [ORG], CPO•“The market will grow at 50-60% per year” – [ORG], Former Board Member
+Sources:[ORG], BM Interviews, Research & Analysis
+32%
+[ORG] AISTotal Addressable Market
+“[The market size for labeling]is definitely in the billions, either single- or double-digit billions. I wouldn’t be surprised if the market were low double-digit billions” – [ORG], Former Head of Studio
+ESTIMATES
+
+[Page 20]
+[ORG]
+CONFIDENTIAL
+Text and audio combined represent over a third of the labeling market; text is expected to grow the fastest with the advent of Large Language Models
+20
+Global Market Size for Data Collection & Labeling Solutions – by Data Type [USD b]
+3Market Dynamics – Addressable Market
+Sources:[ORG], [ORG],BM Interviews, Research & Analysis
+~33%(1.8)
+~11%(0.8)
+~21%(2.6)
+9.5~9%(1.1)
+~30%(3.7)
+~8%(1.0)
+~29%(2.1)
+~30%(2.8)
+~21%(2.0)
+20242025
+~10%(0.9)~33%(4.1)
+7.2
+~30%(2.2)
+~9%(0.6) 100%
+~21%(1.5)
+2022
+~31%(2.9)
+2023
+12.5~8%(0.8)
+~23%(1.3)
+~22%(1.2)
+5.5
+~12%(0.7)~10%(0.5)
+Data Types Most Directly Addressable by [ORG]
+*Sensor fusion: combination of data from multiple sensors (e.g. LIDAR, RADAR), heavily used in autonomous driving
+DIRECTIONAL ESTIMATES – UPDATED 
+TextAudio
+ImageVideo
+Sensor Fusion*
+CAGR ‘22-’2522%20%51%
+Total
+27%27%
+32%Delta‘25-’22(2 pp)(3 pp)+11 pp(2.5 pp)(3.5 pp)
+Quotes•“Back in 2019, in terms of client external spend, I would’ve said 80-90% of the labeling market was computer vision, including sensor fusion. Now computer vision is closer to 60%, and text has grown significantly, very much driven by large language model work. Today around 40% is around text, LLM and RLHF labeling […] Audio is smaller than text […] Historically computer vision was very profitable, driven by self-driving. You’re starting to see the factors that made it profitable – a lot of industry excitement, investment dollars and a competitive element to it – now with RLHF and LLM fine-tuning […] Computer vision is pretty saturated. It will grow at 20-40% annually in the next few years: the focus will be more on high-value work vs high-volume work. On the other hand, text is growing really quickly: I don’t know if it’s 100% or 300% year-on-year. Text annotation is where the market is going” – [ORG], Former GM of Studio•“There are two broad categories of use cases: language-specific and language-agnostic […] Language-agnostic includes computer vision projects, such as autonomous vehicles and optical character recognition. These can be high in revenue, larger in scale, but lower in profitability as everyone is competing on cost and margins” – [ORG], Director of Enterprise Solutions Group•“I think audio will grow slower than image and video: that’s been the trend. The growth rate has been relatively stable over last 24 months; I would expect it to stay around 15% yoy, though voice search with gen AI could increase demand” – [ORG], VP & MD, AI & ML
+
+[Page 21]
+[ORG]
+CONFIDENTIAL
+While English accounts for most of the text & audio market, customers with multi-lingual requirements prefer vendors who can cover multiple languages
+21Sources: BM Interviews, Research & Analysis
+3
+InsightsSupporting Quotes
+English represents the majority of the market
+Clients with multi-lingual requirements prefer having one vendor cover multiple languages
+“Customer-facing applications are predominantly multi-lingual: 60% English, 40% other (Spanish, French, German – depends on our target market; incrementally release for other languages)” – [ORG] Sr Engineering Leader - Head of Cloud Technology, Tools, Observability and Developer Platform“Outside of China, English is at least 70% of the market. Francophone and Hispanic are next :15% and 15% remaining” – [ORG], Fmr. Board Member“English is still very dominant, including in LLM dataset. Race is to achieve dominance in English. Multi-lingual is important for [ORG], multi-market: big part of [ORG] strategy, but deprioritized in case of LLM work. Try to get to top 20-40 markets, as quickly as possible after English.For text and audio, 60% English. Just text is 80% English” – [ORG]., VP & MD, AI & ML“We prefer one vendor that covers multiple solutions / languages” – [ORG], Global Program Director, Insights Strategy and Design“If customers end up needing multiple languages for the same task, they would rather have one vendor doing both (same instructions / process). It depends on customer’s sophistication / willingness to multi-source” –  [ORG], Former Head of Studio“English is 50% of our work, and the rest is split across multiple languages. Procurement is a lot of work, and bespoke anytime. I would really want to minimize the number of commercial relationships we need to have” – Yext, Director – Data Science
+Global Market Size for Data Collection & Labeling Solutions, Text & Audio – by Language [USD b]
+English
+1.9
+~70%(1.3)
+2022
+~30%(0.6)100%Other Languages
+Note: this is the market for text and audio only (~34% of USD 5.5 b in 2022, i.e. USD 1.9 b
+Market Dynamics – Addressable Market
+
+[Page 22]
+[ORG]
+CONFIDENTIAL
+North America is by far the largest market for AI data services, followed by Europe; these regions will be [ORG]’s initial focus
+22
+3Market Dynamics – Addressable Market
+Sources:[ORG], BM Interviews, Research & Analysis
+ChinaEurope
+5.5
+Asia-Pacific(ex China)
+~60%(3.3)
+Rest of the World
+North America(US + Canada)
+2022
+~5%(0.3)
+~15%(0.8)
+100%
+~10%(0.5)~10%(0.5)
+Primary Focus
+DIRECTIONAL ESTIMATES
+Quotes and Other Supporting Data•“My view on the AI data services market is that it’s 60% North America, 20% Europe, 15% China and 5% rest of the world” – [ORG], CPO•“For a company with a client base like Scale, the vast vast majority of the market is US-based, which is where most AI innovation is happening. There is some amount of European spend, especially around self-driving, like German car OEMs […] China is very much a black box” – [ORG], Former Head of Studio•“In terms of AI overall, the leading markets are North America and China. The US is multiple times bigger than the European market […] China is more isolated. In terms of spend on data for AI, I think 80-90% comes from the US, 10% from Europe, Asia-Pacific ex China is single digits, Latin America and Africa are close to 0” – [ORG], Director of Machine Learning•“In terms of the market by geography, the US is 60-70%. Europe is maybe 5-10%: it’s pretty small for us. China is 15-20% [note from BM: [ORG] spun out of [ORG], a Chinese company], and then it’s the rest of the world, mostly APAC” – [ORG], Senior VP / Chief Globalization Officer•Cognilityca provides the following 2021 vendor revenue estimates:•[ORG]: 60% North America, 25% Europe, 10% Asia, 5% Australia•[ORG]: 65% North America, 20% Europe, 15% Asia-Pacific•[ORG]: 75% North America, 15% Europe, 10% APAC (ex China)•[ORG]: 50% North America, 25% Asia, 20% Europe, 5% Australia•[ORG]: 45% North America, 35% Europe, 15% APAC, 5% Middle East
+Secondary Focus
+Suggested [ORG] Focus (based on market size, [ORG] client base and cultural proximity)
+Global Market Size for Data Collection & Labeling Solutions – by Geography [USD b]
+
+[Page 23]
+[ORG]
+CONFIDENTIAL
+Relevance & Discovery is the largest offering category, followed by other Computer Vision annotation, though there is overlap between offerings
+23
+3Market Dynamics – Addressable Market
+Sources:[ORG], BM Interviews, Research & Analysis
+Quotes
+Computer Vision(Annotation ex Relevance)
+Data Sourcing(All Data Types)
+~8%(0.5)7.2Knowledge RetrievalLLM Training
+~35%(2.5)
+Relevance & Discovery
+Conversational AI
+2023
+~10%(0.7)
+~3%(0.2)
+~30%(2.2)
+~15%(1.1)
+DIRECTIONAL ESTIMATES
+•“Computer vision annotation and relevance are the biggest segments and are about the same size overall, even though computer vision gets more hype” – Scale, Former VP of Operations and Growth•“Around 70% of our business is in relevance. Outside of us, I might say relevance is more like 40% […] Data collection is 15% of the market […] However the lines are blurring between some of these categories: more LLMs are starting to merge with search. NLP and relevance are already overlapping with each other” – [ORG], VP & Managing Director, AI & ML•“Search relevance is big: a couple of our competitors are doing 80-90% of their work in that space. We’re not at that level. For the market overall, it’s probably 35-40% […] Data collection and capture is around 10% of market spend […] Reinforcement learning and the ranking of LLM output is around 5%” – [ORG], Senior VP•“I group conversational AI (audio and chat) and LLM training like ChatGPT together; those account for 20-30% of the spend and will grow the fastest” – [ORG], CPO•“Conversational AI and LLM training are in the same category. They account for 20-30% of market spend – with the vast majority going to text. I’m less knowledgeable about image-based generative AI […] Knowledge retrieval is maybe 10% of LLM spend” – [ORG], Director of Strategic AI Partnerships
+Global Market Size for Data Collection & Labeling Solutions – by Offering [USD b]Offering Categories Defined Jointly with [ORG] Team
+Note: we are using 2023 estimates (rather than 2022) as LLM-related work was very limited in 2022. Also, numbers in the graph do not add up to 100% due to rounding
+
+[Page 24]
+[ORG]
+CONFIDENTIAL
+Most customers are expected to continue outsourcing the majority of their annotation, though [ORG], LLM builders and startups also label in-house
+24Sources: BM Interviews, Research & Analysis
+3Market Dynamics – Trends 
+InsightsSupporting Quotes
+Most customers will continue to outsource most of their labeling
+[ORG], LLM builders and AI startups may annotate in-house over concerns about security, data quality and/or cost
+“In most cases, clients are willing to outsource 80% of annotation and do 20% in-house” – [ORG], Former Head of Studio“Many large tech companies and autonomous driving customers do prefer to outsource annotation. Annotationoften requires a large workforce of thousands of people, which I assume comes with risk that they don’t want, and high costs.Doing annotation in-house happens: some bigtech companies maintain large teams overseas, but it’s less common” – [ORG], VP and Managing Director, AI & Machine Learning“It would only make sense to do data annotation in-house if we had high volumeand believe it’s a core part of our business. Walmart loves in-house things: we built our own awful ML platform, but data annotation is really near the bottom of what we’d build in-house. We’re not spending that much money on data, compared to what we spend on [ORG] and ML infrastructure. This is also the case at [ORG] where I work now” – Walmart, Former Senior Product Manager“We will cut down heavily on in-house annotation and use vendors more. Our experience is not there” – Johnson & Johnson, Global Procurement Digital, Data Science & Analytics Director “[ORG] does use vendors but had data leak issues before I arrived. They’re trying to figure out how to do more in-house, with full-time employees on prem.[ORG] prioritizes privacy. They’d like to do more in-house because you have more control. JG, who’s the SVP for AI/ML, said he’d like to go in the direction of 60% in-house. I think that’s a major stretch, because there are so many challenges: how will you procure all laptops and tools in-house, get everyone security access –it was even hard for me–, how do you solve career development issues. I don’t think logistically they will be able to scale. They may end up at 30-40% in-house in 3-4 years. Today it’s more like 10-20%” – [ORG], Former Chief of Staff for the Head of AI/ML Product & Program Management“Clients may go in-house for one or both of two reasons. Either the data is very sensitive and they don’t want it shown to crowd workers for fear of data leaks. Or annotatingthedata requires in-house subject-matter expertise, for example in legal, medical, or financial fields […] Startups may also try to bootstrap annotation in-house due to cost” – [ORG], Former Head of Studio“For quality reasons and because it’s core to their business, LLM providers prefer to annotate in-house” – [ORG], Director of ML
+
+[Page 25]
+[ORG]
+CONFIDENTIAL
+Having one’s own labeling platform is a key success factor for AI data service providers, especially outside of [ORG] customers
+25Sources: BM Interviews, Research & Analysis
+3Market Dynamics – Trends 
+Benefits of Own PlatformSupporting Quotes“For us, having our own platform has been instrumental, especially for mega tech clients who have very varied use cases. We do a lot of web apps and can customize them for use cases in 1-2 days […] If you work in your own platform, you can optimize things much more efficiently. There’s a big delta in profitability between programs where we own the platform vs not. In some cases we've even been able to reduce our rates to clients, so they buy into that: they actually spend less in some cases when they allow us to work on our own platform” – [ORG], Senior Vice President / Chief Globalization Officer“Tooling is one of the most important pieces of all, even though some of the larger tech companies have their own platform. It is essential to sell to enterprise clients outside [ORG]” – [ORG], VP and Managing Director, AI & Machine Learning“We chose not to engage in projects where we only provide workforce: I cannot control quality or protect my name. In all our [ORG] projects, we controlled the platform […] 100% of the labeling was done on Scale’s platform: for data collection and management, it was a mix of customers’ platform and/or our platform […] Alex [CEO] really helped customers see the value of using our own platform. We’re very strong on the technology and work hard, so customers see us more as peers and partners” – [ORG], Former VP of Growth and Operations“We want vendors to bring their own tools. We often cannot share ours, as they cannot know what we are building on” – [ORG], Sr. Engineering Leader“Whether at [ORG], 20th Century Fox or my former startup Rally, we always wanted vendors to bring their own tools” – [ORG], Former Senior Product Manager“In my case, we mostly use vendors’ tools. I think that’s the same for [ORG] overall. For all things speech-related, vendors have their own tools. They optimize and have ways of distributing to their crowd” – [ORG], VP Engineering & Product Group Lead – AI 
+•More control over quality•Ability to customize workflows to use cases•Increased speed / throughput via automation•Lower delivery cost•Higher margins, ultimately
+
+[Page 26]
+[ORG]
+CONFIDENTIAL
+Audio collection can help win certain downstream annotation projects; however, it is lower-margin and not growing as fast as text/LLM
+26Sources: BM Interviews, Research & Analysis
+3Market Dynamics – Trends 
+InsightsSupporting Quotes
+•Lacking audio collection capabilities does not seem to have hindered our growth to date•Considering it is a lower-margin, slower-growing business, prioritizing faster-growing / higher-margin segments (e.g. LLM training) would have a more significant business impact
+Audio collection is useful to win some audio annotation projects
+Major competitors have built capabilities in both as a differentiator
+However, it is a lower-margin, slower-growing and relatively small market segment
+“In most cases, we want both speech data collection and annotation, unless we have existing data” – [ORG], VP Engineering"Our experience at Defined AI is that clients want both collection and annotation […] However, capabilities are vastly different” – Defined AI, Director of Strategic AI Partnerships“Of the 6 vendors we used [at Google for speech], 4 of them could do both collection and annotation” – Google, Head of Program Management and Operations – Speech“At [ORG], we merged our data collection and annotation platform because we wanted more go-to-market motion for upsell” – [ORG], Former VP of Product Management“Collection and annotation is very different in terms of operations. While annotation is about tooling and good framework to manage risk around large workforces, collection is more about understanding compliance with privacy laws, and logistical know-how. While it’s possible to just focus on annotation, we try to use the combination as a differentiator” – [ORG], VP & MD, AI & ML“Data collection has lower margins [and] is not a part of the lifecycle that companies want to overspend on […]We sell it so we can sell larger annotation projects downstream. We’ve started becoming more selective on the types of data collection project we take on […] We prefer to compete on projects where we can differentiate, so complex, multi-locales launched concurrently […] I think audio will grow slower than the market overall” – [ORG], VP & MD, AI & ML
+
+[Page 27]
+[ORG]
+CONFIDENTIAL
+Three major technological trends are impacting the data labeling market
+27Sources: [ORG], [ORG], Slator, BM Interviews, Research & Analysis
+AI Services Market Trend
+3Market Dynamics – Trends 
+Explanation Implication for WelocalizeEmergence of generative AI and increasing use of pre-trained models / transfer learning
+•Develop an offering for generative AI (e.g. model fine-tuning and assurance, prompt engineering, response writing), that may entail more specialized / qualified annotators
+“In 2022, generative AI was maybe 1-2% of the AI services market.Going forward, companies will spend more on generative AI. In 2023, generative AI might account for 10% of the market” – [ORG], CPO“Some customers are decreasing their investment in core products to fund LLM initiatives. We’re seeing growing demand for things like prompt and response writing, as well as work requiring technical or specialized knowledge, like math, coding and contract law” – [ORG], VP and MD, AI & ML
+Increased automation in data labeling
+•Leverage and/or build best-in-class annotation tools with robust automation capabilities•Invest in ML Ops capabilities to enhance delivery•Build domain expertise to serve market segments not easily automated
+Data labeling is increasingly automated – mostly augmenting, but in some cases replacing, humans. Automation can be done at 3 stages: pre-labeling of data, quality assurance to validate worker labeling and/or optimization of workload and task routing “Domain expertise enables you to access cutting-edge contracts. The more complicated part of the market is working on edge cases: that is the future of the market which will not get automated” – [ORG], Former Board Member
+Emergence of synthetic data generation •Continue to monitor trends in this market, and assess to what extent this will be required to remain competitive•If it is, consider an investment or acquisition (like [ORG] in Mindtech)
+Synthetic data may help generate data in a timely, scaled and cost-efficient way, and/or edge-case data in significant volumes that would otherwise be challenging to procure – hence its growing adoption“Synthetic data is becoming more important in image and video, which is another reason we’re not driving hard towards those markets” – [ORG], Chief Growth Officer
+
+[Page 28]
+Customers
+
+[Page 29]
+[ORG]
+CONFIDENTIAL
+Large companies account for ~70% of market spend
+29
+Global Market Size for Data Collection & Labeling Solutions – by Customer Size  [USD b]
+3Market Dynamics – Addressable Market
+Sources:BM Interviews, Research & Analysis
+6%
+~70%
+2022
+~20%Mid-SizedCompaniesGovernment
+LargeCompanies
+5.5~4%Startups
+Core & Immediate
+•“If you split the market by customer size, 70% of revenue comes from large companies, 20% from mid-sized and 10% from small firms. Large companies spend more, but are more competitive to serve: they’re hard to get in and have longer sales cycles. Mid-market companies spend less but are less competitive. If you have a large [ORG], you could penetrate them […] I’d define large companies as having over $2 billion in revenue, and mid-sized between $500 million and $2 billion in revenue” – [ORG], Chief Product and Marketing Officer•“The large cap tech companies, like [ORG], Google, [ORG], account for 60-70% of spend on AI data labeling. Market spend is pretty heavily weighted towards them because they have more at stake and more dollars to put behind it. Mid-sized, reasonably large companies – not Google, [ORG] but the tier below, maybe late-stage companies or companies that have IPO-ed in the last 5 years – account for 20-30% of the spend. They’re developing point-solutions that perform better than GPT in specific use cases […] A true SMB would never use data labeling, but an early-stage startup would: they represent very little of the market. A lot of them are asking for this service, but they don’t have significant spend […] They may do some niche use through self-serve projects; they’ll try to bootstrap some annotation, doing it internally or running it through something off-the-shelf like GPT 4, with people internally doing QA checking; that’s what I’ve heard friends do, who have a seed or series A startup” – [ORG], FormerHead of Studio•“In terms of spend on AI data services, I think the split is 60% enterprise, 35% mid-market and 5% SMB […] I expect mid-market to grow the fastest […]I define enterprise as the Fortune 500 or Global 2000, and mid-market as companies with more than 200 employees, but not in the Global 2000 list” – [ORG], Former Director of AI SolutionsRecommended AIS focus:Secondary & Medium-Term
+DIRECTIONAL
+Large companies are defined as being in the Global 2000 list (approx. USD 2+ billion in revenue)Mid-sized companies are defined as having more than ~200 employees, but not on the Global 2000 list (approx. USD <2 billion in revenue)Startups are defined as being smaller than mid-sized companies (e.g. less than ~200 employees)
+
+[Page 30]
+[ORG]
+CONFIDENTIAL
+AI data service providers aim to serve most AI startups in a “self-serve” way, due to their limited budget and volatility, as a bet on the future
+30Sources:BM Interviews, Research & Analysis
+InsightsSupporting QuotesMost AI startups’ spend does not justify spinning up project resources
+“A lot of startups are asking for this work, but they don’t have significant spend that justifies us spinning up projects and dedicated support people to them. They may do some niche use through self-serve projects. They will try to bootstrap some annotation, doing it internally or running it through something off-the-shelf like GPT 4, with people internally doing QA checking” – [ORG], Former Head of Studio“We see more churn with startups. A lot of startups come and go: they have budget issues, smaller projects and more iterative projects because their strategy is evolving” – [ORG], VP & Managing Director, AI & ML“AI startups are not been a market for us. They might go to a smaller player. It’s not interesting for us, because spend is in the $50-200 k range” – [ORG], Senior VP
+However, self-serve model can help harness their long-term potential
+“Scale has a product called Scale Rapid, started in late 2021. Anyone with no minimum or contract can upload data, share instructions and provide modifications […]It is really automated so that small customers can start a project and have a good enough experience to want to chat with our sales team. It was one of our faster-growing products. It’s not the biggest revenue contributor, but 1 in 100 customers will become really big: we see it like a VC investment […] If a startup is really strategic for us, like if they have high long-term spend potential or help us break into an industry, we will consider providing them with a more white-glove service” – [ORG], Former VP of Operations & Growth“AI startups have very little money to spend. What you want to do is get them hooked: 1 in 10 will get big and you want them on your platform. The cost of switching is reasonably high if you have good developer enablement. Startups want to be efficient: they can’t build on [ORG] then switch to Google. You start hiring people with a particular skillset” – [ORG], Fmr. VP of PM”[Self-serve or]’Platform as a Service’ would be a more attractive options for startups. They come in to do their own project, with their own staff and no guarantees on quality. We might also do a hybrid version, where we provide trained annotators for clients to manage" – [ORG], Director - Enterprise Solutions Group
+4Customers – Segmentation
+
+[Page 31]
+[ORG]
+CONFIDENTIAL
+Tech companies remain by far the largest buyers of data services, followed by automotive players; however, new customer segments are emerging
+31Sources: BM Interviews, Research & Analysis
+4Customers – Segmentation
+~60%
+~16%~6%~6%
+5.5
+2022
+~4%~3%~5%
+Core & ImmediateRecommended AIS focus:
+Global Market Size for Data Collection & Labeling Solutions – by Customer Vertical  [USD b]
+DIRECTIONAL ESTIMATES – UPDATED
+*Includes Geospatial / Agriculture, Consumer Products, Industrial Products, Utilities, etc.
+•“The biggest players are the computer vision automotive companies and the large tech players working on AI. Other than that, the market is very fractured” – [ORG], VP of Sales•“The most important customers are large tech companies with a large number of advanced, data-hungry AI models. These span from service providers, like [ORG], to self-driving car companies” – [ORG], Former Director of Data Science•“The largest sectors in order are: (1) tech giants, (2) automotive, (3) defense / public sector, (4) retail, (5) medical AI and (6) geospatial. Tech giants sit above all this, followed by the automotive sector, which has raised a wall of capital behind its self-driving vision” – [ORG], Former Board Member•“In terms of spend on AI overall – not just data services – the largest opportunity is in financial services, so banking and insurance. They have been doing things with modeling for their core business for a while, so they’re relatively mature, compete with one another and have a lot of money to spend. Then you have healthcare, mostly on the payer side rather than providers. And of course, you have software companies. Then you have a longer tail […] The is also significant demand from the public sector and they lack the skills to do it themselves” – [ORG], Former Director, AI Solutions•“In terms of spend by industry from what we see, I’d say 50% comes from technology, 10% financial services, 10% healthcare, 10% government, and then everything else” – [ORG], Chief Product and Marketing Offering•“Mega techs have the majority of spend, followed by AI unicorns, and vertical enterprises in retail, finance and health tech” – [ORG], Chief Globalization Officer
+Retail
+Technology
+Government /Defense
+FinancialServicesMedical
+Automotive
+Other*
+
+[Page 32]
+[ORG]
+CONFIDENTIAL
+[ORG] offers the highest volume by far; end-to-end services are only for less technologically mature clients or non-core areas
+32Sources:BM Interviews, Research & Analysis
+Customer Segment
+4Customers – Segmentation
+[ORG]*
+Automotive & Autonomous DrivingLarge Tech***
+AI Startups
+Independent LLM Builders
+Est. Segment Size (USD; %) USD ~2.5 b;~45% of market
+USD ~0.9 b;~16% of marketUSD ~0.6 b~11% of market
+USD < 0.1 b< 2% of market
+USD < 0.1 b< 2% of market
+Service Model / Capabilities Required
+Government (Defense)USD ~0.3 b~6% of market
+Non-Tech Enterprise**USD ~1 b~18% of market
+Avg. Annual Spend (USD)Hundreds of millions
+Tens of millionsSingle-digit millions to 10+ million
+Tens of thousands to hundreds of thousands
+Single-digit millions
+Tens of millions
+Single-digit millions to 10+ m for top ~5 by industry (then fragmented long tail)
+*Currently [ORG], [ORG], [ORG], [ORG], [ORG]; ** Non-tech Global 2000 (mostly); *** Tech companies with annual revenue over USD 2 billion, excl. [ORG] (mostly)Priority 1Priority 2Primarily Self-ServePriority 3
+Time to Become Approved Vendor6-9 months
+2-12 months3-9 months
+12-24 months
+6-12+ months
+Time to Sign New Project1-6 months
+1-4 months
+1-6 months
+Several weeks to 3+ months for entire process
+Less than ~1 month for entire process
+3-6+ months
+3-6 months
+DIRECTIONAL
+Data annotation (+ collection In some cases)
+Data annotation only (no collection); mostly computer-vision (including sensor fusion)Data annotation (+ collection In some cases)May want end-to-end; mostly computer-vision
+Data annotation (+ collection In some cases)
+Data annotation (+ collection In some cases)
+May want end-to-end depending on maturity and use case
+
+[Page 33]
+[ORG]
+CONFIDENTIAL
+[ORG] firms spend hundreds of millions per year, automotive and defense tens of millions, while large tech and non-tech enterprise are in the millions
+33Sources:BM Interviews, Research & Analysis
+Customer SegmentSupporting Quotes
+4Customers – Segmentation
+Avg. Annual Spend (USD)“[ORG] companies spend $100 to $500 million” – [ORG], Former VP of Growth and Operations“[ORG] spends well north of $100 million per year, maybe up to $1 billion” – [ORG], VP Engineering & Product Group Lead – AIHundreds of millions
+Tens of millions
+Single-digit millions to 10+ million
+Tens of thousands to hundreds of thousands
+“Scale’s gov contract is $249 million over 3 years, for one contract” – [ORG], Fmr. VP of Operations“Regarding government, the not-cleared portion is not that big, maybe $10-20 million. But the cleared part is really big” – [ORG], Director - Enterprise Solutions Group
+“Large tech companies spend on average 3-5 million annually” – [ORG], VP & MD, AI & ML“[ORG] is in the realm of several millions to tens of millions” – [ORG], Former Senior PM
+“AI startups are not a market for us, because their spend is in the $50-200 k range” – [ORG], Senior VP“At my startup Rally, we were spending less than $1 million” – [ORG], Former Senior PM
+“This is a new segment, but we have 2 clients north of $2 m annualized” – [ORG], Senior VP“Independent LLM providers are still fairly nascent in terms of scale. But for LLM builders from [ORG], they spend in the low hundreds of millions in total” – [ORG], Former VP of Growth and OperationsSingle-digit millions
+AI Startups
+Independent LLM Builders
+Automotive & Autonomous Driving
+Government (Defense)
+[ORG]*Non-Tech Enterprise**
+Large Tech***Tens of millions“Automotive companies typically spend in the tens of thousands, sub $50 million” – [ORG], Former VP of Operations and Growth“Automotive companies are in the tens of millions in spend”– [ORG], VP & MD, AI & ML
+Single-digit millions to 10+ m for top ~5 by industry (then fragmented long tail)“My department was spending $1-2 m; Walmart as a whole maybe spent $10-20 m a year” – Walmart, Former Product Manager; “Non-tech enterprise players spend less than large tech, maybe $1-2 m, mostly concentrated in top 3-5 players, then it’s a long tail”–[ORG], VP & MD, AI & ML
+Priority 1Priority 2Primarily Self-ServePriority 3
+DIRECTIONAL
+*Currently [ORG], [ORG], [ORG], [ORG], [ORG]; ** Non-tech Global 2000 (mostly); *** Tech companies with annual revenue over USD 2 billion, excl. [ORG] (mostly)
+
+[Page 34]
+[ORG]
+CONFIDENTIAL
+LLM builders make purchasing decisions the fastest; government is the slowest, followed by non-tech enterprises
+34
+DIRECTIONAL
+Sources:BM Interviews, Research & Analysis
+Supporting Quotes
+4Customers – Segmentation
+“Unless there is internal pressure to go faster, becoming an approved vendor takes 6-9 months; then signing a new project takes 1-6 months” – [ORG], Former VP of Ops.“Ballpark duration to purchase data is 3 months, though it can vary” – [ORG], VP Engineering
+"The whole thing takes sub 3 months when done for the first time & new projects usually take 2 months” – [ORG], Former VP of Ops; “The process takes 3-4 months depending on the data they're requesting” – [ORG], Director IT Strategy - Cloud Transformation
+“Becoming an approved supplier for the government is a specific framework” – [ORG], VP & MD, AI & ML; “Easily takes more than a year unless you know someone at a high-enough position” – [ORG], Former VP of Operations and Growth
+“Unless there is internal pressure to go faster, becoming an approved vendor takes 3-9 months. Then new projects take 1-3 months” – [ORG], Former VP of Ops; “It takes 4-6 months between when you ask for data and sign a contract, mostly due to compliance” – [ORG], Fmr. Director of Data Science
+“Independent LLM providers and AI startups are incredibly fast; it takes less than 1 month for everything” – Scale, Former VP of Ops; “It typically takes several weeks to months to complete the procurement and integration of the data into AI systems” – [ORG], Former Regional VP of Sales
+“Independent LLM providers and AI startups are incredibly fast; it takes less than 1 month for everything” – [ORG], Former VP of Operations and Growth; “With independent LLM providers, we can close deals in weeks, instead of multiple months” – [ORG], Senior VP
+Time to Become Approved Vendor6-9 months
+2-4 months3-9 months
+12-24 months
+6-12+ months
+Time to Sign New Project1-6 months
+1-4 months
+1-6 months
+Several weeks to 3+ months for entire process
+Less than ~1 month for entire process
+3-6+ months
+3-6 months
+Customer Segment
+AI Startups
+Independent LLM Builders
+Automotive & Autonomous Driving
+Government (Defense)
+[ORG]*Non-Tech Enterprise**
+Large Tech***
+Priority 1Priority 2Primarily Self-ServePriority 3Time to Sign 
+“The process may take 2-6 months depending on complexity, regulations and coverage” – [ORG], Global Program Director; “6-18 months are needed to be approved.Average time taken is 3-6 months unless when there’s no RFP” – [ORG], Former VP of Ops
+*Currently [ORG], [ORG], [ORG], [ORG], [ORG]; ** Non-tech Global 2000 (mostly); *** Tech companies with annual revenue over USD 2 billion, excl. [ORG] (mostly)
+
+[Page 35]
+[ORG]
+CONFIDENTIAL
+Larger companies tend to have a higher % of ongoing, long-term projects
+35Sources:BM Interviews, Research & Analysis
+Supporting Quotes
+4Customers – Segmentation
+% Ongoing vs Ad Hoc Programs (estimates)80% ongoing20% ad hoc“80% of projects continue from year-to-year, and 20% are new” – [ORG], VP Engineering “There’s an 80/20 split between ongoing projects and side projects or experimental research” – Google,Former Head of Program Management and Operations - SpeechMajority is ongoing“Our programs were much more focused at [ORG] [compared to [ORG]]: we were in a steady state” – [ORG], Fmr. Executive VP; “The vast majority of the work is ongoing with only slight variation here or there. Smaller projects are often bundled project within bigger project” – [ORG], Former VP of Ops80% ongoing20% ad hoc
+n/a
+65% ongoing35% ad hoc“For large tech, the split is around 50/50 between programs and ad hoc; it depends on what’s going on in R&D in terms of special projects” – [ORG]., VP & MD, AI & ML; “For large tech, there are more ongoing programs: I’m hard-pressed to think of a one-off program, but we have some” – [ORG], SVP
+50% ongoing50% ad hoc“We were probably at 50/50 between continuous and discrete project: all models get updated, but at different frequencies”–[ORG],Former AI Product Manager; “Startups [have]smaller, more iterative projects because their strategy is evolving” – [ORG], VP & MD, AI & ML
+TBD
+“80-90% of our spend is on ongoing programs. Of that, about 65% is on existing ongoing programs, and 35% is on new. Everyone across the org wants to build new AI/ML models. We get 2-3 net new requirements every 2 weeks; so, 4-5 new programs per month” – [ORG], Data Science & Analytics Director 
+60% ongoing40% ad hoc (TBC)“Needs from LLM providers are varied – from large projects, to small and medium size, to a ridiculous amount of experimentation. They probably need white-glove service. I’m not sure Scale would serve them just for financial reasons, but possibly strategic reasons to enter the space” – [ORG], [PERSON]
+Customer Segment
+AI Startups
+Independent LLM Builders
+Government (Defense)
+[ORG]*Non-Tech Enterprise**
+Large Tech***
+Priority 1Priority 2Primarily Self-ServePriority 3
+Automotive & Autonomous Driving
+DIRECTIONAL
+*Currently [ORG], [ORG], [ORG], [ORG], [ORG]; ** Non-tech Global 2000 (mostly); *** Tech companies with annual revenue over USD 2 billion, excl. [ORG] (mostly)
+
+[Page 36]
+[ORG]
+CONFIDENTIAL
+Outside [ORG], most customers prefer to use vendors’ platforms; direct sales are most common, though partnerships can help for non-tech enterprise
+36Sources:BM Interviews, Research & Analysis
+Supporting Quotes
+4Customers – Segmentation
+Customer Segment
+AI Startups
+Independent LLM Builders
+Automotive & Autonomous Driving
+Government (Defense)
+[ORG]*Non-Tech Enterprise**
+Large Tech***
+Priority 1Priority 2Primarily Self-ServePriority 3
+PlatformOwn
+VendorVendor and/or ownVendor
+Vendor
+Vendor
+Sales ChannelDirectDirect and/or tech consultancyDirectDirect
+Direct
+Direct & Marketplace 
+Direct
+“[ORG] generally prefers to use their own platform for labeling: it’s multi-vendor, gives them more predictability on price, more control” – [ORG], VP & Managing Director, AI & ML“Customers like big banks, insurance & healthcare often lock themselves in RFP with BPO consultancies. Scale has recognized that and is working on such relationships” – [ORG], Former VP of Ops & Growth
+“While 95% of sales are direct for us, there is a market for indirect, like [ORG] marketplace or [ORG], which serves very small buyers, buyers that spend $10-50k. We anticipate it to grow. In the industry, we have seen partnerships with technology consultancies & are looking at it ourselves” – [ORG], Senior VP
+“Whether at [ORG], 20th Century Fox or my former startup Rally, we always wanted vendors to bring their own tools” – [ORG], Former Senior Product Manager“We want vendors to bring their own tools” – [ORG], Sr. Engineering Leader“Public sector has huge demand for AI solutions and really lacks the resources to do it themselves" – [ORG], Former Director, AI Solutions 
+"A lot of customers do their own data collection, like autonomous driving companies (Cruise – with its own employees; Lidar is proprietary). Outside of autonomous driving, often customers do not collect their own data” – [ORG], Former VP of Operations and Growth
+*Currently [ORG], [ORG], [ORG], [ORG], [ORG]; ** Non-tech Global 2000 (mostly); *** Tech companies with annual revenue over USD 2 billion, excl. [ORG] (mostly)
+“Anthropic is said to use a lot of  vendors, like Scale & [ORG]. Anthropic gives instructions and vendors help with recruiting” – [ORG], Director of MLVendor
+
+[Page 37]
+[ORG]
+CONFIDENTIAL
+Tech-savvy customers only want data annotation and collection services, while less technologically mature companies may want end-to-end services
+37Sources:BM Interviews, Research & Analysis
+Supporting Quotes
+4Customers – Segmentation
+Service Model / Capabilities Required“Tech companies like Google, [ORG], [ORG] […]don’t hire us to build models” – [ORG], MD “In most cases, you’d want to do speech data collection and annotation. That’s what we do right now for speech: both collection and annotation" – [ORG], VP Engineering & Product Group Lead – AI
+“A lot of customers do their own data collection, like autonomous driving companies. Cruise does so with its own employees and proprietary Lidar tech” – [ORG], Former VP of Operations and Growth 
+“Defense is very interested in AI solutions and really lacking resources to do them. They’re looking for full-service partners” – [ORG], Former Director, AI Solutions
+“We handle most of the machine learning value chain in-house, but work with vendors for data” – [ORG], Former Senior Product Manager“T ech companies like […]Netflix don’t hire us to build models” – [ORG], Managing Director 
+“Less mature industries, like healthcare, give us end-to-end control […] Consumer and industrial product firms might give us full control in some areas […] Banking is very sophisticated when it comes to their core business, but they might outsource non-core areas to us” – [ORG], Managing Director
+“We used vendors for labeling; collection was mostly done internally – but this may be different for other startups […] We build and update our own models” – [ORG], Former Product Manager, AI
+“LLM builders build models in-house and only collaborate with vendors to procure or annotate data” – [ORG], Director of Machine Learning
+Customer Segment
+AI Startups
+Independent LLM Builders
+Automotive & Autonomous Driving
+Government (Defense)
+[ORG]*
+Large Tech***
+Priority 1Priority 2Primarily Self-ServePriority 3
+Non-Tech Enterprise**
+*Currently [ORG], [ORG], [ORG], [ORG], [ORG]; ** Non-tech Global 2000 (mostly); *** Tech companies with annual revenue over USD 2 billion, excl. [ORG] (mostly)
+Data annotation (+ collection In some cases)
+Data annotation only (no collection); mostly computer-vision (including sensor fusion)Data annotation (+ collection In some cases)May want end-to-end; mostly computer-vision
+Data annotation (+ collection In some cases)
+Data annotation (+ collection In some cases)
+May want end-to-end depending on maturity and use case
+
+[Page 38]
+[ORG]
+CONFIDENTIAL
+Customers’ purchasing process involves seven main stages, though this can vary based on company size/sophistication, use case and volume purchased
+38Sources: BM Interviews, Research & Analysis
+Customers – Purchasing Process4
+Customer Purchasing Process – Large CompaniesStages
+Descrip-tionStake-holders
+Quotes
+Need IdentificationDetermination that data services are required for specific use caseBusiness and/or Product / Tech
+Approach Determination
+Decision whether to go in-house or outsourceProduct / Tech
+Vendor Pre-Selection (and/or RFP*)Outreach to pre-selected vendors to submit bidsProduct / Tech  and/or Business
+Pilot
+Evaluation of vendors based on a small sample projectProduct / Tech  and/or Business
+Vendor Recommen-dationVendor recommendation based on pilot resultsProduct / Tech
+Final Decision
+Final approval and sign-off
+Project Sponsor / Executive Committee**“Business or Marketing are usually the stakeholders, and they engage with the IT organization to evaluate the problem. Once it’s defined, there’s some degree ofdiscovery of vendorsand you agree on the scope of a POC” – [ORG], Former Senior Product Manager”We figure outwhat data we need, then reach out to vendorsin this space – only the top vendors, which we identify via aquick Google search and prior relationships” – [ORG], Former Director ofData Science“There are 3 scenarios. For known problems, procurement keeps a list of preferred vendors, or exclusion criteria for vendors. I’ll get a quote from 1 or 2 vendors then go to procurement. If I know a solution exists but I don’t know who can do it, we research 3-4 vendors and reach out to them directly. If I don’t know whether a solution exists in the market, I’ll trigger an RFP , which takes longer” – [ORG], Global Program Director“When starting a new project, it’s common to see POC or paid pilots with multiple vendors to compare quality and speed. After that, buyers are still not single-source, at least the more sophisticated ones. For smaller teams, it’s easier to work with one vendor, because there’s decent amount of overhead working with different vendors and providing feedback on quality” – [ORG], Former Head of Studio
+Contract Negotiation
+Compliance review and procurement negotiationLegal/Compliance and/or Procurement
+*Request For Proposal; ** Can include Product / Tech / Business and/or Finance Leadership
+
+[Page 39]
+[ORG]
+CONFIDENTIAL
+Once table stakes are met, data accuracy, scalability and variety are customers’ top purchasing criteria – though this varies by company size and use case
+39Sources: BM Interviews, Research & Analysis
+Customers’ Key Purchasing Criteria
+4Customers – Key Purchasing Criteria
+TableStakes
+Differen-tiators
+1Data Type / Use Case Supported*2Data Security, Compliance and Ethics**
+Supporting Quotes“The top criteria is: do you give me what I need? Do you solve the exact task in my business case?” – [ORG], Global Program Director“Whether the data is compliant and obtained ethically is a must-have. Otherwise, we won’t consider the vendor […] This is true for larger companies, because they can get sued” – [ORG], Former Director of Data Science1Data Quality / Accuracy"Quality is by far the highest priority. Bad quality means bad AI: that will get a provider contract cancelled immediately" – [ORG],Former Chief Technology Officer”The more complicated part of the market is working on edge cases […] At the cutting edge […] customers care about your work quality on the 1-5% of cases that are most complex" – [ORG], Former Board Member2Scalability (Volume and/or Speed)"Qualityis typically the top criterion.Throughputusually a close second" – [ORG], Strategic Product Manager3Variety of Data“Data coverage and distribution that mimics our customer base is really important to reduce bias" – [ORG],Former Director of Data Science4Price "Of the total cost of ML development, less than 10% is data labeling because other areas are done in-house by very expensive data scientists […] so price is usually not the main criteria” – [ORG], Former Board Member5Vendor Relationship and/or Reputation“Who gets considered depends on whether they are an existing vendor and their general reputation for the use case” – [ORG], Lead Product Manager“For large tech companies, our sales team came from older school companies that sold into those clients; a lot of customers buy on pre-existing sales relationship” – [ORG], Former Head of Studio6Customer Support"Good quality data and customer support are key criteria" – [ORG],Director of Data Science
+*This includes supporting relevant languages and/or regional/cultural dimensions; ** This is mostly for large companies and/or regulated industries
+7Compatibility with Client Tech“System inter-operability is a key factor. The vendor’s solution has to work with our technology stack” –[ORG],Global Program Director, Insights Strategy and Design 8Domain Expertise“Domain expertise is quite important for enterprise verticals, not as much for tech firms” –[ORG],SVP
+
+[Page 40]
+[ORG]
+CONFIDENTIAL
+Most customers care about security; price is especially important for startups & mature [ORG] programs; domain expertise important for non-tech enterprise
+40Sources: BM Interviews, Research & Analysis
+Variations of KPC by Customer Segment
+4Customers – Key Purchasing Criteria
+Supporting Quotes
+Security and compliance are important for most customers, though less for startups
+Price is especially important for startups and mature [ORG] programs
+Domain expertise is important for non-tech enterprise customers – not for tech companies
+“Whether the data is compliant and obtained ethically is a must-have. Otherwise, we won’t consider the vendor […] This is true for larger companies, because they can get sued” – [ORG], Former Director of Data Science“At Walmart, we had very stringent security requirements. There’s a separate team [for security issues]” – [ORG], Lead Product Manager“Privacy and security is less mature in small companies” – [ORG], Former Senior Product Manager“For government, the largest part of the market by far requires security clearance” – [ORG], Director - Enterprise Solutions Group“We absolutely bargain harder when programs are mature. We won’t bargain on price at first: we care about ‘do we get what we need'. If we continue having needs at scale, then it becomes important to be more sustainable” – [ORG], VP Engineering & Product Group Lead – AI “Price does matter, but it matters more to the smaller players that are tighter in budget, like startups. For larger and more serious buyers, price is a secondary consideration to things such as reliability/quality, timelines and scalability” – [ORG], Director, Enterprise Solutions Group
+“Domain expertise is quite important for enterprise verticals, not as much for tech firms” –[ORG],SVP“Customers choose BPO firms like [ORG] or Infosys because in some areas we have deep domain knowledge as we have a lot of data, such as customer calls, or IT and HR helpdesk issues” – [ORG], Managing Director
+
+[Page 41]
+[ORG]
+CONFIDENTIAL
+Company size, volume of data purchased, project criticality and task complexity / degree of competition influence customers’ price-sensitivity
+41Sources: BM Interviews, Research & Analysis
+4Customers – Key Purchasing Criteria
+Factors Influencing Customers’ Price SensitivityLowHighDegree of Customer Price-SensitivityCompany SizeLargeSmall“Price does matter, but it matters more to the smaller players that are tighter in budget, like startups. For larger and more serious buyers, price is a secondary consideration to things such as reliability/quality, timelines and scalability” – [ORG], Director, Enterprise Solutions GroupVolume of Data PurchasedLowHigh”When a project requires large volumes of data, you tend to negotiate discounts" – [ORG], Lead Product Manager
+Project CriticalityHighLow“Projects that are customer-facing / revenue-generating require better accuracy and have less cost-sensitivity” – [ORG], Lead Product Manager
+Program MaturityLowHigh“We absolutely bargain harder when programs are mature. We won’t bargain on price at first: we care about ‘do we get what we need'. If we continue having needs at scale, then it becomes important to be more sustainable” – [ORG], VP Engineering & Product Group Lead – AI 
+•The combination of these factors explains the dispersion in terms of customer price-sensitivity•Targeting large buyers on critical projects with limited competition enhances our ability to increase margins
+Supporting Quotes
+Task Complexity / Vendor CompetitionHighLow“When a project is commoditized and has large volume, customers are very cost-sensitive. If it’s a one-time project or it is very difficult, customers are less price-sensitive because they have few options. One time I charged a customer twice their next-best option” –[ORG], Former VP of Operations and Growth
+
+[Page 42]
+[ORG]
+CONFIDENTIAL
+Today 95% of revenue is generated through direct sales, but indirect channels like tech consultancies and AI platforms are expected to grow
+42Sources: Company Websites and Presentations, BM Interviews, Research & Analysis
+Channel Category
+FOR DISCUSSION4Customers – Distribution Channels
+Sample PartnersSupporting QuotesCustomers that Can Be Reached Via This Channel•Non-Tech Enterprise
+“I think professional services firm, like [ORG], EY, Capgemini, IBM, or the Indian Pure Players, are a major channel for labeling companies” – [ORG], Managing Director“Data leak risk is No.1 concern for most regulatory protected organizations. So,they're callingDeloitteand [ORG] toprovide AI model assurance and risk protection” – [ORG], CEO
+*[ORG] is a data intelligence platform with four suites that are focused on the different aspects of data discovery, protection, and management that helps organizations to get their data, know their data, control their data, and use their data.
+•Companies that want to self-serve (large & sophisticated, or smaller companies)
+“it would make sense to have a product on [ORG], but then how is it different from [ORG]? No one is there on the marketplace to answer the question. If you have your own portal, you get less traffic but more qualified traffic […] [ORG] is also dangerous because they try to copy you” – [ORG], Former VP of Operations and Growth“We run our unstructured data through [ORG]*, where classification is done automatically or purchased from vendors through the marketplace [...] Annually we spend USD 1.5 m withScale AI, USD 250 k with [ORG] and USD 60 k with [ORG], and we purchase all of that through [ORG]” –  [ORG],Head of Data Strategy
+•Non-Tech Enterprise•Potentially Large Tech (TBC)“[ORG] is both a customer and a channel partner. [ORG] offers a lot of end-to-end services for building AI: you could come in as the annotation partner. Other vendors, like Scale, are already trying to do a joint go-to-market with [ORG]” – [ORG], Former VP of Ops and Growth
+Technology Consultancies 
+AI Platforms 
+Cloud / Online Marketplaces
+Priority Level
+
+[Page 43]
+[ORG]
+CONFIDENTIAL
+There are opportunities across the fast-growing data services market, including in text/LLM, new use cases, customer segments and delivery models
+Sources: BM Interviews, Research & Analysis
+4Customers – Underserved Needs
+Underserved Market NeedsSupporting QuotesMarket is Growing Fast and is Underserved Overall“I think the whole space is underserved. There is a massive market opportunity” – [ORG], Fmr. Board Member“Based on the rate at which generative AI is growing, I think the market will grow much faster than anyone is anticipating. Pretty much every client of mine is doing some kind of proof of concept or pilot, which then expands into larger projects” – [ORG], MDText Annotation is Growing the Fastest, Driven by LLM Work“Text is growing really quickly […] very much driven by large language model work […] Text annotation is where the market is going […] You’re starting to see the factors that made [computer vision] profitable – a lot of industry excitement, investment dollars and a competitive element to it – now with RLHF and LLM fine-tuning ” – [ORG], Former GM of Studio
+Demand from New Customer Segments is Growing“As AI moves from only hyperscalers, to enterprises, to SMB, the need for validated data will grow exponentially”–[ORG]., Fmr. CTO “Large non-tech, Fortune 500 corporates may over time become customers, but they will require a significant amount of consulting because they don’t know what they need. They’re like: 'Help us think about AI’ ” – [ORG], Former Head of Studio
+43
+Demand for Specialized / Highly Qualified Annotators is Increasing“With LLM, the bar for quality is higher […] The challenge with customizing an LLM is domain knowledge. It will be really hard to find quality people […] There is room for vendors who understand foundation models and what data they need. We cannot use large-scale, low-quality vendors” – [ORG], Director of Machine Learning ;         “Some customers are decreasing their investment in core products to fund LLM initiatives. We’re seeing growing demand for things like prompt and response writing, as well as work requiring technical or specialized knowledge, like math, coding and contract law” – [ORG], VP and MD, AI & ML
+“Self-Serve” Model Seems Underserved“A self-serve option where we can use vendors’ annotators but control the quality ourselves is an interesting idea. That way we don’t need to deal with procurement of labor. I think that’s an underserved opportunity” – Yext, Director of Data Science“’Platform as a Service’ is one way [of serving AI startups]. You make the tool available to them and they come in to do their own project with no guarantees about quality. There’s also a hybrid version, where we provide trained annotators for clients to manage” – [ORG], Director – Enterprise Solutions Group
+There is Emerging Demand in Other New Use Cases“Some spaces are just starting, like medical AI. You’re starting to see million-dollar contracts for the first time. There’s an opportunity for someone to really go deep and dominate” – [ORG], Former Board Member ; “We likeAR/VRbecause it’s more complex:not so many vendors can do it; you can count them on 1 hand. But if we believe thehype, itwill be enormously important. [...] AR/VR has increased significantly; it’s maybe similar or smaller thanaudio in size, but growing faster”–[ORG], VP & MD, AI & ML
+
+[Page 44]
+Competitive Landscape
+
+[Page 45]
+[ORG]
+45
+Competition can be segmented based on workforce and technology capabilities, with leading players trying to build strength in both
+Sources: [ORG], Company Websites, LEK, BM Interviews, Research & Analysis
+AI Data Services – Competitive Landscape Overview
+CONFIDENTIAL5Competitive Landscape
+Workforce Lacking Scale / Diversity, or Nonexistent
+Scaled and Diverse Labeling Workforce
+Robust Annotation TechnologyLittle to No Annotation Technology
+ Technology-first companies
+Service-focused companies
+LSPs
+SageMaker Ground Truth Plus
+Scaled crowd + some degree of platform
+“Everyone is trying to push into the top right [ORG]. To be sustainably competitive, you need strong tech capabilities and the ability to run highly-skilled workforce […] then enterprise sales to win large contracts” – [ORG], Former Board Member
+
+
+[Page 46]
+[ORG]
+CONFIDENTIAL
+From its roots as an LSP , [ORG] has diversified into one of the largest AI data service providers globally, and has focused on improving its technologyAppen Overview
+Sources: [ORG] website, filings and presentations, Australian Financial Review, CapitalIQ, BM Interviews, Research & Analysis46
+WeaknessesStrengths•One of top 3 players globally in AI training data by revenue•Strong brand recognition: perceived as one of the go-to providers for labeling•Marquee clients, serving some of the major tech companies•Large, diverse crowd of 1 m annotators and expertise in 235+ languages•Strong data granularity: can provide data with fine parameters (e.g. specific demographics)•Forward-looking strategy, e.g. presented their service offering for generative AI in May 2023 Investor Day; also invested in synthetic data (Mindtech, 2022)•New CEO and leadership team may give the business a new impetus•Largest AI data service provider in China, and only scaled foreign player in China ($33 m revenue in 2022, vs $10-20+ m for Speech Ocean and DataTang)
+•Very high customer concentration: top 5 customers account for 82% of [ORG]’s revenue (2022), with top 2 clients accounting for over 50% of total sales•2022 revenue was down 13% year-on-year (while the market grew), as global advertising spend slowed and [ORG] ([ORG]’s largest customer) reduced its spending•Mixed market feedback regarding data quality / accuracy and sales team’s domain expertise•Mixed results of integrating its acquisitions (e.g. [ORG]) and building products / transitioning to a product-centric company•Previous leadership missed recent growth targets and stock price lost 95% of its value between Aug 2020 and December 2022•Some security concerns (e.g. 2020 data breach of 5 million accounts)•A portion of [ORG]’s revenue comes from content moderation (exact % TBD)
++ -Company FactsOverview & PositioningOne of the largest data service providers, primarily serving large tech companiesRevenue (FY22)USD ~389 m, down 13% year-on-year
+Competitive Landscape – Deep Dive: [ORG]
+EBITDA % (FY22)3% (vs. 17% in FY 2021)Valuation & OwnershipUSD 291m (AUD 425m) as of Jun 18,2023 (USD:AUD = 100:146); Publicly-listed (ASX)
+Gross Marg. (FY22)14% (vs. 24% in FY 2021)
+Founded in1996HeadquartersChatswood, New South Wales,AustraliaM&A ActivityAcquired [ORG] for mobile location-based data collection (Aug 2021);Acquired [ORG] for its automated data annotation solution (Mar 2019)Service OfferingMulti-modal data collection and annotation, as well as linguistic services (including localization)
+5
+Major clients
+
+
+[Page 47]
+[ORG]
+47
+[ORG] has already formulated its offering for generative AI, though it remains a small portion of its overall business
+Sources: Company Website, Filings and Investor Presentation, BM Interviews, Research & Analysis
+CONFIDENTIALCompetitive Landscape – Deep Dive: [ORG]
+[ORG]’s AI Training Data Offering (as of June 2023)
+5
+Note: [ORG] also provides linguistic services (including localization), though we do not yet know the exact proportion 
+Offering for Traditional AI ModelsData CollectionData AnnotationModel Evaluation / Relevance
+Offering for Generative AI ModelsLLM Fine-TuningLLM AssuranceOptimize model performance to align with human experiencesEnsure that model performance meets risk and regulatory requirementsRLHF*
+RLAIF** Model EvaluationMonitor
+Certify
+Benchmark
+*Reinforcement Learning with Human Feedback; **Reinforcement Learning with AI Feedback
+Flag inaccurate / biased content
+Train model with human feedback
+Train model with AI feedback
+Instruction DataPre-validated datasets
+In light grey: formulated but not yet released (RLAIF, Certify, Benchmark, Monitor)
+Red TeamChallenge model to expose vulnerabilities
+Compare model performance to industry peers
+Compare model performance to industry peers
+Monitor model in real-time
+Provide quality structured or unstructured data with strong granularity across a variety of modes, via 250+ pre-labeled datasets, custom data collection and/or synthetic data generation
+Provide AI-assisted annotation across data types: video, image, text, audio, point cloud
+Provide relevance and evaluation services globally, including edge case testing
+
+[Page 48]
+[ORG]
+CONFIDENTIAL
+Scale is the leading technology-focused provider of AI data services, with a vision of becoming the “[ORG] of AI”[ORG] Overview
+Sources: Company Website, Sacra, Crunchbase,BM Interviews, Research & Analysis
+WeaknessesStrengths•Pricier than peers: charges a premium compared to other vendors•Supports fewer languages / locales (50+ languages across 70+ countries) than [ORG] (250+ languages), [ORG] (180+ languages) and [ORG] (500+Data annotation languages and dialects)•Less strong in text (though building LLM capabilities) and limited presence in audio•Data provided may not be as demographically targeted / granular as other players like [ORG]•Privacy concerns around how [ORG] collects certain data (e.g. from [ORG] Roomba in ‘20)•Intense work culture: work hard to satisfy customers, leading some employees to burn out•Despite relatively high gross margins, the company may not be overall profitable (TBC) due to its investment in growth
++ -Company Facts
+Competitive Landscape – Deep Dive: Scale
+5
+Overview & PositioningLeading technology-first provider that has expanded into labeling services, initially focused on computer vision for automotiveRevenue (FY22)USD ~290 m, up 61% YoY (estimate)
+EBITDA % (FY22)N/AValuation & OwnershipUSD 7.3 b (as of April 2021 series E)Privately owned (e.g. Tiger Global, Founders Fund, YC)
+Gross Marg. (FY22)May be in the 50-70% range (TBC)
+Founded in2016HeadquartersSan Francisco, CA, USAM&A ActivityAcquired [ORG] to expand Scale’s suite of tools (Nov, 2021); Acquired [ORG] for its expertise in applying AI to real-time video (Dec, 2020)Main industriesAutonomous Driving, Government (Defense), TechnologyMajor clients
+•Top 3 provider by revenue and largest in terms of valuation•Best-in-class technology platform, always improving: “Scale’s contracts tend to be at the  cutting edge of tech” – [ORG], Former Board Member•Very strong in computer vision (its original offering), including sensor fusion/point cloud (for 3D objects) •Strong market position in autonomous driving (working with cutting-edge clients) and government / defense ($240+ million contract with US DoD over 3 years)•Talented, gritty team: employees are technically strong with anentrepreneurial spirit and a desire to climb up•Forward-looking strategy (e.g. Scale Synthetic, Scale Rapid for self-serve, LLM offering)•Significant funding (raised USD 600+ m)•Overall high data quality / accuracy
+
+[Page 49]
+[ORG]
+CONFIDENTIAL
+[ORG], a technology consultancy, is one of the top 3 AI data solution providers by revenue thanks to its 2020 [ORG] acquisitionTELUS International Overview
+Sources: Company website, filings and presentations, BM Interviews, Research & Analysis49
+WeaknessesStrengths•Top 3 provider by revenue•Strong customer service / support team: “[ORG] has better customer service and support than [ORG] and [ORG]. Working with them is a joy: they’re very collaborative and willing to customize” - [ORG], Sr Engineering Leader•Overall high quality and varied data: “[ORG] has very good quality data and data variety. We use them for innovative projects” – [ORG], Sr Engineering Leader•Globally distributed team and diverse market coverage in terms of geography and sector: 500+ languages and dialects•Very strong in language (text and audio annotation)•Technology consultancy which can cross-sell from its other service lines•Part of a large, profitable parent company which can invest in its growth
+•Global Systems Integrators (like [ORG]) prefer not to partner with them, due to competitive dynamics•Heavy reliance on relevance for top-line: “70% of our business comes from relevance” – [ORG] VP & MD, AI & ML•Relatively weak data collection capabilities: “Lionbridge was originally a translation company. They’re good for transcription, but horrible on data collection. They took more than 5 months to do a voice collection” – Google, Head of Program Management and Operations – Speech•No presence in government – “Scale is also impressive in the government segment, where my company does not play” – [ORG], VP & MD, AI & ML
++ -Company FactsOverview & PositioningRevenue (FY22)USD 2,468 m overall, incl. USD ~345 mfor AI (14%)
+EBITDA % (FY22)20.7% (vs. 18.23% in FY 2021) for TI overallValuation & OwnershipUSD 5.92 b as of 7/6/23Public firm. AI Data solutions one of 4 service lines
+Gross Marg. (FY22)23.6% (vs. 21.2% in FY 2021) for TI overall
+Founded in2005HeadquartersVancouver, British Columbia,CanadaM&A ActivityWillowTree (2023): improve software dev. abilitiesPlayment (2021): boost data annotation in Comp. Vis.LionBridge (2020): establish data annotation service
+Major clients
+5
+Main industriesTechnology, Automotive, Healthcare
+Technology consulting firm that became a top 3 AI data service provider via acquisition of Lionbridge, with a very strong presence in relevance work
+Competitive Landscape – Deep Dive: [ORG]
+
+[Page 50]
+[ORG]
+CONFIDENTIAL
+[ORG] was one of the earliest Language Service Providers to provide AI data services and is comparable in size to [ORG] AISDataForce Overview
+Sources: Company website, BM Interviews, Research & Analysis50
+WeaknessesStrengths•Very strong in language (text and audio annotation), thanks to background as a Language Service Provider•Separate branding for its AI data services to ensure clearer marketing•Part of a large, profitable parent company which can invest in its growth•Can cross-sell from its localization accounts•Sales team has domain expertise and industry relationships•Strong in some specialized use cases, e.g. cybersecurity / fraud detection: “We use [ORG] through [ORG] to label cyber data, like IP and access information, which is used for fraud detection” – [ORG], Head of Data Strategy •Aggressive, penetration pricing: “We’ve seen them be very aggressive on price” – [ORG], VP & MD, AI & ML
+•Poor customer review on data quality and technical capabilities: “We considered [ORG] […] but they never gave us good quality; maybe because they’re newer and less mature in their understanding of the depth and breadth of data needs. They’re less technical” – [ORG], Sr. Engineering Leader•Limited brand awareness for data services: most experts interviewed have limited or noknowledge of it•No/limited presence in government
++ -Company FactsOverview & PositioningRevenue (FY22)Ballpark of USD ~50 m (~5% of USD 1.16 b for [ORG] overall; [ORG] is up 4.6% YoY)
+Competitive Landscape – Deep Dive: [ORG]
+EBITDA % (FY22)n/aOwnershipPrivately owned by founder [PERSON]
+Gross Marg. (FY22)n/a
+~2019 for [ORG] division; 1992 for TransPerfectNew York, NY , USA 
+4
+Acquired Skilltelligencefor retail / field data collection capabilities(May 2021); Acquired [ORG] to strengthen MT / AI language capabilities (Aug 2018)Technology, Automotive, Finance, Life Science, Retail
+AI services division of [ORG] (leading LSP), which is growing beyond its historical focus on languages to include computer vision work
+Founded inHeadquartersM&A Activity
+Major clientsMain industries
+
+[Page 51]
+[ORG] FP&A
+
+[Page 52]
+[ORG]
+52
+[ORG]’s AI service line underperforms key competitors in terms of gross margin, but is in line with [ORG]’s overall 2022 performance
+60%58%54%50%47%45%44%42%40%37%34%30%24%24%21%14%13%
+40%42%46%50%53%55%56%58%60%63%66%70%76%76%79%86%87%
+13
+[ORG] -2021
+76111 [PHONE],468
+Appen2022Welocalize AISJan-Apr 2023Innodata2021
+955 100% = total revenue2,194
+e2f2021Summa Linguae - Data for [ID]
+[ORG] - Loc.2021
+18
+e2f2022
+38819
+[ORG].2021
+960
+[ORG].2022
+20
+TaskUs2021RWS -2022 Appen2021
+924
+Innodata2022TaskUs2022Summa Linguae - Loc.2022Summa Linguae - Data for [ID]
+Gross marginDirect Costs
+Benchmark of Direct Cost and Gross Margin Structure of Major Competitors [USD m]
+Sources: Company Filings, Capital IQ, [ORG], [ORG], [ORG], BM Analysis
+*This slide presents financial data from companies overall (rather than specific divisions), unless explicitly noted otherwise. A more detailed breakdown by service line was generally not available. USD:EUR and USD:GBP conversion rates for 2021 and 2022 were used for [ORG], [ORG] and [ORG] (based on the US IRS rates). We were only able to access Jan-Apr 2023 data for [ORG] to date, but plan to analyze prior year data for our next report
+6Welocalize FP&A
+"Players who are able to combine highly-skilled workforce with some decent tech, and who control the customer relationship, can have gross margins of 50-60%. That’s the sweet spot of this market, though tech players could have higher margins, up to 80%, because they have less operations” – [ORG], Former Board Member"Profitability changes depending on the complexity of the work you’re doing. You could segment projects into easy (bounding boxes on an image), medium (bounding boxes, but densely populated) and difficult (need deep domain expertise to make a decision about, e.g. medical AI). Gross margins are 50-60% for complex work, 30% for work of medium complexity, and 15-20% for low-complexity work" – [ORG], CPO"On commoditized projects, gross margins are 40%. On super complex, gross margins are 70%" – [ORG], Former VP of Operations and Growth“Gross margins in this market are in the 20+% range, with data collection being more volatile, while NLP and annotation tend to be more profitable” – [ORG], VP and Managing Director, AI & ML
+CONFIDENTIAL
+
+[Page 53]
+[ORG]
+CONFIDENTIAL
+There are two main objectives for the FP&A work stream: enhancing visibility into our financials and assessing levers for margin improvementFP&A Work Stream Objectives
+53
+How We Can Achieve These Objectives1Enhance Financial VisibilityGet a clear understanding of our revenue and profitability over time (e.g. since 2018) by:•Service Line•Offerings Within Service Lines•Customer•Program2Assess Levers For Margin ImprovementIdentify levers to improve gross margin across AIS customers and programs
+•FP&A Team already has a plan and is working on this
+•Internal data analysis – identify over/under-performing programs, clients and services. What is achievable, by when, by whom?•External data - benchmarking competitor profitability and understanding which levers they use•Internal discussions on levers for improvement
+6Welocalize FP&A
+
+[Page 54]
+[ORG]
+54
+There are two categories of levers to improve gross margin: increasing revenue per program and decreasing direct cost per programLevers for Gross Margin Improvement – Framework
+Gross Profit = Revenue – Direct Costs
+Gross Margin = Gross ProfitRevenue
+Increase Revenue per Program1
+Decrease Direct Cost per Program2
+Formulas Lever Categories
+FOR DISCUSSIONCONFIDENTIAL6Welocalize FP&A
+
+[Page 55]
+[ORG]
+55
+To increase revenue per program, we can explore changing the customer mix, service mix, charging model, and potentially increasing pricesPRELIMINARY – FOR DISCUSSION
+Levers for Gross Margin ImprovementIncrease Revenue per Program1Lever Sub-CategoryChange customer mix: sell to higher-margin customersChange service mix:sell higher-margin servicesChange charging model (so we can benefit from efficiency gains)
+Increase price of existing services
+Sources: [ORG], BM Analysis
+FeasibilityImpactHow Might We Achieve This?Expand into less price-sensitive accounts / departments  - which ones? (e.g. non-tech enterprise?)Develop / sell services for which customers are willing to pay more – which ones? (e.g. labeling framework development, model building?)For example, if we use customers’ system, can we earn a bonus for meeting certain time/quality milestones?
+TBD
+ab
+c
+d
+Any other levers? Thoughts on impact / feasibility / possible actions?
+CONFIDENTIAL6Welocalize FP&A
+
+[Page 56]
+[ORG]
+56
+To decrease cost per program, we can explore increasing efficiency and changing the workforce mix for annotators / vendorsPRELIMINARY – FOR DISCUSSION
+Levers for Gross Margin Improvement
+Direct Cost Category
+Sources: [ORG], BM Analysis
+FeasibilityImpactHow Might We Achieve This?
+Labor: Annotators (77% of revenue*)
+*Based on [ORG] January-April 2023 AI service line revenue
+Labor: Delivery Mgmt (6% of revenue*)Labor: Delivery Support (5% of revenue*)Any other direct costs / levers? Thoughts on these levers?
+LeverSub-LeverIncrease Efficiency
+Change Workforce Mix
+Use our own platformOptimize / automate workflowSimplify tasksPre-label/pre-annotate itemsImprove sourcingImprove onboardingImprove trainingImprove retentionChange workforce locationShift to less-qualified workforceTBDTBD
+abcdefghij
+Decrease Direct Cost per Program2
+CONFIDENTIAL6Welocalize FP&A
+
+[Page 57]
+Implications for [ORG]
+
+[Page 58]
+[ORG]
+58
+Selling text and audio services to [ORG] / Large Tech and existing accounts – including LLM work, conversational AI and relevance – can be our priority7Implications for [ORG]
+CategoriesRecommendationsCustomers1.Focus on [ORG] for volume, followed by Large Tech2.Cross-sell into existing non-tech enterprise accounts to increase margins3.Develop self-serve portal which AI startups (and other customers) can use
+Offering1.Focus on text (fast-growing LLM work / conversational AI, and large relevance market), followed by audio annotation (e.g. conversational AI), though the latter is lower-growth2.Deprioritize developing audio collection capabilities (small, slower-growing, lower-margin market; lack of capabilities do not seem to have hindered our growth) and computer vision (low margins, competitive)
+Geography1.Focus primarily on North America (~60% of the market), followed by Europe as a distant second (~15% of the market) – in terms of allocating sales and account management resources2.Deprioritize other regions (e.g. Asia-Pacific ex China, China, rest of the world) due to smaller market size, limited existing client base in those regions and/or lower cultural proximity
+Technology1.Develop [ORG]’s own annotation platform to penetrate accounts outside of [ORG] while increasing gross margins (through automation) and quality (through customized controls) – unless existing third-party solutions already make this possible?
+Brand Awareness1.Increase brand awareness to make it onto customers’ “pre-selection” lists: this can be done through account management (existing accounts), proactive enterprise sales outreach (for potential new accounts) and marketing initiatives (to appear in online search results) 
+CONFIDENTIAL
+
+[Page 59]
+[ORG]
+CONFIDENTIAL
+Discussion Topics and Project Next StepsAdditional Discussion Topics
+59
+•Phase 2: what are our key objectives / approach / major questions to address?•Customer segments: any segments / specific players to further analyze?•Offerings: how to further flesh them out / what level of detail is needed?•Marketing and Pricing: what is needed?•Phase 2  mid-point steerco meeting: does Tuesday July 25 (morning) work for everyone? •Target completion date: Friday Aug 4?•August Board update: anything specific to prepare?
+•Set up meetings with AIS key account teams ([ORG], Google) and key accounts themselves (“customer satisfaction survey” + understand how we can expand)•Any other AIS account managers (or customers) to speak with (e.g. customers from other service lines to test interest in cross-selling)?•Discuss/review “revenue bridge to 2025”: who to involve?•Discuss levers for gross margin improvement with account and finance teams (July 12): anyone else to involve?•Discuss/refine positioning and unique value proposition: who to involve?•Discuss/refine offering: who to involve and what level of detail is needed?•Discuss sales/marketing, delivery/operations and technology capabilities needed to deliver on “revenue and gross margin bridge” to 2025 (+ investments required): who to involve?
+Project Next Steps
+7Implications for [ORG]
+
+[Page 60]
+Appendix
+
+[Page 61]
+[ORG]
+CONFIDENTIAL
+We will work hand-in-hand with [ORG] to provide a data-driven analysis and strategy
+Phase 1 – Market Assessment report to inform growth strategy, including market size/trends by segments, customer profiles and purchasing behavior, competitive dynamics and where [ORG] should focusOutput
+Input2 Types
+For each phase, mid-point + final reports + updates as needed
+External Data•Primary research: •~20 interviews with relevant experts (buyers + competitors: paid interviews conducted anonymously)•~10 buyers•~10 competitors (and/or partners)•Optional buyer survey can be conducted in Phase 2 – to be discussed•Secondary research: •From third-parties: thorough online research to collect market, customer and competitor data•From [ORG] / NEP: existing market studies, industry reports and customer/competitive analyses•From BM LLC: AI and technology services industry experience from prior engagements 
+1
+Internal Data •Relevant company data (e.g. existing strategic plans, capabilities overview, sales data)•Additional input from / discussions with [ORG] team1
+2
+2Phase 2 – Actionable Growth Strategy, with a clear roadmap to achieve quantified objectives and organization-wide consensus around the plan
+Project Approach 
+61
+8AppendixRECALL FROM KICK-OFF MEETING
+
+[Page 62]
+[ORG]
+CONFIDENTIAL
+Our analysis depends on what data is currently available, and how challenging / time-consuming labeling historical data would be
+62
+FP&A Work Stream – Gap Analysis and Next Steps
+Revenue
+Financial Metrics
+Gross Margin
+By Service LineBy Service OfferingBy CustomerBy Program
+Status Currently Not AvailableCurrently Available
+For each category, do we currently have the data?•If so, we can show a graph over time and identify trends•If not, how might we obtain it (with help from whom and within what timeframe)?
+PRELIMINARY8Appendix
+
+[Page 63]
+[URL]
+Innovative Strategies for Growth

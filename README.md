@@ -15,13 +15,23 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 3. Create `.env` in the repo root:
    ```bash
    OPENROUTER_API_KEY=your_openrouter_api_key_here
+   # optional for Objective 3 local inference:
+   OLLAMA_BASE_URL=http://localhost:11434
+   LOCAL_RAG_MODEL=qwen2.5:32b
    ```
-4. Optional: ingest synthetic starter corpus:
+4. Optional (Objective 3 local model): start Ollama and pull a model:
+   ```bash
+   ollama serve
+   ollama pull qwen2.5:32b
+   ```
+5. Optional: ingest synthetic starter corpus:
    ```bash
    ./.venv/bin/python preprocess.py --vertical V1 --dir synthetic_data/V1
    ./.venv/bin/python preprocess.py --vertical V2 --dir synthetic_data/V2
+   # Objective 3 only (ingests *.sanitized.txt from sanitized_data into V3):
+   ./.venv/bin/python ingest_objective3.py
    ```
-5. Start app:
+6. Start app:
    ```bash
    ./.venv/bin/uvicorn backend:app --port 8000
    ```
@@ -39,15 +49,18 @@ python3.12 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 
 # 3) Create data folders
-mkdir -p real_data/V1 real_data/V2
+mkdir -p real_data/V1 real_data/V2 real_data/V3
 
 # 4) Put your real files into:
 #    real_data/V1  (expert network brief content)
 #    real_data/V2  (interview guide content)
+#    real_data/V3  (interview notes/transcripts for conversational Q&A)
 
 # 5) Ingest / update RAG
 ./.venv/bin/python preprocess.py --vertical V1 --dir real_data/V1
 ./.venv/bin/python preprocess.py --vertical V2 --dir real_data/V2
+# Objective 3 only: pull sanitized files from sanitized_data into V3
+./.venv/bin/python ingest_objective3.py
 
 # 6) Verify
 ./.venv/bin/python preprocess.py --list
@@ -79,17 +92,21 @@ Create `.env` in this folder with:
 
 ```bash
 OPENROUTER_API_KEY=your_openrouter_api_key_here
+# Optional local-model settings for Objective 3
+OLLAMA_BASE_URL=http://localhost:11434
+LOCAL_RAG_MODEL=qwen2.5:32b
 ```
 
 ### Step 2: Create data folders
 
 ```bash
-mkdir -p real_data/V1 real_data/V2
+mkdir -p real_data/V1 real_data/V2 real_data/V3
 ```
 
 Use:
 - `real_data/V1` for Objective 1 content (expert network briefs, screening examples, past briefs)
 - `real_data/V2` for Objective 2 content (interview guides, stakeholder question banks, methodology)
+- `real_data/V3` for Objective 3 content (interview notes, transcripts, synthesis support documents)
 
 ### Step 3: Add files into the correct folder
 
@@ -117,6 +134,8 @@ Run these commands every time you want the RAG to pick up new/changed files:
 ```bash
 ./.venv/bin/python preprocess.py --vertical V1 --dir real_data/V1
 ./.venv/bin/python preprocess.py --vertical V2 --dir real_data/V2
+# Objective 3 only (recommended): ingest sanitized corpus from sanitized_data into V3
+./.venv/bin/python ingest_objective3.py
 ```
 
 You can also ingest specific files (useful if files are outside `real_data/`):
@@ -125,12 +144,23 @@ You can also ingest specific files (useful if files are outside `real_data/`):
 ./.venv/bin/python preprocess.py --vertical V1 --files "/full/path/file1.docx" "/full/path/file2.pdf"
 ```
 
+Objective 3 wrapper options:
+
+```bash
+# Preview which files would be ingested (no changes)
+./.venv/bin/python ingest_objective3.py --dry-run
+
+# If sanitized files are in a different folder:
+./.venv/bin/python ingest_objective3.py --dir "/full/path/to/sanitized_data"
+```
+
 ### Step 5: Confirm what is in the RAG
 
 ```bash
 ./.venv/bin/python preprocess.py --list
 ./.venv/bin/python preprocess.py --list V1
 ./.venv/bin/python preprocess.py --list V2
+./.venv/bin/python preprocess.py --list V3
 ./.venv/bin/python preprocess.py --stats
 ```
 
@@ -151,7 +181,7 @@ Common scenarios:
    - Result: old chunks for that filename are replaced automatically.
 
 2. Add a brand-new document:
-   - Drop it into `real_data/V1` or `real_data/V2`.
+   - Drop it into `real_data/V1`, `real_data/V2`, or `real_data/V3`.
    - Re-run Step 4 command for that vertical.
 
 3. Remove a document from the RAG:
@@ -164,24 +194,143 @@ Common scenarios:
      ./.venv/bin/python preprocess.py --remove <doc_id>
      ```
 
-4. Move a document from V1 to V2 (or V2 to V1):
+4. Move a document across verticals (e.g., V1↔V2, V2↔V3, V1↔V3):
    - Remove old entry by `doc_id`.
    - Put file in the new vertical folder.
    - Re-run Step 4 for the new vertical.
 
 ---
 
+## Local Data Sanitization (LM Studio, Fully Local)
+
+Use this when you need de-identified copies of sensitive source files before sharing or downstream processing.
+
+### What it does
+
+- Reads supported files from an input directory: `.txt`, `.md`, `.docx`, `.pdf`, `.csv`, `.json`, `.xml`, `.yaml`, `.yml`
+- Uses a local LM Studio model to extract person/org names per chunk
+- Applies deterministic local replacement rules for identifiers:
+  - Person names → `[PERSON]`
+  - Organization names → `[ORG]`
+  - Emails → `[EMAIL]`
+  - Phones → `[PHONE]`
+  - URLs → `[URL]`
+  - IDs / long identifiers / SSN / IP → `[ID]`
+- Writes sanitized outputs to a separate output directory
+- Writes run metadata to `sanitization_report.json`
+
+### Privacy defaults
+
+- By default, output filenames are anonymized: `file_0001.sanitized.txt`, etc.
+- By default, source paths are hashed in the report (not written in plaintext).
+- To preserve source names/paths, pass `--preserve-names`.
+
+### Prerequisites
+
+1. LM Studio local server is running on `http://127.0.0.1:1234`
+2. A model is loaded in LM Studio and reachable via `/v1/models`
+3. Recommended model setup used in this repo:
+
+```bash
+$HOME/.lmstudio/bin/lms server start
+$HOME/.lmstudio/bin/lms load qwen/qwen3-32b --identifier sanitizer_qwen --yes
+```
+
+### Recommended command (stable profile)
+
+```bash
+./.venv/bin/python sanitize_with_lmstudio.py \
+  --input-dir Data \
+  --output-dir sanitized_data \
+  --model sanitizer_qwen \
+  --use-nothink \
+  --passes 1 \
+  --max-chars 12000 \
+  --overlap 500 \
+  --chunk-workers 1
+```
+
+Notes:
+- `--use-nothink` prefixes user prompts with `/nothink` for Qwen-style models.
+- `--passes 1` is usually the best speed/quality tradeoff for large corpora.
+
+### Resume and re-run behavior
+
+- Resume incomplete runs:
+  - Re-run the same command without `--overwrite`
+  - Already-created sanitized files are skipped automatically
+- Force full re-sanitization:
+  - Add `--overwrite`
+
+### Output files
+
+- Sanitized documents: `sanitized_data/file_XXXX.sanitized.txt`
+- Run report: `sanitized_data/sanitization_report.json`
+
+### Build Objective 3 RAG from sanitized output
+
+After sanitization finishes, run:
+
+```bash
+./.venv/bin/python ingest_objective3.py
+./.venv/bin/python preprocess.py --list V3
+./.venv/bin/python preprocess.py --stats
+```
+
+Important:
+- `ingest_objective3.py` ingests only `*.sanitized.txt` files.
+- It always writes to `V3` (Objective 3 collection only).
+- `sanitization_report.json` and `sanitize_run.log` are not ingested by this wrapper.
+
+Key report fields:
+- `files_total`
+- `files_succeeded`
+- `files_skipped`
+- `files_failed`
+- Per-file `status`, `chunks`, `entities_people`, `entities_orgs`, timing, and errors
+
+### Troubleshooting
+
+1. Error: `400 ... No models loaded`
+   - Cause: LM Studio server is up but no model is loaded
+   - Fix:
+   ```bash
+   $HOME/.lmstudio/bin/lms load qwen/qwen3-32b --identifier sanitizer_qwen --yes
+   ```
+
+2. Warning: `Ignoring wrong pointing object ...`
+   - Cause: recoverable PDF structure warnings from `pypdf`
+   - Impact: usually non-fatal; run can still complete
+
+3. Scanned/image PDFs sanitize poorly
+   - Current pipeline is text-extraction based (no OCR fallback yet)
+   - For best results, use text-based PDFs
+
+4. Slow throughput on very large files
+   - Reduce passes (`--passes 1`)
+   - Increase chunk size (`--max-chars`)
+   - Keep `--chunk-workers 1` for stability on this setup
+
+---
+
 ## 1. Product Vision
 
-Benjamin is an internal AI tool for a boutique strategy consulting firm that competes with McKinsey, BCG, and Bain. It accelerates repetitive components of client engagements — specifically **expert network briefs** and **interview guide drafting** — by combining curated knowledge bases (RAGs) with Claude Sonnet 4.5 and domain-specific system prompts.
+Benjamin is an internal AI tool for a boutique strategy consulting firm that competes with McKinsey, BCG, and Bain. It accelerates repetitive components of client engagements across three workflows:
 
-**Client and company confidentiality is non-negotiable.** All processing outside the single OpenRouter API call (routed through Amazon Bedrock with Zero Data Retention) runs entirely on a local M2 Mac. No data touches the cloud or web beyond that one call.
+- **Objective 1**: Expert network brief drafting
+- **Objective 2**: Interview guide drafting
+- **Objective 3**: Conversational synthesis of interview notes and related research
+
+**Client and company confidentiality is non-negotiable.** The current implementation uses a hybrid generation route:
+
+- Objectives 1 and 2 use Claude Sonnet 4.5 via OpenRouter → Bedrock (ZDR, no fallbacks).
+- Objective 3 uses a **local model via Ollama** over the same local RAG stack.
 
 ---
 
 ## 2. Users & Context
 
-- **Users**: Consultants at the firm conducting commercial due diligence and growth strategy engagements
+- **Users**: Consultants conducting commercial due diligence and growth strategy engagements
 - **Clients**: Investment firms, private equity firms, hedge funds, corporates
 - **Industries**: Primarily technology and manufacturing, but cross-industry
 - **Project types**: Commercial due diligence, growth strategy (market / customer / competitive analyses)
@@ -198,10 +347,10 @@ Generate project briefs for expert networks to identify and screen relevant stak
 **Requirements:**
 - Accept project objectives and key questions as input
 - Output a structured brief suitable for expert network submission
-- Include ~5 screening questions (±1) that:
+- Include ~5 screening questions (+/- 1) that:
   - Cover a representative set of interview topics
   - Assess interviewees' level of knowledge
-  - Extract useful information even if the person is not ultimately interviewed
+  - Extract useful information even if the person is not interviewed
 - Tailor output to the specific industry, client type, and engagement scope
 
 ### Objective 2: Interview Guide Drafting
@@ -216,54 +365,95 @@ Generate tailored interview question lists for each stakeholder type (customers,
   - Phrasing sensitive questions to extract needed information without revealing intent
 - Adapt tone and framing per stakeholder type
 
+### Objective 3: Conversational Research Synthesis (Sensitive Notes)
+
+Answer analyst-style questions over interview notes/transcripts and related research with explicit evidence.
+
+**Representative question types:**
+- "How many interviewees agreed vs disagreed with X?"
+- "Find quotes supporting statement Y."
+- "Who talked about topic Z?"
+- "What is the consensus view on growth rate? Cite relevant references."
+
+**Requirements:**
+- Reuse the same RAG foundation as Objectives 1 and 2
+- Route generation to a local LLM for sensitive content
+- Return quote-level and source-level references
+- Avoid unsupported claims when evidence is weak or conflicting
+
 ---
 
 ## 4. System Architecture
 
 ### 4.1 Preprocessing Pipeline (Offline / Batch)
 
-A local preprocessing step ingests source documents and builds **multiple RAG indices across different verticals**:
+A local preprocessing step ingests source documents and builds multiple RAG indices across verticals:
 
-- **Input**: Multiple files (past briefs, interview guides, methodology docs, industry templates, best practices, etc.)
-- **Processing**: Chunk → embed (Sentence Transformers, MPS-accelerated) → store in Chroma
-- **Output**: Two named RAG collections (verticals):
-  - **V1** — maps to Objective 1 (expert network briefs, screening question examples, past project briefs)
-  - **V2** — maps to Objective 2 (interview guides by stakeholder type, question design patterns, methodology)
+- **Input**: Past briefs, interview guides, methodology docs, interview notes, and related research artifacts
+- **Processing**: Chunk -> embed (Sentence Transformers, MPS-accelerated) -> store in Chroma
+- **Output**: Three named collections:
+  - **V1** -> Objective 1 (briefs, screening examples, prior deliverables)
+  - **V2** -> Objective 2 (interview guide patterns, stakeholder question structures)
+  - **V3** -> Objective 3 (interview notes, transcripts, synthesis evidence)
 
-Each vertical is a separate Chroma collection with its own metadata schema, allowing targeted retrieval per objective.
+The pipeline supports incremental updates. Re-ingesting an updated file replaces stale chunks for that filename+vertical.
 
-The pipeline is designed for **easy incremental updates** — as new project briefs, interview guides, or methodology documents are completed, they can be added to the relevant vertical without rebuilding the entire index. Updated or replaced documents are automatically re-chunked and re-embedded, with stale chunks removed.
+### 4.2 Runtime Routing (Current)
 
-### 4.2 Web Application (Runtime)
+| Objective | Collection | Provider | Model | Cloud egress |
+|---|---|---|---|---|
+| `expert_network_brief` | V1 | OpenRouter | `anthropic/claude-sonnet-4.5` | Yes |
+| `interview_guide` | V2 | OpenRouter | `anthropic/claude-sonnet-4.5` | Yes |
+| `insights_qa` | V3 | Ollama (local) | `LOCAL_RAG_MODEL` (default `qwen2.5:32b`) | No |
 
-A FastAPI + HTML frontend where consultants interact with the system:
+### 4.3 Web Application (Runtime)
 
-1. **Select objective** (brief drafting or interview guide)
-2. **Provide project context** (objectives, questions, stakeholder type, industry)
-3. **System retrieves** relevant chunks from the corresponding vertical (V1 or V2)
-4. **Custom system prompt** (per objective) instructs Claude on firm style, output format, and quality standards
-5. **Claude Sonnet 4.5** generates the output via OpenRouter → Bedrock + ZDR
-6. **Response displayed** with source citations from the RAG
+A FastAPI + HTML frontend where consultants interact with three sections (Brief Salon, Interview Atelier, Insights Parlour):
 
-### 4.3 Security Model
+1. Select objective
+2. Choose mode
+   - `direct`: optional file context + prompt
+   - `rag`: retrieve from V1/V2/V3 + objective-specific prompt
+3. Retrieve relevant chunks from the mapped vertical
+4. Load objective-specific prompt from `system_prompts/*.md`
+5. Route generation by objective (OpenRouter for Obj 1/2, Ollama for Obj 3)
+6. Display answer with sources and token usage
+
+Current UX behavior:
+- Objective 3 forces `rag` mode in the UI
+- Objective-specific labels/placeholders/hints are applied dynamically
+- The right panel is **Library**, grouped into dropdown folders by collection, with links to open original files
+
+### 4.4 API Surface (Current)
+
+- `POST /api/chat`
+  - `mode=direct`: optional file context + prompt, OpenRouter generation
+  - `mode=rag`: requires `objective` in `{expert_network_brief, interview_guide, insights_qa}`
+  - RAG response includes `content`, `usage`, `provider`, `model`, `sources`
+- `GET /api/documents`
+  - Lists ingested documents and metadata
+- `GET /api/documents/{doc_id}/file`
+  - Serves stored original files for Library links
+- `GET /api/stats`
+  - Returns per-vertical doc/chunk/vector stats
+
+### 4.5 Security Model
 
 ```
-LOCAL (M2 Mac - 24GB)                    CLOUD (only network call)
+LOCAL (consultant machine)                 CLOUD (only Obj 1/2)
 ┌─────────────────────────────┐          ┌──────────────────────────┐
-│ All source documents        │          │ OpenRouter API           │
-│ All RAG indices (Chroma)    │          │  → Amazon Bedrock        │
-│ All embeddings              │   ──►    │  → ZDR enforced          │
-│ All preprocessing           │ (prompt  │  → No data retention     │
-│ Web UI + FastAPI backend    │  only)   │  → No fallback providers │
-│ System prompts              │          └──────────────────────────┘
-│ User inputs                 │
+│ All source docs + uploads   │          │ OpenRouter API           │
+│ All vectors + metadata      │          │  -> Amazon Bedrock       │
+│ All preprocessing           │   ->     │  -> ZDR enforced         │
+│ Web UI + FastAPI            │ prompt   │  -> No fallback providers│
+│ Ollama local model (Obj 3)  │ only     └──────────────────────────┘
 └─────────────────────────────┘
 ```
 
-- **Zero leakage**: No document content, embeddings, or metadata leaves the local machine
-- **Only the assembled prompt** (retrieved chunks + user query + system prompt) is sent to OpenRouter
-- **ZDR**: OpenRouter routes exclusively to Bedrock endpoints with zero data retention
-- **No fallbacks**: `allow_fallbacks: false` ensures no silent rerouting to non-ZDR providers
+- Objective 3 can run fully local (retrieval + generation)
+- Objectives 1/2 send only assembled prompts to OpenRouter
+- Bedrock-only routing with `allow_fallbacks: false`
+- Sensitive working corpus folder `/Data/` is gitignored
 
 ---
 
@@ -273,86 +463,50 @@ LOCAL (M2 Mac - 24GB)                    CLOUD (only network call)
 
 | Requirement | Description |
 |---|---|
-| Multi-file ingestion | Accept a directory or list of files for batch processing |
-| Vertical assignment | Each file is tagged to a vertical (V1 or V2) |
-| Chunking | 512-token chunks with 50-token overlap |
-| Local embeddings | Sentence Transformers (`all-mpnet-base-v2`), MPS-accelerated |
-| Persistent storage | Chroma with DuckDB backend, one collection per vertical |
-| Metadata tracking | SQLite for document metadata (filename, vertical, chunk count, ingestion date) |
-| Idempotent re-ingestion | Re-ingesting a file replaces its chunks (content-hash-based doc IDs) |
-| Incremental updates | Add new files to an existing vertical without rebuilding the full index |
-| Single-file add/remove | Add or remove individual documents from a vertical with one command |
-| Update detection | Skip files that haven't changed since last ingestion (content-hash comparison) |
+| Multi-file ingestion | Accept a directory or explicit file list |
+| Vertical assignment | Each file is tagged to `V1`, `V2`, or `V3` |
+| Chunking | 512-token chunks with 50-token overlap; chunks under 100 tokens are dropped |
+| Local embeddings | Sentence Transformers (`all-mpnet-base-v2`) |
+| Persistent storage | Chroma (vectors) + SQLite (document metadata) |
+| Idempotent update behavior | Same filename in same vertical is replaced on re-ingest |
+| Update detection | Unchanged files are skipped by content hash |
+| Management commands | List docs, remove by `doc_id`, and print stats |
 
 ### 5.2 Web Application
 
 | Requirement | Description |
 |---|---|
-| Objective selection | User picks Objective 1 (brief) or Objective 2 (interview guide) |
-| Context input | Free-text fields for project objectives, key questions, industry, stakeholder type |
-| RAG retrieval | Queries the corresponding vertical (V1 for Obj 1, V2 for Obj 2) |
-| Custom system prompts | Per-objective prompts encoding firm methodology and output format |
-| LLM generation | Claude Sonnet 4.5 via OpenRouter (Bedrock + ZDR, no fallbacks) |
-| Source citations | Display which RAG chunks informed the response |
-| Document library | View/manage ingested documents and verticals |
+| Objective selection | User picks Objective 1, 2, or 3 |
+| Mode selection | Direct upload mode and RAG mode (Obj 3 forces RAG) |
+| RAG retrieval | Query mapped vertical (V1/V2/V3) with `top_k` and `min_score` |
+| Objective prompts | Loads objective-specific system prompts from local files |
+| Hybrid generation | Obj 1/2 via OpenRouter; Obj 3 via Ollama local |
+| Source traceability | Display retrieved chunk/document references in response |
+| Library UX | Dropdown folders by vertical with per-file "Open original document" links |
 
 ### 5.3 Security (Hard Requirements)
 
 | Requirement | Description |
 |---|---|
-| Fully local processing | Embeddings, chunking, storage, UI — all on local machine |
-| No cloud storage | No S3, no cloud databases, no external vector stores |
-| No telemetry | No analytics, no usage tracking to external services |
-| ZDR enforcement | `provider.zdr: true` on every OpenRouter call |
-| Bedrock-only routing | `provider.order: ["amazon-bedrock"]`, `allow_fallbacks: false` |
-| Credential security | API key via local `.env` file or environment variable only |
+| Fully local data plane | Embeddings, chunking, storage, and document files stay local |
+| Controlled cloud egress | Only Obj 1/2 assembled prompts leave machine |
+| Local sensitive synthesis | Obj 3 generation is local via Ollama |
+| ZDR + provider lock | OpenRouter requests enforce ZDR and Bedrock-only routing |
+| Credential handling | API keys from local env files / environment variables only |
+| Repository hygiene | Raw source data folder `/Data/` is excluded from git |
 
 ---
 
-## 6. System Prompts (Suggested)
+## 6. System Prompts
 
-Each objective uses a dedicated system prompt stored as a local markdown file. Below are suggested starting points — these should be iterated based on output quality.
+Each objective has a dedicated prompt file:
 
-### 6.1 Objective 1: Expert Network Brief (`system_prompts/expert_network_brief.md`)
-
-> You are an expert research assistant at a boutique strategy consulting firm. Your task is to draft a project brief for an expert network (e.g., GLG, AlphaSights) to help identify and screen relevant stakeholders for interviews.
->
-> **Output format:**
-> 1. **Project Background** — 2-3 sentence summary of the engagement context
-> 2. **Target Expert Profile** — Description of ideal interviewees (role, industry, experience level)
-> 3. **Screening Questions** — Exactly 5 questions (±1) that:
->    - Cover a representative cross-section of the topics to be discussed in actual interviews
->    - Assess the interviewee's depth of knowledge on the subject matter
->    - Yield useful data points even if the person is not ultimately selected for a full interview
->    - Are concise and answerable in 1-2 sentences
->
-> **Style guidelines:**
-> - Professional, concise, and specific to the industry/market in question
-> - Avoid jargon that expert network coordinators may not understand
-> - Screening questions should be closed-ended or short-answer where possible
->
-> Use the provided reference materials (past briefs, methodology) to match the firm's established format and quality bar.
-
-### 6.2 Objective 2: Interview Guide (`system_prompts/interview_guide.md`)
-
-> You are an expert research assistant at a boutique strategy consulting firm. Your task is to draft an interview guide — a structured list of questions for a specific stakeholder type.
->
-> **Output format:**
-> 1. **Interview Context** — Brief description of the engagement and this interview's role in it
-> 2. **Stakeholder Type** — Who is being interviewed (e.g., customer, competitor, internal employee)
-> 3. **Questions** — Organized by topic area, with:
->    - Opening questions (rapport-building, broad context)
->    - Core questions (directly addressing project objectives)
->    - Sensitive questions (phrased to maximize candor without revealing intent)
->    - Closing questions (catch-all, referrals)
->
-> **Question design principles:**
-> - Optimize for usefulness of responses — ask questions that yield actionable data
-> - Optimize for willingness to speak — phrase sensitive topics indirectly when needed
-> - For competitive intelligence: frame questions around "market trends" or "industry practices" rather than asking directly about a competitor's strategy
-> - Tailor language and depth to the stakeholder type (e.g., C-suite vs. operational staff)
->
-> Use the provided reference materials (past guides, methodology) to match the firm's established format and quality bar.
+- `system_prompts/expert_network_brief.md`
+  - Brief structure + ~5 screening question guidance
+- `system_prompts/interview_guide.md`
+  - Stakeholder-specific interview guide structure and sensitive phrasing guidance
+- `system_prompts/insights_qa.md`
+  - Evidence-first synthesis: counts, quote extraction, who-mentioned-topic, consensus with citations
 
 ---
 
@@ -360,61 +514,64 @@ Each objective uses a dedicated system prompt stored as a local markdown file. B
 
 | Component | Technology |
 |---|---|
-| **Runtime** | Python 3.12, M2 Mac (24GB) |
-| **Web framework** | FastAPI + Uvicorn |
-| **Frontend** | HTML/CSS/JS (single-page, served by FastAPI) |
-| **LLM** | Claude Sonnet 4.5 via OpenRouter → Amazon Bedrock (ZDR) |
-| **Embeddings** | Sentence Transformers (`all-mpnet-base-v2`), MPS device |
-| **Vector store** | ChromaDB (persistent, local) |
-| **Metadata store** | SQLite |
-| **Document parsing** | python-docx, pypdf, plain text |
-| **Credentials** | `OPENROUTER_API_KEY` via local `.env` or environment variable |
+| Runtime | Python 3.12 |
+| Web framework | FastAPI + Uvicorn |
+| Frontend | HTML/CSS/JS single-page app (French-whimsical salon UI) |
+| LLM routing | Hybrid: OpenRouter Claude (Obj 1/2) + Ollama local (Obj 3) |
+| Local model config | `OLLAMA_BASE_URL`, `LOCAL_RAG_MODEL` |
+| Embeddings | Sentence Transformers (`all-mpnet-base-v2`) |
+| Vector store | ChromaDB (local persistent) |
+| Metadata store | SQLite (`uploaded_docs/metadata.db`) |
+| Parsing | `python-docx`, `pypdf`, text decoding |
+| Local sanitization | LM Studio local API + `sanitize_with_lmstudio.py` |
 
 ---
 
-## 8. File Structure (Target)
+## 8. File Structure
 
 ```
 Benjamin/
-├── backend.py                          # FastAPI server (chat + RAG endpoints)
-├── preprocess.py                       # CLI: ingest files → chunk → embed → store
+├── backend.py                          # FastAPI server (chat + documents + stats)
+├── preprocess.py                       # CLI: ingest/list/remove/stats for RAG data
+├── sanitize_with_lmstudio.py           # CLI: local de-identification pipeline via LM Studio
 ├── system_prompts/
 │   ├── expert_network_brief.md         # System prompt for Objective 1
-│   └── interview_guide.md              # System prompt for Objective 2
+│   ├── interview_guide.md              # System prompt for Objective 2
+│   └── insights_qa.md                  # System prompt for Objective 3
 ├── rag/
-│   ├── __init__.py
-│   ├── embeddings.py                   # Local embedding model wrapper
-│   ├── vector_store.py                 # Chroma client (multi-collection)
-│   ├── chunking.py                     # Text chunking strategies
-│   ├── document_manager.py             # Document metadata CRUD (SQLite)
-│   └── retrieval.py                    # Query → retrieve → assemble context
+│   ├── embeddings.py
+│   ├── vector_store.py
+│   ├── chunking.py
+│   ├── document_manager.py
+│   ├── retrieval.py
+│   └── system_prompts.py
 ├── static/
-│   └── index.html                      # Web frontend
-├── chroma_db/                          # Vector database (local, gitignored)
-├── uploaded_docs/                      # Original documents (local, gitignored)
-│   └── metadata.db                     # SQLite metadata
-├── requirements.txt                    # Python dependencies
-├── README.md                           # This PRD
-└── RAG_IMPLEMENTATION_PLAN.md          # Detailed technical implementation plan
+│   └── index.html                      # Frontend + Library dropdown folders and file links
+├── chroma_db/                          # Local vector database (gitignored)
+├── uploaded_docs/                      # Stored source files + metadata.db (gitignored)
+├── Data/                               # Raw working corpus (gitignored)
+├── sanitized_data/                     # Sanitized outputs + run report (local)
+├── tests/
+├── requirements.txt
+└── README.md
 ```
 
 ---
 
 ## 9. Success Criteria
 
-- **Objective 1**: Given project objectives, the system produces a usable expert network brief with ~5 screening questions in under 30 seconds
-- **Objective 2**: Given project objectives and stakeholder type, the system produces a tailored interview guide with appropriately phrased questions in under 30 seconds
-- **Confidentiality**: Zero data leakage — verified by network audit (only OpenRouter calls leave the machine)
-- **Quality**: Output quality comparable to manually drafted briefs/guides, requiring minimal editing
-- **RAG relevance**: Retrieved chunks are demonstrably relevant (>80% precision in top-5)
+- **Objective 1**: Produces usable expert-network briefs with ~5 screening questions quickly
+- **Objective 2**: Produces stakeholder-tailored interview guides with sensitive-question phrasing
+- **Objective 3**: Answers transcript-centric analytical questions with explicit citations and quotes
+- **Confidentiality**: Sensitive transcript synthesis can run fully local
+- **RAG relevance**: Top retrieved chunks are consistently relevant to the analyst query
 
 ---
 
 ## 10. Out of Scope (Current Phase)
 
-- Multi-user access / authentication
-- Cloud deployment
-- Conversation memory across sessions
-- PDF table/image extraction
-- Real-time collaborative editing
-- Integration with expert network platforms (e.g., GLG, AlphaSights APIs)
+- Multi-user authentication/authorization
+- Cloud deployment of the app
+- Cross-session memory beyond current request context
+- OCR-heavy handling for scanned/image-only PDFs
+- Direct integration with expert-network vendor APIs

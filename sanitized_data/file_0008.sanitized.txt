@@ -1,0 +1,3848 @@
+[Page 1]
+Project Patriot –
+Market Diligence
+March 3, 2025
+CONFIDENTIAL
+Wrap-Up Discussion
+
+
+[Page 2]
+[ORG]
+Table of Content
+Introduction1
+Executive Summary2
+Market Sizing3
+CONFIDENTIAL
+2
+6 Go-To-Market Implications for [ORG]
+Customer Analysis4
+5 Competitive Analysis
+7 Discussion Topics & Next Steps
+
+[Page 3]
+[ORG]
+Context and Objectives
+• ClearlyRated is evaluating an investment in [ORG], a Customer Experience (CX) & Employee Experience (EX) feedback
+collection platform focused on Architecture, Engineering and Construction ([ORG]) firms in the US
+• As part of the diligence process and to inform the investment decision, ClearlyRated and its investor Software Growth Partners
+have commissioned [PERSON] to conduct an assessment of [ORG]’s market, customer and competitive
+[ORG]
+• The assessment is focused on 3 work streams:
+• US Market Size, Penetration and Growth
+• Customer Analysis & Purchasing Behavior
+• Competitive [ORG]
+• This final report has been prepared in 4 weeks
+1 Introduction CONFIDENTIAL
+3
+
+[Page 4]
+[ORG]
+CONFIDENTIAL
+The project is complete
+Project Plan
+Wrap-Up Discussion
+(Fri Feb 28)
+Phase 1 Kick-Off
+(Mon Feb 3)
+Week 1 
+(Feb 3-7)
+Week 2 
+(Feb 10-14)
+Week 3
+(Feb 17-21)
+Week 4
+(Feb 24-28)
+• Request and review available  
+data
+• Draft & validate interview 
+guide; launch expert network 
+requests
+• Review, schedule and begin 
+conducting customer / 
+competitor interviews
+• Draft market sizing framework
+• Begin secondary research
+• Draft report structure and 
+synthesize initial findings
+• Continue customer & 
+competitor interviews
+• Continue secondary research
+• Prepare preliminary market 
+sizing output
+• Synthesize preliminary 
+findings and complete mid-
+point report
+• Conduct mid-point discussion 
+• Align on next steps and 
+remaining questions
+• Continue primary and 
+secondary research to answer 
+pending itemson market, 
+competitive and customer 
+landscape
+• Refine market sizing & outlook
+• Finalize primary and 
+secondary research
+• Address pending items
+• Synthesize / update key 
+findings
+• Finalize report
+• Conduct wrap-up discussion
+Plan
+Touch-
+points
+4
+Mid-Point Discussion
+(Wed Feb 19)
+Additional touchpoints / updates (meetings and/or emails) as needed
+Week 1 Update
+(Mon Feb 10)
+Week 3 Update
+(Mon Feb 24)
+1 Introduction
+Initial Discussion
+(Thu Feb 13)
+
+[Page 5]
+[ORG]
+ 5
+Interviews Conducted (20)
+CONFIDENTIAL1 Introduction
+We conducted 20 interviews with competitors and buyers across mid-market 
+and enterprise [ORG] firms
+Construction (6)
+• [ORG] [Enterprise], SVP Marketing & Communications
+• [ORG] [Mid-Market], President
+• [ORG] [Enterprise], Market Intelligence Analyst
+• [ORG] [Mid-Market], Director of Business Development
+• [PERSON] [Enterprise], Sr . Director - Marketing Strategy & Planning
+• [ORG] [Mid-Market], HR Director
+Engineering (5)
+• [ORG] [Enterprise], Associate VP – Digital
+• [ORG] [Enterprise], VP - Client and Partner Relations
+• Ramboll [Mid-Market], Global HR Director
+• SME-USA [Mid-Market], Chief Business Development Officer
+• [ORG] [Mid-Market], Senior Insights Manager
+Architecture (4)
+• DLR Group [Upper Mid-Market], Principal – Global Design Research Leader
+• [ORG] [Enterprise], Marketing Director
+• [ORG] [Mid-Market], Director of Sustainability
+• [ORG] [Enterprise], Director of Business Development
+Buyers (15) Competitors (5)
+• [ORG], Global Head of T echnical Delivery, VOC/E
+• [ORG], Former Head of Client Success - North America
+• [ORG], Enterprise Sales Director - Hospitality
+• [ORG], Area Vice President
+• [ORG], Former Head of Sales
+
+[Page 6]
+[ORG]
+ 6
+We also consulted over 60+ secondary sources
+External (50+)
+CONFIDENTIAL
+Secondary Sources (60+)
+Data Shared by SGP / 
+[ORG] (10+)
+• Business 02 and 03 as of 12-
+31-2024 – Customers [ORG] Master Client and 
+Renewal List 
+• Business 03 – Usage
+• Business 06 - Operations 
+Report 
+• Business 07 – Top 25 client 
+context 
+• Business 08 - NPS 
+• Business 18 – Pricing
+• Business 19 – Partners and 
+context 
+• Business 20 – Competition
+• Business 30 - [ORG] Industry 
+Sources
+• Business-30_appendix-A -
+Top 500 Design Firms
+• Capterra
+• [ORG] 
+• [ORG]
+• [ORG] annual Clarity AE Industry Study
+• Engineering News-Record ([ORG])
+• Forrester
+• G2
+• [ORG]
+• [ORG]
+• IBIS World
+• International Data Corporation(IDC)
+• S&P Capital IQ
+• SelectHub
+• Service Performance Insight Professional Services
+Maturity Benchmark
+• SmartBrief Outlook for [ORG] Companies
+• [ORG] annual [ORG] Inspire Report
+• [ORG]
+Competitor websites / filings / press releases /
+earnings calls (27+)
+• [ORG]
+• AON Hewitt
+• AskNicely
+• ChurnZero
+• Circle S Studios
+• Cotera
+• CustomerGauge
+• CX Pilots
+• Energage
+[ORG] Industry Research & Benchmarking (17+)
+1 Introduction
+• Acquisition.gov
+• North American Industry Classification Scheme (NAICS)
+• CPARSUS Small Business Administration
+• Federal Register
+• US Census Bureau
+• US Code
+Government & Regulatory Sources (6+)
+• [ORG]
+• Genesys
+• GuildQuality
+• HSO
+• [ORG]
+• McorpCX
+• [ORG]
+• NICE
+• PSMJ
+• [ORG]
+• QuestionPro
+• Sprinklr
+• [ORG]
+• SurveySparrow
+• Typeform
+• WTW
+• Zonka
+• Zweig Group
+
+[Page 7]
+Executive Summary
+
+[Page 8]
+[ORG]
+CONFIDENTIAL
+Executive Summary (1/4)
+8
+• CX/EX feedback collection solutions targeting [ORG] firms in the US currently represent a USD ~90 million market, which is
+expected to reach USD ~140 million by 2029, driven by greater penetration and increased spending
+• By solution: CX/EX platforms represent the largest segment (~65%), due to higher average spend and higher penetration in
+Enterprise. Self-service survey tools account for ~20% of the market due to lower average spend, despite high penetration
+• By vertical: Construction and Engineering account for ~90% of the market – Engineering (~50%) due to higher adoption and
+Construction (~40%) due to large number of firms. Architecturemarket is relatively small, due to lower number of firms
+• By customer size: Enterprise represents~55% of the market, due to higher adoption and average spend. Mid-market at ~25%
+• Market growth will be driven by positive [ORG] industry outlook (which increases CX/EX budget available), competition for clients,
+labor shortages, and gradual technology transformationin the [ORG] industry
+• Some uncertainty remains around [ORG] industry outlook – due to potential tariffs, fewer migrant workers exacerbating talent
+shortage, and uncertainty around interest rates. However, this uncertainty can also create opportunities CX/EX solution
+providers, as revenue dips and competition for talent are drivers of adoption
+• In the next 5 years, ~60% of market growth in CX/EX platforms will come from greenfield and brownfield opportunities, while
+~40% will derive from spend increase of existing CX/EX platform users
+• ~100 Mid-market firms and ~50 Enterprises are expected to adopt a CX/EX platform from scratch (greenfield opportunity),
+while ~60 Mid-market firms and ~30 Enterprises are expected to upgrade from existing tools (self-service / free / CRM add-
+on) to a CX/EX platform (brownfieldopportunity)
+Market 
+Sizing
+2 Executive Summary
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+[Page 9]
+[ORG]
+CONFIDENTIAL
+Executive Summary (2/4)
+9
+• Complexityof CX/EX feedback collection needs vary by customer size and CX/EX maturity
+• Often, [ORG] firms needs are relatively straightforward(e.g. post-project customer feedback), and can be met by tools with self-
+service capabilities
+• Robust platforms like [ORG] become more relevant as needs mature, and/or when clients value a more hand-held
+approach
+• Negative events, such as revenue dips or employee churn, are major triggers for initiating CX/EX programs; upgrading solutions
+can be more growth-motivated, once customerssee the value of CX/EX programs
+• Preference for more robust CX/EX platforms is driven by 3 main factors: sophistication of the marketing leader, company
+technologicalmaturity overall, and company size / complexity / budget
+• Buyers discover solutions through two main channels: word-of-mouth / industry peers, and online search
+• Solutions are evaluated on having just the right fit in terms of functionality for the buyer’s level of CX/EX maturity, ease of use
+and price – though this varies by customer segment
+• Functionality,integrationwith existing systems/processesand ease of use overtakeprice for larger and more mature buyers
+• Switching costs are relatively high, especially for larger buyers, due to integrations(e.g. with CRM system), importance of ease of
+use (vs. learning about a new platform), and the relatively small investmentwhich CX/EX solutions represent for large firms
+• Buyers serving federal customers are less likely to use survey tools beyond CPARS, making them a lower GTM priority for [ORG]
+Customer 
+Analysis
+2 Executive Summary
+•
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+[Page 10]
+[ORG]
+CONFIDENTIAL
+Executive Summary (3/4)
+10
+• [ORG] competes to some degree against six main categories of players: CX platforms, self-service survey tools and
+platforms, CX consultancies,omnichannel inferencesolutions and CRM and HR platforms with survey capabilities
+• [ORG]’s main direct competitorsin CX/EX feedback collection tools for [ORG] are [ORG] and [ORG]
+• [ORG] offers an advanced, feature-complete and scalable analytics platform that can grow with customers’needs
+• SurveyMonkeyprovides easy-to-use, yet relatively robust tools, well-suited for customerswith basic survey needs
+• [ORG] stands out relative to competitorsin terms of its support capabilities, ease of use and strong industry experience
+• However, [ORG] is priced at a premium to self-service survey tools. It seems to be price-competitive for service-assisted
+set-ups compared to [ORG] and [ORG], but can be more expensive when comparing to simple implementations (e.g. no
+integrations)
+• As such, [ORG] can be perceived as expensive or “overkill” for first-time buyers examining simple solutions, while
+sometimes being viewed as not advanced enough for more mature buyers
+• Satisfaction levels with key competitors are relatively high, reinforcing the importance of targeting greenfield opportunities for
+[ORG]
+• However, self-service customers are not always aware of survey tools’ full functionality – which also represents an opportunity
+for [ORG]
+Competitive 
+Landscape
+2 Executive Summary
+
+[Page 11]
+[ORG]
+CONFIDENTIAL
+Executive Summary (4/4)
+11
+• [ORG]’s sweet spot are customers who are relatively early in their CX/EX stage, and value [ORG]’s “hand-held”
+approach. Targeting potential customers early in their purchasing journey, before they start considering other solutions, will
+maximize [ORG]’s chances success
+• As such, the following measures would enhance [ORG]’s growth:
+• Continuing to build a strong brand awareness in the [ORG] industry to be top-of-mind for customers evaluating CX/EX feedback
+collection tools (through presence at industry conferences,podcast interviews, organizing industry-specific events, etc.)
+• Developing an entry-level, competitively-priced solution for customers with basic needs: this will allow [ORG] to get a
+foothold in new accounts early, before they become accustomedto other platforms (and face high switching costs)
+• Tailoringits value proposition depending on clients’ needs profiles, in addition to emphasizing its [ORG] industry experience:
+• For clients with complex needs: point out [ORG]’s competitive Total Cost of Ownership (including customization) vs.
+service-assisted implementations of [ORG]/[ORG], and high level of dedicated support and guidance (including for
+mid-sized companies)
+• For clients with low-complexity needs: highlight ease of use (vs. [ORG]) and flexibility and adaptability of solutions, with
+an upgrade path to more advanced capabilities compared to [ORG]
+• For clients who perceive CX/EX as high priority: underline agile, dedicated service team for fast deployment, in addition to
+with high-touch, comprehensivesupport with strategicadvisory
+• For clients who perceive CX/EX as lower priority: emphasize fast time-to-value and rapid ROI from hand-held onboarding
+process and proactive advisory services that help identify latent opportunities
+• To detect potential customers, leading indicators include recent adoption of CRM tools (e.g. [ORG], [ORG], [ORG]),
+participation in marketingtechnology events, existenceof Digital / Data / Customer Experience / Employee Experience team, and
+recent customer issues / loss (indicating strong pain point)
+Implications 
+for [ORG]
+2 Executive Summary
+
+[Page 12]
+Market Analysis
+
+[Page 13]
+[ORG]
+ 13
+We leveraged a bottom-up methodology to evaluate the market size for CX/EX 
+programs targeting [ORG] firms in the US
+CONFIDENTIAL
+Market Sizing Methodology – Bottom-Up
+3 Market Analysis – Methodology: Bottom-Up
+Sources: BM Interviews, Research & Analysis
+• xx
+Metrics Sources
+Average spend on systematic CX/EX feedback collection 
+programs, by segment
+Number of [ORG] companies in the US, by segment
+% of [ORG] companies in the US with a systematic CX/EX 
+feedback collection program, by segment
+Total Addressable Market for CX/EX feedback collection 
+programs targeting [ORG] firms in the US, by segment
+• US Census Bureau’s Statistics of US Businesses
+• Buyer and Competitor Interviews
+• Secondary research (e.g. [ORG] surveys)
+• Buyer and Competitor Interviews
+• Secondary research (e.g. competitor/[ORG] data, SaaS
+spending data from [ORG])
+
+[Page 14]
+[ORG]
+ 14
+We triangulated our bottom-up market sizing with top-down estimates based 
+on competitor revenue and market share
+CONFIDENTIAL
+Market Sizing Methodology – Top-Down
+3 Market Analysis – Methodology: T op-Down
+Sources: Company Filings, [ORG], [ORG], BM Interviews, Research & Analysis
+ESTIMATES
+Metrics Sources & Assumptions
+US as a % of Global [ORG] Revenue
+[ID] [ORG] Global Revenue [last available year]
+Estimated [ID]-2024 [ORG] Revenue CAGR 
+Top-Down Triangulation Data Point for CX/EX feedback 
+collection programs targeting [ORG] firms in the US
+• [ORG] [ID] 10-K Filing
+Values
+[ORG] Estimated Market Share
+[ORG] as a % of the CX/EX feedback collection US market
+USD ~1.5 billion
+~15%
+~70%
+• Interview with [ORG] executive
+• [ORG] [ID] 10-K Filing (assumes no change)
+• [ORG], [ORG], other competitor revenues
+(when publicly disclosed)
+• Assumes [ORG] in line with overall market share
+~30%
+~2% • Interviews with competitors (e.g. [ORG], 
+[ORG], [ORG])
+USD ~90 million
+[ID] [ORG] Global Revenue [estimate] • CalculationUSD ~1.9 billion
+
+[Page 15]
+[ORG]
+ 15
+The bottom-up market size for [ORG] firms in the US is estimated at USD 90 
+million, and expected to reach USD 140 million by 2029
+CONFIDENTIAL
+Market Size for CX/EX Programs Targeting [ORG] Firms in the US – by Offering [USD m]
+3 Market Analysis – Market Size by Offering
+Sources: BM Interviews, Research & Analysis
+• Market is forecast to grow from USD 90
+m at over 9% per year to reach USD
+140 m by 2029, driven primarily by
+growth in average spend (2-5% p.a.)
+and contributions from growth in
+adoption of customer feedback
+programs and paid survey tools (1-2%
+p.a.)
+• CX/EX platforms represent by far the
+largest segment, due to higher average
+spend and higher penetration in the
+Enterprise segment
+• Growth of consulting services are
+expected to slightly lag CX/EX
+platforms and self-service survey tools,
+as the share of companies with
+customer feedback programs opting for
+consulting service is expected to remain
+constant (vs. 1-2% adoption growth for
+platforms and tools)
+Total
+Comments
+CAGR
+9%
+7%
+9%
+10%
+59
+(65%)
+20
+(22%)
+11
+(13%)
+2024
+64
+(65%)
+22
+(22%)
+12
+(12%)
+2025
+70
+(65%)
+24
+(22%)
+13
+(12%)
+2026
+77
+(66%)
+26
+(22%)
+14
+(12%)
+2027
+84
+(66%)
+29
+(22%)
+15
+(12%)
+2028
+92
+(66%)
+31
+(22%)
+16
+(12%)
+2029
+90
+98
+107
+117
+128
+140
+Consulting services
+Self-service survey tools
+CX/EX platforms
+ESTIMATES
+
+[Page 16]
+[ORG]
+ 16
+Construction and Engineering account for ~90% of the market: Engineering due 
+to higher adoption; Construction due to large number of firms
+CONFIDENTIAL
+Market Size for CX/EX Programs Targeting [ORG] Firms in the US – by Vertical [USD m]
+3 Market Analysis – Market Size by Vertical
+Sources: BM Interviews, Research & Analysis
+• Relative share of smaller firms is the
+main driver of differences in growth
+rates of the three sub-verticals, as
+smaller firms are expected to continue
+to lag in solution adoption and spend
+growth
+• Engineering constitutes the largest sub-
+vertical in terms of market size as it has
+more Enterprise and Mid-market firms
+(1.9 k out of 7 k firms) and higher
+solution adoption than Construction,
+which is primarily made up of smaller
+firms (47.8 k of 49 k businesses in
+scope)
+Comments
+47
+(52%)
+35
+(39%)
+2024
+9
+(9%)
+51
+(52%)
+38
+(39%)
+2025
+9
+(9%)
+56
+(53%)
+41
+(39%)
+2026
+10
+(9%)
+62
+(53%)
+45
+(38%)
+8
+(9%)
+11
+(9%)
+68
+(53%)
+49
+(38%)
+2028
+12
+(9%)
+75
+(53%)
+53
+(38%)
+2029
+90
+98
+107
+[PHONE]
+Total 9%
+10%
+8%
+10%
+Architecture
+Construction
+Engineering
+CAGR
+ESTIMATES
+
+[Page 17]
+[ORG]
+ 17
+Across [ORG], Enterprise is the largest segment due to higher adoption and 
+average spend; gap with smaller businesses is expected to widen
+CONFIDENTIAL
+Market Size for CX/EX Programs Targeting [ORG] Firms in the US – by Company Size [USD m]
+3 Market Analysis – Market Size by Company Size
+Sources: BM Interviews, Research & Analysis
+• Both Mid-market and Enterprise
+benefit from the same underlying
+adoption and spend growth trends,
+though Mid-market will grow marginally
+faster due to its lower relative exposure
+to slower-growing Consulting services
+• Adoption and spend growth among
+Smaller businesses will continue to lag
+larger firms due to the relatively higher
+cost and time commitment required to
+run CX/EX programs for smaller
+organizations, and greater budget
+constraints
+Comments
+22
+(25%)
+17
+(19%)
+2024
+56
+(57%)
+24
+(25%)
+18
+(18%)
+2025
+61
+(57%)
+27
+(25%)
+19
+(18%)
+2026
+68
+(58%)
+30
+(25%)
+20
+(17%)
+51
+(56%)
+74
+(58%)
+33
+(25%)
+21
+(17%)
+2028
+82
+(58%)
+36
+(26%)
+22
+(16%)
+2029
+90
+98
+107
+[PHONE]
+9%
+5%
+10%
+10%
+Smaller businesses
+Mid-market
+Enterprise
+Total
+CAGR
+ESTIMATES
+
+[Page 18]
+[ORG]
+ 18
+Enterprise accounts for over 60% of the Engineering market, due to higher 
+penetration and spend
+CONFIDENTIAL
+Market Size for CX/EX Programs Targeting Engineering Firms in the US [USD m]
+3 Market Analysis – Market Size: Engineering
+Sources: BM Interviews, Research & Analysis
+• Engineering is the largest sub-vertical
+in terms of market size, with its high
+share of Enterprise (~300) and Mid-
+market (~1.6 k ) out of the ~7 k firms in
+the sub-vertical, along with the highest
+solution adoption in [ORG]
+• Adoption and spend growth among
+Smaller businesses is expected to
+continue to lag larger firms across all
+sub-verticals
+Comments
+3
+(7%)
+15
+(30%)
+2025
+36
+(64%)
+17
+(30%)
+4
+(6%)
+33
+(64%)
+2026
+40
+(64%)
+19
+(30%)
+4
+(6%)
+14
+(30%)
+2027
+44
+(64%)
+20
+(30%)
+4
+(6%)
+2024 2028
+48
+(64%)
+23
+(30%)
+4
+(6%)
+3
+(7%)
+2029
+47
+51
+56
+62
+68
+75
+30
+(63%)
+10%
+5%
+10%
+10%
+Smaller businesses
+Mid-market
+Enterprise
+Total
+CAGR
+ESTIMATES
+
+[Page 19]
+[ORG]
+ 19
+Nearly half of Construction’s market value is Enterprise, despite long-tail of 
+~48 k smaller businesses
+CONFIDENTIAL
+Market Size for CX/EX Programs Targeting Construction Firms in the US [USD m]
+3 Market Analysis – Market Size: Construction
+Sources: BM Interviews, Research & Analysis
+• Construction is expected to see slightly 
+lower growth compared to the other 
+two [ORG] sub-verticals, due to its much 
+larger share of smaller firms(47.8 k 
+smaller, 1 k Mid-market and 180 
+Enterprise)
+• Solution adoption levels are also lower 
+in Construction than in Engineering, 
+contributing to the smaller market size 
+(USD 35 m vs. USD 47 m), despite a 
+much larger number of companies (49 k 
+vs. 7 k) 
+• Adoption and spend growth among 
+Smaller businesses is expected to 
+continue to lag larger firms across all 
+sub-verticals; Smaller businesses’ share 
+of the market is expected to fall from 
+38% to 33% in Construction
+Comments
+6
+(18%)
+13
+(38%)
+2024
+17
+(45%)
+7
+(18%)
+14
+(37%)
+2025
+19
+(46%)
+8
+(19%)
+15
+(36%)
+2026
+21
+(47%)
+8
+(19%)
+15
+(35%)
+16
+(44%)
+23
+(47%)
+9
+(19%)
+16
+(34%)
+2028
+25
+(48%)
+10
+(19%)
+17
+(33%)
+2029
+35
+38
+41
+45
+49
+53
+2027
+8%
+5%
+10%
+10%
+Smaller businesses
+Mid-market
+Enterprise
+Total
+CAGR
+ESTIMATES
+
+[Page 20]
+[ORG]
+ 20
+Enterprise also accounts for two thirds of the Architecture market, due to 
+higher penetration and spend
+CONFIDENTIAL
+Market Size for CX/EX Programs Targeting Architecture Firms in the US [USD m]
+3 Market Analysis – Market Size: Architecture
+Sources: BM Interviews, Research & Analysis
+• Architectureis the smallest sub-vertical
+in terms of market size, as it has the
+fewest number of companies (~1,600),
+but is similar to Engineering in terms of
+business size mix (~60 Enterprise and
+~300 Mid-Market)
+• Adoption and spend growth among
+Smaller businesses is expected to
+continue to lag larger firms across all
+sub-verticals
+Comments
+1
+(8%)
+2
+(24%)
+2025
+6
+(68%)
+2
+(24%)
+1
+(8%)
+6
+(67%)
+2026
+7
+(68%)
+3
+(24%)
+1
+(8%)
+2
+(24%)
+2027
+8
+(68%)
+3
+(25%)
+1
+(8%)
+2024 2028
+9
+(68%)
+3
+(25%)
+1
+(7%)
+1
+(9%)
+2029
+8
+9
+9
+10
+11
+12
+5
+(67%)
+CAGR
+10%
+5%
+10%
+10%
+Smaller businesses
+Mid-market
+Enterprise
+Total
+ESTIMATES
+
+[Page 21]
+[ORG]
+ 21
+[ORG] industry growth, intensifying competition, particularly for labor, and 
+technology transformation will drive increased CX/EX solution adoption
+CONFIDENTIAL
+Market Adoption Drivers / T ailwinds
+3 Market Analysis – Growth Drivers / Tailwinds
+Sources: [ORG], [ORG], [ORG], [ORG], BM Interviews, Research & Analysis
+• “For the private sector, buying behavior is typically driven by economic cycles, market competition, and profit margins” – [ORG], VP
+Solutions Marketing; “Spend on survey tools will grow in line with our revenue” – [ORG], Associate VP
+• “On balance, [ORG] industry growth has a positive impact, because firms have more budget. With a better outlook, they spend more on those
+[CX/EX] activities. If the outlook is negative, they may spend money, but to understand churn – not a full CX program. Even in a downturn,
+they’ll spend, but more cautiously” – [ORG], Global Head of T echnicalDelivery
+• Overall economic growth will impact [ORG] market growth. [ORG] expects US Construction (new build) growth of 8% in 2025, while
+[ORG] projects a double-digit growth in the US [ORG] services market for 2024-2030
+• High level of optimism in [ORG] industry outlook (42% very optimistic and 44% cautiously optimistic: [ORG] 2024 survey)
+• With that said, industry growth may also present challenges to the CX/EX industry: “In 2008 and 2020, I remember spending in construction
+dipped. One of the first things to get cut was Marketing & BD overhead, which would impact CX programs. At the same time, some
+companies were discussing how to increase share of wallet. Unsophisticated owners will cut BD” – [ORG], Director of BD
+• “Drivers for adoption [include the] importance of being competitive in the market” – [ORG],Fmr. Head of Sales
+• “Large construction firms are very disciplined and structured when it comes to training and retaining personnel. They love sending surveys” –
+[ORG], Director of Sustainability
+• Understanding employee satisfaction help companies attract and retain talent, in the face of growing labor shortages facing construction
+industry, already seeing higher-than-average wage increases (~5% yoy since 2022). Possible restrictions on migrant workers may exacerbate
+current labor shortage
+• Tech-forward [ORG] companies (data driven, with systems and applications that are fully or mostly integrated) are almost 50% more likely to
+track customer satisfaction than average, according to [ORG] survey
+• “If companies have made an investment in [ORG] (e.g. construction/engineering module), it’s a good indicator that they spent money on
+technology, left a homegrown system, and moved into the marketplace” – [ORG], Enterprise Sales Director – Hospitality
+• Slow but steady technology transformation will continue in [ORG] market
+[ORG] Industry 
+Growth
+Competition 
+for Clients and 
+Labor Shortage
+Technology 
+Transformation
+
+[Page 22]
+[ORG]
+ 22
+However, [ORG] industry outlook could be negatively impacted by looming 
+tariffs, restrictions to migrant labor supply and public policy uncertainty
+CONFIDENTIAL
+Potential [ORG] Market Headwinds
+3 Market Analysis – Potential Headwinds
+Sources: Oxford Economics, Pew Research Center, US Census Bureau data, White House, BM Interviews, Research & Analysis
+• Executive orders imposing 25% tariffs on all US imports of steel and aluminum with no exceptions or exclusions, due to take effect on March
+12, and a general 25% tariff on all Canadian and Mexican imports, delayed for 30 days until March 6
+• Tariffs likely to drive up material costs of steel, aluminum, timber and other building materials in the short term; many companies unable to
+shelter themselves through hedging or contractual arrangements may account for price hikes
+• Potential disruptions from delivery delays of materials due to increased customs inspections and supply chain turbulence
+• 26% of US construction workers are immigrants and 13% of workers are unauthorized (per Pew Research Center), the largest share of any
+sector; foreign-born workers, regardless of status, fill ~30% of trade jobs like carpentry, plastering, masonry and electrical roles
+• Deportations and migrant worker visa restrictions could exacerbate the labor supply issue that the sector already faces, slowing down
+project timelines, increasing labor costs and an inducing an overall construction industry slowdown
+• A series of executive orders already expand “expedited removals” and restrict employment-based visas; US Immigration and Customs
+Enforcement have ramped up efforts to arrest and detain people unauthorized to be in the US
+• Public projects in limbo as federal agencies ordered to stop/pause disbursing Infrastructure Investment and Jobs Act (IIJA) and Inflation
+Reduction Act (IRA) funding, clean energy tax credits within the IRA and spending associated with the CHIPS act
+• New administration is expected to bring a lower tax environment with fewer regulations; however, uncertainty over public policy may delay
+investment decisions
+• Interest rates could remain high, potentially hampering private investment in construction, particularly in residential and large commercial
+projects, while government policies (e.g. tariffs) may generate inflation; Federal Reserve have paused interest cuts citing elevated inflation
+Potential tariff 
+impact
+Migrant labor 
+shake-up
+Public policy & 
+interest rate 
+uncertainty
+Uncertain outlook may also create opportunities for CX/EX solution providers, 
+as revenue dips and competition for talent are drivers of adoption
+
+[Page 23]
+[ORG]
+ 23
+Fewer than 900 Mid-market and Enterprise users of CX/EX platforms today; 
+~60% of market growth expected to come from greenfield and upgrades
+CONFIDENTIAL
+Sources of growth for CX/EX Platforms in [ORG]
+3 Market Analysis – White Space
+Sources: BM Interviews, Research & Analysis
+536 387
+2,961
+572
+31 54
+732
+1,532
+858
+1,861
+60 101
+2,161
+95
+205
+2024 [ORG]
+companies
+57,589
+46,422
+11,166
+44,786
+104
+No 
+systematic 
+CX
+tracking
+Tracking CX, 
+all solutions
+Tracking,
+no CX/EX 
+platform 
+in 2024
+7,444
+129
+Enterprise
+Mid-
+market
+Smaller 
+firms
+2029 CX/EX
+platform 
+users
+Greenfield
+CX/EX 
+platform
+adopters 
+24-29
+Tracking 
+in 2024,
+adopting 
+CX/EX
+platform 
+by 2029
+2024 CX/EX
+platform 
+users
+302
+54,092
+3,366
+2,808
+Brownfield/upgrade opportunity: 
+~60 Mid-market and ~30 
+Enterprises use only Free/CRM or 
+self-service survey tools today, but 
+expected to adopt a CX/EX platform 
+by 2029, representing ~37% of new 
+Mid-Market and Enterprise users
+38
+62
+11
+10
+5
+9
+19
+9
+12
+13
+Spend 
+increase of 
+2024 CX/EX 
+users
+1 2
+Tracking 
+in 2024,
+adopting 
+CX/EX
+platform 
+by 2029
+1
+2024 CX/EX
+platform 
+users
+Greenfield
+CX/EX 
+platform
+adopters 
+24-29
+2029 CX/EX
+platform 
+users
+Smaller 
+firms
+Mid-
+market
+Enterprise
+59
+92
+3
+[ORG] Companies in the US by Size [Number of Companies] US Market Size for CX/EX Platforms in [ORG] [USD m]
+USD 20 m of 2024-29 market 
+growth coming from new 
+adopters of CX/EX platforms
+(i.e. 57% of market growth; 
+36% from greenfield and 21% 
+from brownfield/upgrade) 
+Greenfield opportunity: 
+~100 Mid-market and 
+~55 Enterprises do not 
+systematically track CX 
+today and expected to 
+adopt a CX/EX platform 
+by 2029, accounting for 
+63% of new Mid-Market 
+and Enterprise users
+USD 14 m of expected 
+growth coming from 
+spend increases of 2024 
+platform users (i.e. 43% 
+of market growth)
+Fewer than 900 Mid-market 
+and Enterprise users of CX/EX 
+platforms today
+
+[Page 24]
+[ORG]
+ 24
+Upsell and price increases for existing customers have historically been major 
+drivers of growth, as evidenced by the NRR of leading CX/EX vendors
+CONFIDENTIAL
+Net Revenue Retention of Major CX/EX Solution Providers (across entire customer base - not only [ORG])
+3
+Sources: Company Earnings Calls, BM Interviews, Research & Analysis
+100%
+105%
+110%
+115%
+120%
+125%
+130%
+Q1 19 Q3 19 Q4 19 Q1 20 Q2 20 Q3 20 Q4 20 Q1 21 Q2 21 Q3 21 Q4 21 Q1 22 Q2 22 Q3 22 Q4 22
+Survey
+Monkey
+[ORG]
+[ORG]
+• Upselling into and price 
+increases for existing 
+customers have historically 
+been major drivers of 
+industry growth, especially 
+in Mid-Market and 
+Enterprise, as seen in NRR 
+from [ORG] and 
+[ORG], as well as multi-
+seat clients of 
+[ORG] 
+• Price increases have 
+historically been justified by 
+platforms’ functionality 
+build-out
+Insights
+Indicative only: NRR 
+numbers not disclosed 
+at a company level, 
+only “>100%” and 
+relative movements
+Limited disclosure since 
+2022, as all 3 companies 
+were taken private
+“Organizational domain net 
+revenue retention which includes 
+both Enterprise and [ORG] 
+customers again exceeded 100%. 
+110% net revenue retention for 
+our multi-seat customers”
+Market Analysis – Backup: Growth Drivers
+
+[Page 25]
+[ORG]
+ 25
+Adoption of systematic CX/EX programs is generally higher in Enterprise due 
+to higher technological maturity, company complexity and budget
+CONFIDENTIAL
+Current Adoption of Systematic CX/EX Feedback Collection Programs by Segment
+3 Market Analysis – Backup: Programmatic Adoption
+Sources: [ORG], [ORG], BM Interviews, Research & Analysis
+Segment Estimated Adoption %* Rationale 
+Enterprise
+Mid-Market
+Smaller 
+Businesses
+* % of firms by segment which have already adopted a systematic CX/EX feedback collection program
+75%
+40%
+15%
+• “The vast majority [of big construction firms] would use consultants and/or software to conduct surveys; 
+probably 80% of them” – [ORG], President
+• [ORG] surveys (next slide) indicate an average of ~70% for large firms but does not separate 
+out Enterprise which would have higher -than-average adoption
+• [ORG] surveys (next slide) indicate an average of ~45% for mid -sized firms and ~70% for large 
+firms; Mid-Market would occupy the lower range between the two
+• “Probably 50% of mid -sized firms have some kind of feedback collection process […] 30-40% 
+may use consultants and/or software” – [ORG], President
+• “50% of architecture firms outside the top 5 and inside the top 100 might use a survey tool” –
+[ORG], Director of Sustainability
+• [ORG] surveys (next slide) indicate an average of ~35% for smaller firms ; surveys indicate 
+slightly higher % for engineering vs architecture
+• “Penetration for small firms [in Construction] is maybe 10%. Very few firms have adopted it ” –
+[ORG], Director of Business Development
+• “They just don't adopt it. A lot of it is cost and the time to run it . Who's going to run it? What 
+are you going to do with it when you get it? Is it valuable?“ – [ORG], CDO
+85%
+55%
+35%
+75%
+40%
+30%
+Architecture Engineering Construction
+ESTIMATES
+
+[Page 26]
+[ORG]
+ 26
+Client satisfaction measurement in [ORG] appears to grow primarily in larger 
+companies, with adoption seemingly stagnating among smaller companies
+CONFIDENTIAL
+% of [ORG] Firms Measuring Client Satisfaction – Industry Surveys
+3 Market Analysis – Backup: Programmatic Adoption
+Note: [ORG] sample size of 415 (2020), 480 (2021), 540 (2022), 583 (2023) and 652 (2024). [ORG] sample of 176 (2021) and 395 (2023)
+Sources: [ORG] Annual AE Clarity Industry Study, [ORG] Annual [ORG] Inspire Report, BM Research & Analysis
+20
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+2020 2021 2022 2023 2024
+[ORG] Average
+Architecture or A/E
+Engineering or E/A
+[ORG] Average
+20
+25
+30
+35
+40
+45
+50
+55
+60
+65
+70
+75
+2020 2021 2022 2023 2024
+Small 
+(1–50 empl.)
+Medium 
+(51–250 empl.)
+Large 
+(250+ empl.)
+By Sub-Vertical By Company Size • Survey results to be taken
+with precaution, due to
+significant noise and year-to-
+year variation (due to changes
+to sample compositions)
+• Measurement of client
+satisfaction slightly more
+common in Engineering than
+Architecture companies but
+could be explained by sample
+bias (average company size in
+survey larger for Engineering
+than for Architecture)
+• Around two thirds of larger
+companies measure client
+satisfaction compared to 35-
+45% of smaller companies
+with less than 250 employees
+• Largely flat trendlines with
+slightly positive development
+in larger companies
+Insights
+
+[Page 27]
+[ORG]
+ 27
+Adoption of more sophisticated CX/EX platforms is higher in Enterprise, while 
+mid-sized firms are more likely to adopt self-service survey tools
+CONFIDENTIAL
+Current Solution Adoption of Systematic CX/EX Feedback Collection Programs by Segment
+3 Market Analysis – Backup: Adoption by Solution
+Sources: BM Interviews, Research & Analysis
+% of Programs using* Rationale
+*% by segment will exceed 100%, as a firm can use more than one type of solution. % apply to firms which have a systematic program in place
+• Larger firms, with higher budgets and more complex needs, are more likely to use CX/EX platforms, while sometimes 
+also using self-service tools for simpler needs: 4 out of 4 Enterprise stakeholders interviewed use both CX platforms and 
+self-service tools. “We signed a 3-year contract with [ORG] […] [ORG] has baked in survey tools, but that wasn’t 
+enough for us […] Some people in our company use [ORG], for less sophisticated surveys”– [ORG]
+• Budget also allows for slightly higher use of third-party market / customer research firms, compared to smaller 
+companies: “A large firm is more apt to use a consultant, because they are surveying more areas, disciplines and 
+industries” – [ORG], President
+• Self-service tools, followed by CX/EX platforms, have the highest adoption among mid-sized firms: “In terms of 
+adoption, self-serve tools would be at the top of the stack”– [ORG], Former Head of Client Success - North America
+• [ORG] survey (next slide) indicates use of consultants in the 5-10% range
+• “For mid-market construction firms, numbers would be about the same [as for Enterprise], but they won’t hire a third-
+party” – [ORG], Senior Director - Marketing Strategy & Planning
+• For smaller businesses, free tools, followed by self-service survey tools, have the highest adoption: “Small firms are 
+trying to go in with mostly entry-level software […] It’s very rare in that demographic to spend more than $30 k […] The 
+really small ones will start with [ORG], and freemium options. [ORG] does have something very bare-bones, to 
+compete with other freemium” – [ORG], Area Vice President, Enterprise Sales at [ORG]
+• “Small businesses would use something simple or free, that is available on the internet […] They could also be doing an 
+email survey and hope the intern can tally. Everybody understands how to do a [ORG]” – [ORG]
+• Budget for consultants/third-parties is limited
+Free / CRM: 
+Self-service survey tools: 
+CX/EX platforms:
+Consultants:
+10%
+70%
+70%
+20%
+Free / CRM: 
+Self-service survey tools: 
+CX/EX platforms:
+Consultants:
+30%
+60%
+40%
+10%
+Free / CRM: 
+Self-service survey tools: 
+CX/EX platforms:
+Consultants:
+50%
+40%
+20%
+5%
+Segment
+Enterprise
+Mid-Market
+Smaller 
+Businesses
+ESTIMATES
+
+[Page 28]
+[ORG]
+ 28
+Combining adoption levels and type of solution used reflects the maturity 
+level by segment – as illustrated for Enterprise below
+CONFIDENTIAL
+Illustration of Solution Adoption / Maturity Levels for Enterprise
+3 Market Analysis – Backup: Adoption by Solution
+Sources: BM Interviews, Research & Analysis
+*% by segment will exceed 100%, as a firm can use more than one type of solution. % apply to firms which have a systematic program in place
+** % of firms by segment which have already adopted a systematic CX/EX feedback collection program
+Free / CRM: 10%
+Self-service survey tools: 70%
+CX/EX platforms: 70%
+Consultants: 20%
+% of Programs using*
+ESTIMATES
+75%85%75%
+Architecture Engineering Construction
+Estimated Adoption %**
+7.5%8.5%7.5%
+53%60%53%
+53%60%53%
+15%17%15%
+• Adoption levels of systematic CX/EX programs need 
+to be combined with type of solution used to reflect 
+maturity by segment
+• Architecture example:
+• An estimated 75% of Enterprises had adopted 
+a systematic CX/EX program (with the 
+remainder only adopting, for instance, client 
+meetings / calls / emails)
+• Of those 75%, an estimated 70% have 
+adopted CX/EX platforms (i.e. 53% of total 
+Enterprises)
+• Companies may adopt more than 1 solution 
+concurrently, for different use cases (e.g. self-
+service tools for internal surveys and CX 
+platforms for external surveys)
+
+[Page 29]
+[ORG]
+29% 31%
+8%
+13% 9%
+23%
+29% 34%
+39%
+29% 26% 31%
+Small 
+(1–50 empl.)
+Medium
+(51–250 
+empl.)
+Large
+(250+ empl.)
+Key project
+milestones
+End of
+project
+Annually
+Irregularly
+29
+Larger companies exhibit slightly more regular and systematic measurement 
+of customer feedback 
+CONFIDENTIAL
+Client Satisfaction Measurement Methods – A/E Companies Measuring Client Satisfaction 
+3
+Note: [ORG] sample size of 415 (2020), 480 (2021), 540 (2022), 583 (2023) and 652 (2024); *2020 is the last year where measurement freque ncy is provided by company size
+Sources: [ORG] Annual AE Clarity Industry Study, BM Interviews, Research & Analysis
+Insights
+Market Analysis – Backup: Adoption by Solution
+Frequency of Measurement – By Size [2020]*
+26% 33% 28%
+40%
+31%
+13%
+13%
+5%
+12%
+17%
+33%
+31%
+49%
+30% 31%
+29% 23% 18% 18% 21%
+2020 2021 2022 2023 2024
+No systematic 
+collection
+Most likely to 
+integrate with 
+PM tool
+• Survey results to be taken 
+with precaution, due to 
+significant noise and year-to-
+year variation (due to changes 
+to sample compositions)
+• Larger companies do appear 
+to have more systematic 
+feedback collection 
+compared to smaller ones
+• Majority of feedback 
+collection takes place outside 
+of projects, which may limit 
+need for integration with 
+project management tools
+Frequency of Measurement – All Sizes
+
+[Page 30]
+[ORG]
+ 30
+Larger companies also consistently exhibit a higher likelihood of conducting 
+internal performance assessments
+CONFIDENTIAL
+Internal Project Performance Measurement – All Architecture / Engineering Companies 
+3
+Note: [ORG] sample size of 415 (2020), 480 (2021), 540 (2022), 583 (2023) and 652 (2024)
+Sources: [ORG] Annual AE Clarity Industry Study, BM Interviews, Research & Analysis
+Insights
+Market Analysis – Backup: Adoption by Solution
+Internal Project Performance Evaluation - 2024 • Survey results to be taken 
+with precaution, due to 
+significant noise and year-to-
+year variation (due to changes 
+to sample compositions)
+• Internal feedback loops could 
+be indicative of organizational 
+willingness to improve and 
+openness to client 
+satisfaction and feedback 
+measurement
+• Responses of Larger firms 
+consistently suggest a higher 
+likelihood of conducting 
+internal performance 
+assessments compared to 
+other firms
+35
+53
+57
+52
+61 61 59
+54
+70
+75
+71
+83
+2021 2022 2023 2024
+Internal Project Performance Evaluation – By Size
+17%
+40%
+42%
+For all projects
+Strategic projects only
+New clients only
+No
+1%
+Small (1–50 empl.)
+Medium (51–250 empl.)
+Large (250+ empl.)
+
+[Page 31]
+[ORG]
+ 31
+Third-party organizations used to some extent across all company sizes to 
+collect feedback, although mostly by larger companies
+CONFIDENTIAL
+Client Satisfaction Measurement Methods – A/E Companies Measuring Client Satisfaction 
+3
+Note: [ORG] sample size of 415 (2020), 480 (2021), 540 (2022), 583 (2023) and 652 (2024)
+Sources: [ORG] Annual AE Clarity Industry Study, BM Interviews, Research & Analysis
+Who Contacts Clients (2020) • Third-party organizations 
+used to some extent across 
+all company sizes to collect 
+feedback, although mostly by 
+larger companies
+Insights
+13960Small
+(1–50 empl.)
+65144Medium
+(51–250 empl.)
+85636Large
+(250+ empl.)
+74054Architecture
+or A/E
+25048Engineering
+or E/A
+Third-
+party
+Project Mgt. 
+team
+Executive 
+team
+Market Analysis – Backup: Adoption by Solution
+
+[Page 32]
+[ORG]
+ 32
+Implementation of customer satisfaction measurement into project 
+management processes is limited to date
+CONFIDENTIAL
+Visibility of Project Performance – All Architecture / Engineering Companies 
+3
+Note: [ORG] sample size of 415 (2020), 480 (2021), 540 (2022), 583 (2023) and 652 (2024)
+Sources: [ORG] annual AE Clarity Industry Study, BM Interviews, Research & Analysis
+Client Satisfaction Visibility Cost Variance Visibility • Client satisfaction measures
+do not appear to be growing
+in importance for ongoing
+project management for
+Architecture and Engineering
+companies
+• Only around a quarter of
+companies have a high level
+of visibility to ascertain
+whether clients are satisfied
+before closure of a project
+• The visibility gap compared
+to high-priority project
+management measures like
+project cost variance does
+not seem to be narrowing
+Insights
+23% 18% 22% 25% 25%
+19% 23%
+23%
+32% 25%
+28% 34% 28%
+22%
+23%
+18%
+19% 21% 14%
+16%
+11% 7% 7% 8% 11%
+2022 2023 2024
+Very high
+2020
+Moderate
+Low
+Very low
+100%
+2021
+High
+7% 10% 7% 7% 8%
+10%
+12% 11% 10% 12%
+24% 19% 28%
+22% 22%
+34% 35%
+36%
+39% 35%
+25% 23% 17% 22% 23%
+2021 2022 2023 20242020
+High
+Moderate
+Low
+Very low
+Very high
+Visibility gap 
+not closing
+Market Analysis – Backup: Adoption by Solution
+
+[Page 33]
+[ORG]
+ 33
+On average, Enterprise customers spend ~6x as much as mid-sized firms on 
+CX/EX platforms, who in turn spend 4x more than smaller businesses
+CONFIDENTIAL
+Average Spend on CX/EX Feedback Collection Platforms , by Segment
+3
+Sources: [ORG] Data, [ORG], BM Interviews, Research & Analysis
+Avg. Spend* Rationale
+USD 125 k
+*Average spend on CX/EX feedback collection programs, for companies which have paid CX/EX feedback collection programs
+USD 20 k
+USD 5 k
+• “[ORG] has a monthly service fee and a license fee. After the initial purchase, we spend $1-1.5k per 
+month for 20-25 users in our LA office, so $15k a year. Nationwide, the total comes out to be $100-120 k”
+– [ORG], Marketing Director
+• [ORG] Enterprise customers spend USD 600k+ globally, with new logos trending closer to USD 100 k
+• [ORG] average revenues of USD ~90 k for 3 Enterprise customers (B&M, CDM, RTI)
+• [ORG] revenues of USD ~20-30 k for Mid-Market firms
+• Median contract value on [ORG] SaaS marketplace (mostly mid-market companies) in USD 9-29 k range
+• "Our spend [on [ORG]] is minimal: between $1,500 and $5,000 a year for the company as a whole. We 
+only have 3 users. Over the next 5 years, it will definitely go up: it will double, if not triple“ – [ORG], Director of Business Development
+• [ORG] revenues of USD ~8-15+ k for smaller businesses (though [ORG] may be on higher end 
+of spend per customer, for smaller businesses)
+• Low entry prices for CX modules (e.g. [ORG] USD 1.5k  per user), but some companies will also require 
+EX modules, increasing spend
+CX/EX Platforms
+Solution Segment
+Enterprise
+Mid-Market
+Smaller 
+Businesses
+Market Analysis – Backup: Spend by Solution/Segment ESTIMATES
+
+[Page 34]
+[ORG]
+ 34
+Contract value benchmarks for CX/EX platforms would support high spend 
+ranges – but [ORG], with simpler needs, would likely be on lower end
+CONFIDENTIAL
+CX/EX Platform Pricing (USD k, per year)
+3
+Note: [ORG] is a SaaS buying platform to purchase, renew, and manage subscriptions, primarily serving Mid-sized and Enterprise companies
+Sources: [ORG], Company Earnings Calls, BM Interviews, Research & Analysis
+Contract Value Range (CX/EX) – [ORG] [ORG] – Average Annualized Revenue Per Customer • Entry-level price plans from 
+leading CX platforms and 
+lower range of contract 
+values on [ORG] platform 
+consistent with c. $5k+ spend 
+for smaller firms
+• Contract values on [ORG]
+platform consistent with $20-
+25k spend of Mid-market 
+firms
+• Spend of [ORG] customers 
+indicative of Enterprise firms, 
+has trended down as it has 
+entered Mid-market segment 
+but suggests average 
+Enterprise spend of $100-
+400k+ 
+• Spend of [ORG] firms likely to 
+be in lower end of ranges as 
+needs are simpler compared 
+to B2C and other verticals
+Insights
+6.5
+28.5
+[ORG]
+(268)
+6.5
+11.0
+[ORG]
+(30)
+4.8
+10.1
+[ORG]
+(36)
+6.3
+8.6
+AskNicely
+(21)
+126.0
+108.2
+47.1
+15.9
+Max
+Min
+Median
+[ORG]
+(1 seat, CX)
+[ORG]
+(GSA, 
+Tier 1)
+AskNicely
+(Learn)
+[ORG] 
+1-24 FTEs)
+QuestionPro
+(1 seat, 
+Advanced)
+1.5
+20.0
+5.4
+12.5
+1.2
+Entry-Level Pricing (CX only)
+624
+249
+109
+438
+Q2 20
+(100% 
+Enterprise)
+Q1 22
+(59% 
+Enterprise)
+Est.revenue 
+of new Ent. 
+clients 20-22
+Est. avg. 
+revenue of Ent.
+clients Q1 22
+(Number of 
+contracts)
+Reflects Mid-Market
+(USD ~20-25 k 
+weighted average)
+Reflects Smaller Firms
+(USD ~5k+ average)
+Reflects Enterprise
+(USD 100+ k)
+Market Analysis – Backup: Spend by Solution/Segment
+
+[Page 35]
+[ORG]
+ 35
+Enterprise clients spend USD ~20 k annually on self-service survey tools, while 
+mid-sized spend USD ~10 k and smaller firms spend USD ~1.5 k
+CONFIDENTIAL
+Average Spend on Self-Service Survey Tools, by Segment
+3
+Sources: [ORG] Data, BM Interviews, Research & Analysis
+Self-service 
+survey tools (e.g. 
+[ORG])
+Solution Segment Avg. Spend* Rationale
+Enterprise
+Mid-Market
+Smaller 
+Businesses
+USD 20 k
+*Average spend on CX/EX feedback collection programs, for companies which have paid CX/EX feedback collection programs
+USD 10 k
+USD 1.5 k
+• Competitor pricing data ([ORG], Typeform, [ORG] – next slide) suggests annual Enterprise 
+spend around USD 20 k
+• “[ORG] is one of the leaders, by far. The integrations are great. Costs are very specific. In survey 
+space, cost is always $5-10k a year to $50k a year” – [ORG], Associate Vice President
+• [ORG] data and contract value on [ORG] SaaS marketplace (next slide) confirm $~10 k estimate
+• “For [ORG], we have a very basic membership. It costs $10k annually for CX surveys” – [ORG], HR Director
+• “At my current firm, I spend maybe $5-10k [on customer surveys]. I hired a consultant to run marketing 
+and social media. I would set aside $5,000 to develop a survey. I’m only $150 million in  revenue, so I am 
+going after 50 companies, not 500” – [ORG], President
+• Competitor pricing data ([ORG], Typeform, [ORG], etc. – next slide) suggests annual spend 
+around USD 1.5 k
+• “Smaller companies are spending $1,500-2,000 a year” – [ORG], President
+Market Analysis – Backup: Spend by Solution/Segment
+
+[Page 36]
+[ORG]
+ 36
+Spend range on self-service survey tools overlaps with the lower end of CX/EX 
+platforms
+CONFIDENTIAL
+Self-Service Survey Tools Pricing (USD k, per year)
+3
+Note: [ORG] is a SaaS-buying platform to purchase, renew, and manage subscriptions, primarily serving Mid-sized and Enterprise companies
+Sources: [ORG], Company Earnings Calls, BM Interviews, Research & Analysis
+Contract Value Range (CX/EX) – [ORG] [ORG] – Average ARR of ‘Enterprise’ Clients • Entry-level price plans with 
+access to business features 
+start at USD 0.5-1 k per seat, 
+consistent with 2-3 paid users 
+and USD ~1.5 k spend for 
+smaller firms
+• Average spend of 
+[ORG] ‘sales-assisted’ 
+/ Enterprise clients in USD 10-
+15 k range, consistent with 
+Mid-market spend of USD  
+~10 k and Enterprise spend of 
+USD ~20 k, further supported 
+by the range of self-service 
+survey tools contract values 
+on [ORG] platform
+Insights
+16.5
+[ORG]
+(160)
+2.4
+9.0
+Typeform
+(27)
+6.5
+27.5
+[ORG]
+(27)
+43.3
+13.5
+39.3
+7.5
+Max
+Min
+Median
+Typeform
+(Business)
+[ORG]
+(Collab.)
+Survey
+Sparrow
+(Business)
+Survey
+Monkey
+0.9
+0.7
+0.9
+0.5
+Entry-Level Pricing (business plans)
+13.6 14.4
+11.3
+13.6
+Q3 19
+("Enterprise")
+Q2 21
+("Enterprise")
+Q2 22
+("Sales-
+assisted")
+Q4 22
+("Sales-
+assisted")
+(Number of 
+contracts)
+Upper Range 
+Reflects Enterprise
+(USD ~20-25 k)
+Reflects 
+Smaller Firms
+(USD ~1.5 k
+for 2-3 seats)
+Reflects Mid-Market
+(USD ~10-15 k)
+Market Analysis – Backup: Spend by Solution/Segment
+
+[Page 37]
+[ORG]
+ 37
+Enterprise may hire outside market research / VOC firms, while mid-sized and 
+smaller firms may only hire individual consultants to run surveys
+CONFIDENTIAL
+Average Spend on CX/EX Consulting / Professional Services , by Segment
+3
+Sources: [ORG] Data, BM Interviews, Research & Analysis
+Avg. Spend* Rationale
+USD 80 k
+*Average spend on CX/EX feedback collection programs, for companies which have paid CX/EX feedback collection programs
+USD 15 k
+USD 5 k
+• “We did a brand project, where independent consultant contacts clients and have one-on-
+one interviews to discuss our performance. That was some of the most useful insight that 
+we’ve gotten, because it’s more responsive. It was a one-off project, but sort of ongoing. 
+We spend $100 k on that” – [ORG], SVP Marketing
+• [ORG] managed service package for up to five offices at USD 20 k
+• [ORG] managed engagement survey services $28-65k / year for 6k employee company
+• “A mid-sized firm might spend $10-15 k on consultants”– [ORG], President
+• [ORG] pricing: Baseline Client Perception Study USD 5.5 k, Complete Strategic 
+Feedback Planning and Implementation USD 7.8 k, onsite consulting fees USD 3-6 k, CX 
+workshops USD 6 k: typical spend USD ~5-15 k for Mid-sized users of services
+• “When I was at a smaller company, I ran surveys every year with free software, I did use a 
+coach for $100 an hour” – [ORG]
+• [ORG] ([ORG] partner consultant) pricing: Ad Hoc Employee Research $2,800, 
+Survey Configuration $750, Standard Dashboard Configuration $1,250
+• Typical [ORG] offer to SMB is Baseline Client Perception Study at USD 5.5 k
+Consulting / 
+Professional 
+Services
+Solution Segment
+Enterprise
+Mid-Market
+Smaller 
+Businesses
+Market Analysis – Backup: Spend by Solution/Segment ESTIMATES
+
+[Page 38]
+[ORG]
+ 38
+There are ~49 k construction firms in the US with over 25 employees, 
+including ~180 “Enterprise” and ~1,000 “Mid-market” firms
+CONFIDENTIAL
+Segment Definitions and Number of [ORG] Companies by Vertical in the US, by Segment (1/3)
+3
+Sources: US Census Bureau, BM Interviews, Research & Analysis
+Construction
+Vertical Segment Size Segmentation Criteria Supporting Data / Rationale Number of Firms
+Total
+Enterprise
+Mid-Market
+Smaller 
+Businesses**
+*Assumes an average of $150,000 in revenue per employee; **Construction companies with fewer than 25 employees (i.e. 717 k companies in the US, out of 765 k construction 
+firms in total) are excluded from this market size, with the assumption that they do not have formal/paid CX/EX feedback collection programs
+More than $800 m in revenue 
+/ 5,000 employees*
+$75 m – $800 m in revenue /
+500 – 4,999 employees*
+$~4 m – $75 m in revenue /
+25 – 499 employees*
+“Mid-market cutoff in construction is $800 to $900 m” –
+[ORG], Director of Business Development
+“For mid-market, 500-600 people is the lower cutoff for 
+construction“ – [ORG], President
+“Under $100 m will be a smaller company” – [ORG], Director of Business Development
+~180 firms
+~1 k firms
+~47.8 k firms
+~49 k firms
+Market Analysis – Backup: Number of Firms DIRECTIONAL
+
+[Page 39]
+[ORG]
+ 39
+There are ~7,000 engineering firms in the US with over 20 employees, 
+including ~300 “Enterprise” and ~1,600 “Mid-market” firms
+CONFIDENTIAL
+Segment Definitions and Number of [ORG] Companies by Vertical in the US, by Segment (2/3)
+3
+Sources: US Census Bureau, US Small Business Administration, BM Interviews, Research & Analysis
+Engineering
+Vertical Segment Size Segmentation Criteria Supporting Data / Rationale Number of Firms
+Total
+Enterprise
+Mid-Market
+Smaller 
+Businesses**
+More than $~500 m in revenue 
+/ 2,000 employees*
+$~25 m – $~500 m in revenue /
+100 – 2,000 employees*
+$~5 m – $~25 m in revenue /
+20 – 100 employees*
+“Below $500 million in revenue, adoption levels decline and 
+we consider this mid-market” – [ORG], Enterprise Sales 
+Director - Hospitality
+“The largest engineering services business that qualifies as a 
+small business for Federal Government Programs is $25.5m in 
+revenues” – US Small Business Administration 
+”A small engineering firm is up to $20 m in revenue, which is until 
+60-70 people” – [ORG], President
+~300 firms
+~1.6 k firms
+~5 k firms
+~7 k firms***
+*Assumes an average of $250,000 in revenue per employee, in line with [ORG] data and market feedback; **Engineering companies with fewer than 20 employees (i.e., 39, 
+201 companies) are excluded from this market size, with the assumption that they do not have formal/paid CX/EX feedback collection programs; ***T otals are rounded
+Market Analysis – Backup: Number of Firms DIRECTIONAL
+
+[Page 40]
+[ORG]
+ 40
+There are ~1,600 architecture firms in the US with over 20 employees, 
+including ~60 “Enterprise” and ~300 “Mid-market” firms
+CONFIDENTIAL
+Segment Definitions and Number of [ORG] Companies by Vertical in the US, by Segment (3/3)
+3
+Sources: US Census Bureau, BM Interviews, Research & Analysis
+Architecture
+Vertical Segment Size Segmentation Criteria Supporting Data / Rationale Number of Firms
+Total
+Enterprise
+Mid-Market
+Smaller 
+Businesses**
+*Assumes an average of $300,000 in revenue per employee, in line with market feedback; **Architecture companies with fewer than 20 employees (i.e. 19,536 companies) are 
+excluded from this market size, with the assumption that they do not have formal/paid CX/EX feedback collection programs
+More than $~150 m in revenue 
+/ 500 employees*
+$~25 m – $~150 m in revenue /
+75 – 500 employees*
+$~5 m – $~25 m in revenue /
+20 – 75 employees*
+“There are 100 large architecture firms in the US […] Number 
+of firms with more than $100 m in revenues should be higher 
+than 40 firms” – [ORG], Marketing Director
+Segmentation calculated based on the boundaries drawn for 
+Enterprise and Smaller Businesses
+“Architecture has a large number of very small firms with 20-
+50 people” – [ORG], Director of Sustainability
+~60 firms
+~300 firms
+~1,250 firms
+~1,600 firms
+Market Analysis – Backup: Number of Firms DIRECTIONAL
+
+[Page 41]
+Customer Analysis
+
+[Page 42]
+[ORG]
+ 42
+Complexity of needs vary by customer size and CX/EX maturity – though most 
+[ORG] firms with a CX/EX program are experimenting or in early stages
+CONFIDENTIAL
+Typical Needs and CX/EX Solutions by Maturity Stage and Size of [ORG] Companies
+4 Customers – Needs
+Sources: BM Interviews, Research & Analysis
+1) Key Decision-Makers
+SMB
+Mid-
+sized
+Enter-
+prise
+Basic CX/EX program Institutionalized CX/EX program Mature CX/EX program
+• Needs: Collect basic post-project 
+feedback on client satisfaction and 
+identify immediate service issues
+• Users: Front-line staff (e.g., 
+project managers)
+• KDMs1: Typically the CEO makes 
+the call based on operational 
+needs or in response to crisis
+• Needs: Move beyond ad hoc to 
+build a baseline for customer 
+experience metrics across projects
+• Users: Marketing or project 
+managers using basic survey tools
+• KDMs1: Department head (e.g. 
+Marketing or BD Manager) who 
+champions initial CX insights
+• Needs: Systematic feedback from 
+multiple channels across different 
+divisions or project teams
+• Users: Pilot project managers or 
+marketing, operations dept leads
+• KDMs1: Mid-level VPs or Directors 
+who initiate pilot programs
+• Solutions: Manual 
+outreach (emails, 
+phone calls, face-to-
+face)
+• Simple, free tools 
+(e.g. Google Forms)
+• Solutions: Basic 
+online survey tools 
+(e.g. [ORG], 
+native CRM tools) to 
+gather initial insights
+• Solutions: Each unit 
+often uses own mix 
+of decentralized, 
+manual outreach 
+and basic survey 
+tools
+• Needs: Establish more structured, 
+repeatable processes to aggregate 
+feedback and identify trends
+• Users: Marketing/Operations 
+Manager and possibly an IT/admin 
+person (i.e. delegated task)
+• KDMs1: Senior leadership (CEO, 
+COO, VP Sales/BD/Marketing)
+• Needs: Systematic feedback loops 
+that tie CX insights to project 
+outcomes and process 
+improvements
+• Users: Emerging cross-
+departmental CX team, BD, 
+marketing, and operations
+• KDMs1: Director of CX/Marketing
+• Needs: Standardized processes to 
+gain unified insights across the 
+company and feedback channels
+• Users: Centralized CX/EX teams 
+that span multiple departments 
+(including marketing and IT)
+• KDMs1: Commercial leadership 
+(e.g. CCO, CMO), procurement
+• Solutions: Mix of 
+self-service tools and 
+CX/EX platforms for 
+survey automation, 
+templates and basic 
+reporting with no IT 
+support needs
+• Solutions: Ad hoc 
+managed surveys
+• Self-service CX/EX 
+platforms with more 
+enhanced reporting, 
+analytics, and CRM/ 
+ERP integration
+• Solutions: Managed/ 
+customized CX/EX 
+platforms with CRM/ 
+ERP integrations
+• CX consultancies
+• Self-service tools for 
+simpler use cases
+• Needs: Integration of feedback 
+with operational data to drive 
+decision-making and process 
+improvement across projects
+• Users: Dedicated CX/EX champion 
+or small cross-functional team
+• KDMs1: Senior leadership with 
+input from the growing CX team
+• Needs: Holistic, enterprise-wide 
+view of CX, proactive/predictive 
+insights for strategic planning
+• Users: Proper CX/EX team (incl. 
+data analysts) alongside customer-
+facing departments
+• KDMs1: Commercial leadership, 
+cross-functional steerco
+• Needs: Real-time, omnichannel CX 
+insights for strategic decision-
+making and innovation
+• Users: Dedicated CX team as well 
+as operational units leveraging 
+integrated tools
+• KDMs1: Executive (CEO, CMO, CIO, 
+CDO) and CX leaders, procurement
+• Solutions: Broader 
+use of self-service 
+CX/EX platforms
+• Use of consultants 
+and professional 
+services for CRM/ 
+ERP integration
+• Solutions: More 
+advanced, tailored 
+and/or managed 
+CX/EX platforms that 
+integrate seamlessly 
+with CRM/ERP 
+systems
+• Solutions: Omni-
+channel, AI-driven 
+platforms 
+• CX consultancies
+• Self-service tools for 
+simpler use cases
+
+[Page 43]
+[ORG]
+ 43
+Negative events like revenue dips or employee churn are major triggers for 
+adopting and upleveling CX/EX programs
+CONFIDENTIAL
+Triggers for Adopting and Upleveling CX/EX Programs across Companies’ CX/EX Program Lifecycle
+4 Customers – Drivers for Adoption
+Sources: BM Interviews, Research & Analysis
+Negative Trigger Events
+Company Growth and/or 
+Strategic Re-Orientation
+Proof of Concept 
+Validated / New 
+Capabilities Required
+• Company sees value from its CX/EX program, and is willing to 
+invest more for additional capabilities(e.g. automation, multi-
+channel data collection, better support, native analytics 
+capabilities, closer CX/EX program integration, benchmarking, 
+higher respondent/data volume, richer choice of question types)
+Trigger Categories
+Sample Supporting Quotes:
+• “The real trigger for most is some sort of change. Most smaller businesses won’t activate a CX program unless something happens, like a dip in revenue, change in reviews,
+huge employee turnover […] Trigger points to move to more advanced tools are the needs for multi-channel capabilities, automation, advanced analytics capabilities,
+benchmarking, the need for better service & support, or tying your CX and EX programs together” – [ORG], Global Head of T echnicalDelivery
+• “Changes in company strategy, like evaluating new services, markets, customer segments, or acquisitions and cultural shifts, are triggers for adoption” – [ORG], Former VP
+• “We’ve been using [ORG] for the last 10 years. Our initial challenge was adoption and increasing responses. Now that it is solved and that we’ve grown as a business,
+our focus is on having better analytics capabilities and integrating into our CRM – so we’re looking for a new platform” – [ORG], SVP Marketing
+Also: third-party tool = more open feedback?
+No Formal Program Basic CX/EX Program Institutionalized CX/EX Mature CX/EX Program
+Mainly drive 
+initial 
+adoption, 
+but may also 
+justify 
+incremental 
+investmentsCompetition / Peer 
+Recommendations
+• Revenue dip / customer churn / poor reviews
+• High employee turnover
+• Company growth/ complexity – especially with acquisitions (different cultures)
+• Expansion (into new services, new markets, new customer segments)
+• Investment decision based on peer recommendations, industry conferences, observing 
+competitors, and/or advisory
+
+[Page 44]
+[ORG]
+ 44
+Sophistication of a company’s marketing leader, company technological 
+maturity and size drive higher adoption of more robust CX/EX tools
+CONFIDENTIAL
+What Drives the Preference for More Robust CX/EX Feedback Collection Tools
+4 Customers – Drivers for Method Preference
+Sources: BM Interviews, Research & Analysis
+Supporting Quotes
+Marketing Leader Sophistication
+Company Size / 
+Complexity / Budget
+• “It comes down to the sophistication of the marketing leader […] If you have a sophisticated
+marketing leader,they’ll want to do these surveys” – [ORG], President
+• “The bigger you get, the more complex management becomes, so you need tools and real-time
+data flows to keep you in front of the storms” – [ORG], Director of Sustainability
+• “Large organizations have more bandwidth, and will have the capabilities and resources for CX
+programs. It’s harder for smaller companies like mine” – [ORG], President
+Low High
+CX/EX Tool Adoption
+is positively correlated with:
+Strong Pain Points
+(e.g. customer / employee issues )
+• “Often, there is a drop in revenue, high employee turnover,a mix of high/low performing areas and
+executiveteam members are not sure why” – [ORG], Global Head of TechnicalDelivery,VOC/E
+• “Typically there’s a trigger event […] something catastrophic happened – like a project went wildly
+wrong, or the company lost a customer or damaged its reputation. Or they want to understand why
+they’re not retaining customers or growing their business. Or they’re launching a new product or
+getting into a new market” – [ORG], Former Head of Customer Success - North America
+Company Technological Maturity
+• “What feedback collection option a company chooses depends on its maturity” – [ORG], Former
+Head of Customer Success - North America
+
+[Page 45]
+[ORG]
+ 45
+Higher organizational complexity of Enterprises also drive higher adoption of 
+CX/EX platforms, relative to CX/EX maturity, compared to smaller firms
+CONFIDENTIAL
+Organizational Factors that Drive Complexity of Needs
+Sources: BM Interviews, Research & Analysis
+Enter-
+prise
+Mid-
+sized
+SMB
+Basic CX/EX program Institutionalized program Mature CX/EX program
+• Systematic end-of-project / periodic feedback 
+collection to build a baseline for customer / 
+employee experience metrics
+Self-service 
+survey tools
+CX/EX 
+platform 
+adoption
+• Standardized and repeatable processes to 
+efficiently collect and manage feedback to gain 
+unified insights across the company and service 
+channels
+• Integration of feedback with operational data 
+for real-time insights and predictions to assist 
+decision-making, strategic planning and process 
+improvement
+Organizational factors that drive 
+complexity of needs:
+• Number of business units and 
+divisions
+• Number of locations
+• Number of clients
+• Volume of projects
+Organizational factors that drive 
+complexity of needs
+• Number of users
+• Diversity of use cases
+• Need for customization
+Organizational factors that drive 
+complexity of needs:
+• Number of channels
+• Number of system integrations
+• Quantity of data
+“We didn’t need something complex: [ORG] 
+was a quick, easy and cheap choice; we knew we’d 
+do analytics outside. [ORG] has been fairly 
+reliable and effective: it was limited but had all the 
+features we need” 
+– [ORG], Global Sales & Strategy Lead
+“We wanted to do covariant analysis and have 
+pretty sophisticated logic built into our surveys 
+(based on geography, client type/size) – no way 
+we can do that with [ORG] so we 
+moved on” – [ORG], 
+Senior Director - Marketing Strategy & Planning
+4 Customers – Drivers for Method Preference
+
+[Page 46]
+[ORG]
+ 46
+Customers learn about CX/EX solutions through two main channels: industry 
+peers / word-of-mouth, and online search
+CONFIDENTIAL
+How Customers Learn about CX/EX Solutions
+4 Customers – Marketing Channels
+Sources: BM Interviews, Research & Analysis
+Word-of-Mouth 
+/ Industry Peers 
+& Conferences
+Channels Supporting Quotes
+• “We go to a lot of industry events and conferences, and talk to [ORG] partners, such as building suppliers, contractors, our
+insurance group of similar-size contractors, where we talked about feedback from our clients, which morphed into surveys:
+who does them and who does them well. We learned about our providers mostly through industry partners, not Google
+Search. [ORG] came from a concrete contractor, who recommended them because [ORG] had done a lot of
+work in construction. [ORG] was recommended to us by an engineering company, [ORG]. Engineering and
+architecturefirms are a good source of information” – [PERSON]
+• “Discovering vendors happen very often word-of-mouth. I go to a trade show, maybe an HP Enterprise event […] I’ll walk up
+to Intel booth – ask them what they use for surveys, and get put in touch for who’s responsible for that on their team? They
+always want to help and maintain a relationship […] We go to tech events that are geared for A&E” – [ORG], Associate Vice
+President – Digital
+• “We learn about tools through peer events, like industry forums: we talk to competitors, ask them whether they’re doing
+this, what results they’re seeing. Also customer conversations” – [ORG], Former VP
+• “[ORG] was recommendedby a client of ours” – [ORG], SVP of Marketing
+Online Search
+• “We came up with our vendor shortlist through Googling” – [ORG], Market Intelligence Analyst
+• “We also use tools like [ORG]” – [ORG], Former VP
+
+[Page 47]
+[ORG]
+CONFIDENTIAL
+Customers’ purchasing process typically involves five main stages, though this 
+can vary based on company size and purchase amount
+47Sources: BM Interviews, Research & Analysis
+Customers – Purchasing Process4
+Customer Purchasing Process – Enterprise
+Stages
+Descrip-
+tion
+Stake-
+holders
+Quotes
+Need Identification 
+& Requirements 
+Definition
+Determination that 
+surveys are required, 
+and assessment of 
+selection criteria
+Initial Research & 
+Vendor Shortlist
+Outreach to shortlisted 
+vendors, based on 
+industry peer 
+recommendation and/or 
+online search
+Vendor Evaluation & 
+Recommendation
+Vendor 
+recommendation, based 
+on evaluation of demos 
+and/or bids submitted
+(+ sometimes pilot 
+programs)
+Final Decision
+Final approval 
+and sign-off
+Executive Leadership
+• "The purchasing process for Customer Experience/Survey software typically begins with identifying business needs and defining key requirements. Stakeholders 
+from CX, IT , procurement, and finance evaluate options based on features, integration capabilities, security, and cost. Vendors are shortlisted, demos are 
+conducted, and pricing is negotiated before final approval by leadership” – [ORG], Licensed Architect & Design Manager
+• “You initially gather available solutions through market research, put together a list of general tooling found in the space, and do a deeper dive into 
+functionality to narrow the list down to a vetted group. Once you have a few that match your needs, you'll have those companies give their sales pitch and go 
+through demos […] and then come to a decision” – [ORG], Former Global Sales & Strategy Lead
+• “The platform is analyzed by our [market intelligence] team, funding is requested, the IT department assesses it from a security and integration standpoint, 
+and executive approval is requested” – [ORG], Market Intelligence Analyst
+• “For CX solutions, the buyer persona is customer-facing […] For EX, the mandate usually comes from HR or leadership” – [ORG], Former Head of Sales
+Contract Negotiation
+Procurement 
+negotiation 
+(+ possible Compliance 
+review)
+Procurement
+(+ possibly Legal / 
+Compliance)
+For CX: Commercial team (Marketing, Sales, BD, etc.); sometimes Insights / Market 
+Intelligence team; IT for security / integration review
+For EX: Human Resources team + IT for security / integration review
+
+[Page 48]
+[ORG]
+ 48
+For Mid-market customers, sales cycles are shorter and involve fewer 
+stakeholders, compared to Enterprise
+CONFIDENTIAL
+Mid-Market vs Enterprise Purchasing Behavior
+4 Customers – Mid-Market vs Enterprise
+Sources: BM Interviews, Research & Analysis
+smaller firms?
+Dimensions Mid-Market Enterprise
+Sales Cycle
+3-6 months
+• “In mid-market, 3-6 months is pretty common […] We often see
+stakeholders that wear multiple hats and more authority. They move
+faster with less red tape. They already know what they want to buy, and
+we don’t need to sell. The legal process and security reviews are not as
+robust” – [ORG], Area Vice President
+6-12 months
+• “With enterprise, the deal cycle is longer: we often see 9-12 months,
+sometimes even longer” – [ORG], Area Vice President
+• “Sales cycle for large firms is 6 to 18 months” – [ORG], Former
+Head of Customer Success - North America
+Stakeholders 
+Involved
+Fewer stakeholders / decision-makers:
+often client-oriented VPs (e.g. Marketing, Business Dev.,
+Account Management)and C-level executives
+• “The president and the marketing manager are involved in making
+purchasing decisions for Customer Experience / Survey software and/or
+services […] The marketing team puts the software in front of the
+president and then the president takes a look at it” – [ORG],
+President
+• “C-Level typically signs off. CX typically falls under Marketing and in
+some occasions Operations. Few organizations in this sector have a CX
+sitting at the Exec level/cross functional role” – [ORG], Sr. Sales Director
+May involve more stakeholders:
+However,this varies depending on organizationalcomplexity
+• “When selling to enterprise, you have more stakeholders in different
+areas and divisions with whom we need to be political with and build
+consensus with. In our first engineering deal, we had 32 customers on a
+Zoom call, and 12 division leaders who all had to vote. We ended up
+winning it, but it felt like dealing with Congress” – [ORG], Area VP
+
+[Page 49]
+[ORG]
+CONFIDENTIAL
+Solutions are evaluated on having just the right fit in terms of functionality, ease 
+of use and price – though this varies by customer segment
+49
+Note: Application and data security were mentioned as a screening criteria, especially for Enterprise– critical but not differentiating
+Sources: BM Interviews, Research & Analysis
+Key Purchasing Criteria
+Customers – Key Purchasing Criteria
+Supporting Quotes
+1 Functionality / Feature Fit “Functionality is the #1 key purchasing criteria. Ensuring the use case is addressed 
+comes first” – [ORG], Associate Vice President
+2 Ease of Use “User interface and ease of use are number 1” – [ORG], Director of 
+Business Development
+3
+Ease of Implementation / 
+Onboarding
+“Ease of implementation is less important than ease of use. There wasn’t a lot 
+involved with integration, other than mapping to [ORG]: it was very easy to do, 
+and our team did it” – [ORG], Market Intelligence Analyst
+4
+5
+Support & Services “Services are less important than price” – [ORG], Market Intelligence Analyst6
+7
+8 Completeness & Scalability [This criteria was only mentioned by larger, more mature buyers]
+4
+Description
+Are capabilities and complexity right-sized for 
+current needs and maturity level of company? 
+How easy is the tool to use and configure on 
+an ongoing basis?
+How quickly and seamlessly can the team start 
+using the tool without heavy IT involvement?
+What level of ongoing support, training, and 
+managed services are provided?
+Can the solution grow and evolve with the 
+organization’s needs? How advanced are tools?
+Price / Value “Price is a key piece, because survey software is probably seen as a commodity until 
+you use it […] You can always negotiate the price. I’ll spend $2.5-5k. If it works well, 
+we will use it more often, and potentially pay more” – [ORG], President
+Is the pricing structure aligned with the 
+company’s budget and perceived value?
+Industry Experience “Having relevant industry experience is not a deal-breaker, but definitely nice-to-
+have” – [PERSON]
+Does the provider understand [ORG]-specific 
+challenges? How well does the solution adapt?
+Integration Capabilities “We needed a solution that integrates into our [ORG] CRM” – [ORG], 
+Market Intelligence Analyst
+How well does the solution integrate with 
+existing systems and processes?
+Industry experience
+Recommendation: no change to current order
+Summary: typically not voluntarily provided as a KPC. Customers either don’t think 
+it is crucial, or have never considered it because they have not come across [ORG]
+specific vendors. Could be a differentiator for some
+•
+•
+•
+•
+•
+•
+•
+•
+•
+
+[Page 50]
+[ORG]
+Functionality, integration with existing systems/processes and ease of use 
+overtake price for larger and more mature companies
+50
+Note: Application and data security were mentioned as a screening criteria, especially for Enterprise– critical but not differentiating
+Sources: BM Interviews, Research & Analysis
+Implementation
+Company Size CX/EX Maturity
+Low High
+Implementation
+CONFIDENTIAL
+Key Purchasing Criteria Small Large
+Functionality
+Functionality
+Ease of Use
+Ease of Use
+Price
+Price
+Support Support
+Integration
+Integration
+Industry Industry
+Completeness Completeness
+Implementation
+Implementation
+FunctionalityEase of Use
+Ease of UsePrice
+Price
+Support Support
+Integration
+Integration
+Industry
+Industry
+Completeness
+Completeness
+• Smaller and low-maturity
+companies look for easy
+deployment of low-cost
+solutions, with just enough
+features to collect and
+analyze feedback; solutions
+often seen as commodities
+• Ease of use is important
+across all segments, though
+more important for lower
+maturity companies
+• Expanded capabilities
+become more important than
+price and ease of use as
+companies become larger or
+more mature
+• Integrations (e.g. with CRM)
+are key for larger companies,
+even at a basic stage of
+adoption
+• Ease of implementation is
+lower priority for large
+companies (higher budget)
+and more mature firms
+Insights
+1 Functionality / Feature Fit
+2 Ease of Use 
+3
+Ease of Implementation / 
+Onboarding
+4
+5
+Support & Services6
+7
+8 Completeness& Scalability
+Price / Value
+Industry Experience
+Integration Capabilities
+Customers – Key Purchasing Criteria4
+Functionality
+
+[Page 51]
+[ORG]
+ 51
+Switching costs are relatively high, especially for larger firms
+CONFIDENTIAL
+Switching Costs for CX/EX Solutions
+4 Customers – Switching Costs
+Sources: BM Interviews, Research & Analysis
+Factors Impacting 
+Switching Costs Supporting QuotesExplanation
+Existing 
+Integrations
+Importance of 
+Ease of Use
+Relatively Low 
+Cost for Large 
+Firms
+Integrations (e.g. with CRM) are more common with larger
+firms, and require time and investment – thus increasing
+switching costs
+“Once we chose a vendor, we’re unlikely to switch for a while,
+due to the integrations […] with [ORG] or [ORG] PowerBI
+for reporting” – [ORG], Associate VP - Digital
+Ease of use is an important criteria; once teams are
+accustomed to specific software/processes,there is limited
+desire to adopt different solutions, unless functionality no
+longer meets needs
+“It would be a tough decision to switch away, because it would
+require re-configuring things. We have a lot of things already
+built and baked in [ORG]” – [ORG], Market Intelligence
+Analyst
+CX/EX feedback collection tools represent a small % of
+company spend (especially for larger firms) – so price
+differenceswould need to be significant to warrant changes
+“If pricing is not crazy, you don’t change vendors. What we pay
+for surveys is on the lower-end of what we pay for IT. Survey
+tools are a very low % of our IT budget, it’s a fraction. For an
+internal data center, we pay hundreds of thousands or millions
+of dollars in network equipment alone” – [ORG], Associate VP
+
+[Page 52]
+[ORG]
+ 52
+Survey buyers serving federal customers may have lower incentives to 
+conduct surveys, due to CPARS and restrictions on federal employees
+CONFIDENTIAL
+Federal vs Private Sector Customer [ORG]
+4 Customers – Private Sector vs Federal [ORG]
+Sources: Acquisition.gov, CPARS, Federal Register, US Code, BM Interviews, Research & Analysis
+Federal employees communications 
+are subject to restrictions, more than 
+for employees of private companies
+Insights
+Existence of CPARSlowers incentive 
+for federal employees to respond to 
+additional surveys
+Supporting Data
+• US regulations restrict federal employees’ interactions with vendors, and in particular:
+• Procurement Integrity Act (41 U.S.C. 2101-2107): provides stringent guidelines on the handling and disclosure of
+procurement-related information
+• Federal Acquisition Regulation (FAR) Part 3: emphasizes the avoidance of conflict of interest, and avoiding even the
+appearance of unethical behavior in federal procurements
+• “The problem with federal […] is that your stakeholders almost need to get permission from their bosses to deliver the survey.
+It will be more directed and targeted. Firms are less likely to use survey for federal customers. With CPARS, nobody wants to
+answer two types of surveys” – [ORG], President
+• “A higher % of surveys don’t get responses from federal agencies” – [ORG], Associate VP
+• “Federal customers get fewer surveys from us, because they have their own evaluation tool and are not always allowed to
+answer other evaluations: it’s trickier” – [ORG], Market Intelligence Analyst
+• US federal employees are mandated to document vendor performance on the Contractor Performance Assessment Reporting
+System (CPARS), as per FAR 42.1503, “at least annually and at the time the work under a contract or order is completed”
+Considering the existence of CPARS and restrictions on federal employee communications with vendors, 
+targeting customers selling to federal agencies specifically is likely a low-priority in terms of go-to-market strategy
+However, platforms collecting non-
+intentional signals may benefit
+• “[ORG] got wind of a project that was going terribly wrong, when they saw federal employees hitting their website on the
+same day, at the same time. They linked it back to a specific project. This was not through intentional feedback collection,
+like surveys: it’s through other signals” – [ORG], Enterprise Sales Director - Hospitality
+
+[Page 53]
+Competitive 
+Analysis
+
+[Page 54]
+[ORG]
+ 54
+Competition can be segmented based on use case focus and service model; 
+[ORG] is unique among platforms with its strong focus on [ORG]
+CONFIDENTIAL
+[ORG] Customer & Employee Experience Solutions – Competitive Landscape Overview
+5 Competitive Analysis – Overview
+Sources: Company Websites, BM Interviews, Research & Analysis
+Self-
+Service
+Fully 
+Managed
+Market Research
+ Omnichannel Inference3
+1) Employee Experience. 2) Self-service platforms generally offer less customization, onboarding assistance. 3) AI-driven platforms using data from all channels (incl. call centers)
+Self-service survey tools
+CX consultancies
+CRM/ERP/HR extensions
+Market research firms Review platforms
+CX analytics platforms
+Omnichannel 
+platforms
+CX/EX platforms
+Self-service platforms2
+CX/EX1 Feedback
+Service 
+Model
+Use Case Focus
+A
+B
+D
+C
+E
+F
+F
+12
+10
+11
+[ORG] specialists
+
+
+[Page 55]
+[ORG]
+ 55
+[ORG] is directly competing with six categories of players to fulfill the 
+customer and employee feedback needs of [ORG] companies
+Sources: Company Websites, BM Interviews, Research & Analysis
+Competitive Landscape Overview
+CONFIDENTIAL5
+Category Sample Competitors Description Competitive Positioning
+CX/EX platforms
+Enterprise-grade and customizable platforms with
+deep integrations, dedicated support and managed
+professional services as needed
+Premium services that provide support, tailored custom
+solutions and comprehensive, scalable insights with
+advanced analytics
+Self-service platforms
+Cloud-based, subscription-driven solutions that
+offer pre-built survey templates and analytics for
+rapid deployment; limited customization/support
+Agile, cost-effective CX/EX insights with a user-friendly
+interface that minimizes technical complexity; quick,
+scalable for SMBs and basic needs of mid-market firms
+Self-service survey tools
+Freemium-to-subscription models featuring
+intuitive survey builders and basic reporting
+capabilities
+Enables easy, low-cost survey deployment for teams or
+projects in the [ORG] sector that need straightforward,
+accessible survey tools
+CRM / ERP /HR 
+extensions
+Integrated survey tool modules within existing
+CRM/ERP/HR ecosystems, typically offered as part
+of broader subscriptions
+Low-cost, easy solution for [ORG] firms already invested in
+major CRM/ERP/HR platforms looking to enrich their
+customer / employee data with feedback insights
+CX consultancies
+Project-based or retainer consultancy services
+delivering end-to-end CX strategy, implementation,
+and ongoing support
+Offers expert, bespoke guidance to organizations
+needing comprehensive, tailored CX/EX solutions,
+beyond just technology deployment
+Omnichannel inference 
+solutions
+SaaS platforms leveraging AI to integrate and
+analyze data across all customer touchpoints (incl.
+CRM, call centers, and social media) in real time
+Targets large, data-rich [ORG] enterprises focused on
+leveraging cutting-edge analytics for holistic,
+omnichannel customer experience management
+Competitive Analysis – Overview
+A
+B
+C
+D
+E
+F
+Are these categories 
+listed in a particular 
+order (e.g. descending 
+order of relevance?)
+Based on this description, this is the best solution for mid
+Yet, haven’t heard of these players 
+A
+B
+D
+C
+E
+F
+C
+[ORG] specialists
+
+
+[Page 56]
+[ORG]
+ 56
+CX/EX platform solutions mostly become relevant for [ORG] companies only as 
+their needs mature, with many use cases served by simpler self-service tools
+CONFIDENTIAL
+Typical needs and CX/EX solutions by maturity stage and size of [ORG] companies
+5 Competitive Analysis – Overview
+Sources: BM Interviews, Research & Analysis
+1) Key Decision-Makers
+SMB
+Mid-
+sized
+Enter-
+prise
+A
+B
+D
+C
+E
+F
+C
+A B C D E F A B C D E F A B C D E F
+A B C D E F A B C D E F A B C D E F
+A B C D E F A B C D E F A B C D E F
+A
+B
+C
+D
+E
+F
+CX/EX platforms
+Self-service platforms
+Self-service survey tools
+CRM/ERP/HR extensions
+CX consultancies
+Omnichannel platforms
+• Needs: Collect basic post-project 
+feedback on client satisfaction and 
+identify immediate service issues
+• Users: Front-line staff (e.g., 
+project managers)
+• KDMs1: Typically the CEO makes 
+the call based on operational 
+needs or in response to crisis
+• Needs: Move beyond ad hoc to 
+build a baseline for customer 
+experience metrics across projects
+• Users: Marketing or project 
+managers using basic survey tools
+• KDMs1: Department head (e.g. 
+Marketing or BD Manager) who 
+champions initial CX insights
+• Needs: Systematic feedback from 
+multiple channels across different 
+divisions or project teams
+• Users: Pilot project managers or 
+marketing, operations dept leads
+• KDMs1: Mid-level VPs or Directors 
+who initiate pilot programs
+• Solutions: Manual 
+outreach (emails, 
+phone calls, face-to-
+face)
+• Simple, free tools 
+(e.g. Google Forms)
+• Solutions: Basic 
+online survey tools 
+(e.g. [ORG], 
+native CRM tools) to 
+gather initial insights
+• Solutions: Each unit 
+often uses own mix 
+of decentralized, 
+manual outreach 
+and basic survey 
+tools
+• Needs: Establish more structured, 
+repeatable processes to aggregate 
+feedback and identify trends
+• Users: Marketing/Operations 
+Manager and possibly an IT/admin 
+person (i.e. delegated task)
+• KDMs1: Senior leadership (CEO, 
+COO, VP Sales/BD/Marketing)
+• Needs: Systematic feedback loops 
+that tie CX insights to project 
+outcomes and process 
+improvements
+• Users: Emerging cross-
+departmental CX team, BD, 
+marketing, and operations
+• KDMs1: Director of CX/Marketing
+• Needs: Standardized processes to 
+gain unified insights across the 
+company and feedback channels
+• Users: Centralized CX/EX teams 
+that span multiple departments 
+(including marketing and IT)
+• KDMs1: Commercial leadership 
+(e.g. CCO, CMO), procurement
+• Solutions: Mix of 
+self-service tools and 
+CX/EX platforms for 
+survey automation, 
+templates and basic 
+reporting with no IT 
+support needs
+• Solutions: Ad hoc 
+managed surveys
+• Self-service CX/EX 
+platforms with more 
+enhanced reporting, 
+analytics, and CRM/ 
+ERP integration
+• Solutions: Managed/ 
+customized CX/EX 
+platforms with CRM/ 
+ERP integrations
+• CX consultancies
+• Self-service tools for 
+simpler use cases
+• Needs: Integration of feedback 
+with operational data to drive 
+decision-making and process 
+improvement across projects
+• Users: Dedicated CX/EX champion 
+or small cross-functional team
+• KDMs1: Senior leadership with 
+input from the growing CX team
+• Needs: Holistic, enterprise-wide 
+view of CX, proactive/predictive 
+insights for strategic planning
+• Users: Proper CX/EX team (incl. 
+data analysts) alongside customer-
+facing departments
+• KDMs1: Commercial leadership, 
+cross-functional steerco
+• Needs: Real-time, omnichannel CX 
+insights for strategic decision-
+making and innovation
+• Users: Dedicated CX team as well 
+as operational units leveraging 
+integrated tools
+• KDMs1: Executive (CEO, CMO, CIO, 
+CDO) and CX leaders, procurement
+• Solutions: Broader 
+use of self-service 
+CX/EX platforms
+• Use of consultants 
+and professional 
+services for CRM/ 
+ERP integration
+• Solutions: More 
+advanced, tailored 
+and/or managed 
+CX/EX platforms that 
+integrate seamlessly 
+with CRM/ERP 
+systems
+• Solutions: Omni-
+channel, AI-driven 
+platforms 
+• CX consultancies
+• Self-service tools for 
+simpler use cases
+Basic CX/EX program Institutionalized CX/EX program Mature CX/EX program
+
+[Page 57]
+[ORG]
+ 57
+[ORG] and [ORG] are [ORG]’s two main competitors in the [ORG] 
+verticals
+CONFIDENTIAL
+Estimated Market Share by Player in CX/EX Solutions for [ORG] in the US
+5 Competitive Analysis – Overview
+Sources: [ORG], Competitor Filings, BM Interviews, Research & Analysis
+Comments
+• [ORG] is the largest player, with an estimated ~45%
+market share in [ORG]. It represents ~70% of the CX/EX
+platform market
+• [ORG] is the second-largest player, with 15%
+market share. It accounts for ~65% of the self-service
+survey tools market
+• [ORG] is the third-largest player, with ~8% market
+share (i.e. ~12% of the CX/EX platform market)
+• [ORG] accounts for an estimated ~3% of the
+market (i.e. ~5% of the CX/EX platform market)
+• The remaining ~30% of the market is split across a mix
+of competitors, including:
+• CX/EX platforms, like [ORG] and [ORG]
+• EX solutions, such as [ORG] and [ORG]
+• Self-service tools, including [ORG] and
+[ORG]
+• Consulting firms, which offer customer and/or
+employee feedback collection & analysis services
+ESTIMATES
+~45%[ORG]
+~15%
+[ORG]
+~8% [ORG]
+~3% [ORG]
+~29%
+Other
+USD 90 m
+US Market
+
+[Page 58]
+[ORG]
+CONFIDENTIAL
+[ORG]’ self-service model offers cost-competitive access to a powerful but 
+complex enterprise-grade platform, most suitable for more mature buyers
+[ORG] XM Overview
+Sources: Company Website, S&P Capital IQ, [ORG] Peer Reviews, BM Interviews, Research & Analysis
+WeaknessesStrengths
+• General CX/EX platform, not specifically 
+tailored for [ORG]
+• Limited [ORG] focus (vertical accounts for ~3% 
+of revenues) and no dedicated sales, account 
+and support resources for [ORG], often result in  
+low product knowledge for vertical use cases
+• Breadth and complexity of features can be 
+overwhelming with a steep learning curve, 
+especially for smaller and early-stage CX/EX 
+companies, and price-value can be poor for 
+simpler use cases
+• Limited availability of dedicated customer 
+and account support, with high reliance on 
+QPN partners
+• Complex integration process, especially 
+when implementing experience management 
+across multiple departments; use of support 
+and professional services can be expensive
+• One firm interviewed is considering switching 
+from [ORG] due to repeated changes in 
+feature packages and price
++ -Company Facts
+Competitive Landscape – Deep Dive: Qualtrics5
+Overview 
+& Positioning
+Market leader by revenue in CX/EX management 
+with c. 20 k logos globally, mostly in Mid-size and 
+Enterprise (incl. 90+ of Fortune 100) segments
+Revenue (FY22*) USD 1,533 m (84% SaaS, 16% services), up 31% YoY
+Op. Loss % (FY22*) -71% (operating loss, after R&D and SG&A)
+Valuation & 
+Ownership
+[ORG] and [ORG] led $12.5 b buyout 
+from [ORG] in 2023, with [ORG], [ORG] co-investors
+Gross Marg. (FY22) 71% (84% for SaaS, 1% for services)
+Founded in 2002
+Headquarters Provo, UT , USA
+M&A Activity Acquired Clarabridge (omnichannel AI platform for 
+$1.1 b in Jul 2021); Usermind (XM orchestration, Jul 
+2021), SurveyVitals (healthcare patient, CX 2021)
+Main industries Professional and business services, technology, 
+financial services, healthcare and life sciences, 
+education, and government
+Major clients
+• Solution built around self-service model that 
+enables competitively-priced access to its 
+Enterprise-grade CX/EX platform
+• Complete suite of features, including multi-
+channel data collection, advanced analytics, 
+and customizable reporting and DIY program 
+controls, making it suitable for companies 
+throughout their CX/EX journey, from SMBs 
+to mature, complex [ORG] organizations
+• Integrates with a wide range of CRM, ERP , 
+and other enterprise systems; productized 
+connectors to over 100 platforms
+• Offers extensive support services, training, 
+and managed services through its ‘QPN’ 
+network with 300+ implementation, 
+consulting, and solution design partners that 
+include [ORG], [ORG], [ORG], [ORG], [ORG]
+• Strong user community and self-help forums 
+to help clients help themselves 
+• High-profile client references and case 
+studies in all verticals, including [ORG]
+58
+*12 months to Q1 2023
+
+[Page 59]
+[ORG]
+CONFIDENTIAL
+[ORG] combines relatively powerful capabilities with intuitive design, 
+and benefits from high familiarity with its interface and survey logic
+[ORG] Overview
+Sources: Company Website, S&P Capital IQ, [ORG] Peer Reviews, BM Interviews, Research & Analysis
+WeaknessesStrengths
+• Remains a more general survey tool and 
+could require significant customization or 
+supplementation to fully meet [ORG]-specific or 
+enterprise-grade needs (e.g. integration with 
+project management or BIM/CAD systems) 
+• While its analytics have improved, it does not 
+offer the same level of advanced, real-time, 
+omnichannel insights or closed loop action 
+guidance as [ORG] or [ORG]
+• Deployed for ease of use rather than highly 
+tailored, enterprise-grade configurations, with 
+limitations in terms of personalization (e.g. 
+for survey design/branding, limited ability to 
+consolidate feedback across multiple 
+channels and systems), automation (e.g. 
+automatic triggers in sync with CRM), and 
+survey design flexibility (e.g. simplified skip 
+logic, limited types of questions)
+• Limited customer service, focused on 
+providing first-line support, and very limited 
+consulting and integration services available
++ -Company Facts
+Competitive Landscape – Deep Dive: SurveyMonkey4
+Overview 
+& Positioning
+World’s largest platform for surveys and forms with
+more than 350k organizations and 17m active users; 
+combines powerful capabilities with intuitive design
+Revenue (FY22) USD 481 m (181 m sales-assisted), 8% YoY growth
+Op. Loss % (FY22) -17% GAAP operating margin
+Valuation & 
+Ownership
+Acquired by Symphony T echnology Group in 2023 at 
+$1.5 b valuation (28% premium) following 2018 IPO
+Gross Marg. (FY22) 82% (up from 81% in FY21)
+Founded in 1999
+Headquarters San Mateo, CA, USA
+M&A Activity Acquired GetFeedback ([ORG] specialist, CX/EX 
+survey suite for $68 m in Aug 2019); Usabilla
+(website and app survey for $80 m in Mar 2019)
+Main industries Healthcare, education, technology, public sector and 
+financial services, retail
+Major clients
+• Low barrier to adoption with competitive 
+pricing and freemium options; high 
+familiarity with interface and survey logic 
+from widespread use; large user base into 
+which new and more advanced features can 
+be upsold
+• Intuitive, user-friendly interface with drag-
+and-drop builder, 240+ templates, a large 
+question bank and support for multi-lingual 
+surveys, and minimal training required
+• Suitable for smaller [ORG] firms and early-
+stage CX programs, as well as standardized 
+feedback processes and departmental 
+insights, especially for companies which 
+value quick deployment and low overhead
+• Expanded analytical capabilities and API 
+integrations, including a large number of 
+marketing and BI tools (e.g. Tableau, 
+PowerBI); this supports use cases for larger 
+and enterprise customers, while maintaining 
+the simplicity that many users appreciate
+59
+
+
+[Page 60]
+[ORG]
+CONFIDENTIAL
+[ORG] primarily targets large-scale implementations with its services-
+focused solution capable of handling complex, multi-channel set-ups
+[ORG] Overview
+Sources: Company Website, S&P Capital IQ, [ORG] Peer Reviews, BM Interviews, Research & Analysis
+WeaknessesStrengths
+• [ORG] is among the most expensive CX
+solutions in terms of both price point and
+total cost of ownership, presenting a barrier
+for firms with limited CX budgets
+• Model focused on managed services, with
+limited in-the-box and self-service
+capabilities, resulting in high client reliance
+on [ORG] services team, adding expenses
+and project lead time; every single change
+has to be requested, programmed and costs
+consulting hours
+• Focus on global enterprise segment means
+that smaller clients often de-prioritized in
+terms of attention and see higher rotation on
+account and service teams
+• Designed and optimized for B2C enterprises,
+implementation can be complex and time
+consuming, and some features may be less
+relevant or adapted to B2B and [ORG] use
+cases (e.g. standard dashboards and
+templates, AI insights)
++ -Company Facts
+Competitive Landscape – Deep Dive: Medallia4
+Overview 
+& Positioning
+Leader in global enterprise segment, and complex, 
+large-scale implementations, increasingly addressing 
+Mid-market and smaller Enterprises
+Revenue (21/22*) USD 524.5 m, up 19% YoY
+Op. Loss % (21/22*) -23%
+Valuation & 
+Ownership
+Acquired by [ORG] in July 2021 at USD 6.4 b 
+valuation (20% premium) after going public in 2019
+Gross Marg. (22Q2) 63% (16% for PS, 81% for SaaS)
+Founded in 2001
+Headquarters San Mateo, CA, USA
+M&A Activity Acquired Mindful (CC analytics, Aug 2022); CXTeam
+(LatAm CX consultancy Apr 2022), Fields Healthcare 
+Research (2022), Voci (CC)
+Main industries Automotive, Financial Services, Healthcare, Public 
+Sector, Manufacturing, Retail, Technology
+Major clients
+• Robust and flexible, [ORG]’s platform can
+handle any level of operational complexity
+and capture real-time feedback across
+multiple channels and project flows
+• Known for providing high-touch services,
+including comprehensive support, training,
+and implementation services, with extensive
+integration options to core systems like CRM,
+ERP ,and field management platforms
+• Ease-of-use from customized set-up along
+with extensive feature set, automation and
+data collection capabilities, and strong
+analytics and predictive, data-driven insights
+• “Closed loop” platform designed for “action-
+orientation” and immediate resolution of
+issues uncovered by feedback (e.g. alerts for
+customer comments or negative signals and
+responses or automated actions right from
+the platform)
+60
+*12 months to Q2 2022
+
+
+[Page 61]
+[ORG]
+ 61
+[ORG] stands out relative to competitors in terms of support and ease of 
+use, combined with strong industry experience (1/2)
+CONFIDENTIAL
+Performance of Major Solution Providers across Customers’ Key Purchasing Criteria
+5 Competitive Analysis – Performance across KPCs
+Sources: Company Websites, [ORG] Peer Reviews , G2, BM Interviews, Research & Analysis
+Key Purchasing Criteria
+1 Functionality / Feature Fit
+2 Ease of Use 
+Ease of Implementation / 
+Onboarding4
+Services & Support6
+8 Scalability & Completeness
+3 Price / Value
+7 Industry Experience
+5 Integration Capabilities
+Major Providers
+Very competitive Not competitive
+Sample structure
+-
+-
+-
+-
+
+
+[Page 62]
+[ORG]
+ 62
+[ORG] stands out relative to competitors in terms of support and ease of 
+use, combined with strong industry experience (2/2)
+CONFIDENTIAL
+[ORG] Performance across Customers’ Key Purchasing Criteria
+5 Competitive Analysis – Performance across KPCs
+Sources: BM Interviews, Research & Analysis
+Key Purchasing Criteria
+1 Functionality / Feature Fit
+2 Ease of Use 
+Ease of Implementation / 
+Onboarding4
+Services & Support6
+8 Scalability & Completeness
+3 Price / Value
+7 Industry Experience
+5 Integration Capabilities
+Commentary & Supporting Quotes
+Very competitive Not competitive
+Sample structure
+-
+-
+-
+• Solid offering across CX and EX survey functionality
+• Sweet spot = needs in-between novice and expert
+• Simple and attractive user interface
+• Priced at a premium to self-service survey tools;
+sometimes more expensive than [ORG]/[ORG]
+• More price-competitive vs. service-assisted set-ups
+• Implementation requires initial customization (vs.
+access to a cloud-based platform like [ORG])
+• Integration to some key [ORG] project management tools ([ORG], [ORG], [ORG]) and main CRMs
+([ORG], [ORG]); support for custom integrations
+• Onboarding, training and ongoing support fully tailored to the specific workflows of [ORG] sub-sectors
+• Credibility in sales from [ORG] client references; tools,
+advisory and support builds on deep [ORG] experience
+• AI and analytics scale disadvantage vs. larger competitors (e.g. [ORG] has committed to invest $500 million
+in AI Innovation by 2027/2028)
+“Their user interface is very easy – I like it, it’s simpler
+than [ORG] […] but aggregating information was
+harder with [ORG]” – [ORG]
+“I like [ORG]’s approach: they said they would
+create custom dashboards that give you real-time
+data” – [ORG]
+“[[ORG]] just looked like a dumbed-down version
+of a more robust platform” – [PERSON]
+“Implementing [[ORG]] too was a struggle […]
+[ORG] said you could go in a million different
+directions” – [ORG]
+“If we’re paying $1,000 per user per year for [ORG],
+[ORG] was $1,600-$1,700 per user” – [ORG]
+“[ORG] was recommended to us by a concrete
+contractor, because they had done a lot of work in
+construction” – [ORG]
+Client
+a
+well
+they
+you
+the
+dashboard,
+setting
+Rachel
+“Client
+Dumas
+“Value
+system
+structured,
+[ORG]
+
+[Page 63]
+[ORG]
+ 63
+[ORG] is priced at a premium to self-service tools and platforms and, for 
+certain use cases, can be more expensive than [ORG] and [ORG]
+CONFIDENTIAL
+Example Pricing – Annual Cost (USD k), excluding implementation and integration costs
+Note: [ORG] premium plan refers to Employee Experience module, starting at $5,000 / year. [ORG] seems to have recently moved to volume-based pricing, though no data 
+is publicly available regarding thisMedallia premium plans refer to step-ups from Tier 1, 2 and 3, respectively 
+Sources: [ORG], Competitor websites, SelectHub, BM Interviews, Research & Analysis
+40 employees, 1 user 120 employees, 3 users 1,000 employees, 20 users
+[ORG]
+1.5
+15.0
+5.0
+3.8
+Qual-
+trics
+0.5
+20.0
+[ORG]
+1 mngd
+survey
+[ORG]
+SaaS
+Survey
+Monkey
+5.4
+6.6
+[ORG]
+5.5
+15.3
+35.0
+10.3
+1.4
+12.0
+1.0
+15.0
+[ORG]
+4.5
+5.0
+3.8
+Qual-
+trics
+0.9
+20.0
+1.8
+[ORG]
+SaaS
+Survey
+Monkey
+5.4
+6.6
+[ORG]
+22.0 21.9
+35.0
+13.3
+2.7
+12.0
+[ORG]
+4 mngd
+surveys
+[ORG]
+SaaS
+35.0
+14.0
+[ORG]
+30.0
+14.0
+3.8
+Qual-
+trics
+6.0
+12.0
+[ORG]
+12 mngd
+surveys
+5.4
+6.6
+[ORG]
+66.0
+52.1
+49.0 47.8
+18.0
+12.0
+Survey
+Monkey
+Basic plan
+Premium plan Δ
+Support (25 hrs)
+Managed 
+surveys can 
+be most cost-
+effective 
+option
+Pricing based 
+on number 
+employees
+Pricing based 
+on response 
+volume
+Pricing based 
+on number of 
+users
+Flat Price: 
+annual 12k 
+response limit
+Need for professional 
+service support could 
+significantly increase cost
+3 Price / Value
+5 Competitive Analysis – Feedback on [ORG] Pricing
+“The expensive part is the integration, with tools like [ORG] or [ORG] 
+Power BI for reporting. It costs maybe less than $50,000” – [ORG], Associate VP
+
+[Page 64]
+[ORG]
+ 64
+[ORG] may be perceived as expensive or “overkill” for first-time buyers 
+examining simple solutions; an entry-level solution would help
+CONFIDENTIAL
+Buyer Feedback on [ORG] Pricing
+Sources: BM Interviews, Research & Analysis
+5 Competitive Analysis – Feedback on [ORG] Pricing
+Price
+Value
+3 Price / Value
+Companies like [ORG] and [ORG] may be perceived as having 
+higher quality/price ratios than [ORG], at least for certain use cases
+“I could see an [ORG]-specific vendor being well-received, and it would be good to have
+several levels of offering, so that you can try it out first. This industry is not very
+sophisticated, like consumer research firms, who’ve been doing surveys for 30 years
+You need to ease us in, and then expand from there” – [ORG], Director
+“If we’re paying $1,000 per user per year for [ORG], [ORG] was $1,600-
+$1,700 per user. If you ask them, it wasn’t apples-to-apples. But we went to [ORG]
+because we wanted a more streamlined, standardized approach: [ORG] said you
+could go in a million different directions […] Aggregating information was harder with
+[ORG]: their offerings were confusing to a fault, even more than [ORG] […]
+[ORG] was going to be zig-zagging. Implementing it too was a struggle […] I
+like [ORG]’s approach: they said they would create customer dashboards that
+give you real-time data, allowing you to focus on the project and client relationship.
+Within that dashboard, you can drill down more granularly and set benchmarks for
+future engagements. But it was a little much for what we wanted to do at the time.
+Maybe we’ll get back to them after we’ve used a first provider” – [PERSON]
+“Really small companies will start with [ORG], and freemium options.
+[ORG] does have something very bare-bones, to compete with other freemium:
+that freemium will do just enough for what you need to do, but tries to hook you in
+and end to pay extra to get extra capability” – [ORG], Area Vice President
+It may be helpful for [ORG] to have an off-the-shelf “plug & play”
+solution with more basic features (and it can always upsell once clients
+see value: “land & expand”)
+
+[Page 65]
+[ORG]
+ 65
+[ORG]’s service-assisted platform and middle-of-the-road approach can 
+expose it on both ends of the market, but also presents unique advantages
+CONFIDENTIAL
+Feature Gap Analysis
+*Integration refers to set-up for API-based data transfers between systems. Deeper CRM integrations for closed-loop triggers and automations are frequent pain points
+Sources: [ORG] Peer Insights, Reddit, G2, Capterra, Company Websites, BM Interviews, Research & Analysis
+5 Competitive Analysis – Feature Gap Analysis
+Gaps vs [ORG] Gaps vs [ORG]
+Simplicity
+• Intuitive drag-and-drop interface simplifies the
+survey creation process, making it accessible
+even for users with minimal technical skills
+• Simpler, easy-to-use versions of more advanced
+survey tools (e.g., Question Skip Logic and Page
+Skip Logic, question types)
+Fast deployment
+• Optimized for standardized processes and
+require limited customization or manual input
+• [ORG] Genius can generate surveys
+quickly based on user prompts, suggest optimal
+question types, and identify potential issues in
+survey structure
+API integration with third-party tools*
+• Integrations with large number of third-party
+tools (e.g. Tableau, Power BI and marketing
+automation tools)
+• Data export in multiple formats possible for
+further analysis or reporting needs
+Self-service configuration
+• Easily handles complex survey design & routing
+• Bulit-in support for wide range of UX options
+(e.g. 3D grids, sliders, side-by-side questions)
+• Easy branding personalization
+Out-of-the-box analytics & visualization
+• Effective dashboards and data visualization for
+most organizational use cases (executive
+dashboards, filtering, etc.)
+• Key driver analysis and root cause analysis, incl.
+native support for multi-channel data pulling,
+omnichannel AI analytics
+Closed-loop automation tools
+• Connectors to over 100 platforms allows easy
+integrations and automations based on customer
+feedback, behavior and churn predictions
+Enterprise collaboration
+• Permission settings and team tools to facilitate
+collaborations, internally and with third-parties
+[ORG]’s edge over competitors
+Service-assisted approach
+• Hand-held approach with support for on-
+boarding, survey design, configuration and
+analytics
+• [ORG] workflows and needs expertise
+Out-of-the box [ORG]-optimized
+• Library of 5,000+ industry-tested survey
+templates
+• Tailored insights for [ORG]
+• Seamless connections with [ORG], [ORG]
+along with standard CRMs
+Native vendor relation tools [would need to 
+be validated in customer interviews]
+• Integrated vendor feedback module to
+complement customer and employee
+experience
+
+[Page 66]
+[ORG]
+ 66
+[ORG] is often the default CX solution until needs outgrow its 
+capabilities
+CONFIDENTIAL
+Evolution of CX/EX Solution by Maturity Stage – Examples
+5
+Sources: BM Interviews, Research & Analysis
+Basic CX/EX program Institutionalized program
+• Adoption of [ORG] self-service survey 
+tool was driven by the need for more actionable 
+insights than external research firms could 
+provide due to their lack of understanding of 
+Turner's business and employee mindset
+• Chose [ORG] for its ease of use and 
+brand recognition, survey feature set and data 
+accessibility through APIs
+• Replaced [ORG] tools which faced technical 
+issues for external users (high email reject rate)
+• Used by approximately 1,000 users across 
+[ORG], surveying c. 35,000 customers to gather 
+feedback at the end of projects
+• Switched to [ORG] due to SM’s limitations in 
+branding control and survey logic capabilities 
+(based on geo, client type, project size) and new  
+CX measurements at key project milestones
+• EX handled by [ORG] (unchanged)
+• Likely to keep [ORG], due to established 
+integration with [ORG] and other systems
+• Value [ORG] for comprehensive functionality, 
+granularity and control over survey building, 
+and analysis, despite its complexity
+• Likely to keep [ORG]
+• Analytics primarily used for high-level trend 
+analysis, but sufficient as the data collected 
+through surveys is exported and analyzed using 
+third-party BI tools like Power BI
+• Transitioned from using phone calls, emails and 
+PDF forms to collect customer feedback
+• Adopted [ORG] for its ease of use and 
+low cost, which allowed for a higher 
+engagement rate and easier feedback collection
+• Cautious about survey automation; complexity 
+and variability of construction projects can affect 
+timing and appropriateness of sending surveys
+• Value enterprise account features of multiple 
+user collaboration and survey sharing
+• Emerging need for better integration with CRM 
+system and more advanced analytics
+• Leaning towards [ORG] for its ability to 
+integrate with CRM, consolidate client data, and 
+generate more detailed analytics and insights
+• Used simple setup with [ORG] and 
+[ORG] survey functionality
+• For one-off, local office-level surveys, Survey-
+Monkey remains in use (MS [ORG] used for EX)
+• Local-level use may continue at the margins, 
+though trend is towards consistency
+Construction
+Engineering
+Architecture
+Construction
+• [ORG] used to provide firm-wide consistency
+for post-occupancy feedback for larger projects 
+(~700-800/yr, only for potential repeat clients)
+• Contemplating in-house development of survey 
+tool in the next 2-3 years*. For now, trying to 
+keep the same expense for surveys
+Outlook / Future Plans
+*[ORG] also evaluated [ORG], but did not choose it as it wanted to handle customizations in-house, which [ORG] did not support at the time. [ORG] is contemplating in-house development 
+because it has a strong IT team (due to its scale) and to amortize its investment in a new data center
+Competitive Analysis – Why Customers Choose Competitors: Examples
+
+[Page 67]
+[ORG]
+ 67
+Satisfaction levels with existing solutions is relatively high, which reinforces 
+the focus on “white space” as a GTM priority for [ORG]
+CONFIDENTIAL
+Satisfaction Levels with Select Competitors
+Sources: G2, [ORG], BM Interviews, Research & Analysis
+5 Competitive Analysis – Satisfaction with Competitors
+is lower than CX platforms like 
+• “[ORG] is a great tool if you are using a templated design. Where things get challenging is the limitation in question type 
+capabilities: firms will outgrow the tool pretty quickly. APIs are very difficult, bringing in historical data, merging data from student 
+andsources and doing advanced analytics are all difficult . It’s great as a starting point for smaller businesses, or doing quick survey/polling” 
+– [ORG], Global Head of T echnical Delivery, VOC/E
+• “For a small company like mine with only 1 BD person and myself, I’d hire a student, and tell them what to do. I would let them go to 
+[ORG]. It’s more simplified but gives intelligence and feedback. Everybody understands how to do a [ORG]” – [ORG], President
+• “We needed an external tool. We didn’t need something complex. [ORG] was a quick, easy and cheap choice. It’s well-known; we 
+knew we’d do analytics outside. We also don’t have a challenge with other companies having to whitelist it. [ORG] has been fairly 
+reliable and effective: It was limited but had all the features we need” – [ORG], Former VP - Client and Partner Relations
+• “In 5 years, the spend will definitely go up. If we are spending $5k today, it will be double if not triple. We’re happy with what we’re getting" 
+– [ORG], Director of Business Development
+• “I’m used to [ORG], and like the granularity […] [ORG] has made our lives easier […] It took us a while to integrate [ORG], getting listed 
+as a safe site. I didn’t want to reinvent the wheel with a new platform […] If we didn’t have [ORG] in place, we would consider another 
+platform” – [ORG], Senior Director, Marketing Strategy & Planning
+• “We’ve been using [ORG] in 2021. We signed a 3-year contract for $11k annually. We’re going through our first renegotiation which is 
+coming up pretty soon, I expect the spend to go up with them” – [ORG], Market Intelligence Analyst
+According to [ORG] Peer Review Insights, 96% of [ORG]’s users, 93% of [ORG]’s users and 81% of [ORG]’s users are 
+likely to recommend the respective solutions to a colleague, indicating a high level of satisfaction with existing solutions
+Satisfaction level with [ORG] is high and [ORG] is average, 
+reinforcing the focus on "white space" and self
+priority for [ORG]
+Satisfaction levels with existing solutions are relatively high, which reinforces 
+the focus on “white space” as a GTM priority for [ORG]
+Satisfaction levels 
+with [ORG] are 
+very high
+[ORG] is 
+perceived as a 
+cost-efficient 
+entry-level 
+solution
+
+
+[Page 68]
+[ORG]
+ 68
+However, self-service buyers are not always aware or capable of unlocking survey 
+tools’ full functionality – representing an opportunity for [ORG]
+CONFIDENTIAL
+Self-Service Knowledge Gap Opportunity
+Sources: BM Interviews, Research & Analysis
+5 Competitive Analysis – Limited Buyer Knowledge on Competitor Capabilities
+OpportunityQuotes
+Undiscovered 
+functionality
+Outdated 
+experience
+“We issue a quarterly online survey to a very random selection of client
+contacts in our CRM, which is not tied to project milestones at all […]
+[ORG] is completely standalone, which is one of the shortfalls of our
+current approach […] We need to export client data from CRM to feed into
+[ORG], tracking who has responded in the past and opt-outs. Our ideal
+future state is to have a more integrated solution with our CRM […] We
+had issues with our CRM, which is [ORG] [ORG] 360. Our CRM was frozen
+for a long time. During that time, a giant backlog of CRM improvements
+built up: and our requests to integrate got moved lower in the backlog.
+[ORG] may have that functionality, but we haven’t explored it further
+[…] We are considering switching to [ORG], which a colleague used
+at her previous architecture firm, because it has a lot of automation tied
+to project milestones. Reporting is also good, to bring it to people who
+can make decisions” – [ORG], Director Insights
+• Many users of self-service platforms are left to
+“discover” functionalities on their own, often
+relying on outdated experiences or failed
+attempts at integrations(e.g. with a CRM via API)
+• This creates a persistent pain point: the platform
+might be powerful, but the lack of guided
+support prevents users from realizing its full
+potential
+• These users are unhappy with their current, self-
+service solution - not because the tool lacks
+capabilities, but because they couldn’t effectively
+access them
+• They are likely to be receptive to a solution that
+actively supports them, reduces friction, and
+demonstratestangible ROI, such as [ORG]“Having a survey software that has an open API so that it can work with a
+[ORG] or another CRM is very important. SurveyMonkeydoesn’t have
+that, so we’re looking at [ORG]” – [ORG], SVP Marketing
+Nature of 
+Knowledge Gap
+
+[Page 69]
+Go-To-Market 
+Implications for 
+[ORG]
+
+[Page 70]
+[ORG]
+ 70
+[ORG] should primarily target new customers who have yet to adopt a 
+standardized software solution, and grow alongside them
+CONFIDENTIAL
+Go-To-Market Implications for [ORG]
+6 Go-To-Market Implications
+Sources: BM Interviews, Research & Analysis
+Whom To 
+Target
+With 
+What 
+Offering
+When
+How
+• Mid-to-large [ORG] firms (primarily Engineering) who are relatively early in their CX/EX journey, have yet to adopt a standardized
+solution, and value [ORG]’s “hand-held” approach
+• In addition to current offering, consider developing an entry-level, competitively-priced solution for customers with basic needs: this
+will allow [ORG] to get a foothold in new accounts early, before they become accustomedto other platforms
+• [ORG] should target potential customers early in their purchasing journey, before they start considering other solutions, to
+maximize its chances of being chosen
+Awareness Consideration Decision Repurchase / RenewalBuyer Journey:
+[ORG]’s 
+chances of 
+winning deals*:
+*Depending on when it appears in customers’ purchasing journey
+Hands-on assisted sales process 
+can help companies define their 
+needs
+Feature-by-feature and cost 
+comparison may not favor 
+[ORG]
+High switching cost
+Mature CX/EX buyers may favor 
+more advanced platforms
+Demos and tailored sales 
+demonstrate how [ORG] 
+can help, accelerate time-to-
+value and close sale
+Priority time to target customers
+• Develop strong brand awareness in the [ORG] industry to be top-of-mind for customers evaluating CX/EX feedback collection tools (e.g.
+through presence at industry conferencesand podcast interviews, by organizing industry-specific events and encouragingreferrals)
+• Ensure C-suite / organizationalbuy-in and engagement, to ensure project success
+New slide on GTM: Awards / events (already 
+
+[Page 71]
+[ORG]
+ 71
+Recent CRM adoption, interest in MarTech, existence of Digital / CX / EX team, 
+and recent customer loss/issues can help identify potential buyers
+CONFIDENTIAL
+Indicators for Lead Generation
+Sources: BM Interviews, Research & Analysis
+6 Go-To-Market Implications
+Recent CRM Adoption
+Reflects willingness to invest in
+customer-related technology
+Rationale
+• Research tech stack of [ORG] firms (e.g. with [ORG], [ORG], [ORG])
+• Perform LinkedIn search of employees at [ORG] firms with CRM-related
+roles / recent hires (e.g. CRM administrator)
+• Build relationships with [ORG]-focused systems integration firms to be
+informed of early leads and evaluate joint go-to-market opportunities
+How to Identify Targets
+Presence at Marketing 
+Technology (MarT ech) 
+Events and in MarT ech
+Publications
+Shows interest in customer-
+related technology
+• Identify [ORG] firm attendees at marketing technology-related events (e.g.
+[ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG],
+[ORG], [ORG])
+• Track interviews of [ORG] firm leaders in marketing technology
+publications (e.g. MarT ech)
+Existence of a Digital, Data, 
+Customer Experience and/or 
+Employee Experience team
+Indicates technological maturity
+(or at least willingness to invest)
+• Perform LinkedIn search of employees at [ORG] firms with “Customer
+Experience”, “Digital”, “Data” and/or “Employee Experience” in their
+profiles
+Recent Customer Loss / 
+Churn / Lack of Satisfaction
+Indicates strong pain point and
+likely willingness to address it
+through enhanced CX program
+• Monitor [ORG] publications (e.g. [ORG], [ORG], [ORG]) for recent news
+• Attend [ORG]-related events and network with attendees to understand
+recent industry developments
+
+[Page 72]
+[ORG]
+ 72
+[ORG]’s value proposition can be tailored to highlight its most relevant 
+strengths depending on clients’ needs profiles
+CONFIDENTIAL
+Sources: BM Interviews, Research & Analysis
+6 Go-To-Market Implications
+[ORG]’s Relative Strengths by Dimension
+Customer Perception 
+of Need Importance
+• Digital Maturity & CX/EX Readiness
+• Urgency and Pain Points (e.g. high employee 
+turnover, loss of key customer accounts, or 
+recent market pressures)
+Complexity of Need
+• Scale (e.g. size, 
+number of clients 
+and employees, 
+volume of projects)
+• Organizational 
+Complexity (e.g
+diversity of clients 
+and employees, 
+channels, locations, 
+markets)
+Low High
+Low
+High
+Key Competitors by Customer Need Profile – Illustrative
+1
+2
+3 4
+1
+2
+3
+4
+Overarchingdifferentiator: [ORG] specialist
+• Proven track record, deep [ORG]-specific customizations(e.g. benchmarks,
+pre-built templates, integrations)going beyond generic configurations
+• Competitive Total Cost of Ownership (including customization) compared to
+service-assisted implementations of [ORG] and [ORG]
+• High level of dedicated support and guidance at any company size, not just
+large enterprise – especially useful for less mature orgs
+• Ease of use: less intimidating than [ORG]
+• Flexibility and adaptability, with upgrade path to more advanced capabilities
+than [ORG]; prepared for future needs while keeping the initial
+implementation lean and non-disruptive—bridging the basic vs. enterprise gap
+• “Guaranteed” ROI from hand-held onboarding process that delivers
+customized, actionable insights quickly
+• Proactive advisory services to help identify latent opportunities and build a
+long-term CX/EX roadmap
+• Agile, dedicated service team for rapid, robust implementation, and reduced
+lead times
+• High-touch, comprehensive support with strategic advisory that delivers more
+targeted and actionable insights than one-size-fits-all approach
+
+[Page 73]
+[URL]
+Innovative Strategies 
+for Growth

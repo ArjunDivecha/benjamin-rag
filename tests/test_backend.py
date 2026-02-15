@@ -267,3 +267,66 @@ def test_provider_config_and_only_openrouter_call(tmp_path: Path, monkeypatch):
     assert provider["zdr"] is True
     assert provider["order"] == ["amazon-bedrock"]
     assert provider["allow_fallbacks"] is False
+
+
+def test_local_model_config_reads_dotenv_when_env_missing(tmp_path: Path, monkeypatch):
+    env_file = tmp_path / ".env"
+    env_file.write_text(
+        "LOCAL_RAG_MODEL=qwen3:32b\n"
+        "OLLAMA_BASE_URL=http://127.0.0.1:11434/\n",
+        encoding="utf-8",
+    )
+
+    monkeypatch.delenv("LOCAL_RAG_MODEL", raising=False)
+    monkeypatch.delenv("OLLAMA_BASE_URL", raising=False)
+    monkeypatch.setattr(backend, "APP_DIR", str(tmp_path))
+    monkeypatch.chdir(tmp_path)
+
+    base_url, model = backend._load_local_model_config()
+    assert base_url == "http://127.0.0.1:11434"
+    assert model == "qwen3:32b"
+
+
+def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
+    _seed_v3_doc(tmp_path, monkeypatch)
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+    monkeypatch.setattr(backend, "_load_openrouter_key", lambda: "test-key")
+    monkeypatch.setattr(backend, "_load_opus_compare_model", lambda: "anthropic/claude-opus-4.6")
+    calls = []
+
+    def fake_post(url, *args, **kwargs):
+        calls.append(url)
+        if url == backend.OPENROUTER_URL:
+            return _DummyResponse(
+                200,
+                {
+                    "choices": [{"message": {"content": "opus ok"}}],
+                    "usage": {"prompt_tokens": 29, "completion_tokens": 11},
+                },
+            )
+        if str(url).endswith("/api/chat"):
+            return _DummyResponse(
+                200,
+                {
+                    "message": {"content": "local ok"},
+                    "prompt_eval_count": 17,
+                    "eval_count": 9,
+                },
+            )
+        return _DummyResponse(404, {}, text="unexpected")
+
+    monkeypatch.setattr(backend.requests, "post", fake_post)
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat/compare",
+        data={"message": "Who mentioned growth?", "objective": "insights_qa"},
+    )
+    assert resp.status_code == 200
+    data = resp.json()
+    assert data["local"]["content"] == "local ok"
+    assert data["local"]["provider"] == "ollama"
+    assert data["opus"]["content"] == "opus ok"
+    assert data["opus"]["provider"] == "openrouter"
+    assert data["rag"]["collection"] == "V3"
+    assert data["sources"]
+    assert backend.OPENROUTER_URL in calls

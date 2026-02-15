@@ -1,0 +1,289 @@
+[ORG] – Week 1 Update
+[Project was supposed to last 3 weeks, but got cut short after 1 week as our client was originally not retained by the seller to issue an LOI]
+
+[ORG] – Pre-LOI Commercial Due Diligence – Week 1 Update (as of Sep 1, 2025)
+ 
+Preliminary Insights: please notes that these may evolve as our research progresses
+  
+Market Size
+ 
+Use Cases
+We've honed in on 3 primary use cases for nitrogen services in downstream O&G end-markets (refineries, petrochem, LNG):
+Routine maintenance – for example cleaning out tanks / spheres, pigging / cleaning pipelines, etc.
+Turnarounds – for instance, refineries purging reactor catalysts and then 'blanketing' equipment with nitrogen to keep it inert
+Emergencies – can be small (e.g. nitrogen system is down and needs supplementation) or large (e.g. emergency turnaround because the catalyst needs to be replaced sooner than planned)
+Continuous use for operations is focused on gas provision, not services – and seems out of scope / largely not addressable by independents
+ 
+Market Sizing – scheduled to be discussed in more detail during Tuesday 9/2 check-in
+Framework – we are approaching market sizing in two ways:
+Based on facility-level spend: # facilities in each end market * addressable spend per facility (broken down by routine maintenance, turnaround, and emergencies)
+Based on competitor revenues: bottom-up sum of known or estimated competitor revenues (leveraging initial research of competitor websites / public information, [ORG] / [ORG] files, triangulation via fleet size, and estimates from interviews)
+Our very preliminary estimates of the US nitrogen services market for downstream O&G are:
+Based on facility-level spend: USD ~400-450 m (LNG commissioning to be added, as a key next step)
+Based on competitor revenues: USD ~550 m
+Data sources: 
+We have reliable data on # of facilities in the US from the following sources:
+Refineries: 125 operating refineries with known capacity (from [ORG])
+LNG: ~181 facilities (from [ORG] / [ORG]), broken down as follows:
+27 facilities in operation under [ORG] regulation: 
+14 import / export terminals
+13 inter-state peak-shavers
+Another ~155 intra-state, typically smaller facilities in [ORG]'s database (e.g. smaller peak-shavers, storage facilities)
+Petrochem: Estimated ~300-350 petrochem facilities triangulated through multiple sources ([ORG], [ORG], [ORG], CISA)
+We are continuing to explore more granular data sets in Petrochem from private / paid sources such as [ORG] and [ORG] ([ORG])
+We are continuing to gather data and refine model assumptions, including on:
+The addressability & segmentation of different types of petrochem and LNG facilities
+More granular / refined 'spend per facility' assumptions for petrochem and some LNG facilities
+Competitor revenues (including estimated market share of independents vs molecule providers)
+ 
+Market growth
+LNG is expected to grow the fastest in the coming years, driven by LNG export terminal new builds
+“The fastest growth is in LNG, with significant demand from new plants […] LNG plants going up everywhere. [PERSON], [PERSON], etc. are constantly adding more trains […] I think LNG will go through the roof […] There was a stranglehold for a long time on permits: you couldn’t ship it overseas” – [ORG], [PERSON]
+“Oil & Gas isn’t a high growth market given the stagnation in new refinery builds, but the growth in LNG terminals will more than offset this […] LNG terminals and bunkers are a growth market, not just in the US. Bunkering market annual growth is 30%, terminals is 11% growth in the US” – [ORG], [PERSON]
+“LNG is the fastest-growing segment [in downstream O&G]” – [ORG], [PERSON]
+Growth in the refinery market is expected to be limited, with few or no new refineries expected to come online in the next 3-5 years
+The last new refinery with significant capacity came online in 1977 – though smaller refineries and/or add-ons/upgrades to existing facilities have been built since
+“There’s not been a new refinery built in the last 50 years” – [ORG], [PERSON]
+“I don’t really see a lot of growth” – [ORG], [PERSON]
+“Oil & Gas isn’t a high growth market given the stagnation in new refinery builds” – [ORG], [PERSON]
+Petrochemicals
+We are still gathering data on the petrochemicals market; however, preliminary research indicates that growth could be higher than for refineries [TBC]
+“Petrochemical expansion and pipeline work are also strong, with demand outpacing supply in some areas” – [ORG], [PERSON]
+“Refinery and petrochemical turnarounds remain a steady, recurring base of demand” – [ORG], [PERSON]
+ 
+Competitive Dynamics
+ 
+From our initial research, none of the 3 primary use cases for nitrogen services seem to be “walled off” by large molecule suppliers, and this is unlikely to happen going forward
+Even when pipelines or on-site nitrogen generators exist, pumper trucks and pumper truck operators are still required:
+“Because you have nitrogen on-site does not mean you don’t need nitrogen services: you need the pumps and the pressure elevation, even if you already have the product” – [ORG], [PERSON]
+“Refineries can spend up to $3-5 million a year on pumper-side nitrogen services. This includes refineries with piped-in nitrogen” – [ORG], [PERSON]
+"I don’t feel like any part of the market is walled off [by industrial gas providers] [...] I don’t think independents will get marginalized: I think there’s an opportunity for high-quality equipment and good relationships, and local providers" – [ORG], [PERSON] 
+"Independents will always be there [because] large providers prefer selling nitrogen to make a margin. [Providing services is] a lot of work and unwanted overhead" – [ORG] Energy Services, [PERSON]
+"I don’t think the independents will go away at all. I think there’s room for everybody. In the next 10 years, 150 million tons of LNG will be produced in the US, and another 10 facilities are bringing in another 100 million tons in the Gulf Coast. There’s a huge shift coming in the next 10-20 years – not only in LNG production, but also ethane crackers, propane, etc. because it’s so cheap" – [ORG], [PERSON]
+ 
+Molecule providers do not view services as a core offering, and are unlikely to increase their focus on services going forward due to operational complexity (TBC)
+“You make the money on the service. On the molecule side, gross margins are 30%, compared to 60-70% on services. But services are relatively capital-intensive, with specialized equipment. It takes a lot of specialty equipment that can’t be used other places when the market is down. It’s good to have in your portfolio, but utilization rates are usually low: if you get 30-40% utilization, it’s not bad. It’s also a volatile market: certain services follow the O&G market. When it’s booming, it’s very lucrative and you never have enough assets; but the O&G market is up and down. We would buy used assets, from smaller companies that couldn’t handle the capital requirements. There always seemed to be equipment available, but I don’t know how often companies go bankrupt. When you get a job, many times you’re not the only service provider on-site: maybe because no one has enough equipment, not because customers are trying to mitigate risk. On maintenance side, these can be somewhat emergency calls – so services capture such a premium […] It comes down to having the equipment and the technical people to run the equipment: the product part is the easy part. That stuff is complicated: it’s a combination of pressure and volume, and variability, and maintenance. Typically it’s 24x7: it’s very special people who run those machines. They’re working 24x7 until maintenance is done; the equipment is high pressure and hard to work with […] Services are perceived as a very separate service offering. Operationally, when the “Express Services” [nitrogen service division] guy runs into the room, other colleagues run away – because the other processes that 80% of people are working on are very predictable” – [ORG], [PERSON]
+“I don’t feel like services are the focus for the molecule providers: they have nitrogen for them. I haven’t gotten a call from any of the molecule providers in 3 years” – [ORG], [PERSON]
+“Large providers prefer selling nitrogen [to independent service providers] and making a margin, compared to putting it in their own pumpers. [The reason is that when you provide services], it requires a lot of overhead and maintenance. There are a lot of systems to take care of in order to keep all that running coherently. They’d rather ship nitrogen in a pipeline or deliver a bottle. They can fill their trucks for free and charge customers; or charge my trucks at a bigger margin, and they don’t need to worry about maintenance, or manpower. With a pumper truck, you need 2-3 people on-site, as well as mechanics” – [ORG] Energy Services, [PERSON]
+ 
+Molecule providers benefit from established customer relationships and preferred access to nitrogen; they are also perceived as more cost-effective (~10-15% cheaper – TBC), and sometimes more reliable for larger projects (TBC)
+“If I have a very large site and a good relationship with a large vendor, they might have a distribution center close by and offer services. The market perception is that [large molecule providers] are more reliable and [provide] consistent service as compared to independent providers" – [ORG], [PERSON]
+“[When customers choose large industrial gas providers], I think it is hugely because they are producing the gas themselves so they have immediate access to low-cost gas and a bandwidth to availability[…] The majors [industrial gas providers] swallow 75-80% of the [nitrogen] services market; I may be biased because I look at turnarounds. I suspect it’s because they’ve been able to respond to emergencies quicker, because they have more trucks. They may also leverage better pricing, but I’m not sure” – [ORG], [PERSON]
+"Molecule providers are still strongholds for long-term, scalable, risk-averse nitrogen service contracts, prized for their safety and dependability [...] When companies form a contract with molecule providers, they naturally buy in bulk, and therefore can get a cheaper price – usually 10-15% cheaper. But sometimes that sacrifices service […] Sometimes there’s a cost saving, but it’s really nickel and dimeswhen you look at nitrogen as a % of your operating costs" – [ORG], [PERSON]
+“Industrial gas majors like [ORG], [ORG], Matheson, [ORG] focus on bulk/pipeline nitrogen supply” – [ORG], [PERSON]
+“Industrial gas providers are more likely to win on emergency services, and more on the big jobs […] Customers look at the gas suppliers as simpler to work with, with one phone call, especially in emergency services: we have the resources for services and we have the product. We had confidence that we would provide product when they needed it. The market is based on the last job you had:it’s a very small, tight-knit market” – [ORG], [PERSON]
+“Large refineries will only use industrial gas companies: a lot of coordination is required to bring nitrogen to the location” – [ORG], [PERSON]
+ 
+Independent providers can differentiate themselves through faster response and higher service quality
+"Independent providers thrive by offering agility, customization, and specialized solutions, especially in emergent or technically complicated scenarios [...] It’s about the service they offer: they send the best of their people. When there are new regulations, they’re there to help you troubleshoot: I didn’t get that at an [ORG] or [ORG]. I always get better customer service at smaller companies than larger ones […] For me, it’s about the relationship. More than that, I appreciate the ability to pick up the phone in an emergency. I find that the smaller companies, if they’re local, can do that – whereas I’ve had struggles with [ORG] being one, because they didn’t have it available. They run gas contracts all over the US, and might have to fill up in Tennessee. For planned outages, it’s OK. If it’s unplanned, it’s harder" – [ORG], [PERSON]
+“If you have an independent supplier very close to your site and they can reach you very quickly, you may call them” – [ORG], [PERSON]
+“[Independent] service providers like [ORG] and [ORG] deliver high-purity nitrogen via pumping, differentiated by reliability, responsiveness, and execution” – [ORG], [PERSON]
+"We’ve seen a handful of independents winning work, either by being the lowest bidder, or responding first to an emergency. It’s typically one of those scenarios; but then they need to keep performing. One company did great on the first job, but not on the second job; if you’re an independent, you don’t really get a second chance" – [ORG], [PERSON] 
+“Independents exist because a lot of smaller activities require nitrogen, like the testing of pipelines midstream, which is a regulatory requirement. That’s where smaller companies excel” – [ORG], [PERSON]
+“Companies like Extreme, [ORG] and [ORG] are exclusive nitrogen service providers and have to work harder to get in [compared to industrial gas providers]. The difference between the 2 types of companies is night and day when it comes to relationships. Majors have lots of red tape when it comes to expenses for clients.  The independent companies don't. The majors also are inflexible and have lots of bureaucracy that gets in the way of progress and the independents do not” – [ORG], [PERSON]
+“I believe there is a shift away from the larger companies towards the smaller ones. The reason for that is availability and customer service: you know who the contact is with the company and not a new rep every time, and the independent providers are more likely to try and accommodate last minute needs, compared to a larger company” – [ORG], [PERSON]
+ 
+A single facility may work with 2-3 nitrogen service providers, with 1 main provider and 1-2 backup provider(s)
+“Most facilities have a primary provider that gets 75% of the work; and they keep a relationship with at least a backup, and maybe a third they keep in their back-pocket in case of an emergency. But the bulk of the business is between providers 1 or 2 [However] there are sites that only use one vendor, so they’re willing to pay a premium, to ensure everything goes as planned. This happens, for instance, if someone shows up for an emergency and knocks it out of the park. But then they need to keep performing” – [ORG], [PERSON]
+ 
+Overall, the market is very regional – and preferred vendors can vary by facility
+“It’s very regional and facility-specific: everyone has examples of people knocking it out of the park […] Some smaller players are region-specific: they may be very good in one area, so a local refinery will us them. But they won’t sell to me [national level], because they don’t have anything to sell in California or Tennessee. They can be cost-competitive in that specific local market, but they’re not hunting for work across the country” – [ORG], [PERSON]
+ 
+Feedback gathered on providers to date: in week 1, our main focus was gathering data for our market sizing discussion; as such, less interview time was spent on competitor performance. Had we continued the project, this would’ve been a stronger focus.
+ 
+Large industrial gas providers: interviewees to date generally seem satisfied with incumbent providers; however, some operational decision-makers indicate that independent providers provide faster and higher-quality service
+“I haven’t seen any problems or issues with [ORG] / [ORG] [current vendor], [ORG] or [ORG] [both were vendors at my previous employer]; they were available when we needed them” – [ORG], [PERSON]
+[ORG] / [ORG]
+Fleet size: 41 pumper trucks across 5 end-markets, including downstream refineries/petchem, LNG, midstream, upstream and F&B (source: [ORG] Website)
+“I find that the smaller companies, if they’re local, can do that [answer emergencies faster] – whereas I’ve had struggles with [ORG] being one, because they didn’t have it available. They run gas contracts all over the US, and might have to fill up in Tennessee. For planned outages, it’s OK. If it’s unplanned, it’s harder" – [ORG], [PERSON]
+[ORG] / [ORG]
+Advertises its NICOOL accelerated reactor cooldown
+“[ORG] is one player which has tried to differentiate itself. They have a specific process, NICOOL, that adds to the speed of the cooldown, which they pair with their nitrogen service. They also have a chemical cleaning solutions for spheres which are harder to purge out with nitrogen itself (also use a scavenger). So they pair out a couple of solutions. They advertise that NICOOL will save you 6-12 hours on a 3-day cooldown. It’s not huge, but every hour counts” – [ORG], [PERSON]
+“[ORG] and [ORG] have delivered in other regions pretty reliably” – [ORG], [PERSON]
+Fleet size: we do not currently have data on this and would’ve gathered it as a next step
+[ORG]
+“[ORG] has 50-70 pumper trucks, across all end-markets” – [ORG], [PERSON]
+“[ORG] has had a pretty good reputation, at least from my time on the West Coast” – [ORG], [PERSON]
+Messer
+“Messer has about 200 vacuum-jacketed trucks of all sizes, from mini to 20k gallon truck. Of that, 30-40% are for nitrogen: this means 60-80 trucks with pumps and refrigeration, across all end-markets. You use the same type of truck for all markets” – [ORG], [PERSON]
+ 
+Independent nitrogen service providers: we’ve identified ~10 independent providers in the US so far(including [ORG] and [ORG] / [ORG]) and will continue researching to what extent more players exist
+ 
+[ORG]
+“I evaluated [ORG] but did not work with them in the end. One of the BD guys from [ORG] [our independent provider] moved across to [ORG]. I was looking at cost per MBTU, and they were slightly cheaper. But we had 2 back-to-back hurricanes, and they could not meet that deadline: the plant’s down, I need to purge, and I was left with no alternative but to switch back to my original supplier. I paid a few pennies difference for [moving back to] N2, but they were more reliable. [ORG] was likely overwhelmed, trying to respond to other facilities” – [ORG], [PERSON]
+“[ORG] is sometimes considered more expensive” – [ORG],[PERSON]
+We would’ve gathered additional customer feedback on [ORG] as a key next step
+ 
+[ORG] / [ORG]
+[ORG] sees potential in [ORG]’s REAX reactor turnover services; however, savings were not delivered in the way which [ORG] expected, according to [ORG]’s Director of Turnaround Excellence
+“USA DeBusk is another player trying to differentiate itself: they combine nitrogen services with actual catalyst unload and reactor chemical cleaning. The idea is that packaging those 3 services together creates some savings. There’s some uniqueness there – though they’re still working through what that looks like to make sure there’s value there. It’s how they’re trying to market their acquisition. Overall we try to minimize our total nitrogen use – which means making sure we use the right amount at the right time. Having a vendor that specifically knows what we’re trying to do and understand each phase can save you money, so they can get all your work. I definitely can see potential in that relationship and marriage, and that understanding; but if the truck does not show up on time and service is not perfect, it’s not as great. They’ve had one job where what was sold to us did not come to fruition: they showed up, but the savings weren’t there as advertised. This happened in the last 12 months, on a site in the Gulf Coast. DeBusk have done OK. It’s been acceptable, enough that we would consider them in the future, but not enough for me to call everyone to tell them to use it. They delivered as we expected, but we expected to save a lot of money on the project, a few hundred thousand dollars. They delivered, but not the savings. In the end, they wanted to make it right: so they delivered the savings, but not in the way we expected. I’ve not seen anyone else bundling industrial services” – [ORG], [PERSON]
+We would’ve gathered additional customer feedback on [ORG] as a next step
+ 
+[ORG]
+One of the largest independent nitrogen service providers in the US, with an estimated ~35 pumper trucks in the US (and an additional ~35 in Canada, where [ORG] is headquartered)
+“[ORG] is from Canada. I got them in the market big time down here [in the US], though I don’t know if they can hold onto it. They have 71 pumpers across Canada and the US, including around 35 in the US. They’re probably the biggest [independent] player […] They have good equipment, but not enough mechanics” – [ORG], [PERSON]
+Seems to serve downstream, midstream and upstream oil & gas markets
+Founded in 2013; 5 offices in the US (3 in TX, 1 in NM and 1 in ND) and 6 in Canada
+FMCSA data mentions that they have 49 “power units” (likely includes units beyond pumper trucks) and 95 drivers in the US
+ 
+[ORG] (part of [ORG])
+[ORG] (founded in 1977) is part of publicly-listed [ORG], an oil & gas service company
+In 2024, nitrogen accounted for ~2% of [ORG]’s total revenue (i.e. USD 35 m), across midstream and downstream markets
+[ORG] is a well pressure control specialist: in addition to nitrogen services, it offers coiled tubing, snubbing/hydraulic overwork and well intervention services
+“They’re not as big as they used to be. They shut down their Gulf Coast division, and moved everything to midland Texas and Oklahoma, because it’s so competitive down here. They went elsewhere, where it’s less competitive. They shut down their division in Houston and Corpus. They were the top dog for a long time, but they want to make bigger margins, so going a little further away from crowded city, where there are fewer pipelines and pumping service providers. A lot of pumping service cost depends on how far you’re mobilizing from. At one time, I’m sure they had 25-30 pumpers. They also do downhole for fracking, which is just now coming in Texas. It’s why they’re going to West Texas, for this type of high-volume work” – [ORG], [PERSON]
+[ORG] has 9 locations across TX, OK, UT, MI and PA
+HQ is in Oklahoma (while [ORG]’s HQ is in Georgia)
+We were able to confirm that the Robstown / Corpus Christi location has been wound down (it is no longer on their locations page, but was opened in 2001)
+The Odessa, TX location seems to be actively hiring (3 job openings) – perhaps corroborating the heightened focus on West Texas mentioned in the interview above. There are also multiple job openings in Oklahoma, and a few in Utah, Michigan and Pennsylvania.
+FMCSA data would not be a reliable proxy for [ORG]’s nitrogen pumper truck fleet size – given [ORG]’s diversified activities
+ 
+[ORG]
+Their ASU offering appears to be a differentiator: “I’ve used them before in petrochemicals. I’m very eager to talk to them, because they made me an offer 6 months ago: they’re a nitrogen service provider supplier, but also a supplier of ASU equipment. They will operate the ASU on my facility. They would bring it in, set it up and charge me a flat fee: I have a headache with other contractors on my facility, so I’ve declined for now. But you never know which card you need to pull out of your deck, given we’re so subject to storm surges” – [ORG], [PERSON]
+“Nitrogen Services was one of the two larger independents we’d run up against” – [ORG], [PERSON]
+Serves the upstream, midstream and downstream O&G markets from 2 locations: Midland, TX and Lake Charles, LA
+Their central team is composed of 8 people, including 4 BDR
+FMCSA data mentions that they have 30 “power units” and 59 drivers – number of pumper trucks to be confirmed as a next step
+ 
+[ORG] (including [ORG])
+“We used [ORG] in the past. I contacted a third-party verification company, to see how they stand on insurance, etc. It led me to move away from [ORG], which had a 4-hour delivery time, to [ORG], which could deliver in 30-40 minutes: I chose N2 because they could deliver faster; they were local to our facility, and met the same safety protocol that we embed in our company – in terms of permitting, certification, proof of compliance. That opened the door for me to start a dialog; it really got my attention. Most of their facilities are along the Gulf Coast, in ‘Hurricane Alley’. I look for more local, but compliant companies” – [ORG], [PERSON]
+[ORG] was founded in 2016, serves the midstream and downstream O&G markets, and offers services beyond nitrogen pumping – especially pipe freezing services (since its acquisition of [ORG] in 2023)
+5 locations across the US, including 2 in Louisiana (including HQ), 1 in Texas (since 2022), 1 in Mississippi and 1 in Pennsylvania
+FMCSA data mentions that [ORG] have 19 “power units” and 38 drivers, while [ORG] Nitrogen Services has 14 “power units” and 14 drivers – number of pumper trucks to be confirmed as a next step
+ 
+[ORG]
+Family-owned independent provider established in 2010; headquartered in Oklahoma, with a field office in North Dakota
+FMCSA data mentions that they have 37 “power units” and 28 drivers – number of pumper trucks to be confirmed as a next step
+ 
+[ORG]
+Headquartered in Midland, TX, with additional locations in the Gulf Coast (Sealy, TX; Winnie, TX; Lake Charles, LA)
+FMCSA data mentions that they have 8 “power units” and 8 drivers – number of pumper trucks to be confirmed as a next step
+Also offers membrane nitrogen
+ 
+Intero Integrity Services
+International industrial service provider, with headquarters in the Netherlands and offices in 20 countries
+Provide inspection services, environmental services, industrial services, and pipeline management services, across midstream and downstream markets
+“We typically competed with the other majors, and a couple larger independents, like Integrity Solutions […] Integrity was pretty good” – [ORG], [PERSON]
+FMCSA data on [ORG] only shows 3 “power units” and 12 drivers
+Additional data (e.g. size of US nitrogen services business) to be gathered as a next step
+ 
+[ORG]
+Family-owned, California-based industrial gas and service provider; founded in 1970
+Provides gas & equipment beyond nitrogen
+In addition to nitrogen services, also offers hydrogen services and propane services
+Serves multiple industries beyond oil & gas
+Made 3 acquisitions in California (in 2014, 2019 and 2020) and 2 in Texas (Ward Welding Supply in 2013 and North Texas Welders Supply in 2014) – though today’s presence in Texas is unclear
+Operates 16 retail locations (in CA and AZ), 5 cylinder gas facilities, and 1 lab producing EPA protocol gases and hydrocarbon blends. Has 300+ employees. 
+FMCSA data mentions that they have 97 “power units” and 83 drivers
+Number of pumper trucks for nitrogen services specifically, and size of nitrogen services business, to be confirmed as a next step
+ 
+Note on FMCSA data as a data point to inform fleet size
+The US Federal Motor Carrier Safety Administration requires companies to register commercial motor vehicles used for interstate commerce
+FMCSA provides a data point on fleet size, but not necessarily an accurate view of nitrogen pumper trucks specifically. For instance, FMCSA data mentions:
+36 power units for [ORG] (while [ORG] has 25 pumper trucks, based on company data)
+72 power units for [ORG] (while Extreme has 36 pumper trucks, based on company data)
+ 
+We are still conducting research on the extent to which molecule providers bundle industrial services, and how customers perceive those bundles
+ 
+ 
+Customer Perspective
+ 
+[ORG]
+Table-stakes
+Safety & reliability
+“Every vendor is expected to operate safely. If not, it’s a good way to get kicked out of the refinery. The expectation is perfection” – [ORG], [PERSON]
+“Reliability, availability and safety are key” – [ORG], [PERSON]
+“You look at safety performance and metrics, regulatory compliance records, third-party verification. Sometimes, that’s one of the reasons players go with the large providers” – [ORG], [PERSON]
+Differentiators
+Speed / availability
+“A lot of it comes down to who is available, for instance in emergency situations. And over time, they earn maintenance and turnaround works as they are available and reliable, and ready to go” – [ORG], [PERSON]
+“Safety record and mobilization speed [are the top-two criteria]. When choosing a provider, there’s always a number of studies that take place. You always look at how fast it gets here, where is their closest location […] I look for more local, but compliant companies” – [ORG], [PERSON]
+Service quality 
+“Pricing plays a role, but certainty of quality, certainty of on-time arrival, and ability to perform are key" – [ORG], Category Manager
+“As an owner, when we source gases for our production, reliability and quality are the key to weigh our decisions” – [ORG], Director, Capital Projects
+Cost: overall, cost is perceived as less important than safety, reliability and speed. Its importance also varies by use case
+“Pricing plays a role, but certainty of quality, certainty of on-time arrival, and ability to perform are key " – [ORG], Category Manager
+“Price is more important for turnarounds than for maintenance” – [ORG], [PERSON]
+“Cost, capabilities, and previous relationship are most important to customers when selecting a nitrogen service provider. It can vary based on industrial process, turnarounds, or maintenance.” – [ORG], Director of Operations
+Relationships
+“The relationship that gets you in the door is at the local level - it might be the plant or the local engineer at the office. The decision is very relationship-driven. Once the local guys feel confident in you, then you get sent to procurement to get set up as a vendor”  – [ORG], [PERSON]
+"In this business, a lot goes into relationships and having a face to a name" – [ORG], [PERSON]
+"Relationships get developed [through successful emergency services] - you build trust over time. Then, the customers may develop a preference [over that specific provider], even if that provider is expensive" – [ORG], [PERSON]
+ 
+Customers’ Key Purchasing Criteria vary by situation (turnarounds vs emergencies vs maintenance)
+Turnarounds can be planned months ahead of time and are typically bid out to several vendors; cost is usually more important than for emergencies or maintenance.
+“If it’s a planned turnaround, my expectation is that sites are bidding it out, looking at past catalyst changes; expecting to use a specific volume over how many days with a specific pump rate. They should do it 8-12 months before the turnaround occurs […] For turnarounds, we really are looking for the lowest bidder qualified to do the work. For new vendors, we’d want some sort of reference, in the [ORG] network, or to another major like Marathon, Phillips, Exxon, or even a letter of recommendation. There’s a reluctancy to trust someone new if they are cheaper” – [ORG], [PERSON]
+For emergencies, speed / availability are most important – while cost is a remote concern
+“For emergencies, it’s about who answers the phone call and can be there as fast as possible. If the sales rep doesn’t answer the phone for 3 hours, they lost the work. There’s not a lot of discussion on price and equipment. The first call is to whoever they used last: they usually call a specific person – the BD or sales person –, not a 1-800 number” – [ORG], [PERSON]
+“In an emergency, you don’t care about money: it’s about who can be reached quickly, and is reliable whenever you call them […] Relationships get developed: you build trust over time. A vendor may get the preference, even if they are a bit expensive” – [ORG], [PERSON]
+“In emergency situations, margins are super high, at least double the normal rate. They’re criminal – but that’s because it costs more for the plant to be down than to pay for services” – [ORG], [PERSON]
+Maintenance is somewhere in the middle: it is often not planned as thoroughly as turnarounds, and represents lower amounts, so is not bid out as regularly
+“Maintenance is between a turnaround and an emergency. It’s planned out 1-3 months before. Only the top planners bid that work. Usually they just make a phone call and get a proposal, because not as expensive, and routine planners aren’t as sophisticated as turnaround planners, and don’t go through the same bidding process or due diligence. They pump out 30 job plans in a week: they’re more interested in speed, like a cashier at the checkout counter. You need to be a rising star planner to bid this out. They usually go to whoever they went to last” – [ORG], [PERSON]
+“For maintenance, you’ll go out to bid. Price is more important than for emergencies: it’s a little more predictable, a little less urgent” – [ORG], [PERSON]
+As a result:
+Industrial gas companies may be better positioned for turnarounds, as they sometimes offer more competitive pricing
+“Price is more important for turnarounds than for maintenance, so industrial gas companies are better positioned for turnarounds” – [ORG], [PERSON]
+Independents may be better positioned for emergency services, when they are local to an area and can provide faster service
+“I appreciate the ability to pick up the phone in an emergency. I find that the smaller companies, if they’re local, can do that – whereas I’ve had struggles with [ORG] being one, because they didn’t have it available. They run gas contracts all over the US, and might have to fill up in Tennessee. For planned outages, it’s OK. If it’s unplanned, your local provider is a better solution" – [ORG], [PERSON]
+Maintenance lies somewhere in the middle (see quotes above)
+ 
+Purchasing decision-makers
+Operations value reliability and speed, while Procurement cares more about cost. Usually, Operations drive the purchasing decision
+“The ops guy wants people who are reliable and who they can trust. Procurement and management only care about cost. In the end, ops will win because they’ll demand who they want to use, and it gets pushed up the ladder […] Once an MSA is signed, procurement is out of the picture” – [ORG], [PERSON]
+“It seemed always to be that the guy running the job was going to make the next decision. Maintenance / turnaround manager / operations have a heavy say” – [ORG], [PERSON]
+“Key decision-makers are typically turnaround managers, operations managers, and engineers rather than procurement. Most decisions are made at the plant/site level, though larger operators may also involve regional or corporate input” – [ORG], [PERSON]
+Decision-makers are similar for nitrogen services and other industrial services – which facilitates cross-selling for [ORG]
+“Decision-makers for nitrogen services and other industrial services are similar” – [ORG], [PERSON]
+“It’s the same people making decisions for nitrogen services and other industrial services” – [ORG], [PERSON]
+Purchasing decisions are typically made at the plant level, though this can vary by spend level and by firm
+“Most of these decisions are driven locally. You’re talking to the operations manager. There may be an MSA at a corporate level, then the decision is made at a local level regarding who to use […] MSAs can also be facility by facility; in a few cases, customers were trying to consolidate that, but that’s the exception rather than the rule. Not all providers can serve all facilities, so MSAs can be local. If companies want to consolidate vendors, they would go with larger providers” – [ORG], [PERSON]
+“Most decisions are made at the plant/site level, though larger operators may also involve regional or corporate input” – [ORG], [PERSON]
+“Most of the time, if the cost is less than $500 k, it is up to the plant. Above that, corporate people get involved” – [ORG], [PERSON]
+ 
+Customer stickiness
+Customer stickiness is relatively limited
+“It’s easy to switch providers, if they can do the job and provide local service. It all comes down to BD and customer service” – [ORG], [PERSON]
+“It’s very easy to switch vendors” – [ORG], [PERSON]
+Customers may change vendor due to speed of delivery / availability and/or reliability issues
+“[Speed of delivery] led me to move away from [ORG], which had a 4-hour delivery time, to [ORG], which could deliver in 30-40 minutes. I chose N2 because they could deliver faster; they were local to our facility, and met the same safety protocol that we embed in our company” – [ORG], [PERSON]
+Cost may be another reason to switch suppliers – though this is more likely to happen for a turnaround than in an emergency
+“There are several scenarios [for switching vendors]: [one of them is that] we are having issues or high price from the existing supplier, and want to reduce the cost in general” – [ORG], [PERSON]
+ 
+ 
+ 
+Process Update
+ 
+Project status: on track until stopped on August 29, 2025
+ 
+Accomplished to date:
+Primary Research: 
+Launched expert network sourcing requests
+Drafted and shared the interview guide
+Completed 6 interviews to date
+Buyers (3)
+[ORG] [Refinery], [PERSON]
+[ORG] [Petrochem], [PERSON]
+[ORG] [LNG], VP Operations
+Competitors (3)
+[ORG], Former Sales – Nitrogen Services
+[ORG], [PERSON]
+[ORG], [PERSON]
+Addition competitors and buyers were in the pipeline and did not get scheduled as the project was stopped
+Secondary Research
+Sourced data on the number of facilities by end-market (e.g. [ORG] for refineries, [ORG]/[ORG] for LNG, [ORG] for petrochem facilities)
+Gathered initial data on competitors (e.g. websites, annual reports when available, industry publications)
+Market Sizing
+Determined market sizing approach / framework
+Built market model framework with initial data
+Synthesis
+Started synthesizing key findings and hypotheses to test
+Structured report output and starting to flesh it out
+ 
+Challenge to date
+Sourcing buyers knowledgeable about [ORG] has been challenging to date (especially with Labor Day weekend); however, we had planned to push the expert networks regarding this
+Getting segmented data on petrochem facilities (e.g. by capacity/size) has been relatively challenging. However, we are exploring multiple options to address this – including US Census Bureau data, and private/paid sources (e.g. [ORG], [ORG] Markit)
+ 
+Next steps [had the project continued as planned]
+Continue to source/schedule/conduct interviews (including more buyers knowledgeable about [ORG])
+Continue secondary research
+Market sizing: refine and triangulate market size across both methodologies (facility spend and competitor revenue)
+Synthesize findings (on the market, competitors, customers and the target) and prepare mid-point report

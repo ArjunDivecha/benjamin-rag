@@ -1,0 +1,479 @@
+[ORG] & [ORG]
+[ORG] – Commercial Due Diligence (Part 2)
+Draft Interview Guide 
+December 09, 2025
+
+
+Notes: 
+This guide is a list of relevant questions that is as exhaustive as possible. The intention is not to go through each question with each interviewee, but rather pick and choose based on interviewees’ background / knowledge and the conversation flow. The guide will evolve with our understanding of the market and as we decide to focus on certain areas.
+This guide is structured into the following 6 sections (addressing each potential interviewee angle):
+Priority 1 angles
+[ORG]: current / recent former employees
+Molecule providers: current / recent former employees
+[ORG]: recent former employees
+Priority 2 (backup) angles
+Other service providers to [ORG]
+Nearby LNG facilities
+US DOT [ORG]
+
+Introduction: Thanks for taking the time to speak with us today. We’re calling from [ORG], a market research company, and conducting a study on nitrogen services (e.g. purging, inerting, blanketing, cooling, pressure-testing, etc.) for downstream oil & gas in the US. We’re speaking with a variety of market participants to better understand trends in market demand and customer preferences.
+
+
+[FOR [ORG]: CURRENT OR RECENT EMPLOYEES]
+
+Key Questions 
+
+Interviewee/Company Background
+Could you please begin by introducing your background and experience as it relates to nitrogen services in the US?
+Could you please provide an overview of your company / facility?
+
+Nitrogen Services Use Cases
+[Note to H.I.G. and [ORG] team: we are starting with general questions to ease interviewees into the conversation and make the questions on Freeport feel more natural]
+
+What are the primary use cases for nitrogen services in LNG facilities? 
+How often are nitrogen services required at LNG facilities?
+
+Gas Separation Units (for Methane Removal)
+How common is it for LNG facilities to deal with acid-gas streams which are “too rich”?
+How do LNG facilities deal with that? What are the risks?
+What role does nitrogen play in oxidizer safety?
+In what cases do customers decide to use nitrogen vs other gases like CO2?
+When dealing with such incidents, how likely is it for LNG facilities to switch nitrogen service vendors while the issue is ongoing?
+What typically triggers LNG operators to consider adding new gas separation units?
+Do you have a gas separation unit at your facility?
+How would having an on-site gas separation unit built at the facility impact nitrogen services?
+What is the typical timeline to plan, design, permit, and fully commission a new gas separation unit at an LNG facility?
+How long does each step take?
+Based on our research:
+Any modifications to an existing LNG facility must go through [ORG]’s Natural Gas Act section 3 approval process
+[ORG] approval takes ~2,5-3 years, from pre-filing (6 months minimum) to [ORG] review/authorization (2+ years on average)
+Does this align with your experience / understanding?
+On top of that, how long does construction and commissioning take?
+How likely are there to be delays?
+[If they’re in the process of building one] At which stage of planning, construction and commissioning are you?
+
+[ORG] Nitrogen Demand
+Overall, how do you expect [ORG]’s demand for nitrogen services to evolve over the next 3-5 years? What will drive demand?
+
+Feedback on [ORG]
+How do companies like [ORG] select nitrogen service providers?
+Which criteria matter most when choosing a nitrogen service provider?
+When do LNG facilities choose large industrial gas suppliers vs independent nitrogen service providers for nitrogen services?
+What are the relative strengths / weaknesses of both? 
+How sticky are the relationships with Nitrogen Service Providers? 
+What would make LNG facilities change their service provider? 
+Are there switching costs?
+Are you aware of the current nitrogen service providers active at [ORG]? 
+How happy is [ORG] with their performance?
+How does your current service provider perform on the most important criteria?
+How likely is [ORG] to continue working with them over the next 3-5 years?
+
+Incidents at [ORG]
+LNG facilities in the US seem to have faced a number of issues when it comes to operational reliability and safety. Is this something you have seen with the LNG customers you served, if any? Why do you think that is?
+One facility which made headlines is [ORG]. Have you heard about them or served them as a provider?
+How would you characterize the scale and severity of the major events Freeport has experienced (2022 explosion, 2024 freeze damage, power interruptions, acid-gas system issues)?
+How do these incidents typically affect nitrogen demand?
+What remediation efforts have facilities like [ORG] taken to ensure fewer incidents in the future? Are these remediation paying off or showing positive signs?
+Do you expect the number of incidents/outages to increase or decrease in the next 3-5 years? Why or why not?
+
+Optional Questions (if time allows)
+
+Competitive Landscape
+Which nitrogen service providers have you used or are familiar with? 
+When do customers choose independent nitrogen service providers vs molecule providers for nitrogen services, and why?
+What are the strengths / weaknesses of both player category?
+Does it vary by use case / end-market?
+To what extent do large molecule providers focus on nitrogen services? 
+Is it important to them? Why or why not?
+How is that likely to evolve going forward?
+Do molecule providers bundle any services? If so, which ones? 
+Are customers receptive to these bundles?
+Are independent providers going to be marginalized? Why or why not?
+How do providers differentiate from one another?
+Large industrial gas suppliers
+[ORG] / [ORG]
+[ORG]
+[ORG] / [ORG]
+[ORG]
+Independent nitrogen services providers
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG], etc.
+
+Customer Purchasing Dynamics: Purchasing Process
+To what extent are customers interested in buying bundled services for industrial cleaning + nitrogen services? Why or why not? 
+Is this only relevant for specific use cases or clients?
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+
+Closing: Any other topics we haven’t discussed which you think are important?
+
+[FOR MOLECULE PROVIDERS]
+
+Key Questions
+
+Interviewee/Company Background: Could you please begin by introducing your background as it relates to nitrogen services in the US – overall, and for downstream oil & gas applications specifically (such as LNG facilities)?
+What types of downstream applications have you served clients in?
+How does your company positions / differentiates itself in this space?
+
+Level of Interest in Nitrogen Services
+To what extent do the large industrial gas providers focus on nitrogen (pumping) services today?
+Do industrial gas providers typically provide nitrogen services themselves, or leave the market to independent nitrogen service providers? Why?
+Do industrial gas providers subcontract nitrogen services to independent providers?
+Has the level of interest changed in recent years? If so, what is driving that change?
+Do you foresee industrial gas providers increasing their involvement in nitrogen services in the coming 3-5 years? Why or why not?
+Does this vary by geography or end-market (e.g. LNG vs refineries vs petrochem vs other)?
+Will independent nitrogen service providers be squeezed out of the market?
+What (if anything) is preventing industrial gas suppliers from increasing their presence and market share in nitrogen services?
+Differences across industrial gas providers
+How do the three major players ([ORG], [ORG], and [ORG]) differ in their approach to nitrogen services (e.g. vertical integration, customer segment focus, pricing)?
+Are some providers pursuing nitrogen services more than others? Why or why not? 
+Have you seen / are you seeing M&A activity or market consolidation in nitrogen services?
+Are molecule providers acquiring nitrogen service providers (to acquire their fleet and personnel)?
+How is this likely to evolve going forward?
+
+Industrial Gas Providers vs Independent Nitrogen Service Providers
+What are the relative strengths/weaknesses of industrial gas providers vs independent nitrogen service provides when it comes to providing nitrogen services?
+When do customers choose one vs the other?
+Does it vary by use case / end-market?
+When it comes to LNG facilities, what % of the nitrogen services market do you think goes to industrial gas providers vs independents? Why? 
+How is this likely to evolve going forward?
+Are any parts of the nitrogen services market “walled off” by the large molecule providers? 
+Why or why not?
+If so, what % of the market does that represent?
+How do you expect this to evolve going forward?
+Do molecule providers bundle any services? If so, which ones? 
+Are customers receptive to these bundles?
+
+
+Other Questions (if time allows)
+
+Gas Separation Units (for Methane Removal)
+How common is it for LNG facilities to deal with acid-gas streams which are “too rich”?
+How do LNG facilities deal with that? What are the risks?
+What role does nitrogen play in oxidizer safety?
+In what cases do customers decide to use nitrogen vs other gases like CO2?
+When dealing with such incidents, how likely is it for LNG facilities to switch nitrogen service vendors while the issue is ongoing?
+What typically triggers LNG operators to consider adding new gas separation units?
+Do you have a gas separation unit at your facility?
+When LNG facilities have on-site gas separation units (for methane removal), how does that impact the need for nitrogen services?
+What is the typical timeline to plan, design, permit, and fully commission a new gas separation unit at an LNG facility?
+How long does each step take?
+Based on our research:
+Any modifications to an existing LNG facility must go through [ORG]’s Natural Gas Act section 3 approval process
+[ORG] approval takes ~2,5-3 years, from pre-filing (6 months minimum) to [ORG] review/authorization (2+ years on average)
+Does this align with your experience / understanding?
+On top of that, how long does construction and commissioning take?
+How likely are there to be delays?
+[If they’re in the process of building one] At which stage of planning, construction and commissioning are you?
+
+Incidents at LNG Facilities / [ORG]
+LNG facilities in the US seem to have faced a number of issues when it comes to operational reliability and safety. Is this something you have seen with the LNG customers you served, if any? Why do you think that is?
+One facility which made headlines is [ORG]. Have you heard about them or served them as a provider?
+How would you characterize the scale and severity of the major events Freeport has experienced (2022 explosion, 2024 freeze damage, power interruptions, acid-gas system issues)?
+How do these incidents typically affect nitrogen demand?
+What remediation efforts have facilities like [ORG] taken to ensure fewer incidents in the future? Are these remediation paying off or showing positive signs?
+Do you expect the number of incidents/outages to increase or decrease in the next 3-5 years? Why or why not?
+
+Competitive Landscape
+How do nitrogen service providers differentiate from one another?
+Large industrial gas suppliers
+[ORG] / [ORG]
+[ORG]
+[ORG] / [ORG]
+[ORG]
+Independent nitrogen services providers
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG], etc.
+
+Customer Purchasing Dynamics: Purchasing Process
+To what extent are customers interested in buying bundled services for industrial cleaning + nitrogen services? Why or why not? 
+Is this only relevant for specific use cases or clients?
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+
+Closing: Any other topics we haven’t discussed which you think are important?
+
+[FOR [ORG]: RECENT FORMER EMPLOYEES]
+
+Key Questions 
+
+Interviewee/Company Background: Could you please begin by introducing your background and experience as it relates to nitrogen services?
+What types of customers do you have experience serving (e.g. LNG facilities, refineries, petrochem, other)?
+In what locations have you primarily operated?
+How does your company position / differentiates itself in the market?
+
+Gas Separation Units (for Methane Removal)
+How common is it for LNG facilities to deal with acid-gas streams which are “too rich”?
+How do LNG facilities deal with that? What are the risks?
+What role does nitrogen play in oxidizer safety?
+In what cases do customers decide to use nitrogen vs other gases like CO2?
+When dealing with such incidents, how likely is it for LNG facilities to switch nitrogen service vendors while the issue is ongoing?
+What typically triggers LNG operators to consider adding new gas separation units?
+When LNG facilities have on-site gas separation units (for methane removal), how does that impact the need for nitrogen services?
+What is the typical timeline to plan, design, permit, and fully commission a new gas separation unit at an LNG facility?
+How long does each step take?
+Based on our research:
+Any modifications to an existing LNG facility must go through [ORG]’s Natural Gas Act section 3 approval process
+[ORG] approval takes ~2,5-3 years, from pre-filing (6 months minimum) to [ORG] review/authorization (2+ years on average)
+Does this align with your experience / understanding?
+On top of that, how long does construction and commissioning take?
+How likely are there to be delays?
+Are you familiar with any LNG facilities that are planning or building new gas separation units on-site? If so, which ones? At what stage are they?
+
+Demand for Nitrogen Services at LNG Facilities
+What are the primary use cases for nitrogen services in LNG facilities? 
+How often are nitrogen services required at LNG facilities?
+For LNG facilities that you have serviced or are familiar with, how do you expect their demand for nitrogen services to evolve in the next 3-5 years, and why? For instance:
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+Is Freeport planning to add a gas separation unit on-site? If so, how will this affect demand for nitrogen services?
+[ORG]: [ORG] / [ORG]
+
+Molecule Providers’ Interest in Nitrogen Services
+To what extent do the large industrial gas providers offer nitrogen (pumping) services today?
+Do industrial gas providers typically provide nitrogen services themselves, or leave the market to independent nitrogen service providers? Why?
+Do industrial gas providers ever subcontract nitrogen services to independent providers?
+Has the level of interest changed in recent years? If so, what is driving that change?
+Do you foresee industrial gas providers increasing their involvement in nitrogen services in the coming 3-5 years? Why or why not?
+Does this vary by end-market (e.g. LNG vs refineries vs petrochem vs other)?
+Does interest or participation vary across the three major providers ([ORG], [ORG], and [ORG])?
+Have you seen / are you seeing M&A activity or market consolidation in nitrogen services?
+Are molecule providers acquiring nitrogen service providers (to acquire their fleet and personnel)?
+How is this likely to evolve going forward?
+
+Incidents at LNG facilities
+LNG facilities in the US seem to have faced a number of issues when it comes to operational reliability and safety. Is this something you have seen with the LNG customers you served, if any? Why do you think that is?
+One facility which made headlines is [ORG]. Have you heard about them or served them as a provider?
+How would you characterize the scale and severity of the major events Freeport has experienced (2022 explosion, 2024 freeze damage, power interruptions, acid-gas system issues)?
+How do these incidents typically affect nitrogen demand?
+What remediation efforts have facilities like [ORG] taken to ensure fewer incidents in the future? Are these remediation paying off or showing positive signs?
+Do you expect the number of incidents/outages to increase or decrease in the next 3-5 years? Why or why not?
+
+
+Optional Questions (if time allows)
+
+Competitive Landscape
+When do customers choose independent nitrogen service providers vs molecule providers for nitrogen services, and why?
+What are the strengths / weaknesses of both player category?
+Does it vary by use case / end-market?
+To what extent do large molecule providers focus on nitrogen services? 
+Is it important to them? Why or why not?
+How is that likely to evolve going forward?
+Do molecule providers bundle any services? If so, which ones? 
+Are customers receptive to these bundles?
+Are independent providers going to be marginalized? Why or why not?
+How does [ORG] position itself in the market?
+What are its relative strengths / weaknesses / sources of differentiation?
+Why/when do customers choose [ORG] vs other providers?
+How do other providers differentiate from one another?
+Large industrial gas suppliers
+[ORG] / [ORG]
+[ORG]
+[ORG] / [ORG]
+[ORG]
+Independent nitrogen services providers
+[ORG]
+[ORG]
+[ORG]
+[ORG], etc.
+
+Customer Purchasing Dynamics: Purchasing Process
+To what extent are customers interested in buying bundled services for industrial cleaning + nitrogen services? Why or why not? 
+Is this only relevant for specific use cases or clients?
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+
+Closing: Any other topics we haven’t discussed which you think are important?
+
+
+
+[FOR OTHER SERVICE PROVIDERS AT [ORG]]
+
+Interview / Company Background: 
+Could you please provide an overview of your background as it relates to serving LNG facilities in the US? 
+Which LNG facilities have you served or are you familiar with?
+Could you provide an overview of your company (e.g. products/services offered, company size, geographic presence)?
+When working with LNG facilities, what other vendors (if any) do you typically interact with (e.g. industrial service providers, nitrogen service providers)?
+
+Gas Separation Units (for Methane Removal) and Nitrogen Services at [ORG]
+How common is it for LNG facilities to deal with acid-gas streams which are “too rich”?
+How do LNG facilities deal with that? What are the risks?
+What role does nitrogen play in oxidizer safety?
+In what cases do customers decide to use nitrogen vs other gases like CO2?
+When dealing with such incidents, how likely is it for LNG facilities to switch nitrogen service vendors while the issue is ongoing?
+What typically triggers LNG operators to consider adding new gas separation units?
+Do you have a gas separation unit at your facility?
+Do you know whether [ORG] is currently planning to build an on-site gas separation unit?
+If so, at what stage are they?
+What is the typical timeline to plan, design, permit, and fully commission a new gas separation unit at an LNG facility?
+How long does each step take?
+Based on our research:
+Any modifications to an existing LNG facility must go through [ORG]’s Natural Gas Act section 3 approval process
+[ORG] approval takes ~2,5-3 years, from pre-filing (6 months minimum) to [ORG] review/authorization (2+ years on average)
+Does this align with your experience / understanding?
+On top of that, how long does construction and commissioning take?
+How likely are there to be delays?
+How would having an on-site gas separation unit built at the facility impact nitrogen services?
+Do you know who the current providers of nitrogen services at [ORG] are?
+Have you heard any feedback on them?
+Has this changed or is it expected to change going forward?
+
+Incidents at LNG facilities
+LNG facilities in the US seem to have faced a number of issues when it comes to operational reliability and safety. Is this something you have seen with the LNG customers you served, if any? Why do you think that is?
+One facility which made headlines is [ORG]. Have you heard about them or served them as a provider?
+How would you characterize the scale and severity of the major events Freeport has experienced (2022 explosion, 2024 freeze damage, power interruptions, acid-gas system issues)?
+How do these incidents typically affect nitrogen demand?
+What remediation efforts have facilities like [ORG] taken to ensure fewer incidents in the future? Are these remediation paying off or showing positive signs?
+Do you expect the number of incidents/outages to increase or decrease in the next 3-5 years? Why or why not?
+
+
+Optional Questions (if time and interviewee’s expertise allow)
+
+Customer Purchasing Dynamics: Purchasing Process
+To what extent are customers interested in buying bundled services for industrial cleaning + nitrogen services? Why or why not? 
+Is this only relevant for specific use cases or clients?
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+
+Closing: Any other topics we haven’t discussed which you think are important?
+
+[FOR OTHER NEARBY LNG FACILITIES]
+
+
+Key Questions 
+
+Interviewee/Company Background
+Could you please begin by introducing your background and experience as it relates to nitrogen services in the US?
+Could you please provide an overview of your company / facility?
+How does it compare to other nearby LNG facilities on the Gulf Coast?
+
+Nitrogen Services Use Cases
+What are the primary use cases for nitrogen services in LNG facilities? 
+How often are nitrogen services required at LNG facilities?
+
+Gas Separation Units (for Methane Removal)
+How common is it for LNG facilities to deal with acid-gas streams which are “too rich”?
+How do LNG facilities deal with that? What are the risks?
+What role does nitrogen play in oxidizer safety?
+In what cases do customers decide to use nitrogen vs other gases like CO2?
+When dealing with such incidents, how likely is it for LNG facilities to switch nitrogen service vendors while the issue is ongoing?
+What typically triggers LNG operators to consider adding new gas separation units?
+Are you aware of LNG facilities which currently have, or plan to have, a gas separation unit on-site?
+For LNG facilities which plan to build one, at what stage are they?
+How does having an on-site gas separation unit impact nitrogen services?
+What is the typical timeline to plan, design, permit, and fully commission a new gas separation unit at an LNG facility?
+How long does each step take?
+Based on our research:
+Any modifications to an existing LNG facility must go through [ORG]’s Natural Gas Act section 3 approval process
+[ORG] approval takes ~2,5-3 years, from pre-filing (6 months minimum) to [ORG] review/authorization (2+ years on average)
+Does this align with your experience / understanding?
+On top of that, how long does construction and commissioning take?
+How likely are there to be delays?
+
+[ORG] Nitrogen Demand
+Overall, how do you expect demand for nitrogen services from LNG facilities to evolve over the next 3-5 years? What will drive demand?
+What about for [ORG]?
+
+
+
+Incidents at [ORG]
+LNG facilities in the US seem to have faced a number of issues when it comes to operational reliability and safety. Is this something you have seen with the LNG customers you served, if any? Why do you think that is?
+One facility which made headlines is [ORG]. Have you heard about them or served them as a provider?
+How would you characterize the scale and severity of the major events Freeport has experienced (2022 explosion, 2024 freeze damage, power interruptions, acid-gas system issues)?
+How do these incidents typically affect nitrogen demand?
+What remediation efforts have facilities like [ORG] taken to ensure fewer incidents in the future? Are these remediation paying off or showing positive signs?
+Do you expect the number of incidents/outages to increase or decrease in the next 3-5 years? Why or why not?
+
+
+Optional Questions (if time allows)
+
+Competitive Landscape
+Which nitrogen service providers have you used or are familiar with? 
+When do customers choose independent nitrogen service providers vs molecule providers for nitrogen services, and why?
+What are the strengths / weaknesses of both player category?
+Does it vary by use case / end-market?
+To what extent do large molecule providers focus on nitrogen services? 
+Is it important to them? Why or why not?
+How is that likely to evolve going forward?
+Do molecule providers bundle any services? If so, which ones? 
+Are customers receptive to these bundles?
+Are independent providers going to be marginalized? Why or why not?
+How do providers differentiate from one another?
+Large industrial gas suppliers
+[ORG] / [ORG]
+[ORG]
+[ORG] / [ORG]
+[ORG]
+Independent nitrogen services providers
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG], etc.
+
+Customer Purchasing Dynamics: Purchasing Process
+To what extent are customers interested in buying bundled services for industrial cleaning + nitrogen services? Why or why not? 
+Is this only relevant for specific use cases or clients?
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+
+Closing: Any other topics we haven’t discussed which you think are important?
+
+
+[FOR US DOT - Pipeline and Hazardous Materials Safety Administration ([ORG])]
+
+Interviewee / Organization Background:
+Could you please begin by introducing your background as it relates to inspecting LNG facilities, assessing incidents at LNG facilities, and certifying LNG facilities for safety?
+Wha types of facilities do you have experience inspecting/certifying?
+Which LNG facilities in the US do you have experience assessing and/or certifying for safety?
+
+Overview of LNG Incidents
+How would you characterize the overall safety and reliability performance of US LNG facilities over the last several years?
+What factors do you evaluate when assessing or certifying a LNG facility?
+What are the typical safety and compliance challenges faced by LNG export terminals in the US?
+What types of incidents occur most frequently at LNG facilities (equipment failure, flare emission, thermal oxidizer issues, etc)? 
+Are certain types of incidents increasing or decreasing over time? What is driving these trends?
+How is this likely to evolve in the next 3-5 years?
+How do [ORG] and other regulators generally sequence reviews or approvals after a significant event?
+
+[ORG] – Incidents
+One facility which has been in the news in recent years is [ORG]. How would you characterize [ORG]’s operational reliability relative to its peers?
+How is this expected to evolve in the next 3-5 years?
+How would you characterize the scale and severity of the major events Freeport has experienced (2022 explosion, 2024 freeze damage, power interruptions, acid-gas system issues)?
+How do these incidents typically affect nitrogen demand?
+What remediation efforts have facilities like [ORG] taken to ensure fewer incidents in the future? Are these remediation paying off or showing positive signs?
+Do you expect the number of incidents/outages to increase or decrease in the next 3-5 years? Why or why not?
+
+Gas Separation Units (for Methane Removal)
+How common is it for LNG facilities to deal with acid-gas streams which are “too rich”?
+How do LNG facilities deal with that? What are the risks?
+What role does nitrogen play in oxidizer safety?
+In what cases do customers decide to use nitrogen vs other gases like CO2?
+When dealing with such incidents, how likely is it for LNG facilities to switch nitrogen service vendors while the issue is ongoing?
+Are there certain regulations / safety considerations which prevent them from doing so?
+What typically triggers LNG operators to consider adding new gas separation units?
+Are you aware of LNG facilities which currently have, or plan to have, a gas separation unit on-site?
+For LNG facilities which plan to build one, at what stage are they?
+How does having an on-site gas separation unit impact nitrogen services?
+What is the typical timeline to plan, design, permit, and fully commission a new gas separation unit at an LNG facility?
+How long does each step take?
+Based on our research:
+Any modifications to an existing LNG facility must go through [ORG]’s Natural Gas Act section 3 approval process
+[ORG] approval takes ~2,5-3 years, from pre-filing (6 months minimum) to [ORG] review/authorization (2+ years on average)
+Does this align with your experience / understanding?
+On top of that, how long does construction and commissioning take?
+How likely are there to be delays?
+
+[ORG] Nitrogen Demand (if interviewee’s knowledge allows)
+Overall, how do you expect demand for nitrogen services from LNG facilities to evolve over the next 3-5 years? What will drive demand?
+What about for [ORG]?
+
+Closing: Any other topics we haven’t discussed which you think are important?

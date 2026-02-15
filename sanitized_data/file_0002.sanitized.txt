@@ -1,0 +1,109 @@
+
+
+Innovative Strategies for Growth
+
+
+
+
+Subject: [ORG] Pre-LOI Commercial Due Diligence – Proposal
+
+
+Dear [ORG] Team,
+
+Thank you for contacting [PERSON] regarding a pre-LOI commercial due diligence on [ORG] – including a market / competitive / customer analysis of the US nitrogen services market for downstream oil & gas. This proposal outlines our approach to support you in this endeavor and is structured as follows:
+
+Our understanding of [ORG]’s objectives
+Proposed scope, approach and deliverables
+Timeline
+
+
+Our understanding of [ORG]’s objectives
+
+[ORG], a leading alternative investment firm, acquired [ORG], a national provider of industrial cleaning and maintenance services, in 2024. [ORG] had previously acquired [ORG], an independent provider of nitrogen services.
+
+[ORG] and [ORG] are currently considering whether it makes sense to further expand in the nitrogen services market for downstream oil & gas. To this end, they are in discussion with [ORG] – another independent provider of nitrogen services – regarding a potential acquisition.
+
+As part of its due diligence process, [ORG] and [ORG] are seeking support in understanding:
+Market size of nitrogen services to the downstream oil & gas markets in the US – and accessibility for independent service providers
+Competitive dynamics regarding large industrial gas suppliers vs independent service providers
+Customer perspective on independent service providers in general, and [ORG] in particular
+
+Proposed scope, approach, deliverables and team
+
+To achieve these objectives, [PERSON] will provide a data-driven analysis of the nitrogen services market for downstream oil & gas in the US – addressing the following key elements:
+
+Market Size & Accessibility
+Current market size (TAM) of the US nitrogen services market for downstream oil & gas (refineries, petrochemical plants and LNG facilities)
+Market accessibility: How accessible is this market for independent service providers? What are the key entry points?
+[Lower priority] Background on LNG
+Overview of LNG turnaround cycles and maintenance schedules where N2 is needed (to understand service frequency)
+Pre-commissioning timeline on Extreme's LNG customers - do any of their revenue pops line up with new trains coming online?
+Competitive Dynamics
+What share of the market is controlled or "walled-off" by molecule providers (large industrial gas suppliers)?
+To what extent do molecule providers view services as non-core today, and what is the risk that they increase their competitive focus in services in the future?
+Universe of relevant independent nitrogen service providers (beyond Extreme): [ORG], [ORG], [ORG], [ORG], [ORG], [ORG]
+[Lower priority]
+If possible, gather customer feedback on [ORG]
+What are directional estimates of fleet size and quality of service for the molecule manufacturers: [ORG] / [ORG], [ORG] / [ORG], [ORG], [ORG]?
+Price comparisons with independents & molecule providers
+Any intelligence around customer satisfaction / dissatisfaction with incumbents (especially molecule providers)
+Do molecule providers bundle any services? If so, how so? Is the customer receptive to bundles from molecule providers?
+Customer Perspective
+How do customers perceive independent service providers vs. molecule providers performing these services?
+What is the reputation and positioning of [ORG] specifically?
+Who makes the buying decision for nitrogen vs. USAD's other core industrial services (to inform USAD’s route-to-market and path to cross-selling effectively)
+What drives the plant's buying decision? Does this vary on a turnaround vs. maintenance perspective? If so, please delineate
+Buying decision timeline - do facilities with close ASU access delay their T/A buying decision? Do facilities without ASU access schedule N2 far in advance of T/As?
+How does the buying process change if the buying decision is coming from procurement vs. an ops manager vs. a turnaround manager?
+What drives their decisions? What is important to them?
+Do buyers typically like to buy [ORG] under MSAs? Spot buy? Purchase through bundled contracts?
+Customer stickiness - what drives a customer to want to make a change from their current vendor?
+How do customers view price vs value? Do providers win on low price or speed/reliability/safety/bundled services?
+
+
+For this project, we will leverage 2 types of input:
+
+Primary research:  ~10-15 interviews with competitors and customers
+Competitors: ~5-7 interviews with senior leaders screened for their knowledge of the nitrogen services market (including competitor & customer dynamics) for downstream oil & gas
+Large industrial gas suppliers, e.g. [ORG], [ORG], [ORG], [ORG]
+Independent nitrogen service providers, e.g. [ORG], [ORG], [ORG], [ORG]
+Customers: ~5-8 interviews with decision-makers from a representative sample of nitrogen services customers across the 3 downstream oil & gas end-markets in scope:
+Refineries, e.g. [ORG], [ORG], [ORG], [ORG], [ORG], [ORG]
+Petrochemical plants, e.g. [ORG], [ORG], [ORG], [ORG], [ORG]
+LNG facilities, e.g. [ORG], [ORG], [ORG], [ORG], [ORG]
+Secondary research
+Sourced externally, including from:
+US government agencies & departments, e.g. [ORG]), [ORG]), [ORG]), and [ORG])
+Industry associations, e.g. [ORG]), [ORG]), [ORG])
+Specialized data providers (if available), e.g. [ORG]), [ORG], [ORG]
+Competitor websites/filings/press releases
+From [ORG] and [ORG]: any existing data on market / customer / competitive dynamics and on [ORG] specifically, if available
+From [PERSON] LLC: prior project experience in industrial services
+
+
+Market sizing approach:
+We will attempt several market sizing methodologies for the US nitrogen services market for downstream oil & gas depending on data availability, including the following frameworks:
+US downstream oil & gas facilities capacity x frequency of nitrogen services needed x average spend per nitrogen service need
+We will take into account end-market type (refineries vs petrochemicals vs LNG terminals) and facility capacity
+We will also break down the market between trucked in nitrogen vs piped in
+Ballpark triangulation using the sum of competitors’ relevant revenues (though not all competitors may disclose financial data and break it out by segment)
+We will use secondary and primary sources to collect data points for the model (on market size and growth) – see “input” section above 
+We will also try to triangulate market size with:
+Other market reports
+Estimates from interviews
+
+
+We will provide the following deliverables:
+A mid-point presentation with preliminary findings
+A final report
+
+
+
+
+Timeline
+
+We will conduct this project over 3 weeks, with a preliminary discussion at the end of week 2, to meet [ORG]’s condensed timeline.
+Start date / kick-off meeting: Monday August 25, 2025
+Touchpoints throughout: depending on [ORG]’s preference, can be via email and/or meetings
+Mid-point discussion: end of week 2 (e.g. Friday September 5, 2025)
+Wrap-up discussion: end of week 3 (e.g. Friday September 12, 2025)

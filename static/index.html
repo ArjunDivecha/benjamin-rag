@@ -481,6 +481,17 @@
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
     }
 
+    .panel-response {
+      margin-top: 0;
+      margin-bottom: 0.9rem;
+      min-height: 220px;
+    }
+
+    .side-placeholder {
+      color: #7b624d;
+      font-size: 0.88rem;
+    }
+
     .response.error {
       border-color: #d79b9b;
       color: var(--error);
@@ -502,6 +513,70 @@
       margin-top: 0.68rem;
       color: #7d6450;
       font-size: 0.82rem;
+    }
+
+    .metrics-grid {
+      margin-top: 0.72rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 0.45rem;
+    }
+
+    .metric-chip {
+      border: 1px solid #dfc7a6;
+      border-radius: 10px;
+      background: #fff8ec;
+      padding: 0.46rem 0.55rem;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.58);
+    }
+
+    .metric-label {
+      display: block;
+      color: #7f664d;
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 700;
+      margin-bottom: 0.14rem;
+    }
+
+    .metric-value {
+      display: block;
+      color: #3d291b;
+      font-size: 0.94rem;
+      font-weight: 700;
+    }
+
+    .rag-summary {
+      margin-top: 0.72rem;
+      border: 1px solid #dcbf95;
+      border-radius: 10px;
+      background: linear-gradient(180deg, #fff7e8, #f8e8c9);
+      padding: 0.56rem 0.62rem;
+    }
+
+    .rag-summary-title {
+      display: block;
+      color: #5a3b22;
+      font-family: 'Cormorant Garamond', Georgia, serif;
+      font-size: 1.02rem;
+      margin-bottom: 0.28rem;
+    }
+
+    .rag-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.33rem;
+    }
+
+    .rag-pill {
+      border: 1px solid rgba(116, 83, 43, 0.3);
+      border-radius: 999px;
+      background: #fff3de;
+      color: #63452a;
+      font-size: 0.74rem;
+      font-weight: 700;
+      padding: 0.16rem 0.5rem;
     }
 
     .sources {
@@ -534,11 +609,79 @@
       color: #6e5641;
     }
 
+    .sources li.source-high {
+      border-color: #8ebf96;
+      background: #f4fff6;
+    }
+
+    .sources li.source-medium {
+      border-color: #d7bf7e;
+      background: #fffcef;
+    }
+
+    .sources li.source-low {
+      border-color: #d5b39c;
+      background: #fff8f3;
+    }
+
     .source-title {
       display: block;
       font-weight: 700;
       color: #412a1b;
       margin-bottom: 0.13rem;
+    }
+
+    .source-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 0.45rem;
+      margin-bottom: 0.18rem;
+    }
+
+    .confidence-pill {
+      border-radius: 999px;
+      font-size: 0.7rem;
+      font-weight: 800;
+      padding: 0.12rem 0.42rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      border: 1px solid transparent;
+    }
+
+    .confidence-pill.high {
+      color: #205a2a;
+      background: #e6f7e8;
+      border-color: #98c9a1;
+    }
+
+    .confidence-pill.medium {
+      color: #6a4d0d;
+      background: #fff3cd;
+      border-color: #e1c178;
+    }
+
+    .confidence-pill.low {
+      color: #7f3b13;
+      background: #ffe7da;
+      border-color: #d3a586;
+    }
+
+    .source-subline {
+      color: #6e5641;
+      font-size: 0.79rem;
+      margin-bottom: 0.22rem;
+    }
+
+    .source-snippet {
+      color: #513829;
+      background: rgba(255, 255, 255, 0.62);
+      border: 1px dashed rgba(170, 127, 71, 0.38);
+      border-radius: 7px;
+      padding: 0.36rem 0.42rem;
+      font-size: 0.79rem;
+      line-height: 1.42;
+      white-space: pre-wrap;
     }
 
     .doc-toolbar {
@@ -813,7 +956,7 @@
             <select id="objective" name="objective">
               <option value="expert_network_brief">Brief Salon</option>
               <option value="interview_guide">Interview Atelier</option>
-              <option value="insights_qa">Insights Parlour (Local)</option>
+              <option value="insights_qa">Insights Parlour (Local + Opus)</option>
             </select>
             <div id="objectiveHint" class="hint">Compose an expert-network brief with ~5 screening questions that test true knowledge depth.</div>
           </div>
@@ -877,7 +1020,6 @@
           </div>
         </form>
 
-        <div id="response" class="response" style="display:none"></div>
       </div>
 
       <div class="card">
@@ -886,6 +1028,20 @@
           <button class="btn-small" id="refreshDocsBtn" type="button">Refresh</button>
         </div>
         <div id="docList" class="doc-list"></div>
+      </div>
+
+      <div class="card">
+        <div id="response" class="response panel-response">
+          <span class="response-header">local response</span>
+          <span class="side-placeholder">Press Begin to generate the local answer and metrics.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div id="compareResponse" class="response panel-response">
+          <span class="response-header">opus response</span>
+          <span class="side-placeholder">Switch to Insights Parlour with archived context to run local vs Opus side-by-side.</span>
+        </div>
       </div>
     </div>
 
@@ -921,6 +1077,7 @@
     const fileClear = document.getElementById('fileClear');
     const submitBtn = document.getElementById('submitBtn');
     const responseEl = document.getElementById('response');
+    const compareResponseEl = document.getElementById('compareResponse');
     const docList = document.getElementById('docList');
     const refreshDocsBtn = document.getElementById('refreshDocsBtn');
 
@@ -960,7 +1117,7 @@
         },
       },
       insights_qa: {
-        hint: 'Uses local-model generation over the same RAG stack for sensitive transcript analysis and cited answers.',
+        hint: 'Runs side-by-side answers (local + Opus) over the same RAG context for transcript analysis.',
         promptPlaceholder: 'Ask for counts, quotes, speaker mentions, or consensus views with source citations.',
         forceRag: true,
         fieldLabels: {
@@ -1040,12 +1197,120 @@
       return `${Math.round(Math.max(0, Math.min(1, n)) * 100)}%`;
     }
 
+    function confidenceClass(score) {
+      const n = Number(score);
+      if (!Number.isFinite(n)) return 'low';
+      if (n >= 0.8) return 'high';
+      if (n >= 0.65) return 'medium';
+      return 'low';
+    }
+
+    function formatNumber(value, digits = 1) {
+      const n = Number(value);
+      if (!Number.isFinite(n)) return 'n/a';
+      return n.toFixed(digits);
+    }
+
+    function shouldRunCompare(mode, objectiveValue) {
+      return mode === 'rag' && objectiveValue === 'insights_qa';
+    }
+
+    function comparePlaceholderHtml(isActive) {
+      if (isActive) {
+        return '<span class="response-header">opus response</span><span class="side-placeholder">When you press Begin, the Opus answer and stats will appear here.</span>';
+      }
+      return '<span class="response-header">opus response</span><span class="side-placeholder">Switch to Insights Parlour with archived context to run local vs Opus side-by-side.</span>';
+    }
+
+    function renderResponseHtml(payload, options = {}) {
+      const data = payload || {};
+      const headerLabel = options.header || 'response';
+      const content = String(data.content || '').trim() || 'No response text returned.';
+      let html = `<span class="response-header">${escapeHtml(headerLabel)}</span>${escapeHtml(content)}`;
+
+      if (data.provider || data.model) {
+        const providerLabel = data.provider ? escapeHtml(data.provider) : 'unknown';
+        const modelLabel = data.model ? escapeHtml(data.model) : 'default';
+        html += `<div class="usage">Engine: ${providerLabel} · Model: ${modelLabel}</div>`;
+      }
+
+      const promptTokens = Number(data.usage?.prompt_tokens || 0);
+      const completionTokens = Number(data.usage?.completion_tokens || 0);
+      const totalTokens = Number(data.metrics?.total_tokens || (promptTokens + completionTokens));
+      const latencyMs = Number(data.metrics?.latency_ms || 0);
+      const tokPerSec = Number(data.metrics?.tok_per_sec || 0);
+      const retrievalMs = Number(data.metrics?.retrieval_ms || options.retrievalMs || 0);
+
+      html += `<div class="usage">Session footprint: ${promptTokens} in · ${completionTokens} out</div>`;
+
+      html += '<div class="metrics-grid">';
+      html += `<div class="metric-chip"><span class="metric-label">Total Tokens</span><span class="metric-value">${totalTokens}</span></div>`;
+      html += `<div class="metric-chip"><span class="metric-label">Model Time</span><span class="metric-value">${formatNumber(latencyMs, 0)} ms</span></div>`;
+      html += `<div class="metric-chip"><span class="metric-label">Speed</span><span class="metric-value">${tokPerSec > 0 ? formatNumber(tokPerSec, 2) : 'n/a'} tok/s</span></div>`;
+      if (retrievalMs > 0) {
+        html += `<div class="metric-chip"><span class="metric-label">RAG Retrieval</span><span class="metric-value">${formatNumber(retrievalMs, 0)} ms</span></div>`;
+      }
+      html += '</div>';
+
+      const rag = options.rag || null;
+      if (rag) {
+        const collection = escapeHtml(rag.collection || 'n/a');
+        const chunks = Number(rag.chunks_retrieved || 0);
+        const docs = Number(rag.documents_retrieved || 0);
+        const avgScore = safePercent(rag.avg_score);
+        html += `
+          <div class="rag-summary">
+            <span class="rag-summary-title">RAG Context Summary</span>
+            <div class="rag-pills">
+              <span class="rag-pill">Collection: ${collection}</span>
+              <span class="rag-pill">${chunks} chunks</span>
+              <span class="rag-pill">${docs} documents</span>
+              <span class="rag-pill">Avg confidence: ${avgScore}</span>
+            </div>
+          </div>
+        `;
+      }
+
+      const includeSources = options.includeSources !== false;
+      const sources = Array.isArray(options.sources) ? options.sources : [];
+      if (includeSources && sources.length) {
+        html += '<div class="sources"><h4>Referenced Passages</h4><ul>';
+        html += sources.map((s) => {
+          const filename = s.filename || 'Untitled source';
+          const chunkNum = Number.isInteger(s.chunk_id) ? s.chunk_id + 1 : '?';
+          const confidence = safePercent(s.score);
+          const klass = confidenceClass(s.score);
+          const snippet = s.snippet ? `<div class="source-snippet">${escapeHtml(s.snippet)}</div>` : '';
+          return `
+            <li class="source-${klass}">
+              <div class="source-row">
+                <span class="source-title">${escapeHtml(filename)}</span>
+                <span class="confidence-pill ${klass}">${confidence}</span>
+              </div>
+              <div class="source-subline">Archive fragment ${chunkNum}</div>
+              ${snippet}
+            </li>
+          `;
+        }).join('');
+        html += '</ul></div>';
+      }
+
+      return html;
+    }
+
+    function resetComparePanel() {
+      const active = shouldRunCompare(currentMode(), objective.value);
+      compareResponseEl.classList.remove('error');
+      compareResponseEl.innerHTML = comparePlaceholderHtml(active);
+    }
+
     atelierButtons.forEach(btn => {
       btn.addEventListener('click', () => {
         objective.value = btn.dataset.objective;
         syncAtelierState();
         applyObjectivePresentation();
         toggleModeUI();
+        resetComparePanel();
       });
     });
 
@@ -1053,12 +1318,17 @@
       syncAtelierState();
       applyObjectivePresentation();
       toggleModeUI();
+      resetComparePanel();
     });
-    modeInputs.forEach(input => input.addEventListener('change', toggleModeUI));
+    modeInputs.forEach(input => input.addEventListener('change', () => {
+      toggleModeUI();
+      resetComparePanel();
+    }));
 
     syncAtelierState();
     applyObjectivePresentation();
     toggleModeUI();
+    resetComparePanel();
 
     sampleLinks.forEach(link => {
       link.addEventListener('click', () => {
@@ -1159,10 +1429,17 @@
     form.addEventListener('submit', async (e) => {
       e.preventDefault();
       const mode = currentMode();
+      const compareMode = shouldRunCompare(mode, objective.value);
       submitBtn.disabled = true;
       responseEl.style.display = 'block';
       responseEl.classList.remove('error');
-      responseEl.innerHTML = '<span class="response-header">preparing response...</span>';
+      responseEl.innerHTML = compareMode
+        ? '<span class="response-header">preparing local response...</span>'
+        : '<span class="response-header">preparing response...</span>';
+      compareResponseEl.classList.remove('error');
+      compareResponseEl.innerHTML = compareMode
+        ? '<span class="response-header">preparing opus response...</span>'
+        : comparePlaceholderHtml(false);
 
       const fd = new FormData();
       fd.append('mode', mode);
@@ -1185,7 +1462,8 @@
       }
 
       try {
-        const res = await fetch('/api/chat', {
+        const endpoint = compareMode ? '/api/chat/compare' : '/api/chat';
+        const res = await fetch(endpoint, {
           method: 'POST',
           body: fd,
         });
@@ -1194,36 +1472,54 @@
         if (!res.ok) {
           responseEl.classList.add('error');
           responseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
+          if (compareMode) {
+            compareResponseEl.classList.add('error');
+            compareResponseEl.innerHTML = `<span class="response-header">opus response</span>${escapeHtml(data.detail || res.statusText)}`;
+          }
           return;
         }
 
-        let html = `<span class="response-header">response</span>${escapeHtml(data.content || '')}`;
+        if (compareMode) {
+          if (!data.local || !data.opus) {
+            throw new Error('Compare response missing local/opus payload');
+          }
+          const ragSummary = data.rag || null;
+          const sharedRetrievalMs = Number(data.metrics?.retrieval_ms || 0);
+          const sources = Array.isArray(data.sources) ? data.sources : [];
 
-        if (data.provider || data.model) {
-          const providerLabel = data.provider ? escapeHtml(data.provider) : 'unknown';
-          const modelLabel = data.model ? escapeHtml(data.model) : 'default';
-          html += `<div class="usage">Engine: ${providerLabel} · Model: ${modelLabel}</div>`;
+          responseEl.innerHTML = renderResponseHtml(data.local, {
+            header: 'local response',
+            rag: ragSummary,
+            retrievalMs: sharedRetrievalMs,
+            sources,
+            includeSources: true,
+          });
+          compareResponseEl.innerHTML = renderResponseHtml(data.opus, {
+            header: 'opus response',
+            rag: ragSummary,
+            retrievalMs: sharedRetrievalMs,
+            includeSources: false,
+          });
+        } else {
+          responseEl.innerHTML = renderResponseHtml(data, {
+            header: 'response',
+            rag: data.rag || null,
+            sources: Array.isArray(data.sources) ? data.sources : [],
+            includeSources: true,
+          });
+          compareResponseEl.innerHTML = comparePlaceholderHtml(false);
         }
-
-        if (data.usage) {
-          html += `<div class="usage">Session footprint: ${data.usage.prompt_tokens} in · ${data.usage.completion_tokens} out</div>`;
-        }
-
-        if (Array.isArray(data.sources) && data.sources.length) {
-          html += '<div class="sources"><h4>Referenced Passages</h4><ul>';
-          html += data.sources.map((s) => {
-            const filename = s.filename || 'Untitled source';
-            const chunkNum = Number.isInteger(s.chunk_id) ? s.chunk_id + 1 : '?';
-            return `<li><span class="source-title">${escapeHtml(filename)}</span>Archive fragment ${chunkNum} · confidence ${safePercent(s.score)}</li>`;
-          }).join('');
-          html += '</ul></div>';
-        }
-
-        responseEl.innerHTML = html;
         loadDocuments();
       } catch (err) {
         responseEl.classList.add('error');
         responseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
+        if (compareMode) {
+          compareResponseEl.classList.add('error');
+          compareResponseEl.innerHTML = `<span class="response-header">opus response</span>${escapeHtml(err.message)}`;
+        } else {
+          compareResponseEl.classList.remove('error');
+          compareResponseEl.innerHTML = comparePlaceholderHtml(false);
+        }
       } finally {
         submitBtn.disabled = false;
       }

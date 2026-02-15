@@ -1,0 +1,382 @@
+USA [PERSON] & [ORG]
+[ORG] – Pre-LOI Commercial Due Diligence
+Draft Interview Guide 
+August 26, 2025
+
+
+Note: This guide is a list of relevant questions that is as exhaustive as possible. The intention is not to go through each question with each interviewee, but rather pick and choose based on interviewees’ background / knowledge and the conversation flow. The guide will evolve with our understanding of the market and as we decide to focus on certain areas.
+
+This guide is built in two sections:
+Competitor section 
+Buyer section (similar topics to the competitor section, with some customization)
+
+Introduction
+Thanks for taking the time to speak with us today. We’re calling from [ORG], a market research company, and conducting a study on nitrogen services (e.g. purging, inerting, blanketing, cooling, pressure-testing, etc.) for downstream oil & gas in the US. We’re speaking with a variety of market participants to better understand market size/trends, customer preferences/purchasing dynamics and how market players differentiate themselves from one another.
+
+
+[FOR COMPETITORS]
+
+Interviewee/Company Background: Could you please begin by introducing your background as it relates to nitrogen services for downstream oil & gas applications (refineries, petrochemical plants, LNG facilities) in the US?
+What types of nitrogen services do you have experience with / does your company provide?
+What types of downstream applications have you served clients in?
+In what parts of the market does your company operate, and how does it position / differentiate itself in this space?
+
+Use cases and addressability
+What are the primary use cases for nitrogen within each of these types of facilities? For continuous operations, routine maintenance/turnarounds, and emergency
+Refineries
+Petrochemical facilities
+LNG facilities (e.g., terminals)
+Are these services being used at every facility in the country, or what do you estimate the penetration to be by end-market?
+What % of facilities have on-site ASU and how does that impact addressability?
+For LNG, is the addressable facility base the ~27 large facilities or the longer set of 100+ including smaller storage facilities
+Which of those uses cases would be addressed by a “molecule provider” (e.g., [ORG] or [ORG]) vs by an independent (e.g., [ORG], [ORG], [ORG])?
+Why?
+Which of these use cases or services makes up the bulk of the nitrogen spend at a facility in each end-market? What’s the rough % split of spend across the different use cases or services?
+Refineries
+Petrochemical facilities
+LNG facilities (e.g., terminals)
+How should we think about nitrogen spend as a % of overall facility operating expenses, or as a % of other relevant items in the P&L?
+How lumpy / variable is YoY spend on nitrogen services for a given facility?
+
+Market sizing and inputs (price and frequency)
+Overall, we are thinking of sizing the market for the different types of use cases contracted across facilities (e.g., continuous use, routine maintenance, emergency) and sum them up. Each of these being a function of # of facilities * frequency * price. Does that approach resonate? How would you think about it?
+Do you have a sense for the market size in this space, even just an order of magnitude ($100m, $500m, $1b, $10b, etc.)?
+What is the frequency of need for each use case / service by end-market? How does this vary based on facility profile (e.g., size, specialty, etc.):
+Refineries
+Petrochemical facilities
+LNG facilities (e.g., terminals)
+For LNG, is nitrogen needed for pre-commissioning, when new trains come online? [Note to BM team: we want to understand if nitrogen service providers have revenue pops when new trains come online]
+How do providers price their services in this market? 
+Is it: (Equipment + labor spread) x time + consumables (nitrogen molecules) + mobilization cost + any ancillary equipment rental? 
+Any major differences by player?
+What is the average spend per service for each use case by end-market? How does this vary based on facility profile (e.g., size, specialty, etc.)
+Refineries
+Petrochemical facilities
+LNG facilities (e.g., terminals)
+[Do a quick estimation of the implied market size and pressure test with expert]
+
+Penetration and threats
+If, within each of these segments, I had to understand the relative penetration (or share of wallet) between molecule providers and independents, how would you split them out of 100%?
+Refineries – continuous operations, routine maintenance / turnaround, emergency
+Petrochemical facilities – continuous operations, routine maintenance / turnaround, emergency
+LNG facilities (e.g., terminals) – continuous operations, routine maintenance / turnaround, emergency
+Are any parts of the nitrogen services market “walled off” by the large molecule providers? 
+Why or why not?
+If so, what % of the market does that represent? [Refer to previous question’s breakdown]
+How do you expect this to evolve going forward?
+We’ve seen some companies offering helium leak testing or other similar services. Are there gases that are a direct substitute for nitrogen? Please explain why or why not
+If so, does that widen the competitive set, or is it the same companies offering both options?
+What are the barriers to entry for new players entering the market, or for molecule providers to expand their services?
+
+Growth
+What growth rate would you expect in each end-market for the next 5 years? Why?
+What do you expect to happen to price and volume?
+Are there any technological trends you expect to materially affect the market going forward?
+Are there any regulatory trends you expect to materially affect the market going forward?
+
+
+Customer Dynamics: Purchasing Process
+Who are the key decision-makers/stakeholders involved in purchasing nitrogen services for downstream oil & gas?
+Does this vary by
+End-market: Refineries vs Petrochem vs LNG
+Facility/company size: how would you segment this?
+In what cases are purchasing decisions made centrally (corporate-level) / regionally, vs left to individual plants?
+Does this vary by end-market or facility/company size?
+Has this varied over time, and is it expected to evolve going forward?
+Are the decision-makers/stakeholders involved in purchasing nitrogen services different or similar than those for other industrial services, such as reactor support (e.g. decontamination, chemical cleaning, inert catalyst loading/unloading, emissions control) and NDT/NDE services (e.g. HP hydroblasting, vapor blasting, inspections, paintings / coatings)
+[Note to BM team: this is to inform [ORG]’s route-to-market and path to cross-selling effectively]
+What is the typical purchasing process?
+Does it vary depending on:
+End-market: refineries vs petrochem vs LNG
+Facility/company size
+Use case (e.g. maintenance / turnaround vs emergency; purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Who initiates it: procurement vs ops manager vs turnaround manager?
+How is it initiated (and by whom)?
+How long does it take?
+What are the key steps of the process, and who is involved at what stage?
+Who are the final decision-makers?
+Has this varied over time, and is it expected to evolve going forward?
+How do buyers typically purchase nitrogen services? 
+Under MSAs?
+Spot buy?
+Bundled contracts?
+Does it vary for continuous operations, vs routine maintenance/turnarounds, vs emergency?
+Is this expected to evolve going forward?
+What is the typical length of contracts or agreements?
+Is there seasonality to when customers purchase nitrogen services (e.g. “turnaround season”)?
+Buying decision timeline: does proximity to Air Separation Units (ASUs) impact decision timeline? Why or why not?
+Do facilities with close ASU access delay their turnaround buying decision? 
+Do facilities without ASU access schedule nitrogen services far in advance of turnarounds?
+Growth opportunities: 
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+[Lower priority questions; ask if time allows]
+How are vendors considered, shortlisted and selected?
+How do customers learn about vendors? Through which channels?
+[Vendor Strategy] Do customers typically only purchase nitrogen services from one provider, or multiple providers? Why? 
+How is this expected to evolve going forward?
+
+Customer Dynamics: Key Purchasing Criteria
+What are customers’ Key Purchasing Criteria, from most to least important? 
+[Open-ended, then if needed can prompt:
+Quality of service
+Speed of deployment / project completion
+Safety
+Reliability
+Price
+Fleet size
+Breadth of services / service bundles 
+Nitrogen services (e.g. maintenance / turnaround vs emergency; purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Other industrial services, such as such as reactor support (e.g. decontamination, chemical cleaning, inert catalyst loading/unloading, emissions control) and NDT/NDE services (e.g. HP hydroblasting, vapor blasting, inspections, paintings / coatings)
+Technical expertise
+Customer support
+Existing relationship
+Vendor reputation
+Anything else?]
+Do they vary by
+Turnaround vs maintenance vs emergency
+End-market: refineries vs petrochem vs LNG
+Facility/company size
+Use case (e.g. purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Who initiates it: procurement vs ops manager vs turnaround manager?
+Why / why not? 
+How are they expected to evolve going forward?
+Do providers win on low price or speed/reliability/safety/bundled services?
+[Lower priority; ask if time allows] What are Key Success Factors for independent nitrogen service providers?
+Table-stakes vs differentiators?
+Which vendors perform better/worse than others on those?
+
+Competitive Landscape
+Who are the main providers of nitrogen services to the downstream oil & gas market in the US?
+Does it vary by:
+End-market: refineries vs petrochemical plants vs LNG facilities
+Facility size
+Location (regional differences and/or proximity to pipelines / infrastructure)?
+When do customers choose independent nitrogen service providers vs molecule providers for nitrogen services, and why?
+What are the strengths / weaknesses of both player category?
+Does it vary by use case / end-market?
+To what extent do large molecule providers focus on nitrogen services? 
+Is it important to them? Why or why not?
+How is that likely to evolve going forward?
+Do molecule providers bundle any services? If so, which ones? 
+Are customers receptive to these bundles?
+Are independent providers going to be marginalized? Why or why not?
+How do providers differentiate from one another?
+Large industrial gas suppliers
+[ORG] / [ORG]
+[ORG]
+[ORG] / [ORG]
+[ORG]
+Independent nitrogen services providers
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+Any others?
+Who are the largest independent providers? Please rank them 
+Fleet size, revenue?
+What do fleet utilization rates typically look like? What’s normal annual utilization for pumpers and for transport? [Note to BM team: [ORG] is 12-20% utilization on pumpers and 25-30% on transports]
+Switching costs / customer stickiness
+How easy is it to switch nitrogen service providers?
+What drives customers to want to switch from their current vendor?
+[Lower priority questions, if time allows]
+What are market players’ performance on customer Key Purchasing Criteria / what is their perception in the market? [Note to BM team: prioritize asking this question to customers, as competitors may be biased]
+Quality of service
+Speed of deployment / project completion
+Safety
+Reliability
+Price
+Ask about molecule providers vs independents (order of magnitude)
+Fleet size
+Breadth of services / service bundles, including:
+Nitrogen services (e.g. maintenance / turnaround vs emergency; purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Other industrial services, such as:
+Reactor support: reactor decontamination, reactor chemical cleaning, inert catalyst services (loading/unloading), reactor clearing / emissions control support)
+Non-Destructive Testing (NDT) inspection services / Non-Destructive Examination (NDE): HP hydroblasting, vapor blasting, inspections, paintings / coatings
+Technical expertise
+Customer support
+Existing relationship
+Vendor reputation
+Anything else?
+Have any nitrogen service providers employed any sales strategies which have been particularly successful (e.g. service bundles, differentiated value proposition, aggressive pricing, sales coverage model, marketing tactics)?
+Which players are gaining/losing market share, and why?
+Any new entrants, or emerging/fast-growing players to watch?
+Any consolidation and/or PE activity?
+To what extent are midstream activities also addressable by downstream nitrogen service providers? Why? To what extent do capabilities overlap?
+
+
+Closing: Any other topics we haven’t discussed which you think are important?
+
+
+
+
+
+
+[FOR CUSTOMERS]
+
+Introduction: 
+Thanks for taking the time to speak with us today. We’re calling from [ORG], a market research company, and conducting a study on nitrogen services (e.g. purging, inerting, blanketing, cooling, pressure-testing, etc.) for downstream oil & gas in the US. We’re speaking with a variety of market participants to better understand market size/trends, customer preferences/purchasing dynamics and how market players differentiate themselves from one another.
+
+
+Interviewee/Company Background: 
+Could you please begin by introducing your background as it relates to nitrogen services for downstream oil & gas applications (refineries, petrochemical plants, LNG facilities) in the US?
+Could you please provide an overview of your company / facility (e.g. main activities, # / size of facilities, geographic presence, size / revenue / # of employees)?
+What types of nitrogen services do you have experience with?
+
+Use cases and addressability
+What are the primary use cases for nitrogen within your facilities? For continuous operations, routine maintenance/turnarounds, and emergency
+What alternatives do you see to using these nitrogen services? Do you think there are other facilities that are not using these services? Why?
+How would having on-site ASUs affect your need for nitrogen services? How common is it for facilities to have this?
+Which of those uses cases would be addressed by a “molecule provider” (e.g., [ORG] or [ORG]) vs by an independent (e.g., [ORG], CopperTip, [ORG])?
+Why?
+Can you provide a range regarding annual spend on nitrogen services for a company like yours (in $ and/or as a % of operating expenses)?
+Which of these use cases or services makes up the bulk of the nitrogen spend at a facility? What’s the rough % split of spend across the different use cases or services?
+How should I think about nitrogen spend as a % of overall facility operating expenses or as a % of other relevant items in the P&L?
+How lumpy or variable is your spend on nitrogen services on a YoY basis?
+
+Market sizing and inputs (price and frequency)
+Overall, we are thinking of sizing the market for the different types of use cases contracted across facilities (e.g., continuous use, routine maintenance, emergency) and sum them up. Each of these being a function of # of facilities * frequency * price. Does that approach resonate? How would you think about it?
+Do you have a sense for the size of the addressable market in [refineries/LNG/petrochem]? There are X many facilities of your type in the US
+What is the frequency of need for each use case / service? How does this vary based on facility profile (e.g., size, specialty, etc.)?
+What is the average spend per service for each use case? How does this vary based on facility profile (e.g., size, specialty, etc.)?
+[Do a quick estimation of the implied market size and pressure test with expert]
+
+
+Penetration and threats
+If, within each of these segments, I had to understand the relative penetration (or share of wallet) between molecule providers and independents, how would you split them out of 100%?
+Continuous use
+Routine maintenance or turnarounds
+Emergency
+Are any parts of the nitrogen services market “walled off” by the large molecule providers? 
+Why or why not?
+If so, what % of the market does that represent? [Refer to previous question’s breakdown]
+How do you expect this to evolve going forward?
+We’ve seen some companies offering helium leak testing or other similar services. Are there gases that are a direct substitute for nitrogen? Please explain why or why not
+If so, does that widen the competitive set, or is it the same companies offering both options?
+What are the barriers to entry for new players entering the market, or for molecule providers to expand their services?
+
+Growth
+Do you expect your demand for nitrogen services to increase, decrease, or stay flat over the next 5 years?
+What do you expect will happen to prices?
+Are there any technological trends you expect to materially affect the market going forward?
+Are there any regulatory trends you expect to materially affect the market going forward?
+
+
+Customer Dynamics: Purchasing Process
+Who are the key decision-makers/stakeholders involved in purchasing nitrogen services for downstream oil & gas (for your company and/or similar companies)?
+In what cases are purchasing decisions made centrally (corporate-level) / regionally, vs left to individual plants?
+Has this varied over time, and is it expected to evolve going forward?
+Are the decision-makers/stakeholders involved in purchasing nitrogen services different or similar than those for other industrial services, such as reactor support (e.g. decontamination, chemical cleaning, inert catalyst loading/unloading, emissions control) and NDT/NDE services (e.g. HP hydroblasting, vapor blasting, inspections, paintings / coatings)
+[Note to BM team: this is to inform [ORG]’s route-to-market and path to cross-selling effectively]
+What is the typical purchasing process?
+How is it initiated (and by whom)?
+Does the process / do the criteria vary based on who initiates it, e.g. procurement vs ops manager vs turnaround manager?
+How long does it take?
+What are the key steps of the process, and who is involved at what stage?
+Who are the final decision-makers?
+Has this varied over time, and is it expected to evolve going forward?
+How do buyers typically purchase nitrogen services? 
+Under MSAs?
+Spot buy?
+Bundled contracts?
+Does it vary for continuous operations, vs routine maintenance/turnarounds, vs emergency?
+Is this expected to evolve going forward?
+What is the typical length of contracts or agreements?
+Is there seasonality to when customers purchase nitrogen services (e.g. “turnaround season”)?
+Buying decision timeline: does proximity to Air Separation Units (ASUs) impact decision timeline? Why or why not?
+Do facilities with close ASU access delay their turnaround buying decision? 
+Do facilities without ASU access schedule nitrogen services far in advance of turnarounds?
+Growth opportunities: 
+What are underserved needs / gaps / opportunities in the nitrogen services market for downstream oil & gas? Could additional services / bundles be offered?
+Who is best positioned to address them, and why?
+[Lower priority questions; ask if time allows]
+How are vendors considered, shortlisted and selected?
+How do customers learn about vendors? Through which channels?
+[Vendor Strategy] Do customers typically only purchase nitrogen services from one provider, or multiple providers? Why? 
+How is this expected to evolve going forward?
+
+
+Customer Dynamics: Key Purchasing Criteria
+What are customers’ Key Purchasing Criteria, from most to least important? 
+[Open-ended, then if needed can prompt:
+Quality of service
+Speed of deployment / project completion
+Safety
+Reliability
+Price
+Fleet size
+Breadth of services / service bundles 
+Nitrogen services (e.g. maintenance / turnaround vs emergency; purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Other industrial services, such as such as reactor support (e.g. decontamination, chemical cleaning, inert catalyst loading/unloading, emissions control) and NDT/NDE services (e.g. HP hydroblasting, vapor blasting, inspections, paintings / coatings)
+Technical expertise
+Customer support
+Existing relationship
+Vendor reputation
+Anything else?]
+Do they vary by
+Turnaround vs maintenance vs emergency
+Use case (e.g. purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Who initiates it: procurement vs ops manager vs turnaround manager?
+Why / why not? 
+How are they expected to evolve going forward?
+Do providers win on low price or speed/reliability/safety/bundled services?
+
+
+Competitive Landscape
+Who are the main providers of nitrogen services to the downstream oil & gas market in the US?
+When do customers choose independent nitrogen service providers vs molecule providers for nitrogen services, and why?
+What are the strengths / weaknesses of both player category?
+Does it vary by use case / end-market?
+To what extent do large molecule providers focus on nitrogen services? 
+Is it important to them? Why or why not?
+How is that likely to evolve going forward?
+Do molecule providers bundle any services? If so, which ones? 
+Are customers receptive to these bundles?
+Are independent providers going to be marginalized? Why or why not?
+How do providers differentiate from one another?
+Large industrial gas suppliers
+[ORG] / [ORG]
+[ORG]
+[ORG] / [ORG]
+[ORG]
+Independent nitrogen services providers
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+Any others?
+What are providers’ performance on customer Key Purchasing Criteria?
+Quality of service
+Speed of deployment / project completion
+Safety
+Reliability
+Price
+Ask about molecule providers vs independents (order of magnitude)
+Fleet size
+Breadth of services / service bundles, including:
+Nitrogen services (e.g. maintenance / turnaround vs emergency; purging, inerting, blanketing, cooling, pressure-testing, etc.) 
+Other industrial services, such as:
+Reactor support: reactor decontamination, reactor chemical cleaning, inert catalyst services (loading/unloading), reactor clearing / emissions control support)
+Non-Destructive Testing (NDT) inspection services / Non-Destructive Examination (NDE): HP hydroblasting, vapor blasting, inspections, paintings / coatings
+Technical expertise
+Customer support
+Existing relationship
+Vendor reputation
+Anything else?
+Switching costs / customer stickiness
+How easy is it to switch nitrogen service providers?
+What drives customers to want to switch from their current vendor?
+Do you know who are the largest independent providers? If so, please rank them (e.g. based on revenue or fleet size)
+[Lower priority questions, if time allows]
+Have any nitrogen service providers employed any sales strategies which have been particularly successful (e.g. service bundles, differentiated value proposition, aggressive pricing, sales coverage model, marketing tactics)?
+Which players are gaining/losing market share, and why?
+Any new entrants, or emerging/fast-growing players to watch?
+Any consolidation and/or PE activity?
+
+Closing: Any other topics we haven’t discussed which you think are important?

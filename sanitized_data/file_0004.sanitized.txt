@@ -1,0 +1,63 @@
+Expert Network Brief – AI Services
+
+Data Services for AI
+ 
+We’re conducting a study on the Data Services market for AI, globally
+AI data services entails providing structured data to companies so they can train their AI models. Services include: data sourcing, data preparation (e.g. data labeling / annotation) and model evaluation (e.g. data labeling / annotation)
+ 
+We’re looking to conduct 10+ interviews in the next ~2 weeks. 
+ 
+BUYERS of AI Data Services (5+ interviews)
+Example companies
+Overall, we’re aiming for a diversity of industries and geographies (ideally ~2/3 for North America and ~1/3 for Western Europe and Israel; this can be for company and/or expert location)
+The most important criteria is the job title – please see below
+Specific companies we’re interested in speaking with
+[ORG], [ORG], [ORG], [ORG], [ORG], [ORG]
+[ORG], [ORG], [ORG], [ORG], [ORG]
+All companies with a market capitalization / valuation of USD 500 million or more, or with more than USD 100 million of VC/PE funding are in scope
+This includes all Fortune 500 companies, but we’re looking for a mix of large and mid-sized companies
+Additional list of companies (please go down the list of Fortune 500 - this is just a sample): [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG] ,[ORG], [ORG] [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG] , [ORG], [ORG], [ORG], [ORG], [ORG], [ORG]., [ORG], [ORG]), [ORG], [ORG], [ORG], [ORG], [ORG],[ORG], [ORG], [ORG], [ORG], [ORG], [ORG]
+Expert job titles (can be current or recent former)
+We’re looking to speak with experts who have direct experience purchasing training data for AI models, and have a strategic view of what data their company purchases overall and why
+Example titles (titles may vary significantly)
+Priority 1: Head, VP or Director of AI / Data / Product / Machine Learning (ML) / Data Science / Engineering / Conversational AI
+Priority 2: Localization Product Manager / Program Manager
+Screening questions – please let us know if any of them are too sensitive / should be modified
+What is your role in your company’s purchasing process of data to train AI models? Please select the most appropriate option: 1/ I’m the ultimate decision-maker, 2/ I’m one of several decision-makers, 3/ I’m involved in the purchasing process but not a decision-maker, 4/ I’m not involved in the purchasing process
+What does the purchasing process of AI training data look like? Who are the main stakeholders and how long does the process take?
+Approximately how much does your company spend on AI training data per year? Please select the most appropriate range corresponding to the last 12 months: 1/ No spend, 2/ Less than USD 1 million, 3/ USD 1-10 million, 4/ USD 11-100 million, 5/ More than USD 100 million, 6/ Don’t know, 7/ Not allowed to answer
+What type(s) of data does your company purchase? Please rank the following options from largest to smallest spend, and select only those that apply [randomize answer options to minimize bias]: text, audio, image, video, LiDAR/Radar, other (please specify)
+Please indicate your level of familiarity and experience with each of the following AI training data providers: [ORG], [ORG], [ORG], [ORG], [ORG], [ORG]
+[Use columns with the following options for each provider: Current customer, Recent customer (past 12-24 months), Have evaluated but did not select, Aware of this provider but never evaluated it, Not aware of this provider, Not allowed to discuss
+If you’re getting pushback from experts, feel free to use a scale of 1 to 5 instead, with 5 being most familiar]
+ 
+PROVIDERS of AI Data Services (5+ interviews)
+Example companies
+Priority 1
+[ORG] (recently had C-level leadership changes, which may help us source experts)
+[ORG] ([ORG] acquired [ORG]’s AI data business early 2021)
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG]
+[ORG] (f.k.a Pactera EDGE)
+Priority 2
+[ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG], [ORG]
+AI / data platforms: [ORG], [ORG], [ORG]
+BPO Providers: [ORG], [ORG], [ORG]
+Expert job titles (can be current or recent former)
+Priority 1
+C-level executive
+Head or VP of AI Data Services
+Head of VP of Sales/Marketing (with experience selling AIdata services)
+Head of VP of Strategy (with experience in AI data services)
+Priority 2
+Head of Operations / Delivery / Customer Success (with experience delivering AI data services)
+DO NOT CONTACT current employees of: [ORG], [ORG], [ORG]
+Screening questions
+Please elaborate on your ability to discuss trends in the AI data services market (e.g. major providers, market / customer segments, use cases, market size / growth)
+What are the major use cases for AI data services? Please rank them from largest to smallest in terms of market size
+What are the main types of customers for AI data services? What is the most relevant way of segmenting customers (e.g. by industry, by size, by other criteria), and why?
+What are buyers’ most important criteria when deciding which provider(s) to purchase AI training data from? Does this vary by data type, buyer size and/or industry?
+Who are the major providers of AI data services and how do they differentiate from one another?
