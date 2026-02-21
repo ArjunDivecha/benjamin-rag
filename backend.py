@@ -27,8 +27,9 @@ Then open http://localhost:8000
 import os
 import time
 from concurrent.futures import ThreadPoolExecutor
+from datetime import datetime
 from pathlib import Path
-from typing import Optional
+from typing import Any, Optional
 
 import requests
 import boto3
@@ -62,6 +63,11 @@ OBJECTIVE_TO_PROVIDER = {
     "interview_guide": "bedrock",
     "insights_qa": "ollama",
 }
+WEB_SEARCH_OBJECTIVES = {"expert_network_brief", "interview_guide"}
+EXA_SEARCH_URL = "https://api.exa.ai/search"
+EXA_SEARCH_RESULT_LIMIT = 5
+EXA_SNIPPET_CHARS = 320
+EXA_SEARCH_TIMEOUT_S = 15
 
 _vector_store = None
 _doc_manager = None
@@ -129,6 +135,11 @@ def _load_bedrock_key() -> str:
         "BEDROCK_API_KEY not found. Create a local .env file with "
         "BEDROCK_API_KEY=your_key"
     )
+
+
+def _load_exa_key() -> Optional[str]:
+    """Load Exa API key from environment or local dotenv files."""
+    return _load_env_value("EXA_API_KEY")
 
 
 # -----------------------------------------------------------------------------
@@ -300,7 +311,184 @@ def _build_sources(chunks: list[dict]) -> list[dict]:
     ]
 
 
-def _run_bedrock_model(messages: list[dict], model_name: str, api_key: Optional[str] = None) -> dict:
+def _as_bool(value: Optional[str], default: bool = False) -> bool:
+    if value is None:
+        return default
+    return value.strip().lower() in {"1", "true", "yes", "on"}
+
+
+def _objective_uses_web_search(objective: Optional[str]) -> bool:
+    return (objective or "").strip() in WEB_SEARCH_OBJECTIVES
+
+
+def _build_recency_guard() -> str:
+    today = datetime.now().date().isoformat()
+    return (
+        f"Current date: {today}. "
+        "Do not present the output as if it were from 2025 by default. "
+        "If you include a dated title such as 'Draft | YEAR', use the current year unless the user asks for a different year. "
+        "For time-sensitive claims, use explicit month/year references."
+    )
+
+
+def _compact_text(value: Any) -> str:
+    text = str(value or "")
+    return " ".join(text.split()).strip()
+
+
+def _query_exa_search(query: str) -> dict:
+    key = _load_exa_key()
+    if not key:
+        return {
+            "enabled": False,
+            "provider": "exa",
+            "error": "EXA_API_KEY not configured",
+            "results": [],
+        }
+
+    headers = {
+        "x-api-key": key,
+        "Authorization": f"Bearer {key}",
+        "Content-Type": "application/json",
+    }
+    payload = {
+        "query": _compact_text(query)[:500],
+        "numResults": EXA_SEARCH_RESULT_LIMIT,
+        "type": "fast",
+    }
+
+    started = time.perf_counter()
+    try:
+        resp = requests.post(
+            EXA_SEARCH_URL,
+            headers=headers,
+            json=payload,
+            timeout=EXA_SEARCH_TIMEOUT_S,
+        )
+    except requests.RequestException as exc:
+        return {
+            "enabled": False,
+            "provider": "exa",
+            "error": f"Exa request failed: {exc}",
+            "results": [],
+        }
+
+    latency_ms = round((time.perf_counter() - started) * 1000.0, 1)
+    if resp.status_code != 200:
+        error_text = ""
+        try:
+            error_text = _compact_text(resp.json().get("error") or resp.json().get("message"))
+        except Exception:
+            error_text = _compact_text(resp.text)
+        return {
+            "enabled": False,
+            "provider": "exa",
+            "error": f"Exa returned {resp.status_code}: {error_text or 'unknown error'}",
+            "results": [],
+            "latency_ms": latency_ms,
+        }
+
+    try:
+        data = resp.json()
+    except Exception:
+        return {
+            "enabled": False,
+            "provider": "exa",
+            "error": "Exa returned non-JSON payload",
+            "results": [],
+            "latency_ms": latency_ms,
+        }
+
+    raw_results = data.get("results", []) if isinstance(data, dict) else []
+    normalized = []
+    for item in raw_results:
+        if not isinstance(item, dict):
+            continue
+        url = _compact_text(item.get("url"))
+        if not url:
+            continue
+        title = _compact_text(item.get("title")) or "Untitled result"
+        published_date = _compact_text(
+            item.get("publishedDate") or item.get("published_date") or item.get("date")
+        )
+        snippet = _compact_text(
+            item.get("summary")
+            or item.get("text")
+            or item.get("snippet")
+        )
+        if len(snippet) > EXA_SNIPPET_CHARS:
+            snippet = f"{snippet[:EXA_SNIPPET_CHARS].rstrip()}..."
+        normalized.append(
+            {
+                "title": title,
+                "url": url,
+                "published_date": published_date,
+                "snippet": snippet,
+            }
+        )
+
+    return {
+        "enabled": bool(normalized),
+        "provider": "exa",
+        "results": normalized,
+        "latency_ms": latency_ms,
+    }
+
+
+def _build_web_context(
+    query: str,
+    objective: Optional[str],
+    requested: bool,
+) -> tuple[Optional[str], dict]:
+    meta = {
+        "requested": requested,
+        "enabled": False,
+        "provider": "exa",
+        "results_count": 0,
+        "sources": [],
+    }
+
+    if not requested:
+        meta["reason"] = "disabled_by_user"
+        return None, meta
+
+    if not _objective_uses_web_search(objective):
+        meta["reason"] = "objective_not_supported"
+        return None, meta
+
+    search = _query_exa_search(query=query)
+    results = search.get("results") or []
+    meta["enabled"] = bool(search.get("enabled"))
+    meta["results_count"] = len(results)
+    meta["sources"] = results
+    if search.get("latency_ms") is not None:
+        meta["latency_ms"] = search["latency_ms"]
+    if search.get("error"):
+        meta["error"] = search["error"]
+
+    if not results:
+        return None, meta
+
+    rendered = []
+    for idx, result in enumerate(results, start=1):
+        published = result.get("published_date") or "Unknown"
+        snippet = result.get("snippet") or "No snippet provided."
+        rendered.append(
+            f"[{idx}] {result.get('title', 'Untitled result')}\n"
+            f"URL: {result.get('url', '')}\n"
+            f"Published: {published}\n"
+            f"Snippet: {snippet}"
+        )
+    web_context = "<web_context>\n" + "\n\n".join(rendered) + "\n</web_context>"
+    return web_context, meta
+
+
+def _run_bedrock_model(
+    messages: list[dict],
+    model_name: str,
+    api_key: Optional[str] = None,
+    enable_web_search: bool = False,
+) -> dict:
     if not api_key:
         try:
             api_key = _load_bedrock_key()
@@ -309,6 +497,7 @@ def _run_bedrock_model(messages: list[dict], model_name: str, api_key: Optional[
     # Provide the auth down to boto3 for API key users
     os.environ["AWS_BEARER_TOKEN_BEDROCK"] = api_key
 
+    llm_started = time.perf_counter()
     system_prompt = ""
     filtered_messages = []
     for msg in messages:
@@ -317,7 +506,6 @@ def _run_bedrock_model(messages: list[dict], model_name: str, api_key: Optional[
         else:
             filtered_messages.append(msg)
 
-    llm_started = time.perf_counter()
     try:
         client = boto3.client("bedrock-runtime", region_name=AWS_REGION)
         body = {
@@ -339,7 +527,6 @@ def _run_bedrock_model(messages: list[dict], model_name: str, api_key: Optional[
         raise HTTPException(status_code=500, detail=str(e))
 
     llm_elapsed_s = time.perf_counter() - llm_started
-    
     content = response_body.get('content', [{}])[0].get('text', '').strip()
     usage = response_body.get('usage', {})
     prompt_tokens = int(usage.get("input_tokens", 0))
@@ -399,6 +586,7 @@ async def chat(
     objective: Optional[str] = Form(None),
     top_k: int = Form(5),
     min_score: float = Form(0.5),
+    use_web_search: Optional[str] = Form("false"),
 ):
     """
     Chat endpoint with two modes:
@@ -407,6 +595,12 @@ async def chat(
     """
     mode = (mode or "direct").strip().lower()
     request_started = time.perf_counter()
+    web_requested = _as_bool(use_web_search, default=False)
+    web_context, web_meta = _build_web_context(
+        query=message.strip(),
+        objective=objective,
+        requested=web_requested,
+    )
     if mode not in {"direct", "rag"}:
         raise HTTPException(status_code=400, detail="mode must be 'direct' or 'rag'")
 
@@ -427,12 +621,22 @@ async def chat(
                 raise HTTPException(status_code=400, detail=str(e))
             user_content_parts.append(f"<file name=\"{file.filename}\">\n{text}\n</file>")
 
+        if web_context:
+            user_content_parts.append(web_context)
         user_content_parts.append(message.strip())
         user_content = "\n\n" + "\n\n".join(user_content_parts)
+        direct_messages = [{"role": "user", "content": user_content}]
+        if _objective_uses_web_search(objective):
+            direct_messages = [
+                {"role": "system", "content": _build_recency_guard()},
+                {"role": "user", "content": user_content},
+            ]
         response = _run_bedrock_model(
-            messages=[{"role": "user", "content": user_content}],
+            messages=direct_messages,
             model_name=MODEL,
+            enable_web_search=web_meta["enabled"],
         )
+        response["web_search"] = web_meta
         return response
 
     if not objective or objective not in OBJECTIVE_TO_COLLECTION:
@@ -466,12 +670,17 @@ async def chat(
 
     context = assemble_context(chunks)
     system_prompt = load_system_prompt(objective)
-    user_content = (
+    if _objective_uses_web_search(objective):
+        system_prompt = f"{system_prompt}\n\n{_build_recency_guard()}"
+    user_sections = [
         "<retrieved_context>\n"
         f"{context}\n"
-        "</retrieved_context>\n\n"
-        f"User request:\n{message.strip()}"
-    )
+        "</retrieved_context>"
+    ]
+    if web_context:
+        user_sections.append(web_context)
+    user_sections.append(f"User request:\n{message.strip()}")
+    user_content = "\n\n".join(user_sections)
 
     provider = OBJECTIVE_TO_PROVIDER.get(objective, "bedrock")
     model_response = None
@@ -482,6 +691,7 @@ async def chat(
                 {"role": "user", "content": user_content},
             ],
             model_name=MODEL,
+            enable_web_search=web_meta["enabled"],
         )
     elif provider == "ollama":
         model_response = _run_ollama_model(
@@ -503,6 +713,7 @@ async def chat(
         **model_response,
         "rag": rag_summary,
         "sources": sources,
+        "web_search": web_meta,
     }
 
 def _get_available_models():
@@ -534,6 +745,7 @@ async def chat_compare(
     top_k: int = Form(5),
     min_score: float = Form(0.5),
     file: Optional[UploadFile] = File(None),
+    use_web_search: Optional[str] = Form("false"),
 ):
     """
     Compare endpoint for side-by-side answers for any objective.
@@ -546,6 +758,12 @@ async def chat_compare(
     rag_summary = None
     sources = []
     retrieval_elapsed_s = 0
+    web_requested = _as_bool(use_web_search, default=False)
+    web_context, web_meta = _build_web_context(
+        query=message.strip(),
+        objective=objective,
+        requested=web_requested,
+    )
 
     if mode == "direct":
         user_content_parts = []
@@ -558,9 +776,16 @@ async def chat_compare(
             except ValueError as e:
                 raise HTTPException(status_code=400, detail=str(e))
             user_content_parts.append(f"<file name=\"{file.filename}\">\n{text}\n</file>")
+        if web_context:
+            user_content_parts.append(web_context)
         user_content_parts.append(message.strip())
         user_content = "\n\n" + "\n\n".join(user_content_parts)
         shared_messages = [{"role": "user", "content": user_content}]
+        if _objective_uses_web_search(objective):
+            shared_messages = [
+                {"role": "system", "content": _build_recency_guard()},
+                {"role": "user", "content": user_content},
+            ]
     else:
         if objective not in OBJECTIVE_TO_COLLECTION:
             raise HTTPException(status_code=400, detail="invalid objective")
@@ -587,12 +812,17 @@ async def chat_compare(
 
         context = assemble_context(chunks)
         system_prompt = load_system_prompt(objective)
-        user_content = (
+        if _objective_uses_web_search(objective):
+            system_prompt = f"{system_prompt}\n\n{_build_recency_guard()}"
+        user_sections = [
             "<retrieved_context>\n"
             f"{context}\n"
-            "</retrieved_context>\n\n"
-            f"User request:\n{message.strip()}"
-        )
+            "</retrieved_context>"
+        ]
+        if web_context:
+            user_sections.append(web_context)
+        user_sections.append(f"User request:\n{message.strip()}")
+        user_content = "\n\n".join(user_sections)
         shared_messages = [
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_content},
@@ -609,7 +839,12 @@ async def chat_compare(
         if prov == "bedrock":
             try:
                 bedrock_key = _load_bedrock_key()
-                return _run_bedrock_model(msgs, mod, bedrock_key)
+                return _run_bedrock_model(
+                    msgs,
+                    mod,
+                    bedrock_key,
+                    enable_web_search=web_meta["enabled"],
+                )
             except Exception as e:
                 return {"error": str(e), "content": f"Error: {e}"}
         elif prov == "ollama":
@@ -656,6 +891,7 @@ async def chat_compare(
         "right": opus_result,
         "rag": rag_summary,
         "sources": sources,
+        "web_search": web_meta,
         "metrics": {
             "retrieval_ms": retrieval_ms,
             "request_total_ms": round(request_elapsed_s * 1000.0, 1),

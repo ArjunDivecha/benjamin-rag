@@ -203,11 +203,109 @@ def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat/compare",
-        data={"message": "In 1 sentence, who mentioned growth?", "objective": "insights_qa"},
+        data={
+            "message": "In 1 sentence, who mentioned growth?",
+            "objective": "insights_qa",
+            "model_left": "ollama|qwen2.5:32b",
+            "model_right": "bedrock|us.anthropic.claude-opus-4-6-v1",
+        },
     )
     assert resp.status_code == 200, resp.text
     data = resp.json()
-    assert data["local"]["content"] == "local ok"
-    assert data["local"]["provider"] == "ollama"
-    assert "content" in data["opus"]
-    assert data["opus"]["provider"] == "bedrock"
+    assert data["left"]["content"] == "local ok"
+    assert data["left"]["provider"] == "ollama"
+    assert "content" in data["right"]
+    assert data["right"]["provider"] == "bedrock"
+
+
+def test_chat_compare_enables_web_search_for_objective1_when_checked(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    calls = []
+    captured_messages = []
+
+    def fake_run_bedrock_model(messages, model_name, api_key=None, enable_web_search=False):
+        calls.append(enable_web_search)
+        captured_messages.append(messages)
+        return {
+            "content": "ok",
+            "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+            "provider": "bedrock",
+            "model": model_name,
+            "metrics": {"total_tokens": 2, "latency_ms": 1.0, "tok_per_sec": 2.0},
+        }
+
+    def fake_web_context(query, objective, requested):
+        assert requested is True
+        assert objective == "expert_network_brief"
+        return (
+            "<web_context>\n[1] Headline\nURL: https://example.com\nPublished: 2026-02-01\nSnippet: Update.\n</web_context>",
+            {
+                "requested": True,
+                "enabled": True,
+                "provider": "exa",
+                "results_count": 1,
+                "sources": [{"title": "Headline", "url": "https://example.com", "published_date": "2026-02-01", "snippet": "Update."}],
+            },
+        )
+
+    monkeypatch.setattr(backend, "_load_bedrock_key", lambda: "test-key")
+    monkeypatch.setattr(backend, "_run_bedrock_model", fake_run_bedrock_model)
+    monkeypatch.setattr(backend, "_build_web_context", fake_web_context)
+
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat/compare",
+        data={
+            "message": "What changed in this market recently?",
+            "mode": "direct",
+            "objective": "expert_network_brief",
+            "use_web_search": "true",
+            "model_left": "bedrock|us.anthropic.claude-haiku-4-5-20251001-v1:0",
+            "model_right": "bedrock|us.anthropic.claude-opus-4-6-v1",
+        },
+    )
+    assert resp.status_code == 200, resp.text
+    assert len(calls) == 2
+    assert all(flag is True for flag in calls)
+    for msgs in captured_messages:
+        system_msg = next((m for m in msgs if m.get("role") == "system"), {})
+        user_msg = next((m for m in msgs if m.get("role") == "user"), {})
+        assert "Current date:" in (system_msg.get("content") or "")
+        assert "<web_context>" in (user_msg.get("content") or "")
+    assert resp.json()["web_search"]["enabled"] is True
+
+
+def test_chat_compare_disables_web_search_for_objective3_even_when_checked(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    calls = []
+
+    def fake_run_bedrock_model(messages, model_name, api_key=None, enable_web_search=False):
+        calls.append(enable_web_search)
+        return {
+            "content": "ok",
+            "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+            "provider": "bedrock",
+            "model": model_name,
+            "metrics": {"total_tokens": 2, "latency_ms": 1.0, "tok_per_sec": 2.0},
+        }
+
+    monkeypatch.setattr(backend, "_load_bedrock_key", lambda: "test-key")
+    monkeypatch.setattr(backend, "_run_bedrock_model", fake_run_bedrock_model)
+
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat/compare",
+        data={
+            "message": "Who said growth is accelerating?",
+            "mode": "direct",
+            "objective": "insights_qa",
+            "use_web_search": "true",
+            "model_left": "bedrock|us.anthropic.claude-haiku-4-5-20251001-v1:0",
+            "model_right": "bedrock|us.anthropic.claude-opus-4-6-v1",
+        },
+    )
+    assert resp.status_code == 200, resp.text
+    assert len(calls) == 2
+    assert all(flag is False for flag in calls)
+    assert resp.json()["web_search"]["requested"] is True
+    assert resp.json()["web_search"]["reason"] == "objective_not_supported"

@@ -312,7 +312,7 @@
 
     @media (min-width: 1000px) {
       .grid {
-        grid-template-columns: 1.45fr 0.95fr;
+        grid-template-columns: 1fr 1fr;
       }
     }
 
@@ -406,6 +406,16 @@
       display: flex;
       align-items: center;
       gap: 0.35rem;
+    }
+
+    .toggle-note {
+      margin-top: 0.34rem;
+      font-size: 0.8rem;
+      color: #6f5843;
+    }
+
+    .toggle-note.is-disabled {
+      color: #9a8573;
     }
 
     .radio-group input {
@@ -1019,6 +1029,17 @@
             </div>
           </div>
 
+          <div class="form-group">
+            <label>freshness</label>
+            <div class="radio-group">
+              <label id="webSearchLabel">
+                <input id="useWebSearch" type="checkbox">
+                Add live web context (Exa)
+              </label>
+            </div>
+            <div id="webSearchNote" class="toggle-note">Available for Brief Salon and Interview Atelier.</div>
+          </div>
+
           <div id="directSection">
             <div class="form-group">
               <label for="file">project file (optional)</label>
@@ -1119,6 +1140,9 @@
     const modeRagInput = document.getElementById('modeRag');
     const directModeLabel = document.getElementById('directModeLabel');
     const ragModeLabel = document.getElementById('ragModeLabel');
+    const useWebSearchInput = document.getElementById('useWebSearch');
+    const webSearchLabel = document.getElementById('webSearchLabel');
+    const webSearchNote = document.getElementById('webSearchNote');
     const atelierButtons = document.querySelectorAll('.atelier[data-objective]');
     const directSection = document.getElementById('directSection');
     const ragSection = document.getElementById('ragSection');
@@ -1202,6 +1226,23 @@
       return [...modeInputs].find(i => i.checked)?.value || 'direct';
     }
 
+    function objectiveSupportsWebSearch() {
+      return objective.value === 'expert_network_brief' || objective.value === 'interview_guide';
+    }
+
+    function syncWebSearchToggle() {
+      const supported = objectiveSupportsWebSearch();
+      useWebSearchInput.disabled = !supported;
+      if (!supported) {
+        useWebSearchInput.checked = false;
+      }
+      webSearchLabel.classList.toggle('is-disabled', !supported);
+      webSearchNote.classList.toggle('is-disabled', !supported);
+      webSearchNote.textContent = supported
+        ? 'When checked, the backend fetches recent web results before generation.'
+        : 'Disabled for Insights Parlour (Mode 3).';
+    }
+
     function applyObjectivePresentation() {
       const meta = OBJECTIVE_META[objective.value] || OBJECTIVE_META.expert_network_brief;
       objectiveHint.textContent = meta.hint;
@@ -1226,6 +1267,7 @@
 
       const showInsightsExamples = objective.value === 'insights_qa';
       insightsExamples.classList.toggle('hidden', !showInsightsExamples);
+      syncWebSearchToggle();
     }
 
     function toggleModeUI() {
@@ -1292,6 +1334,7 @@
       const latencyMs = Number(data.metrics?.latency_ms || 0);
       const tokPerSec = Number(data.metrics?.tok_per_sec || 0);
       const retrievalMs = Number(data.metrics?.retrieval_ms || options.retrievalMs || 0);
+      const webSearch = options.webSearch || null;
 
       let costValue = 'n/a';
       if (data.provider === 'bedrock' && data.model) {
@@ -1316,6 +1359,12 @@
       if (tokPerSec > 0) html += `<div class="metric-chip"><span class="metric-label">Speed</span><span class="metric-value">${formatNumber(tokPerSec, 1)} t/s</span></div>`;
       if (costValue !== 'n/a') html += `<div class="metric-chip metric-cost"><span class="metric-label">Cost</span><span class="metric-value">${costValue}</span></div>`;
       if (retrievalMs > 0) html += `<div class="metric-chip"><span class="metric-label">RAG</span><span class="metric-value">${formatNumber(retrievalMs / 1000, 1)}s</span></div>`;
+      if (webSearch?.requested) {
+        const webValue = webSearch.enabled
+          ? `${Number(webSearch.results_count || 0)} hits`
+          : 'off';
+        html += `<div class="metric-chip"><span class="metric-label">Web</span><span class="metric-value">${escapeHtml(webValue)}</span></div>`;
+      }
       html += '</div>';
 
       html += `<div class="response-content">${escapeHtml(content)}</div>`;
@@ -1356,6 +1405,28 @@
                 <span class="confidence-pill ${klass}">${confidence}</span>
               </div>
               <div class="source-subline">Archive fragment ${chunkNum}</div>
+              ${snippet}
+            </li>
+          `;
+        }).join('');
+        html += '</ul></div>';
+      }
+
+      const webSources = Array.isArray(webSearch?.sources) ? webSearch.sources : [];
+      if (webSearch?.requested && webSources.length) {
+        html += '<div class="sources"><h4>Live Web Context</h4><ul>';
+        html += webSources.map((s) => {
+          const title = s.title || 'Untitled source';
+          const url = s.url || '';
+          const date = s.published_date || 'Unknown date';
+          const snippet = s.snippet ? `<div class="source-snippet">${escapeHtml(s.snippet)}</div>` : '';
+          return `
+            <li>
+              <div class="source-row">
+                <span class="source-title">${escapeHtml(title)}</span>
+              </div>
+              <div class="source-subline">${escapeHtml(date)}</div>
+              ${url ? `<a class="doc-link" href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer">Open source</a>` : ''}
               ${snippet}
             </li>
           `;
@@ -1507,6 +1578,7 @@
       const fd = new FormData();
       fd.append('mode', mode);
       fd.append('objective', objective.value);
+      fd.append('use_web_search', useWebSearchInput.checked ? 'true' : 'false');
 
       let userMessage = message.value.trim();
       if (mode === 'rag') {
@@ -1548,17 +1620,20 @@
         const ragSummary = data.rag || null;
         const sharedRetrievalMs = Number(data.metrics?.retrieval_ms || 0);
         const sources = Array.isArray(data.sources) ? data.sources : [];
+        const webSearch = data.web_search || null;
 
         responseEl.innerHTML = renderResponseHtml(data.left, {
           rag: ragSummary,
           retrievalMs: sharedRetrievalMs,
           sources,
+          webSearch,
           includeSources: true,
         });
         compareResponseEl.innerHTML = renderResponseHtml(data.right, {
           rag: ragSummary,
           retrievalMs: sharedRetrievalMs,
           sources,
+          webSearch,
           includeSources: true,
         });
         loadDocuments();

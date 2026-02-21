@@ -17,6 +17,8 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 3. Create `.env` in the repo root:
    ```bash
    BEDROCK_API_KEY=your_bedrock_api_key_here
+   # optional for live web context in objectives 1/2:
+   EXA_API_KEY=your_exa_api_key_here
    # optional for local inference:
    OLLAMA_BASE_URL=http://localhost:11434
    LOCAL_RAG_MODEL=qwen2.5:32b
@@ -52,6 +54,7 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 7. In the UI:
 - Select any two models from the left/right dropdown bars for side-by-side comparison.
 - All three objectives support dual-model comparison across Bedrock and Ollama providers.
+- Optional: check **Add live web context (Exa)** for Brief Salon / Interview Atelier to inject recent web context.
 - Per-run metrics include token counts, latency, speed, and estimated cost for Bedrock models.
 
 ---
@@ -468,10 +471,11 @@ A FastAPI + HTML frontend where consultants interact with three sections (Brief 
    - `direct`: optional file context + prompt
    - `rag`: retrieve from V1/V2/V3 + objective-specific prompt
 3. Select left and right models from dropdown bars (populated from `models.txt` via `/api/models`)
-4. Retrieve relevant chunks from the mapped vertical
-5. Load objective-specific prompt from `system_prompts/*.md`
-6. Route both models to their respective providers in parallel
-7. Display answers side-by-side with per-model metrics (tokens, latency, speed, estimated cost)
+4. Optional: enable live web context (Exa) for objectives 1/2
+5. Retrieve relevant chunks from the mapped vertical
+6. Load objective-specific prompt from `system_prompts/*.md`
+7. Route both models to their respective providers in parallel
+8. Display answers side-by-side with per-model metrics (tokens, latency, speed, estimated cost)
 
 Current UX behavior:
 - Both response panels are always active across all three objectives
@@ -484,13 +488,14 @@ Current UX behavior:
 - `POST /api/chat`
   - `mode=direct`: optional file context + prompt, AWS Bedrock generation
   - `mode=rag`: requires `objective` in `{expert_network_brief, interview_guide, insights_qa}`
+  - Optional `use_web_search=true` runs Exa retrieval and injects `<web_context>` for objectives 1/2
   - RAG response includes `content`, `usage`, `provider`, `model`, `metrics`, `rag`, `sources`
 - `POST /api/chat/compare`
   - Accepts any objective and any pair of models
-  - Parameters: `message`, `mode`, `objective`, `model_left`, `model_right`, `top_k`, `min_score`, `file`
+  - Parameters: `message`, `mode`, `objective`, `model_left`, `model_right`, `top_k`, `min_score`, `file`, `use_web_search`
   - `model_left` and `model_right` use `provider|model_id` format (e.g., `bedrock|us.anthropic.claude-sonnet-4-6`)
   - Both `direct` and `rag` modes are supported
-  - Returns `left`, `right`, shared `rag`, shared `sources`, and request-level `metrics`
+  - Returns `left`, `right`, shared `rag`, shared `sources`, shared `web_search`, and request-level `metrics`
 - `GET /api/models`
   - Returns available models parsed from `models.txt` (used by frontend dropdowns)
 - `GET /api/documents`
