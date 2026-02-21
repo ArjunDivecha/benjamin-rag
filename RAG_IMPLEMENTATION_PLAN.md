@@ -1,5 +1,12 @@
 # Detailed Plan: Local Vector RAG for Document Chat (M2 24GB)
 
+> Status note (2026-02-17): This is a historical deep-design plan.
+> The implemented system has evolved from this draft (notably Objective 3 local + Opus compare flow and current API/UI shape).
+> For current behavior use:
+> - `README.md`
+> - `docs/IMPLEMENTATION_STATUS.md`
+> - `docs/REPO_CONTEXT.md`
+
 ## Project Overview
 
 Extend the existing Sonnet + File Context web app to support vector RAG for large documents, using patterns from your Memory system but fully local for security.

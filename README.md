@@ -1,5 +1,7 @@
 # Benjamin PRD — Strategy Consulting AI Assistant
 
+Last updated: 2026-02-17
+
 Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutique strategy consulting firm, using multi-vertical knowledge bases and custom system prompts to accelerate primary research workflows.
 
 ---
@@ -14,10 +16,12 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    ```
 3. Create `.env` in the repo root:
    ```bash
-   OPENROUTER_API_KEY=your_openrouter_api_key_here
+   BEDROCK_API_KEY=your_bedrock_api_key_here
    # optional for Objective 3 local inference:
    OLLAMA_BASE_URL=http://localhost:11434
    LOCAL_RAG_MODEL=qwen2.5:32b
+   # optional for Objective 3 side-by-side compare:
+   OPUS_COMPARE_MODEL=us.anthropic.claude-opus-4-6-v1
    ```
 4. Optional (Objective 3 local model): start Ollama and pull a model:
    ```bash
@@ -35,6 +39,13 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    ```bash
    ./.venv/bin/uvicorn backend:app --port 8000
    ```
+   or use the one-command launcher:
+   ```bash
+   ./run_benjamin.sh
+   ```
+7. In the UI:
+- For Objective 3, use `With archived context` to run local RAG answers.
+- Objective 3 compare renders **local** and **Opus** answers in adjacent bottom panels.
 
 ---
 
@@ -71,6 +82,30 @@ If you edit or add files later, run Step 5 again.
 
 ---
 
+## One-Command Launcher
+
+Use:
+
+```bash
+./run_benjamin.sh
+```
+
+What it does:
+- ensures Python 3.12 is available
+- creates `.venv` if missing
+- installs dependencies when needed
+- starts `uvicorn` on port `8000` (reload enabled)
+
+Useful overrides:
+
+```bash
+PORT=8010 ./run_benjamin.sh
+PYTHON_BIN=python3.12 ./run_benjamin.sh
+./run_benjamin.sh --host 0.0.0.0 --port 9000 --reload
+```
+
+---
+
 ## Add or Update Real Project Data (Beginner Guide)
 
 Use this exact workflow when your friend wants to add real files or update the RAG later.
@@ -91,10 +126,12 @@ python3.12 -m venv .venv
 Create `.env` in this folder with:
 
 ```bash
-OPENROUTER_API_KEY=your_openrouter_api_key_here
+BEDROCK_API_KEY=your_bedrock_api_key_here
 # Optional local-model settings for Objective 3
 OLLAMA_BASE_URL=http://localhost:11434
 LOCAL_RAG_MODEL=qwen2.5:32b
+# Optional Objective 3 compare model via AWS Bedrock
+OPUS_COMPARE_MODEL=us.anthropic.claude-opus-4-6-v1
 ```
 
 ### Step 2: Create data folders
@@ -323,8 +360,9 @@ Benjamin is an internal AI tool for a boutique strategy consulting firm that com
 
 **Client and company confidentiality is non-negotiable.** The current implementation uses a hybrid generation route:
 
-- Objectives 1 and 2 use Claude Sonnet 4.5 via OpenRouter → Bedrock (ZDR, no fallbacks).
-- Objective 3 uses a **local model via Ollama** over the same local RAG stack.
+- Objectives 1 and 2 use Claude Sonnet 3.5 via AWS Bedrock.
+- Objective 3 defaults to a **local model via Ollama** over the same local RAG stack.
+- Objective 3 also supports side-by-side comparison with AWS Bedrock Opus (same retrieved context).
 
 ---
 
@@ -400,11 +438,12 @@ The pipeline supports incremental updates. Re-ingesting an updated file replaces
 
 ### 4.2 Runtime Routing (Current)
 
-| Objective | Collection | Provider | Model | Cloud egress |
+| Flow | Collection | Provider | Model | Cloud egress |
 |---|---|---|---|---|
-| `expert_network_brief` | V1 | OpenRouter | `anthropic/claude-sonnet-4.5` | Yes |
-| `interview_guide` | V2 | OpenRouter | `anthropic/claude-sonnet-4.5` | Yes |
-| `insights_qa` | V3 | Ollama (local) | `LOCAL_RAG_MODEL` (default `qwen2.5:32b`) | No |
+| Obj 1 (`expert_network_brief`) | V1 | AWS Bedrock | `anthropic.claude-3-5-sonnet-20241022-v2:0` | Yes |
+| Obj 2 (`interview_guide`) | V2 | AWS Bedrock | `anthropic.claude-3-5-sonnet-20241022-v2:0` | Yes |
+| Obj 3 default (`POST /api/chat`) | V3 | Ollama (local) | `LOCAL_RAG_MODEL` (default `qwen2.5:32b`) | No |
+| Obj 3 compare (`POST /api/chat/compare`) | V3 | Ollama + Bedrock | local `LOCAL_RAG_MODEL` + `OPUS_COMPARE_MODEL` (default `us.anthropic.claude-opus-4-6-v1`) | Yes (Opus leg) |
 
 ### 4.3 Web Application (Runtime)
 
@@ -416,20 +455,29 @@ A FastAPI + HTML frontend where consultants interact with three sections (Brief 
    - `rag`: retrieve from V1/V2/V3 + objective-specific prompt
 3. Retrieve relevant chunks from the mapped vertical
 4. Load objective-specific prompt from `system_prompts/*.md`
-5. Route generation by objective (OpenRouter for Obj 1/2, Ollama for Obj 3)
-6. Display answer with sources and token usage
+5. Route generation by objective:
+   - Obj 1/2: AWS Bedrock
+   - Obj 3 default: Ollama local
+   - Obj 3 compare: Ollama local + Opus in parallel
+6. Display answer with sources, token usage, and runtime stats
 
 Current UX behavior:
 - Objective 3 forces `rag` mode in the UI
 - Objective-specific labels/placeholders/hints are applied dynamically
-- The right panel is **Library**, grouped into dropdown folders by collection, with links to open original files
+- Top row: form (left), **Library** (right)
+- Bottom row: local response (left), Opus response (right, compare mode)
+- Source cards are color-coded by confidence and include snippets
 
 ### 4.4 API Surface (Current)
 
 - `POST /api/chat`
-  - `mode=direct`: optional file context + prompt, OpenRouter generation
+  - `mode=direct`: optional file context + prompt, AWS Bedrock generation
   - `mode=rag`: requires `objective` in `{expert_network_brief, interview_guide, insights_qa}`
-  - RAG response includes `content`, `usage`, `provider`, `model`, `sources`
+  - RAG response includes `content`, `usage`, `provider`, `model`, `metrics`, `rag`, `sources`
+- `POST /api/chat/compare`
+  - Objective 3 compare only (`objective=insights_qa`)
+  - Shared retrieval from V3, then runs local and Opus responses in parallel
+  - Returns `local`, `opus`, shared `rag`, shared `sources`, and request-level metrics
 - `GET /api/documents`
   - Lists ingested documents and metadata
 - `GET /api/documents/{doc_id}/file`
@@ -440,26 +488,25 @@ Current UX behavior:
 ### 4.5 Security Model
 
 ```
-LOCAL (consultant machine)                 CLOUD (only Obj 1/2)
+LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compare)
 ┌─────────────────────────────┐          ┌──────────────────────────┐
-│ All source docs + uploads   │          │ OpenRouter API           │
-│ All vectors + metadata      │          │  -> Amazon Bedrock       │
-│ All preprocessing           │   ->     │  -> ZDR enforced         │
-│ Web UI + FastAPI            │ prompt   │  -> No fallback providers│
-│ Ollama local model (Obj 3)  │ only     └──────────────────────────┘
+│ All source docs + uploads   │          │ AWS Bedrock API          │
+│ All vectors + metadata      │   ->     │                          │
+│ All preprocessing           │ prompt   │                          │
+│ Web UI + FastAPI            │ only     └──────────────────────────┘
+│ Ollama local model (Obj 3)  │          
 └─────────────────────────────┘
 ```
 
 - Objective 3 can run fully local (retrieval + generation)
-- Objectives 1/2 send only assembled prompts to OpenRouter
-- Bedrock-only routing with `allow_fallbacks: false`
-- Sensitive working corpus folder `/Data/` is gitignored
+- Objectives 1/2 and optional Objective 3 compare send only assembled prompts to AWS Bedrock
+- Credential handling: API keys from local env files / environment variables only
+- Repository hygiene: Raw source data folder `/Data/` is excluded from gitignored
 
 ---
 
 ## 5. Functional Requirements
 
-### 5.1 Preprocessing CLI
 
 | Requirement | Description |
 |---|---|
@@ -480,8 +527,9 @@ LOCAL (consultant machine)                 CLOUD (only Obj 1/2)
 | Mode selection | Direct upload mode and RAG mode (Obj 3 forces RAG) |
 | RAG retrieval | Query mapped vertical (V1/V2/V3) with `top_k` and `min_score` |
 | Objective prompts | Loads objective-specific system prompts from local files |
-| Hybrid generation | Obj 1/2 via OpenRouter; Obj 3 via Ollama local |
-| Source traceability | Display retrieved chunk/document references in response |
+| Hybrid generation | Obj 1/2 via AWS Bedrock; Obj 3 via Ollama local; Obj 3 compare also runs Opus |
+| Source traceability | Display retrieved chunk/document references with score color and snippets |
+| Runtime stats | Show tokens, model latency, tok/sec, retrieval timing |
 | Library UX | Dropdown folders by vertical with per-file "Open original document" links |
 
 ### 5.3 Security (Hard Requirements)
@@ -489,9 +537,8 @@ LOCAL (consultant machine)                 CLOUD (only Obj 1/2)
 | Requirement | Description |
 |---|---|
 | Fully local data plane | Embeddings, chunking, storage, and document files stay local |
-| Controlled cloud egress | Only Obj 1/2 assembled prompts leave machine |
-| Local sensitive synthesis | Obj 3 generation is local via Ollama |
-| ZDR + provider lock | OpenRouter requests enforce ZDR and Bedrock-only routing |
+| Controlled cloud egress | Only assembled prompts leave machine (Obj 1/2 and optional Obj 3 compare leg) |
+| Local sensitive synthesis | Obj 3 default generation is local via Ollama |
 | Credential handling | API keys from local env files / environment variables only |
 | Repository hygiene | Raw source data folder `/Data/` is excluded from git |
 
@@ -517,8 +564,8 @@ Each objective has a dedicated prompt file:
 | Runtime | Python 3.12 |
 | Web framework | FastAPI + Uvicorn |
 | Frontend | HTML/CSS/JS single-page app (French-whimsical salon UI) |
-| LLM routing | Hybrid: OpenRouter Claude (Obj 1/2) + Ollama local (Obj 3) |
-| Local model config | `OLLAMA_BASE_URL`, `LOCAL_RAG_MODEL` |
+| LLM routing | AWS Bedrock Sonnet (Obj 1/2) + Ollama local (Obj 3 default) + optional AWS Bedrock Opus compare |
+| Local/cloud model config | `OLLAMA_BASE_URL`, `LOCAL_RAG_MODEL`, `OPUS_COMPARE_MODEL` |
 | Embeddings | Sentence Transformers (`all-mpnet-base-v2`) |
 | Vector store | ChromaDB (local persistent) |
 | Metadata store | SQLite (`uploaded_docs/metadata.db`) |
@@ -533,6 +580,7 @@ Each objective has a dedicated prompt file:
 Benjamin/
 ├── backend.py                          # FastAPI server (chat + documents + stats)
 ├── preprocess.py                       # CLI: ingest/list/remove/stats for RAG data
+├── ingest_objective3.py                # CLI: Objective 3-only ingest wrapper (V3 + *.sanitized.txt)
 ├── sanitize_with_lmstudio.py           # CLI: local de-identification pipeline via LM Studio
 ├── system_prompts/
 │   ├── expert_network_brief.md         # System prompt for Objective 1
@@ -546,7 +594,7 @@ Benjamin/
 │   ├── retrieval.py
 │   └── system_prompts.py
 ├── static/
-│   └── index.html                      # Frontend + Library dropdown folders and file links
+│   └── index.html                      # Frontend (form + library + local/opus response panels)
 ├── chroma_db/                          # Local vector database (gitignored)
 ├── uploaded_docs/                      # Stored source files + metadata.db (gitignored)
 ├── Data/                               # Raw working corpus (gitignored)
@@ -564,6 +612,7 @@ Benjamin/
 - **Objective 2**: Produces stakeholder-tailored interview guides with sensitive-question phrasing
 - **Objective 3**: Answers transcript-centric analytical questions with explicit citations and quotes
 - **Confidentiality**: Sensitive transcript synthesis can run fully local
+- **Compare utility**: Analysts can compare local vs Opus outputs on identical retrieved evidence
 - **RAG relevance**: Top retrieved chunks are consistently relevant to the analyst query
 
 ---

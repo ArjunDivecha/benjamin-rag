@@ -31,6 +31,8 @@ from pathlib import Path
 from typing import Optional
 
 import requests
+import boto3
+import json
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
@@ -41,9 +43,9 @@ from fastapi.responses import FileResponse
 # -----------------------------------------------------------------------------
 APP_DIR = os.path.dirname(os.path.abspath(__file__))
 STATIC_DIR = os.path.join(APP_DIR, "static")
-OPENROUTER_URL = "https://openrouter.ai/api/v1/chat/completions"
-MODEL = "anthropic/claude-sonnet-4.5"
-OPUS_COMPARE_MODEL = "anthropic/claude-opus-4.6"
+AWS_REGION = "us-west-2"
+MODEL = "us.anthropic.claude-opus-4-6-v1"
+OPUS_COMPARE_MODEL = "us.anthropic.claude-opus-4-6-v1"
 OLLAMA_BASE_URL = "http://localhost:11434"
 LOCAL_RAG_MODEL = "qwen2.5:32b"
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2MB
@@ -56,8 +58,8 @@ OBJECTIVE_TO_COLLECTION = {
     "insights_qa": "V3",
 }
 OBJECTIVE_TO_PROVIDER = {
-    "expert_network_brief": "openrouter",
-    "interview_guide": "openrouter",
+    "expert_network_brief": "bedrock",
+    "interview_guide": "bedrock",
     "insights_qa": "ollama",
 }
 
@@ -117,15 +119,15 @@ def _load_env_value(key: str) -> Optional[str]:
     return None
 
 
-def _load_openrouter_key() -> str:
-    """Load OpenRouter API key from environment or local dotenv files."""
-    key = _load_env_value("OPENROUTER_API_KEY")
+def _load_bedrock_key() -> str:
+    """Load Bedrock API key from environment or local dotenv files."""
+    key = _load_env_value("BEDROCK_API_KEY")
     if key:
         return key
 
     raise RuntimeError(
-        "OPENROUTER_API_KEY not found. Create a local .env file with "
-        "OPENROUTER_API_KEY=your_key"
+        "BEDROCK_API_KEY not found. Create a local .env file with "
+        "BEDROCK_API_KEY=your_key"
     )
 
 
@@ -186,33 +188,7 @@ def _reset_rag_services_for_tests() -> None:
     _rag_import_error = None
 
 
-def _openrouter_chat(api_key: str, messages: list[dict], model: str = MODEL) -> dict:
-    payload = {
-        "model": model,
-        "messages": messages,
-        "max_tokens": 4096,
-        "provider": {
-            "order": ["amazon-bedrock"],
-            "zdr": True,
-            "allow_fallbacks": False,
-        },
-    }
-
-    headers = {
-        "Authorization": f"Bearer {api_key}",
-        "Content-Type": "application/json",
-        "HTTP-Referer": "http://localhost:8000",
-    }
-
-    resp = requests.post(OPENROUTER_URL, headers=headers, json=payload, timeout=120)
-    if resp.status_code != 200:
-        try:
-            err = resp.json()
-            msg = err.get("error", {}).get("message", resp.text)
-        except Exception:
-            msg = resp.text
-        raise HTTPException(status_code=resp.status_code, detail=msg)
-    return resp.json()
+# _openrouter_chat removed in favor of direct boto3 calls directly inside _run_bedrock_model
 
 
 def _load_local_model_config() -> tuple[str, str]:
@@ -324,32 +300,58 @@ def _build_sources(chunks: list[dict]) -> list[dict]:
     ]
 
 
-def _run_openrouter_model(messages: list[dict], model_name: str, api_key: Optional[str] = None) -> dict:
+def _run_bedrock_model(messages: list[dict], model_name: str, api_key: Optional[str] = None) -> dict:
     if not api_key:
         try:
-            api_key = _load_openrouter_key()
+            api_key = _load_bedrock_key()
         except RuntimeError as e:
             raise HTTPException(status_code=500, detail=str(e))
+    # Provide the auth down to boto3 for API key users
+    os.environ["AWS_BEARER_TOKEN_BEDROCK"] = api_key
+
+    system_prompt = ""
+    filtered_messages = []
+    for msg in messages:
+        if msg["role"] == "system":
+            system_prompt = msg["content"]
+        else:
+            filtered_messages.append(msg)
 
     llm_started = time.perf_counter()
-    data = _openrouter_chat(
-        api_key=api_key,
-        messages=messages,
-        model=model_name,
-    )
+    try:
+        client = boto3.client("bedrock-runtime", region_name=AWS_REGION)
+        body = {
+            "anthropic_version": "bedrock-2023-05-31",
+            "max_tokens": 4096,
+            "messages": filtered_messages
+        }
+        if system_prompt:
+            body["system"] = system_prompt
+
+        response = client.invoke_model(
+            modelId=model_name,
+            contentType="application/json",
+            accept="application/json",
+            body=json.dumps(body)
+        )
+        response_body = json.loads(response.get('body').read())
+    except Exception as e:
+        raise HTTPException(status_code=500, detail=str(e))
+
     llm_elapsed_s = time.perf_counter() - llm_started
-    choice = data.get("choices", [{}])[0]
-    content = choice.get("message", {}).get("content", "").strip()
-    usage = data.get("usage", {})
-    prompt_tokens = int(usage.get("prompt_tokens", 0))
-    completion_tokens = int(usage.get("completion_tokens", 0))
+    
+    content = response_body.get('content', [{}])[0].get('text', '').strip()
+    usage = response_body.get('usage', {})
+    prompt_tokens = int(usage.get("input_tokens", 0))
+    completion_tokens = int(usage.get("output_tokens", 0))
+
     return {
         "content": content,
         "usage": {
             "prompt_tokens": prompt_tokens,
             "completion_tokens": completion_tokens,
         },
-        "provider": "openrouter",
+        "provider": "bedrock",
         "model": model_name,
         "metrics": _build_metrics(
             prompt_tokens=prompt_tokens,
@@ -357,6 +359,7 @@ def _run_openrouter_model(messages: list[dict], model_name: str, api_key: Option
             latency_s=llm_elapsed_s,
         ),
     }
+
 
 
 def _run_ollama_model(messages: list[dict]) -> dict:
@@ -426,7 +429,7 @@ async def chat(
 
         user_content_parts.append(message.strip())
         user_content = "\n\n" + "\n\n".join(user_content_parts)
-        response = _run_openrouter_model(
+        response = _run_bedrock_model(
             messages=[{"role": "user", "content": user_content}],
             model_name=MODEL,
         )
@@ -470,10 +473,10 @@ async def chat(
         f"User request:\n{message.strip()}"
     )
 
-    provider = OBJECTIVE_TO_PROVIDER.get(objective, "openrouter")
+    provider = OBJECTIVE_TO_PROVIDER.get(objective, "bedrock")
     model_response = None
-    if provider == "openrouter":
-        model_response = _run_openrouter_model(
+    if provider == "bedrock":
+        model_response = _run_bedrock_model(
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content},
@@ -560,7 +563,7 @@ async def chat_compare(
     ]
 
     try:
-        api_key = _load_openrouter_key()
+        api_key = _load_bedrock_key()
     except RuntimeError as e:
         raise HTTPException(status_code=500, detail=str(e))
     opus_model = _load_opus_compare_model()
@@ -568,7 +571,7 @@ async def chat_compare(
     with ThreadPoolExecutor(max_workers=2) as executor:
         local_future = executor.submit(_run_ollama_model, shared_messages)
         opus_future = executor.submit(
-            _run_openrouter_model,
+            _run_bedrock_model,
             shared_messages,
             opus_model,
             api_key,

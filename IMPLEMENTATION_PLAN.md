@@ -1,17 +1,22 @@
 # Benjamin — Step-by-Step Implementation Plan
 
+> Status note (2026-02-17): This is the original implementation plan and is kept for historical traceability.
+> Current runtime behavior, API routes, and operator instructions are documented in:
+> - `README.md`
+> - `docs/IMPLEMENTATION_STATUS.md`
+> - `docs/REPO_CONTEXT.md`
+
 A milestone-driven implementation plan where each milestone has tests that must pass before proceeding to the next.
 
 ---
 
 ## What Exists Today
 
-- `backend.py` — FastAPI server with direct file-upload chat (OpenRouter + Bedrock + ZDR) ✅
-- `static/index.html` — Simple chat UI with file upload ✅
-- `requirements.txt` — Basic deps (FastAPI, uvicorn, requests, python-docx, yfinance/pandas/matplotlib) ✅
-- OpenRouter credential loading (1Password / env / .env.txt) ✅
-- `openrouter_sonnet_bedrock_zdr_test.py` — standalone API test (legacy, out of scope)
-- `plot_spx_index.py` — legacy, out of scope
+- `backend.py` — FastAPI server with direct + RAG chat, Objective routing, and compare endpoint ✅
+- `static/index.html` — objective-aware UI with library + local/Opus response panels ✅
+- `preprocess.py` + `ingest_objective3.py` — ingestion/management CLI paths ✅
+- `rag/` modules + `system_prompts/` + tests are implemented ✅
+- This plan’s remaining sections describe the original sequencing used to get here.
 
 ## What Needs to Be Built
 
