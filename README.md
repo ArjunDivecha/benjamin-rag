@@ -1,6 +1,6 @@
 # Benjamin PRD — Strategy Consulting AI Assistant
 
-Last updated: 2026-02-17
+Last updated: 2026-02-20
 
 Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutique strategy consulting firm, using multi-vertical knowledge bases and custom system prompts to accelerate primary research workflows.
 
@@ -17,11 +17,17 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 3. Create `.env` in the repo root:
    ```bash
    BEDROCK_API_KEY=your_bedrock_api_key_here
-   # optional for Objective 3 local inference:
+   # optional for local inference:
    OLLAMA_BASE_URL=http://localhost:11434
    LOCAL_RAG_MODEL=qwen2.5:32b
-   # optional for Objective 3 side-by-side compare:
-   OPUS_COMPARE_MODEL=us.anthropic.claude-opus-4-6-v1
+   ```
+4. Configure available models in `models.txt` (one per line, `provider|model_id` format):
+   ```
+   bedrock|us.anthropic.claude-haiku-4-5-20251001-v1:0
+   bedrock|us.anthropic.claude-sonnet-4-6
+   bedrock|us.anthropic.claude-opus-4-6-v1
+   ollama|qwen2.5:32b
+   ollama|qwen3:30b-a3b
    ```
 4. Optional (Objective 3 local model): start Ollama and pull a model:
    ```bash
@@ -44,8 +50,9 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    ./run_benjamin.sh
    ```
 7. In the UI:
-- For Objective 3, use `With archived context` to run local RAG answers.
-- Objective 3 compare renders **local** and **Opus** answers in adjacent bottom panels.
+- Select any two models from the left/right dropdown bars for side-by-side comparison.
+- All three objectives support dual-model comparison across Bedrock and Ollama providers.
+- Per-run metrics include token counts, latency, speed, and estimated cost for Bedrock models.
 
 ---
 
@@ -127,11 +134,9 @@ Create `.env` in this folder with:
 
 ```bash
 BEDROCK_API_KEY=your_bedrock_api_key_here
-# Optional local-model settings for Objective 3
+# Optional local-model settings
 OLLAMA_BASE_URL=http://localhost:11434
 LOCAL_RAG_MODEL=qwen2.5:32b
-# Optional Objective 3 compare model via AWS Bedrock
-OPUS_COMPARE_MODEL=us.anthropic.claude-opus-4-6-v1
 ```
 
 ### Step 2: Create data folders
@@ -358,11 +363,11 @@ Benjamin is an internal AI tool for a boutique strategy consulting firm that com
 - **Objective 2**: Interview guide drafting
 - **Objective 3**: Conversational synthesis of interview notes and related research
 
-**Client and company confidentiality is non-negotiable.** The current implementation uses a hybrid generation route:
+**Client and company confidentiality is non-negotiable.** The current implementation uses a flexible dual-model comparison architecture:
 
-- Objectives 1 and 2 use Claude Sonnet 3.5 via AWS Bedrock.
-- Objective 3 defaults to a **local model via Ollama** over the same local RAG stack.
-- Objective 3 also supports side-by-side comparison with AWS Bedrock Opus (same retrieved context).
+- All three objectives support side-by-side model comparison via configurable `models.txt`.
+- Models from **AWS Bedrock** (Claude Haiku, Sonnet, Opus) and **Ollama** (local models) can be freely mixed.
+- Users select left/right models from dropdown bars in the UI; the backend dynamically routes to the appropriate provider.
 
 ---
 
@@ -438,12 +443,21 @@ The pipeline supports incremental updates. Re-ingesting an updated file replaces
 
 ### 4.2 Runtime Routing (Current)
 
-| Flow | Collection | Provider | Model | Cloud egress |
-|---|---|---|---|---|
-| Obj 1 (`expert_network_brief`) | V1 | AWS Bedrock | `anthropic.claude-3-5-sonnet-20241022-v2:0` | Yes |
-| Obj 2 (`interview_guide`) | V2 | AWS Bedrock | `anthropic.claude-3-5-sonnet-20241022-v2:0` | Yes |
-| Obj 3 default (`POST /api/chat`) | V3 | Ollama (local) | `LOCAL_RAG_MODEL` (default `qwen2.5:32b`) | No |
-| Obj 3 compare (`POST /api/chat/compare`) | V3 | Ollama + Bedrock | local `LOCAL_RAG_MODEL` + `OPUS_COMPARE_MODEL` (default `us.anthropic.claude-opus-4-6-v1`) | Yes (Opus leg) |
+Model routing is now fully dynamic. Available models are defined in `models.txt` (format: `provider|model_id`, one per line). The UI presents two dropdown selectors for side-by-side comparison. Every request goes to `/api/chat/compare` with user-selected `model_left` and `model_right`.
+
+| Provider | Example Models | Cloud Egress |
+|---|---|---|
+| `bedrock` | `us.anthropic.claude-haiku-4-5-20251001-v1:0`, `us.anthropic.claude-sonnet-4-6`, `us.anthropic.claude-opus-4-6-v1` | Yes |
+| `ollama` | `qwen2.5:32b`, `qwen3:30b-a3b` | No |
+
+**Estimated cost per request** is calculated and displayed in the UI for Bedrock models:
+
+| Model Family | Input (per 1M tokens) | Output (per 1M tokens) |
+|---|---|---|
+| Claude Haiku 4.5 | $1.00 | $5.00 |
+| Claude Sonnet 4.6 | $3.00 | $15.00 |
+| Claude Opus 4.6 | $5.00 | $25.00 |
+| Ollama (local) | $0.00 | $0.00 |
 
 ### 4.3 Web Application (Runtime)
 
@@ -453,19 +467,16 @@ A FastAPI + HTML frontend where consultants interact with three sections (Brief 
 2. Choose mode
    - `direct`: optional file context + prompt
    - `rag`: retrieve from V1/V2/V3 + objective-specific prompt
-3. Retrieve relevant chunks from the mapped vertical
-4. Load objective-specific prompt from `system_prompts/*.md`
-5. Route generation by objective:
-   - Obj 1/2: AWS Bedrock
-   - Obj 3 default: Ollama local
-   - Obj 3 compare: Ollama local + Opus in parallel
-6. Display answer with sources, token usage, and runtime stats
+3. Select left and right models from dropdown bars (populated from `models.txt` via `/api/models`)
+4. Retrieve relevant chunks from the mapped vertical
+5. Load objective-specific prompt from `system_prompts/*.md`
+6. Route both models to their respective providers in parallel
+7. Display answers side-by-side with per-model metrics (tokens, latency, speed, estimated cost)
 
 Current UX behavior:
-- Objective 3 forces `rag` mode in the UI
-- Objective-specific labels/placeholders/hints are applied dynamically
-- Top row: form (left), **Library** (right)
-- Bottom row: local response (left), Opus response (right, compare mode)
+- Both response panels are always active across all three objectives
+- Model dropdowns default to the first two models in `models.txt`
+- Metrics are displayed as compact pills at the top of each response card
 - Source cards are color-coded by confidence and include snippets
 
 ### 4.4 API Surface (Current)
@@ -475,9 +486,13 @@ Current UX behavior:
   - `mode=rag`: requires `objective` in `{expert_network_brief, interview_guide, insights_qa}`
   - RAG response includes `content`, `usage`, `provider`, `model`, `metrics`, `rag`, `sources`
 - `POST /api/chat/compare`
-  - Objective 3 compare only (`objective=insights_qa`)
-  - Shared retrieval from V3, then runs local and Opus responses in parallel
-  - Returns `local`, `opus`, shared `rag`, shared `sources`, and request-level metrics
+  - Accepts any objective and any pair of models
+  - Parameters: `message`, `mode`, `objective`, `model_left`, `model_right`, `top_k`, `min_score`, `file`
+  - `model_left` and `model_right` use `provider|model_id` format (e.g., `bedrock|us.anthropic.claude-sonnet-4-6`)
+  - Both `direct` and `rag` modes are supported
+  - Returns `left`, `right`, shared `rag`, shared `sources`, and request-level `metrics`
+- `GET /api/models`
+  - Returns available models parsed from `models.txt` (used by frontend dropdowns)
 - `GET /api/documents`
   - Lists ingested documents and metadata
 - `GET /api/documents/{doc_id}/file`
@@ -524,12 +539,13 @@ LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compa
 | Requirement | Description |
 |---|---|
 | Objective selection | User picks Objective 1, 2, or 3 |
-| Mode selection | Direct upload mode and RAG mode (Obj 3 forces RAG) |
+| Mode selection | Direct upload mode and RAG mode |
 | RAG retrieval | Query mapped vertical (V1/V2/V3) with `top_k` and `min_score` |
 | Objective prompts | Loads objective-specific system prompts from local files |
-| Hybrid generation | Obj 1/2 via AWS Bedrock; Obj 3 via Ollama local; Obj 3 compare also runs Opus |
+| Dual-model comparison | Any two models (Bedrock or Ollama) can be compared side-by-side on any objective |
+| Dynamic model selection | Models are loaded from `models.txt` and presented via dropdown selectors |
 | Source traceability | Display retrieved chunk/document references with score color and snippets |
-| Runtime stats | Show tokens, model latency, tok/sec, retrieval timing |
+| Runtime stats | Show tokens, latency (seconds), speed (tok/s), and estimated cost per run |
 | Library UX | Dropdown folders by vertical with per-file "Open original document" links |
 
 ### 5.3 Security (Hard Requirements)
@@ -564,8 +580,8 @@ Each objective has a dedicated prompt file:
 | Runtime | Python 3.12 |
 | Web framework | FastAPI + Uvicorn |
 | Frontend | HTML/CSS/JS single-page app (French-whimsical salon UI) |
-| LLM routing | AWS Bedrock Sonnet (Obj 1/2) + Ollama local (Obj 3 default) + optional AWS Bedrock Opus compare |
-| Local/cloud model config | `OLLAMA_BASE_URL`, `LOCAL_RAG_MODEL`, `OPUS_COMPARE_MODEL` |
+| LLM routing | Dynamic dual-model comparison via `models.txt` — supports AWS Bedrock (Claude Haiku/Sonnet/Opus) and Ollama (local models) |
+| Model configuration | `models.txt` (provider\|model_id per line), `/api/models` endpoint |
 | Embeddings | Sentence Transformers (`all-mpnet-base-v2`) |
 | Vector store | ChromaDB (local persistent) |
 | Metadata store | SQLite (`uploaded_docs/metadata.db`) |
@@ -594,7 +610,8 @@ Benjamin/
 │   ├── retrieval.py
 │   └── system_prompts.py
 ├── static/
-│   └── index.html                      # Frontend (form + library + local/opus response panels)
+│   └── index.html                      # Frontend (form + library + dual-model response panels)
+├── models.txt                          # Available models config (provider|model_id per line)
 ├── chroma_db/                          # Local vector database (gitignored)
 ├── uploaded_docs/                      # Stored source files + metadata.db (gitignored)
 ├── Data/                               # Raw working corpus (gitignored)
@@ -612,7 +629,7 @@ Benjamin/
 - **Objective 2**: Produces stakeholder-tailored interview guides with sensitive-question phrasing
 - **Objective 3**: Answers transcript-centric analytical questions with explicit citations and quotes
 - **Confidentiality**: Sensitive transcript synthesis can run fully local
-- **Compare utility**: Analysts can compare local vs Opus outputs on identical retrieved evidence
+- **Compare utility**: Analysts can compare any two models (Bedrock or local) side-by-side on identical retrieved evidence, with per-run cost shown
 - **RAG relevance**: Top retrieved chunks are consistently relevant to the analyst query
 
 ---

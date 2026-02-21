@@ -1,12 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Benjamin Maurice All-Singing-All-Dancing AI</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=Parisienne&display=swap" rel="stylesheet">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Nunito+Sans:wght@400;600;700&family=Parisienne&display=swap"
+    rel="stylesheet">
   <style>
     :root {
       --paper: #f8f0df;
@@ -25,7 +28,9 @@
       --shadow: 0 18px 35px rgba(77, 49, 24, 0.12);
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -47,12 +52,10 @@
       height: 11px;
       z-index: 10;
       pointer-events: none;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--bleu) 0 44px,
-        #f8efdf 44px 88px,
-        var(--rouge) 88px 132px
-      );
+      background: repeating-linear-gradient(90deg,
+          var(--bleu) 0 44px,
+          #f8efdf 44px 88px,
+          var(--rouge) 88px 132px);
       border-bottom: 1px solid rgba(111, 74, 34, 0.4);
     }
 
@@ -86,12 +89,10 @@
     .hero-awning {
       margin: -1.2rem -1.4rem 1rem;
       height: 24px;
-      background: repeating-linear-gradient(
-        90deg,
-        var(--bleu) 0 36px,
-        #f9efdc 36px 72px,
-        var(--rouge) 72px 108px
-      );
+      background: repeating-linear-gradient(90deg,
+          var(--bleu) 0 36px,
+          #f9efdc 36px 72px,
+          var(--rouge) 72px 108px);
       border-bottom: 2px solid #b28a56;
       position: relative;
       z-index: 1;
@@ -169,8 +170,13 @@
       border-top: 1px solid rgba(126, 83, 38, 0.46);
     }
 
-    .ornament::before { left: 0; }
-    .ornament::after { right: 0; }
+    .ornament::before {
+      left: 0;
+    }
+
+    .ornament::after {
+      right: 0;
+    }
 
     .ornament span {
       position: absolute;
@@ -219,9 +225,17 @@
       animation: riseIn 500ms ease-out;
     }
 
-    .atelier:nth-child(1) { transform: rotate(-0.35deg); }
-    .atelier:nth-child(2) { transform: rotate(0.2deg); }
-    .atelier:nth-child(3) { transform: rotate(-0.18deg); }
+    .atelier:nth-child(1) {
+      transform: rotate(-0.35deg);
+    }
+
+    .atelier:nth-child(2) {
+      transform: rotate(0.2deg);
+    }
+
+    .atelier:nth-child(3) {
+      transform: rotate(-0.18deg);
+    }
 
     .atelier::before {
       content: "";
@@ -322,7 +336,7 @@
       pointer-events: none;
     }
 
-    .card > * {
+    .card>* {
       position: relative;
       z-index: 1;
     }
@@ -394,7 +408,9 @@
       gap: 0.35rem;
     }
 
-    .radio-group input { accent-color: var(--bleu); }
+    .radio-group input {
+      accent-color: var(--bleu);
+    }
 
     .file-area {
       display: flex;
@@ -407,9 +423,17 @@
       cursor: pointer;
     }
 
-    .file-area:hover { border-color: var(--bleu); }
-    .file-area.has-file { border-style: solid; }
-    .file-area input[type="file"] { display: none; }
+    .file-area:hover {
+      border-color: var(--bleu);
+    }
+
+    .file-area.has-file {
+      border-style: solid;
+    }
+
+    .file-area input[type="file"] {
+      display: none;
+    }
 
     .file-name {
       flex: 1;
@@ -434,7 +458,9 @@
       cursor: pointer;
     }
 
-    .file-clear:hover { color: var(--error); }
+    .file-clear:hover {
+      color: var(--error);
+    }
 
     .actions {
       display: flex;
@@ -475,7 +501,6 @@
       border: 1px solid #d5b185;
       background: #fff9ed;
       padding: 1rem;
-      white-space: pre-wrap;
       word-break: break-word;
       font-size: 0.95rem;
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.55);
@@ -510,41 +535,58 @@
     }
 
     .usage {
-      margin-top: 0.68rem;
+      margin-bottom: 0.68rem;
       color: #7d6450;
       font-size: 0.82rem;
     }
 
+    .response-content {
+      margin-top: 0.85rem;
+      border-top: 1px dotted #d5b185;
+      padding-top: 0.85rem;
+      white-space: pre-wrap;
+    }
+
     .metrics-grid {
-      margin-top: 0.72rem;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 0.45rem;
+      margin-top: 0.1rem;
+      margin-bottom: 0.6rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.35rem;
     }
 
     .metric-chip {
-      border: 1px solid #dfc7a6;
-      border-radius: 10px;
-      background: #fff8ec;
-      padding: 0.46rem 0.55rem;
-      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.58);
+      border: 1px solid rgba(213, 177, 133, 0.4);
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.5);
+      padding: 0.2rem 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.82rem;
     }
 
     .metric-label {
-      display: block;
       color: #7f664d;
-      font-size: 0.72rem;
-      letter-spacing: 0.08em;
+      font-size: 0.68rem;
       text-transform: uppercase;
       font-weight: 700;
-      margin-bottom: 0.14rem;
+      letter-spacing: 0.02em;
     }
 
     .metric-value {
-      display: block;
       color: #3d291b;
-      font-size: 0.94rem;
       font-weight: 700;
+    }
+
+    .metric-cost {
+      background: var(--sage-light, #eef3ed);
+      border-color: var(--sage, #789073);
+      color: #2d402b;
+    }
+
+    .metric-cost .metric-value {
+      color: #1a2a19;
     }
 
     .rag-summary {
@@ -861,9 +903,12 @@
       opacity: 0.9;
     }
 
-    .hidden { display: none; }
+    .hidden {
+      display: none;
+    }
 
     @media (max-width: 840px) {
+
       .atelier-strip,
       .row {
         grid-template-columns: 1fr;
@@ -908,6 +953,7 @@
         opacity: 0;
         transform: translateY(6px);
       }
+
       to {
         opacity: 1;
         transform: translateY(0);
@@ -915,6 +961,7 @@
     }
   </style>
 </head>
+
 <body>
   <div class="top-tricolor" aria-hidden="true"></div>
 
@@ -958,14 +1005,17 @@
               <option value="interview_guide">Interview Atelier</option>
               <option value="insights_qa">Insights Parlour (Local + Opus)</option>
             </select>
-            <div id="objectiveHint" class="hint">Compose an expert-network brief with ~5 screening questions that test true knowledge depth.</div>
+            <div id="objectiveHint" class="hint">Compose an expert-network brief with ~5 screening questions that test
+              true knowledge depth.</div>
           </div>
 
           <div class="form-group">
             <label>mode</label>
             <div class="radio-group">
-              <label id="directModeLabel"><input id="modeDirect" type="radio" name="mode" value="direct" checked> With an attached note</label>
-              <label id="ragModeLabel"><input id="modeRag" type="radio" name="mode" value="rag"> With archived context</label>
+              <label id="directModeLabel"><input id="modeDirect" type="radio" name="mode" value="direct" checked> With
+                an attached note</label>
+              <label id="ragModeLabel"><input id="modeRag" type="radio" name="mode" value="rag"> With archived
+                context</label>
             </div>
           </div>
 
@@ -973,7 +1023,8 @@
             <div class="form-group">
               <label for="file">project file (optional)</label>
               <div class="file-area" id="fileArea" onclick="document.getElementById('fileInput').click()">
-                <input type="file" id="fileInput" name="file" accept=".txt,.md,.py,.json,.csv,.log,.xml,.html,.yaml,.yml,.docx,.pdf">
+                <input type="file" id="fileInput" name="file"
+                  accept=".txt,.md,.py,.json,.csv,.log,.xml,.html,.yaml,.yml,.docx,.pdf">
                 <span class="file-name" id="fileName">Select a transcript, memo, or draft</span>
                 <button type="button" class="file-clear" id="fileClear" style="display:none">Clear</button>
               </div>
@@ -1002,11 +1053,17 @@
             <div id="insightsExamples" class="hint hidden">
               Ask things like:
               <br>
-              <button class="doc-link sample-link" type="button" data-sample="How many interviewees agreed vs disagreed with the proposition that market growth is accelerating? Include original quotes and source references.">count agreement</button>
+              <button class="doc-link sample-link" type="button"
+                data-sample="How many interviewees agreed vs disagreed with the proposition that market growth is accelerating? Include original quotes and source references.">count
+                agreement</button>
               ·
-              <button class="doc-link sample-link" type="button" data-sample="Find direct quotes supporting the statement that the market is growing fast. Include citations for each quote.">find supporting quotes</button>
+              <button class="doc-link sample-link" type="button"
+                data-sample="Find direct quotes supporting the statement that the market is growing fast. Include citations for each quote.">find
+                supporting quotes</button>
               ·
-              <button class="doc-link sample-link" type="button" data-sample="Who talked about pricing pressure, and what did they say? Include source references.">who mentioned topic</button>
+              <button class="doc-link sample-link" type="button"
+                data-sample="Who talked about pricing pressure, and what did they say? Include source references.">who
+                mentioned topic</button>
             </div>
           </div>
 
@@ -1031,16 +1088,20 @@
       </div>
 
       <div class="card">
+        <div class="form-group" style="margin-bottom: 0.5rem;">
+          <select id="modelLeft" style="font-weight: bold; background-color: #fcf6e9; color: #5b3a21;"></select>
+        </div>
         <div id="response" class="response panel-response">
-          <span class="response-header">local response</span>
-          <span class="side-placeholder">Press Begin to generate the local answer and metrics.</span>
+          <span class="side-placeholder">Press Begin to generate the left answer and metrics.</span>
         </div>
       </div>
 
       <div class="card">
+        <div class="form-group" style="margin-bottom: 0.5rem;">
+          <select id="modelRight" style="font-weight: bold; background-color: #fcf6e9; color: #5b3a21;"></select>
+        </div>
         <div id="compareResponse" class="response panel-response">
-          <span class="response-header">opus response</span>
-          <span class="side-placeholder">Switch to Insights Parlour with archived context to run local vs Opus side-by-side.</span>
+          <span class="side-placeholder">Press Begin to generate the right answer and metrics.</span>
         </div>
       </div>
     </div>
@@ -1080,6 +1141,8 @@
     const compareResponseEl = document.getElementById('compareResponse');
     const docList = document.getElementById('docList');
     const refreshDocsBtn = document.getElementById('refreshDocsBtn');
+    const modelLeft = document.getElementById('modelLeft');
+    const modelRight = document.getElementById('modelRight');
 
     const OBJECTIVE_META = {
       expert_network_brief: {
@@ -1212,27 +1275,16 @@
     }
 
     function shouldRunCompare(mode, objectiveValue) {
-      return mode === 'rag' && objectiveValue === 'insights_qa';
+      return true; // Now we always compare two models
     }
 
     function comparePlaceholderHtml(isActive) {
-      if (isActive) {
-        return '<span class="response-header">opus response</span><span class="side-placeholder">When you press Begin, the Opus answer and stats will appear here.</span>';
-      }
-      return '<span class="response-header">opus response</span><span class="side-placeholder">Switch to Insights Parlour with archived context to run local vs Opus side-by-side.</span>';
+      return '<span class="side-placeholder">When you press Begin, the answer and stats will appear here.</span>';
     }
 
     function renderResponseHtml(payload, options = {}) {
       const data = payload || {};
-      const headerLabel = options.header || 'response';
       const content = String(data.content || '').trim() || 'No response text returned.';
-      let html = `<span class="response-header">${escapeHtml(headerLabel)}</span>${escapeHtml(content)}`;
-
-      if (data.provider || data.model) {
-        const providerLabel = data.provider ? escapeHtml(data.provider) : 'unknown';
-        const modelLabel = data.model ? escapeHtml(data.model) : 'default';
-        html += `<div class="usage">Engine: ${providerLabel} · Model: ${modelLabel}</div>`;
-      }
 
       const promptTokens = Number(data.usage?.prompt_tokens || 0);
       const completionTokens = Number(data.usage?.completion_tokens || 0);
@@ -1241,16 +1293,32 @@
       const tokPerSec = Number(data.metrics?.tok_per_sec || 0);
       const retrievalMs = Number(data.metrics?.retrieval_ms || options.retrievalMs || 0);
 
-      html += `<div class="usage">Session footprint: ${promptTokens} in · ${completionTokens} out</div>`;
+      let costValue = 'n/a';
+      if (data.provider === 'bedrock' && data.model) {
+        let inCostPerM = 0;
+        let outCostPerM = 0;
+        const lowModel = data.model.toLowerCase();
+        if (lowModel.includes('opus')) { inCostPerM = 5.0; outCostPerM = 25.0; }
+        else if (lowModel.includes('sonnet')) { inCostPerM = 3.0; outCostPerM = 15.0; }
+        else if (lowModel.includes('haiku')) { inCostPerM = 1.0; outCostPerM = 5.0; }
 
-      html += '<div class="metrics-grid">';
-      html += `<div class="metric-chip"><span class="metric-label">Total Tokens</span><span class="metric-value">${totalTokens}</span></div>`;
-      html += `<div class="metric-chip"><span class="metric-label">Model Time</span><span class="metric-value">${formatNumber(latencyMs, 0)} ms</span></div>`;
-      html += `<div class="metric-chip"><span class="metric-label">Speed</span><span class="metric-value">${tokPerSec > 0 ? formatNumber(tokPerSec, 2) : 'n/a'} tok/s</span></div>`;
-      if (retrievalMs > 0) {
-        html += `<div class="metric-chip"><span class="metric-label">RAG Retrieval</span><span class="metric-value">${formatNumber(retrievalMs, 0)} ms</span></div>`;
+        if (inCostPerM > 0 || outCostPerM > 0) {
+          const cost = (promptTokens * inCostPerM + completionTokens * outCostPerM) / 1000000;
+          costValue = cost === 0 ? '$0.00' : (cost < 0.0001 ? '<$0.0001' : '$' + cost.toFixed(4));
+        }
+      } else if (data.provider === 'ollama') {
+        costValue = '$0.00';
       }
+
+      let html = '<div class="metrics-grid">';
+      html += `<div class="metric-chip"><span class="metric-label">Tokens</span><span class="metric-value">${totalTokens}</span><span style="font-size:0.7rem; opacity:0.6;">(${promptTokens} in / ${completionTokens} out)</span></div>`;
+      html += `<div class="metric-chip"><span class="metric-label">Time</span><span class="metric-value">${formatNumber(latencyMs / 1000, 1)}s</span></div>`;
+      if (tokPerSec > 0) html += `<div class="metric-chip"><span class="metric-label">Speed</span><span class="metric-value">${formatNumber(tokPerSec, 1)} t/s</span></div>`;
+      if (costValue !== 'n/a') html += `<div class="metric-chip metric-cost"><span class="metric-label">Cost</span><span class="metric-value">${costValue}</span></div>`;
+      if (retrievalMs > 0) html += `<div class="metric-chip"><span class="metric-label">RAG</span><span class="metric-value">${formatNumber(retrievalMs / 1000, 1)}s</span></div>`;
       html += '</div>';
+
+      html += `<div class="response-content">${escapeHtml(content)}</div>`;
 
       const rag = options.rag || null;
       if (rag) {
@@ -1397,11 +1465,10 @@
             <div class="doc-item">
               <strong>${escapeHtml(d.filename || 'Untitled note')}</strong>
               <div class="doc-meta">${escapeHtml(fragmentLabel(d.chunk_count))}</div>
-              ${
-                d.doc_id
-                  ? `<a class="doc-link" href="/api/documents/${encodeURIComponent(d.doc_id)}/file" target="_blank" rel="noopener noreferrer">Open original document</a>`
-                  : ''
-              }
+              ${d.doc_id
+              ? `<a class="doc-link" href="/api/documents/${encodeURIComponent(d.doc_id)}/file" target="_blank" rel="noopener noreferrer">Open original document</a>`
+              : ''
+            }
             </div>
           `).join('');
 
@@ -1433,13 +1500,9 @@
       submitBtn.disabled = true;
       responseEl.style.display = 'block';
       responseEl.classList.remove('error');
-      responseEl.innerHTML = compareMode
-        ? '<span class="response-header">preparing local response...</span>'
-        : '<span class="response-header">preparing response...</span>';
+      responseEl.innerHTML = '<span class="response-header">preparing...</span>';
       compareResponseEl.classList.remove('error');
-      compareResponseEl.innerHTML = compareMode
-        ? '<span class="response-header">preparing opus response...</span>'
-        : comparePlaceholderHtml(false);
+      compareResponseEl.innerHTML = '<span class="response-header">preparing...</span>';
 
       const fd = new FormData();
       fd.append('mode', mode);
@@ -1460,6 +1523,8 @@
       if (mode === 'direct' && fileInput.files.length) {
         fd.append('file', fileInput.files[0]);
       }
+      fd.append('model_left', modelLeft.value);
+      fd.append('model_right', modelRight.value);
 
       try {
         const endpoint = compareMode ? '/api/chat/compare' : '/api/chat';
@@ -1472,54 +1537,36 @@
         if (!res.ok) {
           responseEl.classList.add('error');
           responseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
-          if (compareMode) {
-            compareResponseEl.classList.add('error');
-            compareResponseEl.innerHTML = `<span class="response-header">opus response</span>${escapeHtml(data.detail || res.statusText)}`;
-          }
+          compareResponseEl.classList.add('error');
+          compareResponseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
           return;
         }
 
-        if (compareMode) {
-          if (!data.local || !data.opus) {
-            throw new Error('Compare response missing local/opus payload');
-          }
-          const ragSummary = data.rag || null;
-          const sharedRetrievalMs = Number(data.metrics?.retrieval_ms || 0);
-          const sources = Array.isArray(data.sources) ? data.sources : [];
-
-          responseEl.innerHTML = renderResponseHtml(data.local, {
-            header: 'local response',
-            rag: ragSummary,
-            retrievalMs: sharedRetrievalMs,
-            sources,
-            includeSources: true,
-          });
-          compareResponseEl.innerHTML = renderResponseHtml(data.opus, {
-            header: 'opus response',
-            rag: ragSummary,
-            retrievalMs: sharedRetrievalMs,
-            includeSources: false,
-          });
-        } else {
-          responseEl.innerHTML = renderResponseHtml(data, {
-            header: 'response',
-            rag: data.rag || null,
-            sources: Array.isArray(data.sources) ? data.sources : [],
-            includeSources: true,
-          });
-          compareResponseEl.innerHTML = comparePlaceholderHtml(false);
+        if (!data.left || !data.right) {
+          throw new Error('Compare response missing left/right payload');
         }
+        const ragSummary = data.rag || null;
+        const sharedRetrievalMs = Number(data.metrics?.retrieval_ms || 0);
+        const sources = Array.isArray(data.sources) ? data.sources : [];
+
+        responseEl.innerHTML = renderResponseHtml(data.left, {
+          rag: ragSummary,
+          retrievalMs: sharedRetrievalMs,
+          sources,
+          includeSources: true,
+        });
+        compareResponseEl.innerHTML = renderResponseHtml(data.right, {
+          rag: ragSummary,
+          retrievalMs: sharedRetrievalMs,
+          sources,
+          includeSources: true,
+        });
         loadDocuments();
       } catch (err) {
         responseEl.classList.add('error');
         responseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
-        if (compareMode) {
-          compareResponseEl.classList.add('error');
-          compareResponseEl.innerHTML = `<span class="response-header">opus response</span>${escapeHtml(err.message)}`;
-        } else {
-          compareResponseEl.classList.remove('error');
-          compareResponseEl.innerHTML = comparePlaceholderHtml(false);
-        }
+        compareResponseEl.classList.add('error');
+        compareResponseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
       } finally {
         submitBtn.disabled = false;
       }
@@ -1530,6 +1577,41 @@
       div.textContent = String(value ?? '');
       return div.innerHTML;
     }
+
+    async function fetchModels() {
+      try {
+        const res = await fetch('/api/models');
+        const data = await res.json();
+        const models = data.models || [];
+        if (models.length === 0) {
+          modelLeft.innerHTML = '<option value="">No models found</option>';
+          modelRight.innerHTML = '<option value="">No models found</option>';
+          return;
+        }
+        modelLeft.innerHTML = '';
+        modelRight.innerHTML = '';
+        models.forEach((m, i) => {
+          const opt1 = document.createElement('option');
+          opt1.value = m.provider + "|" + m.model;
+          opt1.textContent = m.provider + " · " + m.model;
+
+          const opt2 = document.createElement('option');
+          opt2.value = m.provider + "|" + m.model;
+          opt2.textContent = m.provider + " · " + m.model;
+
+          modelLeft.appendChild(opt1);
+          modelRight.appendChild(opt2);
+        });
+
+        if (models.length > 1) {
+          modelRight.selectedIndex = 1;
+        }
+      } catch (e) {
+        console.error("Failed to fetch models", e);
+      }
+    }
+    fetchModels();
   </script>
 </body>
+
 </html>

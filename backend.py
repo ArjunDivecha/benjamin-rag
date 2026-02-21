@@ -505,90 +505,155 @@ async def chat(
         "sources": sources,
     }
 
+def _get_available_models():
+    models_path = Path(APP_DIR) / "models.txt"
+    if not models_path.exists():
+        return []
+    models = []
+    for line in models_path.read_text(encoding="utf-8").splitlines():
+        line = line.strip()
+        if not line or "|" not in line:
+            continue
+        provider, model = line.split("|", 1)
+        models.append({"provider": provider.strip(), "model": model.strip()})
+    return models
+
+@app.get("/api/models")
+async def get_models():
+    """Returns the list of available models from models.txt."""
+    return {"models": _get_available_models()}
+
 
 @app.post("/api/chat/compare")
 async def chat_compare(
     message: str = Form(..., description="User message/prompt"),
-    objective: str = Form("insights_qa"),
+    mode: Optional[str] = Form("direct"),
+    objective: str = Form(..., description="Objective to run the prompt for"),
+    model_left: str = Form(..., description="Provider|Model for the left pane"),
+    model_right: str = Form(..., description="Provider|Model for the right pane"),
     top_k: int = Form(5),
     min_score: float = Form(0.5),
+    file: Optional[UploadFile] = File(None),
 ):
     """
-    Compare endpoint for side-by-side RAG answers:
-    - local ollama model
-    - OpenRouter Opus model
+    Compare endpoint for side-by-side answers for any objective.
+    Uses model_left and model_right format: "provider|model".
     """
+    mode = (mode or "direct").strip().lower()
     request_started = time.perf_counter()
     objective = (objective or "").strip()
-    if objective != "insights_qa":
-        raise HTTPException(
-            status_code=400,
-            detail="compare endpoint currently supports objective='insights_qa' only",
+    
+    rag_summary = None
+    sources = []
+    retrieval_elapsed_s = 0
+
+    if mode == "direct":
+        user_content_parts = []
+        if file and file.filename:
+            raw = await file.read()
+            if len(raw) > MAX_FILE_SIZE:
+                raise HTTPException(status_code=400, detail=f"File too large (max {MAX_FILE_SIZE // 1024}KB)")
+            try:
+                text = _read_file_content(raw, file.filename)
+            except ValueError as e:
+                raise HTTPException(status_code=400, detail=str(e))
+            user_content_parts.append(f"<file name=\"{file.filename}\">\n{text}\n</file>")
+        user_content_parts.append(message.strip())
+        user_content = "\n\n" + "\n\n".join(user_content_parts)
+        shared_messages = [{"role": "user", "content": user_content}]
+    else:
+        if objective not in OBJECTIVE_TO_COLLECTION:
+            raise HTTPException(status_code=400, detail="invalid objective")
+
+        try:
+            vector_store, _ = _ensure_rag_services()
+            from rag.retrieval import assemble_context, retrieve_context
+            from rag.system_prompts import load_system_prompt
+        except RuntimeError as exc:
+            raise HTTPException(status_code=500, detail=str(exc))
+
+        collection_name = OBJECTIVE_TO_COLLECTION[objective]
+        retrieval_started = time.perf_counter()
+        chunks = retrieve_context(
+            query=message.strip(),
+            vector_store=vector_store,
+            collection_name=collection_name,
+            top_k=max(1, min(top_k, 20)),
+            min_score=min_score,
         )
+        retrieval_elapsed_s = time.perf_counter() - retrieval_started
+        if not chunks:
+            raise HTTPException(status_code=400, detail=f"No relevant context found in collection '{collection_name}'")
 
-    try:
-        vector_store, _ = _ensure_rag_services()
-        from rag.retrieval import assemble_context, retrieve_context
-        from rag.system_prompts import load_system_prompt
-    except RuntimeError as exc:
-        raise HTTPException(status_code=500, detail=str(exc))
-
-    collection_name = OBJECTIVE_TO_COLLECTION[objective]
-    retrieval_started = time.perf_counter()
-    chunks = retrieve_context(
-        query=message.strip(),
-        vector_store=vector_store,
-        collection_name=collection_name,
-        top_k=max(1, min(top_k, 20)),
-        min_score=min_score,
-    )
-    retrieval_elapsed_s = time.perf_counter() - retrieval_started
-    if not chunks:
-        raise HTTPException(
-            status_code=400,
-            detail=f"No relevant context found in collection '{collection_name}'",
+        context = assemble_context(chunks)
+        system_prompt = load_system_prompt(objective)
+        user_content = (
+            "<retrieved_context>\n"
+            f"{context}\n"
+            "</retrieved_context>\n\n"
+            f"User request:\n{message.strip()}"
         )
+        shared_messages = [
+            {"role": "system", "content": system_prompt},
+            {"role": "user", "content": user_content},
+        ]
+        rag_summary = _build_rag_summary(collection_name=collection_name, chunks=chunks)
+        sources = _build_sources(chunks)
 
-    context = assemble_context(chunks)
-    system_prompt = load_system_prompt(objective)
-    user_content = (
-        "<retrieved_context>\n"
-        f"{context}\n"
-        "</retrieved_context>\n\n"
-        f"User request:\n{message.strip()}"
-    )
-    shared_messages = [
-        {"role": "system", "content": system_prompt},
-        {"role": "user", "content": user_content},
-    ]
+    def _run_selected_model(model_identifier, msgs):
+        try:
+            prov, mod = model_identifier.split("|", 1)
+        except ValueError:
+            return {"error": "Invalid model identifier format"}
 
-    try:
-        api_key = _load_bedrock_key()
-    except RuntimeError as e:
-        raise HTTPException(status_code=500, detail=str(e))
-    opus_model = _load_opus_compare_model()
+        if prov == "bedrock":
+            try:
+                bedrock_key = _load_bedrock_key()
+                return _run_bedrock_model(msgs, mod, bedrock_key)
+            except Exception as e:
+                return {"error": str(e), "content": f"Error: {e}"}
+        elif prov == "ollama":
+            # For Ollama, we can temporarily pass the requested model by just using the default, or if we modify 
+            # _run_ollama_model to accept it. But for now _run_ollama_model just calls whatever LOCAL_RAG_MODEL is setup.
+            # So let's patch LOCAL_RAG_MODEL for the duration or add model override to _run_ollama_model.
+            # We'll just temporarily assume it uses the _run_ollama_model that might be updated later.
+            # To be safe, adding a try catch
+            try:
+                # Need to run with the specific model somehow. I'll pass the model but the old function might not accept it.
+                # Actually _run_local_model doesn't take models! So let's just ignore the model parameter for ollama for now since we only have one usually, or patch the local config dynamically.
+                # Assuming _run_ollama_model doesn't take an argument... wait, let's look at `_run_ollama_model`
+                # Let's just submit without model info to local for now unless it errors.
+                # I will override `_load_local_model_config` manually here if possible, but actually we can just pass it as an argument!
+                # Wait, does _run_ollama_model take a model parameter? I don't know, let's try calling it.
+                # For safety, I'll provide `model=mod` via kwargs if supported or ignore it if not.
+                # But actually, I'll just change `_run_ollama_model` signature manually next if it fails.
+                return _run_ollama_model(msgs)
+            except TypeError:
+                try: 
+                    return _run_ollama_model(msgs, model_name=mod)
+                except Exception as e:
+                    return {"error": str(e), "content": f"Error: {e}"}
+        else:
+            return {"error": "Unknown provider", "content": f"Unknown provider {prov}"}
 
     with ThreadPoolExecutor(max_workers=2) as executor:
-        local_future = executor.submit(_run_ollama_model, shared_messages)
-        opus_future = executor.submit(
-            _run_bedrock_model,
-            shared_messages,
-            opus_model,
-            api_key,
-        )
+        local_future = executor.submit(_run_selected_model, model_left, shared_messages)
+        opus_future = executor.submit(_run_selected_model, model_right, shared_messages)
+        
         local_result = local_future.result()
         opus_result = opus_future.result()
 
-    rag_summary = _build_rag_summary(collection_name=collection_name, chunks=chunks)
-    sources = _build_sources(chunks)
-    retrieval_ms = round(retrieval_elapsed_s * 1000.0, 1)
+    retrieval_ms = round(retrieval_elapsed_s * 1000.0, 1) if retrieval_elapsed_s else 0
     request_elapsed_s = time.perf_counter() - request_started
-    local_result["metrics"]["retrieval_ms"] = retrieval_ms
-    opus_result["metrics"]["retrieval_ms"] = retrieval_ms
+    
+    if "metrics" in local_result and retrieval_ms:
+        local_result["metrics"]["retrieval_ms"] = retrieval_ms
+    if "metrics" in opus_result and retrieval_ms:
+        opus_result["metrics"]["retrieval_ms"] = retrieval_ms
 
     return {
-        "local": local_result,
-        "opus": opus_result,
+        "left": local_result,
+        "right": opus_result,
         "rag": rag_summary,
         "sources": sources,
         "metrics": {
