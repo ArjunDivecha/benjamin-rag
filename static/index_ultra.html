@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Benjamin Maurice — Ultra Research Engine</title>
+
+    <link rel="stylesheet" href="/static/ultra-theme.css">
+</head>
+
+<body>
+    <nav class="nav-bar">
+        <a href="/" class="theme-btn">Classic</a>
+        <a href="/ultra" class="theme-btn active">Ultra</a>
+    </nav>
+
+    <div class="container">
+        <header class="hero">
+            <div class="hero-seal">BM</div>
+            <h1>
+                <span class="title-line">Benjamin Maurice</span>
+                <span class="title-subline"
+                    style="font-family: var(--font-sans); font-size: 1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--accent-light);">Intelligence
+                    Engine</span>
+            </h1>
+            <p class="flourish">Deep insights, uncompromised analysis. A premier workspace for commercial due diligence
+                and market strategy.</p>
+        </header>
+
+        <section class="atelier-strip">
+            <button class="atelier active" type="button" data-objective="expert_network_brief">
+                <h3>Expert Brief</h3>
+                <p>Curated scopes, precise screening mechanics.</p>
+                <span class="chip">Module One</span>
+            </button>
+            <button class="atelier" type="button" data-objective="interview_guide">
+                <h3>Interview Guide</h3>
+                <p>Strategic questioning architectures for high-yield diligence.</p>
+                <span class="chip">Module Two</span>
+            </button>
+            <button class="atelier" type="button" data-objective="insights_qa">
+                <h3>Insights Engine</h3>
+                <p>Synthesize and analyze archived market transcripts.</p>
+                <span class="chip">Module Three</span>
+            </button>
+        </section>
+
+        <div class="grid">
+            <div class="card">
+                <form id="chatForm">
+                    <div class="form-group">
+                        <label>Module Focus</label>
+                        <select id="objective" name="objective">
+                            <option value="expert_network_brief">Expert Brief</option>
+                            <option value="interview_guide">Interview Guide</option>
+                            <option value="insights_qa">Insights Engine (Dual Model Analysis)</option>
+                        </select>
+                        <div id="objectiveHint" class="hint">Compose an expert-network brief with ~5 screening questions
+                            that test true knowledge depth.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Context Mode</label>
+                        <div class="radio-group">
+                            <label id="directModeLabel"><input id="modeDirect" type="radio" name="mode" value="direct"
+                                    checked> Attached File</label>
+                            <label id="ragModeLabel"><input id="modeRag" type="radio" name="mode" value="rag"> RAG
+                                Archive</label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Live Data</label>
+                        <div class="radio-group">
+                            <label id="webSearchLabel">
+                                <input id="useWebSearch" type="checkbox"
+                                    style="width: 18px; height: 18px; border-radius: 4px;">
+                                Enable Exa Web Search
+                            </label>
+                        </div>
+                        <div id="webSearchNote" class="toggle-note">Available for Expert Brief and Interview Guide.
+                        </div>
+                    </div>
+
+                    <div id="directSection">
+                        <div class="form-group">
+                            <label for="file">Source Document (Optional)</label>
+                            <div class="file-area" id="fileArea" onclick="document.getElementById('fileInput').click()">
+                                <input type="file" id="fileInput" name="file"
+                                    accept=".txt,.md,.py,.json,.csv,.log,.xml,.html,.yaml,.yml,.docx,.pdf">
+                                <span class="file-name" id="fileName">Drop or select transcript/memo</span>
+                                <button type="button" class="file-clear" id="fileClear"
+                                    style="display:none">Remove</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div id="ragSection" class="hidden">
+                        <div class="row">
+                            <div class="form-group">
+                                <label id="industryLabel" for="industry">Industry Sector</label>
+                                <input id="industry" type="text" placeholder="e.g. Semiconductor Tooling">
+                            </div>
+                            <div class="form-group">
+                                <label id="stakeholderLabel" for="stakeholderType">Target Stakeholder</label>
+                                <input id="stakeholderType" type="text" placeholder="e.g. Procurement VP">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label id="projectObjectivesLabel" for="projectObjectives">Engagement Goal</label>
+                            <textarea id="projectObjectives" placeholder="Core objective of the diligence"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label id="keyQuestionsLabel" for="keyQuestions">Core Hypotheses</label>
+                            <textarea id="keyQuestions" placeholder="Propositions to pressure-test"></textarea>
+                        </div>
+                        <div id="insightsExamples" class="hint hidden">
+                            Try templates:
+                            <br>
+                            <button class="sample-link" type="button"
+                                data-sample="How many interviewees agreed vs disagreed with the proposition that market growth is accelerating? Include original quotes and source references.">Count
+                                Agreement</button>
+                            ·
+                            <button class="sample-link" type="button"
+                                data-sample="Find direct quotes supporting the statement that the market is growing fast. Include citations for each quote.">Find
+                                Quotes</button>
+                            ·
+                            <button class="sample-link" type="button"
+                                data-sample="Who talked about pricing pressure, and what did they say? Include source references.">Identify
+                                Segments</button>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Prompt Instruction</label>
+                        <textarea id="message" name="message" placeholder="Define the output requirement..."
+                            required></textarea>
+                    </div>
+
+                    <div class="actions">
+                        <button type="submit" id="submitBtn">Initialize Analysis</button>
+                    </div>
+                </form>
+            </div>
+
+            <div class="card">
+                <div class="doc-toolbar">
+                    <h3>Knowledge Archive</h3>
+                    <button class="btn-small" id="refreshDocsBtn" type="button">Sync Data</button>
+                </div>
+                <div id="docList" style="flex-grow: 1; overflow-y: auto;"></div>
+            </div>
+
+            <div class="card">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <select id="modelLeft"></select>
+                </div>
+                <div id="response" class="response panel-response">
+                    <span class="side-placeholder">Awaiting execution...</span>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="form-group" style="margin-bottom: 1rem;">
+                    <select id="modelRight"></select>
+                </div>
+                <div id="compareResponse" class="response panel-response">
+                    <span class="side-placeholder">Awaiting execution...</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/app.js"></script>
+</body>
+
+</html>
