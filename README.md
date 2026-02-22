@@ -54,6 +54,17 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 - Optional: check **Add live web context (Exa)** for Brief Salon / Interview Atelier to inject recent web context.
 - Per-run metrics include token counts, latency, speed, and estimated cost for Bedrock models.
 
+### Dual Themes
+
+The app ships with two frontend themes you can switch between at any time:
+
+| Route | Theme | Description |
+|-------|-------|-------------|
+| `http://localhost:8000/` | **Classic** (French salon) | Parchment textures, Parisian bistro styling, Cormorant Garamond + Parisienne fonts |
+| `http://localhost:8000/pro` | **Professional** | Clean navy/white consulting aesthetic inspired by benjaminmaurice.com, Inter + Playfair Display fonts |
+
+A toggle link in the top-right corner of each theme switches to the other. Both themes share identical functionality.
+
 ---
 
 ## TL;DR: Add/Update RAG Data (Copy/Paste)
@@ -575,7 +586,10 @@ Benjamin/
 │   ├── retrieval.py
 │   └── system_prompts.py
 ├── static/
-│   └── index.html                      # Frontend (form + library + dual-model response panels)
+│   ├── index.html                      # Frontend — Classic French theme (form + library + dual-model response panels)
+│   ├── index_pro.html                  # Frontend — Professional theme (same functionality, clean navy/white design)
+│   ├── pro-theme.css                   # CSS for professional theme
+│   └── app.js                          # Shared application JavaScript (used by professional theme)
 ├── models.txt                          # Available models config (provider|model_id per line)
 ├── chroma_db/                          # Local vector database (gitignored)
 ├── uploaded_docs/                      # Stored source files + metadata.db (gitignored)

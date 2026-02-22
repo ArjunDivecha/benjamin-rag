@@ -961,11 +961,29 @@ def stats():
 
 @app.get("/")
 def index():
-    """Serve the frontend."""
+    """Serve the default modern frontend."""
+    pro_path = os.path.join(STATIC_DIR, "index_pro.html")
+    if os.path.exists(pro_path):
+        return FileResponse(pro_path)
+    return {"message": "Static files not found. Run from project directory."}
+
+
+@app.get("/pro")
+def index_pro():
+    """Serve the modern professional frontend."""
+    pro_path = os.path.join(STATIC_DIR, "index_pro.html")
+    if os.path.exists(pro_path):
+        return FileResponse(pro_path)
+    return {"message": "Professional theme not found."}
+
+
+@app.get("/classic")
+def index_classic():
+    """Serve the legacy classic frontend."""
     index_path = os.path.join(STATIC_DIR, "index.html")
     if os.path.exists(index_path):
         return FileResponse(index_path)
-    return {"message": "Static files not found. Run from Junk directory."}
+    return {"message": "Classic theme not found."}
 
 
 # Mount static files (for CSS, JS if any)

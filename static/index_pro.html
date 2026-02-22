@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Benjamin Maurice — AI Research Assistant</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Raleway:wght@400;500;600;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="/static/pro-theme.css">
+</head>
+
+<body>
+  <div class="top-tricolor" aria-hidden="true"></div>
+
+  <a class="theme-toggle" href="/">Switch to Classic Theme</a>
+
+  <div class="container">
+    <section class="hero">
+      <div class="hero-awning" aria-hidden="true"></div>
+      <div class="hero-seal" aria-hidden="true">BM</div>
+      <h1>
+        <span class="title-line">Benjamin Maurice</span>
+        <span class="title-subline">AI-Powered Research Assistant</span>
+      </h1>
+      <div class="ornament" aria-hidden="true"><span></span></div>
+      <div class="flourish">Strategy consulting intelligence — expert briefs, interview guides, and transcript analysis.</div>
+    </section>
+
+    <section class="atelier-strip">
+      <button class="atelier active" type="button" data-objective="expert_network_brief">
+        <h3>Expert Brief</h3>
+        <p>Compose a considered brief, worthy of an expert's time.</p>
+        <span class="chip">Module 1</span>
+      </button>
+      <button class="atelier" type="button" data-objective="interview_guide">
+        <h3>Interview Guide</h3>
+        <p>Build structured questions that reveal what others miss.</p>
+        <span class="chip">Module 2</span>
+      </button>
+      <button class="atelier" type="button" data-objective="insights_qa">
+        <h3>Insights Engine</h3>
+        <p>Interrogate transcripts in conversation, anchored in evidence.</p>
+        <span class="chip">Module 3</span>
+      </button>
+    </section>
+
+    <div class="grid">
+      <div class="card">
+        <form id="chatForm">
+          <div class="form-group">
+            <label>Objective</label>
+            <select id="objective" name="objective">
+              <option value="expert_network_brief">Expert Brief</option>
+              <option value="interview_guide">Interview Guide</option>
+              <option value="insights_qa">Insights Engine (Local + Opus)</option>
+            </select>
+            <div id="objectiveHint" class="hint">Compose an expert-network brief with ~5 screening questions that test
+              true knowledge depth.</div>
+          </div>
+
+          <div class="form-group">
+            <label>Mode</label>
+            <div class="radio-group">
+              <label id="directModeLabel"><input id="modeDirect" type="radio" name="mode" value="direct" checked> With
+                an attached file</label>
+              <label id="ragModeLabel"><input id="modeRag" type="radio" name="mode" value="rag"> With archived
+                context</label>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label>Web Search</label>
+            <div class="radio-group">
+              <label id="webSearchLabel">
+                <input id="useWebSearch" type="checkbox">
+                Add live web context (Exa)
+              </label>
+            </div>
+            <div id="webSearchNote" class="toggle-note">Available for Expert Brief and Interview Guide.</div>
+          </div>
+
+          <div id="directSection">
+            <div class="form-group">
+              <label for="file">Project File (optional)</label>
+              <div class="file-area" id="fileArea" onclick="document.getElementById('fileInput').click()">
+                <input type="file" id="fileInput" name="file"
+                  accept=".txt,.md,.py,.json,.csv,.log,.xml,.html,.yaml,.yml,.docx,.pdf">
+                <span class="file-name" id="fileName">Select a transcript, memo, or draft</span>
+                <button type="button" class="file-clear" id="fileClear" style="display:none">Clear</button>
+              </div>
+            </div>
+          </div>
+
+          <div id="ragSection" class="hidden">
+            <div class="row">
+              <div class="form-group">
+                <label id="industryLabel" for="industry">Industry</label>
+                <input id="industry" type="text" placeholder="e.g. semiconductors">
+              </div>
+              <div class="form-group">
+                <label id="stakeholderLabel" for="stakeholderType">Stakeholder</label>
+                <input id="stakeholderType" type="text" placeholder="e.g. enterprise customer">
+              </div>
+            </div>
+            <div class="form-group">
+              <label id="projectObjectivesLabel" for="projectObjectives">Engagement Objective</label>
+              <textarea id="projectObjectives" placeholder="Describe the engagement objective"></textarea>
+            </div>
+            <div class="form-group">
+              <label id="keyQuestionsLabel" for="keyQuestions">Questions to Resolve</label>
+              <textarea id="keyQuestions" placeholder="List key hypotheses or diligence questions"></textarea>
+            </div>
+            <div id="insightsExamples" class="hint hidden">
+              Sample queries:
+              <br>
+              <button class="doc-link sample-link" type="button"
+                data-sample="How many interviewees agreed vs disagreed with the proposition that market growth is accelerating? Include original quotes and source references.">count
+                agreement</button>
+              ·
+              <button class="doc-link sample-link" type="button"
+                data-sample="Find direct quotes supporting the statement that the market is growing fast. Include citations for each quote.">find
+                supporting quotes</button>
+              ·
+              <button class="doc-link sample-link" type="button"
+                data-sample="Who talked about pricing pressure, and what did they say? Include source references.">who
+                mentioned topic</button>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="message">Your Prompt</label>
+            <textarea id="message" name="message" placeholder="What would you like to explore?" required></textarea>
+          </div>
+
+          <div class="actions">
+            <button type="submit" id="submitBtn">Run Analysis</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="card">
+        <div class="doc-toolbar">
+          <h3>Document Library</h3>
+          <button class="btn-small" id="refreshDocsBtn" type="button">Refresh</button>
+        </div>
+        <div id="docList" class="doc-list"></div>
+      </div>
+
+      <div class="card">
+        <div class="form-group" style="margin-bottom: 0.5rem;">
+          <select id="modelLeft"></select>
+        </div>
+        <div id="response" class="response panel-response">
+          <span class="side-placeholder">Press Run Analysis to generate the left response.</span>
+        </div>
+      </div>
+
+      <div class="card">
+        <div class="form-group" style="margin-bottom: 0.5rem;">
+          <select id="modelRight"></select>
+        </div>
+        <div id="compareResponse" class="response panel-response">
+          <span class="side-placeholder">Press Run Analysis to generate the right response.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="signature">Benjamin Maurice LLC — AI Research Platform</div>
+  </div>
+
+  <script src="/static/app.js"></script>
+</body>
+
+</html>
