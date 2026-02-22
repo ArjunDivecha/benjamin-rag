@@ -36,10 +36,7 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    ollama serve
    ollama pull qwen2.5:32b
    ```
-5. Ingest real project data from `Data/`:
-   ```bash
-   ./.venv/bin/python preprocess.py --vertical ALL --dir Data --sync
-   ```
+5. Put any project files you want to analyze into the `Data/` folder.
 6. Start app:
    ```bash
    ./.venv/bin/uvicorn backend:app --port 8000
@@ -49,6 +46,7 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    ./run_benjamin.sh
    ```
 7. In the UI:
+- Click the **Sync Data** (or **Refresh**) button to automatically ingest the files from the `Data/` folder into Benjamin's memory.
 - Select any two models from the left/right dropdown bars for side-by-side comparison.
 - All three objectives support dual-model comparison across Bedrock and Ollama providers.
 - Optional: check **Add live web context (Exa)** for Brief Salon / Interview Atelier to inject recent web context.
@@ -67,28 +65,31 @@ A toggle link in the top-right corner of each theme switches to the other. Both 
 
 ---
 
-## TL;DR: Add/Update RAG Data (Copy/Paste)
+## TL;DR: Add/Update RAG Data
+
+The easiest way to update Benjamin's knowledge is through the Web UI:
+1. Put your real files into the `Data/` folder.
+2. Open the Web UI (`http://localhost:8000/` or `http://localhost:8000/ultra`).
+3. Click the **Sync Data** (Ultra) or **Refresh** (Classic) button in the side panel.
+
+*Alternatively, you can do this from the terminal:*
 
 ```bash
 # 1) Go to project
 cd "/Users/arjundivecha/Dropbox/AAA Backup/A Working/Benjamin"
 
-# 2) First-time setup only (skip if already done)
-python3.12 -m venv .venv
-./.venv/bin/pip install -r requirements.txt
-
-# 3) Put your real files into Data/
+# 2) Put your real files into Data/
 #    All three objectives share one unified RAG collection.
 
-# 4) Ingest / update RAG (sync removes deleted files too)
+# 3) Ingest / update RAG (sync removes deleted files too)
 ./.venv/bin/python preprocess.py --vertical ALL --dir Data --sync
 
-# 5) Verify
+# 4) Verify
 ./.venv/bin/python preprocess.py --list
 ./.venv/bin/python preprocess.py --stats
 ```
 
-If you edit or add files later, run Step 4 again.
+If you edit or add files later, just click **Sync Data** again in the UI.
 
 ---
 
@@ -163,15 +164,15 @@ Format expectations:
 - Very short files may ingest as `0 chunks` and not help retrieval (chunks under 100 tokens are discarded).
 - `--dir` is non-recursive (it only ingests files directly inside that folder).
 
-### Step 3: Ingest into the RAG (this is the update command)
+Wait a few seconds for Benjamin to ingest the files. The button will update to tell you how many files were added or removed.
 
-Run this command every time you want the RAG to pick up new/changed files:
+*Alternatively, you can run this command in your terminal:*
 
 ```bash
 ./.venv/bin/python preprocess.py --vertical ALL --dir Data --sync
 ```
 
-The `--sync` flag ensures the RAG is an exact mirror of `Data/`:
+Whether via UI or command line, the sync ensures the RAG is an exact mirror of `Data/`:
 - New files are ingested
 - Changed files are re-ingested (old chunks replaced)
 - Unchanged files are skipped (fast)
@@ -203,18 +204,16 @@ Common scenarios:
 1. Replace an existing document with a newer version:
    - Keep the same filename in `Data/`.
    - Overwrite the file with new content.
-   - Re-run Step 3.
+   - Click **Sync Data** in the UI.
    - Result: old chunks for that filename are replaced automatically.
 
 2. Add a brand-new document:
    - Drop it into `Data/`.
-   - Re-run Step 3.
+   - Click **Sync Data** in the UI.
 
 3. Remove a document from the RAG:
-   - Find its `doc_id`:
-     ```bash
-     ./.venv/bin/python preprocess.py --list
-     ```
+   - Delete it from the `Data/` folder.
+   - Click **Sync Data** in the UI. The button will indicate how many files were removed.
    - Remove by `doc_id`:
      ```bash
      ./.venv/bin/python preprocess.py --remove <doc_id>

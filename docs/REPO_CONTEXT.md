@@ -40,6 +40,7 @@ Last updated: 2026-02-17
 
 ## Ingestion and Data Tools
 - `preprocess.py`: ingest/list/remove/stats for V1/V2/V3.
+- The "Sync Data" / "Refresh" UI button directly integrates with `preprocess.py` to auto-ingest or remove data in the backend.
 - `ingest_objective3.py`: Objective 3 wrapper (ingests `*.sanitized.txt` into `V3` only).
 - `sanitize_with_lmstudio.py`: local de-identification pipeline.
 

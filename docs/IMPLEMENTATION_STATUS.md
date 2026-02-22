@@ -38,6 +38,7 @@ Last updated: 2026-02-17
 ### Milestone 7: Preprocessing CLI
 - Status: `COMPLETED`
 - Implemented: `preprocess.py` with `--files`, `--dir`, `--remove`, `--list`, `--stats`.
+- Sync Data UI button added to trigger background folder sync.
 - Objective 3 wrapper added: `ingest_objective3.py`.
 
 ### Milestone 8: System Prompts
