@@ -4,84 +4,55 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Benjamin Maurice Intelligence Studio</title>
+  <title>Benjamin Maurice — AI Research Assistant</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link
-    href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Manrope:wght@400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=EB+Garamond:wght@500;600;700&family=Raleway:wght@400;500;600;700&display=swap"
     rel="stylesheet">
   <link rel="stylesheet" href="/static/pro-theme.css">
 </head>
 
 <body>
   <div class="top-tricolor" aria-hidden="true"></div>
-  <a class="theme-toggle" href="/classic">Open Legacy Theme</a>
+
+  <a class="theme-toggle" href="/">
+    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+    Classic Theme
+  </a>
 
   <div class="container">
     <section class="hero">
-      <div class="hero-copy">
-        <div class="eyebrow">Benjamin Maurice LLC · Strategy Consulting</div>
-        <h1>
-          AI Research, Built for
-          <span>Commercial Diligence</span>
-        </h1>
-        <p class="hero-lead">
-          A modern consulting workspace for expert briefs, interview guides, and transcript-level insight extraction.
-          Same firm voice, faster operating rhythm.
-        </p>
-        <div class="hero-metrics">
-          <div class="hero-metric">
-            <strong>3</strong>
-            <span>Consulting Modules</span>
-          </div>
-          <div class="hero-metric">
-            <strong>2</strong>
-            <span>Model Lanes Side-by-Side</span>
-          </div>
-          <div class="hero-metric">
-            <strong>Live</strong>
-            <span>Web + Archive Context</span>
-          </div>
-        </div>
-      </div>
-      <aside class="hero-panel">
-        <h2>Operator Notes</h2>
-        <ul class="cap-list">
-          <li>Switch between direct file analysis and archived RAG context.</li>
-          <li>Compare outputs from two models with shared evidence trails.</li>
-          <li>Preserve traceability with passages, confidence, and retrieval stats.</li>
-        </ul>
-      </aside>
+      <div class="hero-awning" aria-hidden="true"></div>
+      <div class="hero-seal" aria-hidden="true">BM</div>
+      <h1>
+        <span class="title-line">Benjamin Maurice</span>
+        <span class="title-subline">AI-Powered Research Assistant</span>
+      </h1>
+      <div class="ornament" aria-hidden="true"><span></span></div>
+      <div class="flourish">Strategy consulting intelligence — expert briefs, interview guides, and transcript analysis.</div>
     </section>
 
     <section class="atelier-strip">
       <button class="atelier active" type="button" data-objective="expert_network_brief">
-        <span class="module-index">Module 01</span>
         <h3>Expert Brief</h3>
-        <p>Frame the right expert profile and draft screening logic that surfaces true depth fast.</p>
-        <span class="chip">Research Intake</span>
+        <p>Compose a considered brief, worthy of an expert's time.</p>
+        <span class="chip">Module 1</span>
       </button>
       <button class="atelier" type="button" data-objective="interview_guide">
-        <span class="module-index">Module 02</span>
         <h3>Interview Guide</h3>
-        <p>Structure high-signal conversations with opening, core, sensitive, and closeout tracks.</p>
-        <span class="chip">Question Design</span>
+        <p>Build structured questions that reveal what others miss.</p>
+        <span class="chip">Module 2</span>
       </button>
       <button class="atelier" type="button" data-objective="insights_qa">
-        <span class="module-index">Module 03</span>
         <h3>Insights Engine</h3>
-        <p>Interrogate transcript sets using source-grounded prompts and proposition testing.</p>
-        <span class="chip">Evidence Analysis</span>
+        <p>Interrogate transcripts in conversation, anchored in evidence.</p>
+        <span class="chip">Module 3</span>
       </button>
     </section>
 
     <div class="grid">
-      <section class="card control-card">
-        <div class="card-head">
-          <h2>Request Composer</h2>
-          <p>Define objective, context mode, and analysis prompt.</p>
-        </div>
-
+      <div class="card">
         <form id="chatForm">
           <div class="form-group">
             <label>Objective</label>
@@ -97,19 +68,19 @@
           <div class="form-group">
             <label>Mode</label>
             <div class="radio-group">
-              <label id="directModeLabel"><input id="modeDirect" type="radio" name="mode" value="direct" checked> Use
+              <label id="directModeLabel"><input id="modeDirect" type="radio" name="mode" value="direct" checked> With
                 an attached file</label>
-              <label id="ragModeLabel"><input id="modeRag" type="radio" name="mode" value="rag"> Use archived
-                knowledge</label>
+              <label id="ragModeLabel"><input id="modeRag" type="radio" name="mode" value="rag"> With archived
+                context</label>
             </div>
           </div>
 
           <div class="form-group">
-            <label>Live Web Context</label>
+            <label>Web Search</label>
             <div class="radio-group">
               <label id="webSearchLabel">
                 <input id="useWebSearch" type="checkbox">
-                Add current web signals (Exa)
+                Add live web context (Exa)
               </label>
             </div>
             <div id="webSearchNote" class="toggle-note">Available for Expert Brief and Interview Guide.</div>
@@ -121,7 +92,7 @@
               <div class="file-area" id="fileArea" onclick="document.getElementById('fileInput').click()">
                 <input type="file" id="fileInput" name="file"
                   accept=".txt,.md,.py,.json,.csv,.log,.xml,.html,.yaml,.yml,.docx,.pdf">
-                <span class="file-name" id="fileName">Select a transcript, memo, or working draft</span>
+                <span class="file-name" id="fileName">Select a transcript, memo, or draft</span>
                 <button type="button" class="file-clear" id="fileClear" style="display:none">Clear</button>
               </div>
             </div>
@@ -147,7 +118,7 @@
               <textarea id="keyQuestions" placeholder="List key hypotheses or diligence questions"></textarea>
             </div>
             <div id="insightsExamples" class="hint hidden">
-              Suggested prompts:
+              Sample queries:
               <br>
               <button class="doc-link sample-link" type="button"
                 data-sample="How many interviewees agreed vs disagreed with the proposition that market growth is accelerating? Include original quotes and source references.">count
@@ -172,41 +143,36 @@
             <button type="submit" id="submitBtn">Run Analysis</button>
           </div>
         </form>
-      </section>
+      </div>
 
-      <section class="card library-card">
-        <div class="card-head">
-          <h2>Document Library</h2>
-          <p>Current archive grouped by consulting module.</p>
-        </div>
+      <div class="card">
         <div class="doc-toolbar">
-          <button class="btn-small" id="refreshDocsBtn" type="button">Refresh Library</button>
+          <h3>Document Library</h3>
+          <button class="btn-small" id="refreshDocsBtn" type="button">Refresh</button>
         </div>
         <div id="docList" class="doc-list"></div>
-      </section>
+      </div>
 
-      <section class="card response-card">
-        <div class="model-header">
-          <h2>Model Lane A</h2>
+      <div class="card">
+        <div class="form-group" style="margin-bottom: 0.5rem;">
           <select id="modelLeft"></select>
         </div>
         <div id="response" class="response panel-response">
           <span class="side-placeholder">Press Run Analysis to generate the left response.</span>
         </div>
-      </section>
+      </div>
 
-      <section class="card response-card">
-        <div class="model-header">
-          <h2>Model Lane B</h2>
+      <div class="card">
+        <div class="form-group" style="margin-bottom: 0.5rem;">
           <select id="modelRight"></select>
         </div>
         <div id="compareResponse" class="response panel-response">
           <span class="side-placeholder">Press Run Analysis to generate the right response.</span>
         </div>
-      </section>
+      </div>
     </div>
 
-    <div class="signature">Benjamin Maurice LLC · Intelligence Studio</div>
+    <div class="signature">Benjamin Maurice LLC — AI Research Platform</div>
   </div>
 
   <script src="/static/app.js"></script>
