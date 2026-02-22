@@ -139,6 +139,39 @@ def ingest_files(
     return ingested
 
 
+def sync_collection(
+    vertical: str,
+    files: Iterable[Path],
+    vector_store: VectorStore,
+    doc_manager: DocumentManager,
+) -> int:
+    """Sync the RAG to exactly match the provided files.
+
+    1. Ingest new/changed files.
+    2. Remove any documents in this vertical whose filename is not in the file list.
+    """
+    file_list = list(files)
+    ingested = ingest_files(vertical, file_list, vector_store, doc_manager)
+
+    current_filenames = set()
+    for p in file_list:
+        suffix = p.suffix.lower()
+        if p.exists() and p.is_file() and suffix in SUPPORTED_SUFFIXES:
+            current_filenames.add(p.name)
+
+    removed = 0
+    for doc in doc_manager.list_documents(vertical=vertical):
+        if doc["filename"] not in current_filenames:
+            vector_store.delete_document(vertical, doc["doc_id"])
+            doc_manager.delete_document(doc["doc_id"])
+            print(f"{doc['filename']}: removed (no longer in directory)")
+            removed += 1
+
+    if removed:
+        print(f"Sync complete: {ingested} ingested, {removed} removed")
+    return ingested
+
+
 def remove_document(doc_id: str, vector_store: VectorStore, doc_manager: DocumentManager) -> int:
     doc = doc_manager.get_document(doc_id)
     if not doc:
@@ -196,6 +229,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--stats", action="store_true", help="Show per-vertical stats")
     parser.add_argument("--storage-path", default="uploaded_docs", help="Local document storage directory")
     parser.add_argument("--vector-path", default="chroma_db", help="Local Chroma persist directory")
+    parser.add_argument("--sync", action="store_true",
+                        help="Sync mode: ingest new/changed files AND remove documents no longer in the directory")
     return parser
 
 
@@ -223,7 +258,10 @@ def main(argv: List[str] | None = None) -> int:
     if not files:
         parser.error("Provide --files and/or --dir with at least one file")
 
-    ingest_files(args.vertical, files, vector_store, doc_manager)
+    if args.sync:
+        sync_collection(args.vertical, files, vector_store, doc_manager)
+    else:
+        ingest_files(args.vertical, files, vector_store, doc_manager)
     return 0
 
 

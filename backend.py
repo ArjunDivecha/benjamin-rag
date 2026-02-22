@@ -48,15 +48,16 @@ AWS_REGION = "us-west-2"
 MODEL = "us.anthropic.claude-opus-4-6-v1"
 OPUS_COMPARE_MODEL = "us.anthropic.claude-opus-4-6-v1"
 OLLAMA_BASE_URL = "http://localhost:11434"
-LOCAL_RAG_MODEL = "qwen2.5:32b"
+LOCAL_RAG_MODEL = "qwen3:32b"
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2MB
 TEXT_ENCODINGS = ["utf-8", "latin-1", "cp1252"]
 VECTOR_DB_PATH = os.path.join(APP_DIR, "chroma_db")
 UPLOADED_DOCS_PATH = os.path.join(APP_DIR, "uploaded_docs")
+UNIFIED_COLLECTION = "ALL"
 OBJECTIVE_TO_COLLECTION = {
-    "expert_network_brief": "V1",
-    "interview_guide": "V2",
-    "insights_qa": "V3",
+    "expert_network_brief": UNIFIED_COLLECTION,
+    "interview_guide": UNIFIED_COLLECTION,
+    "insights_qa": UNIFIED_COLLECTION,
 }
 OBJECTIVE_TO_PROVIDER = {
     "expert_network_brief": "bedrock",

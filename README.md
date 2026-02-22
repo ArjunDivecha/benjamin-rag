@@ -1,6 +1,6 @@
 # Benjamin PRD — Strategy Consulting AI Assistant
 
-Last updated: 2026-02-20
+Last updated: 2026-02-22
 
 Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutique strategy consulting firm, using multi-vertical knowledge bases and custom system prompts to accelerate primary research workflows.
 
@@ -36,12 +36,9 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    ollama serve
    ollama pull qwen2.5:32b
    ```
-5. Optional: ingest synthetic starter corpus:
+5. Ingest real project data from `Data/`:
    ```bash
-   ./.venv/bin/python preprocess.py --vertical V1 --dir synthetic_data/V1
-   ./.venv/bin/python preprocess.py --vertical V2 --dir synthetic_data/V2
-   # Objective 3 only (ingests *.sanitized.txt from sanitized_data into V3):
-   ./.venv/bin/python ingest_objective3.py
+   ./.venv/bin/python preprocess.py --vertical ALL --dir Data --sync
    ```
 6. Start app:
    ```bash
@@ -69,26 +66,18 @@ cd "/Users/arjundivecha/Dropbox/AAA Backup/A Working/Benjamin"
 python3.12 -m venv .venv
 ./.venv/bin/pip install -r requirements.txt
 
-# 3) Create data folders
-mkdir -p real_data/V1 real_data/V2 real_data/V3
+# 3) Put your real files into Data/
+#    All three objectives share one unified RAG collection.
 
-# 4) Put your real files into:
-#    real_data/V1  (expert network brief content)
-#    real_data/V2  (interview guide content)
-#    real_data/V3  (interview notes/transcripts for conversational Q&A)
+# 4) Ingest / update RAG (sync removes deleted files too)
+./.venv/bin/python preprocess.py --vertical ALL --dir Data --sync
 
-# 5) Ingest / update RAG
-./.venv/bin/python preprocess.py --vertical V1 --dir real_data/V1
-./.venv/bin/python preprocess.py --vertical V2 --dir real_data/V2
-# Objective 3 only: pull sanitized files from sanitized_data into V3
-./.venv/bin/python ingest_objective3.py
-
-# 6) Verify
+# 5) Verify
 ./.venv/bin/python preprocess.py --list
 ./.venv/bin/python preprocess.py --stats
 ```
 
-If you edit or add files later, run Step 5 again.
+If you edit or add files later, run Step 4 again.
 
 ---
 
@@ -142,18 +131,9 @@ OLLAMA_BASE_URL=http://localhost:11434
 LOCAL_RAG_MODEL=qwen2.5:32b
 ```
 
-### Step 2: Create data folders
+### Step 2: Add files into the Data folder
 
-```bash
-mkdir -p real_data/V1 real_data/V2 real_data/V3
-```
-
-Use:
-- `real_data/V1` for Objective 1 content (expert network briefs, screening examples, past briefs)
-- `real_data/V2` for Objective 2 content (interview guides, stakeholder question banks, methodology)
-- `real_data/V3` for Objective 3 content (interview notes, transcripts, synthesis support documents)
-
-### Step 3: Add files into the correct folder
+All project files go into `Data/`. There is **one unified RAG collection** that all three objectives (Brief Salon, Interview Atelier, Insights Parlour) share. The system prompts tell each objective how to use the retrieved context, so there is no need to sort files into separate folders.
 
 Supported file types:
 - `.txt`
@@ -172,40 +152,30 @@ Format expectations:
 - Very short files may ingest as `0 chunks` and not help retrieval (chunks under 100 tokens are discarded).
 - `--dir` is non-recursive (it only ingests files directly inside that folder).
 
-### Step 4: Ingest into the RAG (this is the update command)
+### Step 3: Ingest into the RAG (this is the update command)
 
-Run these commands every time you want the RAG to pick up new/changed files:
-
-```bash
-./.venv/bin/python preprocess.py --vertical V1 --dir real_data/V1
-./.venv/bin/python preprocess.py --vertical V2 --dir real_data/V2
-# Objective 3 only (recommended): ingest sanitized corpus from sanitized_data into V3
-./.venv/bin/python ingest_objective3.py
-```
-
-You can also ingest specific files (useful if files are outside `real_data/`):
+Run this command every time you want the RAG to pick up new/changed files:
 
 ```bash
-./.venv/bin/python preprocess.py --vertical V1 --files "/full/path/file1.docx" "/full/path/file2.pdf"
+./.venv/bin/python preprocess.py --vertical ALL --dir Data --sync
 ```
 
-Objective 3 wrapper options:
+The `--sync` flag ensures the RAG is an exact mirror of `Data/`:
+- New files are ingested
+- Changed files are re-ingested (old chunks replaced)
+- Unchanged files are skipped (fast)
+- Files you deleted from `Data/` are automatically removed from the RAG
+
+You can also ingest specific files (useful if files are outside `Data/`):
 
 ```bash
-# Preview which files would be ingested (no changes)
-./.venv/bin/python ingest_objective3.py --dry-run
-
-# If sanitized files are in a different folder:
-./.venv/bin/python ingest_objective3.py --dir "/full/path/to/sanitized_data"
+./.venv/bin/python preprocess.py --vertical ALL --files "/full/path/file1.docx" "/full/path/file2.pdf"
 ```
 
-### Step 5: Confirm what is in the RAG
+### Step 4: Confirm what is in the RAG
 
 ```bash
 ./.venv/bin/python preprocess.py --list
-./.venv/bin/python preprocess.py --list V1
-./.venv/bin/python preprocess.py --list V2
-./.venv/bin/python preprocess.py --list V3
 ./.venv/bin/python preprocess.py --stats
 ```
 
@@ -215,19 +185,19 @@ What to expect in output:
 - `skipped (unsupported file type)` means extension is not supported.
 - `skipped (read error: ...)` means parsing failed for that file.
 
-### Step 6: How to update data later
+### Step 5: How to update data later
 
 Common scenarios:
 
 1. Replace an existing document with a newer version:
-   - Keep the same filename in the same vertical folder.
+   - Keep the same filename in `Data/`.
    - Overwrite the file with new content.
-   - Re-run Step 4 command for that vertical.
+   - Re-run Step 3.
    - Result: old chunks for that filename are replaced automatically.
 
 2. Add a brand-new document:
-   - Drop it into `real_data/V1`, `real_data/V2`, or `real_data/V3`.
-   - Re-run Step 4 command for that vertical.
+   - Drop it into `Data/`.
+   - Re-run Step 3.
 
 3. Remove a document from the RAG:
    - Find its `doc_id`:
@@ -239,14 +209,11 @@ Common scenarios:
      ./.venv/bin/python preprocess.py --remove <doc_id>
      ```
 
-4. Move a document across verticals (e.g., V1↔V2, V2↔V3, V1↔V3):
-   - Remove old entry by `doc_id`.
-   - Put file in the new vertical folder.
-   - Re-run Step 4 for the new vertical.
-
 ---
 
 ## Local Data Sanitization (LM Studio, Fully Local)
+
+> **Note:** Sanitization is optional. If you are comfortable with raw data being used in prompts sent to Bedrock, you can skip this section entirely and ingest raw files directly from `Data/`.
 
 Use this when you need de-identified copies of sensitive source files before sharing or downstream processing.
 
@@ -312,20 +279,15 @@ Notes:
 - Sanitized documents: `sanitized_data/file_XXXX.sanitized.txt`
 - Run report: `sanitized_data/sanitization_report.json`
 
-### Build Objective 3 RAG from sanitized output
+### Build RAG from sanitized output (optional)
 
-After sanitization finishes, run:
+After sanitization finishes, you can ingest the sanitized files instead of raw data:
 
 ```bash
-./.venv/bin/python ingest_objective3.py
-./.venv/bin/python preprocess.py --list V3
+./.venv/bin/python preprocess.py --vertical ALL --dir sanitized_data
+./.venv/bin/python preprocess.py --list
 ./.venv/bin/python preprocess.py --stats
 ```
-
-Important:
-- `ingest_objective3.py` ingests only `*.sanitized.txt` files.
-- It always writes to `V3` (Objective 3 collection only).
-- `sanitization_report.json` and `sanitize_run.log` are not ingested by this wrapper.
 
 Key report fields:
 - `files_total`
@@ -433,16 +395,15 @@ Answer analyst-style questions over interview notes/transcripts and related rese
 
 ### 4.1 Preprocessing Pipeline (Offline / Batch)
 
-A local preprocessing step ingests source documents and builds multiple RAG indices across verticals:
+A local preprocessing step ingests source documents and builds a unified RAG index:
 
-- **Input**: Past briefs, interview guides, methodology docs, interview notes, and related research artifacts
+- **Input**: All project documents — briefs, interview guides, interview notes, presentations, reports, and related research artifacts
 - **Processing**: Chunk -> embed (Sentence Transformers, MPS-accelerated) -> store in Chroma
-- **Output**: Three named collections:
-  - **V1** -> Objective 1 (briefs, screening examples, prior deliverables)
-  - **V2** -> Objective 2 (interview guide patterns, stakeholder question structures)
-  - **V3** -> Objective 3 (interview notes, transcripts, synthesis evidence)
+- **Output**: One unified collection (`ALL`) shared by all three objectives
 
-The pipeline supports incremental updates. Re-ingesting an updated file replaces stale chunks for that filename+vertical.
+All three objectives retrieve from the same collection. The objective-specific system prompts (see Section 6) tell the LLM how to use the retrieved context for each task.
+
+The pipeline supports incremental updates. Re-ingesting an updated file replaces stale chunks for that filename.
 
 ### 4.2 Runtime Routing (Current)
 
@@ -531,7 +492,7 @@ LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compa
 | Requirement | Description |
 |---|---|
 | Multi-file ingestion | Accept a directory or explicit file list |
-| Vertical assignment | Each file is tagged to `V1`, `V2`, or `V3` |
+| Vertical assignment | All files go into the unified `ALL` collection shared by all objectives |
 | Chunking | 512-token chunks with 50-token overlap; chunks under 100 tokens are dropped |
 | Local embeddings | Sentence Transformers (`all-mpnet-base-v2`) |
 | Persistent storage | Chroma (vectors) + SQLite (document metadata) |
@@ -545,7 +506,7 @@ LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compa
 |---|---|
 | Objective selection | User picks Objective 1, 2, or 3 |
 | Mode selection | Direct upload mode and RAG mode |
-| RAG retrieval | Query mapped vertical (V1/V2/V3) with `top_k` and `min_score` |
+| RAG retrieval | Query the unified `ALL` collection with `top_k` and `min_score` |
 | Objective prompts | Loads objective-specific system prompts from local files |
 | Dual-model comparison | Any two models (Bedrock or Ollama) can be compared side-by-side on any objective |
 | Dynamic model selection | Models are loaded from `models.txt` and presented via dropdown selectors |
@@ -601,8 +562,7 @@ Each objective has a dedicated prompt file:
 Benjamin/
 ├── backend.py                          # FastAPI server (chat + documents + stats)
 ├── preprocess.py                       # CLI: ingest/list/remove/stats for RAG data
-├── ingest_objective3.py                # CLI: Objective 3-only ingest wrapper (V3 + *.sanitized.txt)
-├── sanitize_with_lmstudio.py           # CLI: local de-identification pipeline via LM Studio
+├── sanitize_with_lmstudio.py           # CLI: local de-identification pipeline via LM Studio (optional)
 ├── system_prompts/
 │   ├── expert_network_brief.md         # System prompt for Objective 1
 │   ├── interview_guide.md              # System prompt for Objective 2
@@ -619,8 +579,7 @@ Benjamin/
 ├── models.txt                          # Available models config (provider|model_id per line)
 ├── chroma_db/                          # Local vector database (gitignored)
 ├── uploaded_docs/                      # Stored source files + metadata.db (gitignored)
-├── Data/                               # Raw working corpus (gitignored)
-├── sanitized_data/                     # Sanitized outputs + run report (local)
+├── Data/                               # Raw working corpus — all project files go here (gitignored)
 ├── tests/
 ├── requirements.txt
 └── README.md
