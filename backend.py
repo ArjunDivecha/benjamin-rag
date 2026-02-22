@@ -39,6 +39,8 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import FileResponse
 
+from preprocess import _resolve_files, sync_collection
+
 # -----------------------------------------------------------------------------
 # Configuration
 # -----------------------------------------------------------------------------
@@ -907,6 +909,26 @@ def documents(vertical: Optional[str] = None):
     except RuntimeError as exc:
         raise HTTPException(status_code=500, detail=str(exc))
     return doc_manager.list_documents(vertical=vertical)
+
+
+@app.post("/api/documents/sync")
+def sync_documents():
+    """Sync the RAG backend with the files currently in the Data/ directory."""
+    try:
+        vector_store, doc_manager = _ensure_rag_services()
+    except RuntimeError as exc:
+        raise HTTPException(status_code=500, detail=str(exc))
+        
+    data_dir = os.path.join(APP_DIR, "Data")
+    if not os.path.exists(data_dir):
+        return {"ingested": 0, "message": "Data directory not found."}
+        
+    try:
+        files = _resolve_files(None, data_dir)
+        ingested, removed = sync_collection(UNIFIED_COLLECTION, files, vector_store, doc_manager)
+        return {"ingested": ingested, "removed": removed, "message": "Sync successful."}
+    except Exception as exc:
+        raise HTTPException(status_code=500, detail=f"Sync failed: {str(exc)}")
 
 
 @app.get("/api/documents/{doc_id}/file")

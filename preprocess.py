@@ -144,7 +144,7 @@ def sync_collection(
     files: Iterable[Path],
     vector_store: VectorStore,
     doc_manager: DocumentManager,
-) -> int:
+) -> tuple[int, int]:
     """Sync the RAG to exactly match the provided files.
 
     1. Ingest new/changed files.
@@ -169,7 +169,7 @@ def sync_collection(
 
     if removed:
         print(f"Sync complete: {ingested} ingested, {removed} removed")
-    return ingested
+    return ingested, removed
 
 
 def remove_document(doc_id: str, vector_store: VectorStore, doc_manager: DocumentManager) -> int:

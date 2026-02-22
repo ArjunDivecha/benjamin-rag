@@ -24,13 +24,13 @@ def _seed_v1_doc(tmp_path: Path, monkeypatch):
     _configure_rag_paths(tmp_path, monkeypatch)
     vs, dm = backend._ensure_rag_services()
     content = b" a" * 200
-    doc_id = dm.save_document(content, "seed.txt", "V1", chunk_count=1)
+    doc_id = dm.save_document(content, "seed.txt", backend.UNIFIED_COLLECTION, chunk_count=1)
     vs.upsert_document(
-        collection_name="V1",
+        collection_name=backend.UNIFIED_COLLECTION,
         doc_id=doc_id,
         chunks=["semiconductor screening examples"],
         embeddings=[[1.0, 0.0, 0.0]],
-        metadata={"filename": "seed.txt", "vertical": "V1"},
+        metadata={"filename": "seed.txt", "vertical": backend.UNIFIED_COLLECTION},
     )
     return doc_id
 
@@ -38,13 +38,13 @@ def _seed_v3_doc(tmp_path: Path, monkeypatch):
     _configure_rag_paths(tmp_path, monkeypatch)
     vs, dm = backend._ensure_rag_services()
     content = b" a" * 200
-    doc_id = dm.save_document(content, "interview_notes.txt", "V3", chunk_count=1)
+    doc_id = dm.save_document(content, "interview_notes.txt", backend.UNIFIED_COLLECTION, chunk_count=1)
     vs.upsert_document(
-        collection_name="V3",
+        collection_name=backend.UNIFIED_COLLECTION,
         doc_id=doc_id,
         chunks=["Interviewee A said the market is growing fast despite volatility."],
         embeddings=[[1.0, 0.0, 0.0]],
-        metadata={"filename": "interview_notes.txt", "vertical": "V3"},
+        metadata={"filename": "interview_notes.txt", "vertical": backend.UNIFIED_COLLECTION},
     )
     return doc_id
 

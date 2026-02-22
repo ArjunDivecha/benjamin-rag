@@ -416,7 +416,7 @@ async function loadDocuments() {
       `).join('');
 
       return `
-        <details class="library-folder" ${index === 0 ? 'open' : ''}>
+        <details class="library-folder">
           <summary class="folder-summary">
             <span class="folder-title">${escapeHtml(folderName)}</span>
             <span class="folder-side">
@@ -433,7 +433,38 @@ async function loadDocuments() {
   }
 }
 
-refreshDocsBtn.addEventListener('click', loadDocuments);
+refreshDocsBtn.addEventListener('click', async () => {
+  const originalText = refreshDocsBtn.textContent;
+  refreshDocsBtn.textContent = 'Processing...';
+  refreshDocsBtn.disabled = true;
+
+  try {
+    const res = await fetch('/api/documents/sync', { method: 'POST' });
+    if (!res.ok) {
+      throw new Error(`Sync failed (${res.status})`);
+    }
+    const data = await res.json();
+    if (data.ingested === 0 && data.removed === 0) {
+      refreshDocsBtn.textContent = 'No New Files';
+    } else if (data.ingested > 0 && data.removed > 0) {
+      refreshDocsBtn.textContent = `${data.ingested} Added, ${data.removed} Removed`;
+    } else if (data.ingested > 0) {
+      refreshDocsBtn.textContent = `${data.ingested} File${data.ingested === 1 ? '' : 's'} Ingested`;
+    } else if (data.removed > 0) {
+      refreshDocsBtn.textContent = `${data.removed} File${data.removed === 1 ? '' : 's'} Removed`;
+    }
+    await loadDocuments();
+  } catch (err) {
+    console.error('Sync error:', err);
+    refreshDocsBtn.textContent = 'Error syncing';
+  } finally {
+    setTimeout(() => {
+      refreshDocsBtn.textContent = originalText;
+      refreshDocsBtn.disabled = false;
+    }, 3000);
+  }
+});
+
 loadDocuments();
 
 form.addEventListener('submit', async (e) => {
