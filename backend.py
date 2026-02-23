@@ -721,15 +721,38 @@ async def chat(
 
 def _get_available_models():
     models_path = Path(APP_DIR) / "models.txt"
-    if not models_path.exists():
-        return []
     models = []
-    for line in models_path.read_text(encoding="utf-8").splitlines():
-        line = line.strip()
-        if not line or "|" not in line:
-            continue
-        provider, model = line.split("|", 1)
-        models.append({"provider": provider.strip(), "model": model.strip()})
+    seen = set()
+    
+    if models_path.exists():
+        for line in models_path.read_text(encoding="utf-8").splitlines():
+            line = line.strip()
+            if not line or "|" not in line:
+                continue
+            provider, model = line.split("|", 1)
+            provider, model = provider.strip(), model.strip()
+            models.append({"provider": provider, "model": model})
+            seen.add(f"{provider}|{model}")
+
+    # Dynamically fetch Ollama models
+    base_url = (_load_env_value("OLLAMA_BASE_URL") or OLLAMA_BASE_URL).strip().rstrip("/")
+    if not base_url.startswith("http"):
+        base_url = "http://" + base_url
+    
+    try:
+        resp = requests.get(f"{base_url}/api/tags", timeout=2.0)
+        if resp.status_code == 200:
+            data = resp.json().get("models", [])
+            for m in data:
+                model_name = m.get("name")
+                if model_name:
+                    key = f"ollama|{model_name}"
+                    if key not in seen:
+                        models.append({"provider": "ollama", "model": model_name})
+                        seen.add(key)
+    except Exception:
+        pass # Ollama might not be running or reachable, which is fine
+
     return models
 
 @app.get("/api/models")
