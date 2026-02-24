@@ -20,7 +20,7 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    # optional for live web context in objectives 1/2:
    EXA_API_KEY=your_exa_api_key_here
    # optional for local inference:
-   OLLAMA_BASE_URL=http://localhost:11434
+   LMSTUDIO_BASE_URL=http://localhost:1234
    LOCAL_RAG_MODEL=qwen2.5:32b
    ```
 4. Configure available models in `models.txt` (one per line, `provider|model_id` format):
@@ -28,13 +28,13 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
    bedrock|us.anthropic.claude-haiku-4-5-20251001-v1:0
    bedrock|us.anthropic.claude-sonnet-4-6
    bedrock|us.anthropic.claude-opus-4-6-v1
-   ollama|qwen2.5:32b
-   ollama|qwen3:30b-a3b
+   lmstudio|qwen2.5:32b
+   lmstudio|qwen3:30b-a3b
    ```
-4. Optional (Objective 3 local model): start Ollama and pull a model:
+4. Optional (Objective 3 local model): start LM Studio and load a model:
    ```bash
-   ollama serve
-   ollama pull qwen2.5:32b
+   $HOME/.lmstudio/bin/lms server start
+   $HOME/.lmstudio/bin/lms load qwen/qwen3-32b --yes
    ```
 5. Put any project files you want to analyze into the `Data/` folder.
 6. Start app:
@@ -48,7 +48,7 @@ Benjamin is a confidential, RAG-powered AI assistant purpose-built for a boutiqu
 7. In the UI:
 - Click the **Sync Data** (or **Refresh**) button to automatically ingest the files from the `Data/` folder into Benjamin's memory.
 - Select any two models from the left/right dropdown bars for side-by-side comparison.
-- All three objectives support dual-model comparison across Bedrock and Ollama providers.
+- All three objectives support dual-model comparison across Bedrock and LM Studio providers.
 - Optional: check **Add live web context (Exa)** for Brief Salon / Interview Atelier to inject recent web context.
 - Per-run metrics include token counts, latency, speed, and estimated cost for Bedrock models.
 
@@ -139,7 +139,7 @@ Create `.env` in this folder with:
 ```bash
 BEDROCK_API_KEY=your_bedrock_api_key_here
 # Optional local-model settings
-OLLAMA_BASE_URL=http://localhost:11434
+LMSTUDIO_BASE_URL=http://localhost:1234
 LOCAL_RAG_MODEL=qwen2.5:32b
 ```
 
@@ -341,7 +341,7 @@ Benjamin is an internal AI tool for a boutique strategy consulting firm that com
 **Client and company confidentiality is non-negotiable.** The current implementation uses a flexible dual-model comparison architecture:
 
 - All three objectives support side-by-side model comparison via configurable `models.txt`.
-- Models from **AWS Bedrock** (Claude Haiku, Sonnet, Opus) and **Ollama** (local models) can be freely mixed.
+- Models from **AWS Bedrock** (Claude Haiku, Sonnet, Opus) and **LM Studio** (local models) can be freely mixed.
 - Users select left/right models from dropdown bars in the UI; the backend dynamically routes to the appropriate provider.
 
 ---
@@ -422,7 +422,7 @@ Model routing is now fully dynamic. Available models are defined in `models.txt`
 | Provider | Example Models | Cloud Egress |
 |---|---|---|
 | `bedrock` | `us.anthropic.claude-haiku-4-5-20251001-v1:0`, `us.anthropic.claude-sonnet-4-6`, `us.anthropic.claude-opus-4-6-v1` | Yes |
-| `ollama` | `qwen2.5:32b`, `qwen3:30b-a3b` | No |
+| `lmstudio` | `qwen2.5:32b`, `qwen3:30b-a3b` | No |
 
 **Estimated cost per request** is calculated and displayed in the UI for Bedrock models:
 
@@ -431,7 +431,7 @@ Model routing is now fully dynamic. Available models are defined in `models.txt`
 | Claude Haiku 4.5 | $1.00 | $5.00 |
 | Claude Sonnet 4.6 | $3.00 | $15.00 |
 | Claude Opus 4.6 | $5.00 | $25.00 |
-| Ollama (local) | $0.00 | $0.00 |
+| LM Studio (local) | $0.00 | $0.00 |
 
 ### 4.3 Web Application (Runtime)
 
@@ -485,7 +485,7 @@ LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compa
 │ All vectors + metadata      │   ->     │                          │
 │ All preprocessing           │ prompt   │                          │
 │ Web UI + FastAPI            │ only     └──────────────────────────┘
-│ Ollama local model (Obj 3)  │          
+│ LM Studio local model (Obj 3)│          
 └─────────────────────────────┘
 ```
 
@@ -518,7 +518,7 @@ LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compa
 | Mode selection | Direct upload mode and RAG mode |
 | RAG retrieval | Query the unified `ALL` collection with `top_k` and `min_score` |
 | Objective prompts | Loads objective-specific system prompts from local files |
-| Dual-model comparison | Any two models (Bedrock or Ollama) can be compared side-by-side on any objective |
+| Dual-model comparison | Any two models (Bedrock or LM Studio) can be compared side-by-side on any objective |
 | Dynamic model selection | Models are loaded from `models.txt` and presented via dropdown selectors |
 | Source traceability | Display retrieved chunk/document references with score color and snippets |
 | Runtime stats | Show tokens, latency (seconds), speed (tok/s), and estimated cost per run |
@@ -530,7 +530,7 @@ LOCAL (consultant machine)                 CLOUD (Obj 1/2 + optional Obj 3 compa
 |---|---|
 | Fully local data plane | Embeddings, chunking, storage, and document files stay local |
 | Controlled cloud egress | Only assembled prompts leave machine (Obj 1/2 and optional Obj 3 compare leg) |
-| Local sensitive synthesis | Obj 3 default generation is local via Ollama |
+| Local sensitive synthesis | Obj 3 default generation is local via LM Studio |
 | Credential handling | API keys from local env files / environment variables only |
 | Repository hygiene | Raw source data folder `/Data/` is excluded from git |
 
@@ -556,7 +556,7 @@ Each objective has a dedicated prompt file:
 | Runtime | Python 3.12 |
 | Web framework | FastAPI + Uvicorn |
 | Frontend | HTML/CSS/JS single-page app (French-whimsical salon UI) |
-| LLM routing | Dynamic dual-model comparison via `models.txt` — supports AWS Bedrock (Claude Haiku/Sonnet/Opus) and Ollama (local models) |
+| LLM routing | Dynamic dual-model comparison via `models.txt` — supports AWS Bedrock (Claude Haiku/Sonnet/Opus) and LM Studio (local models) |
 | Model configuration | `models.txt` (provider\|model_id per line), `/api/models` endpoint |
 | Embeddings | Sentence Transformers (`all-mpnet-base-v2`) |
 | Vector store | ChromaDB (local persistent) |

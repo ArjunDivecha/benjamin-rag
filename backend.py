@@ -49,7 +49,7 @@ STATIC_DIR = os.path.join(APP_DIR, "static")
 AWS_REGION = "us-west-2"
 MODEL = "us.anthropic.claude-opus-4-6-v1"
 OPUS_COMPARE_MODEL = "us.anthropic.claude-opus-4-6-v1"
-OLLAMA_BASE_URL = "http://localhost:11434"
+LMSTUDIO_BASE_URL = "http://localhost:1234"
 LOCAL_RAG_MODEL = "qwen3:32b"
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2MB
 TEXT_ENCODINGS = ["utf-8", "latin-1", "cp1252"]
@@ -64,7 +64,7 @@ OBJECTIVE_TO_COLLECTION = {
 OBJECTIVE_TO_PROVIDER = {
     "expert_network_brief": "bedrock",
     "interview_guide": "bedrock",
-    "insights_qa": "ollama",
+    "insights_qa": "lmstudio",
 }
 WEB_SEARCH_OBJECTIVES = {"expert_network_brief", "interview_guide"}
 EXA_SEARCH_URL = "https://api.exa.ai/search"
@@ -206,10 +206,10 @@ def _reset_rag_services_for_tests() -> None:
 
 
 def _load_local_model_config() -> tuple[str, str]:
-    base_url = (_load_env_value("OLLAMA_BASE_URL") or OLLAMA_BASE_URL).strip().rstrip("/")
+    base_url = (_load_env_value("LMSTUDIO_BASE_URL") or LMSTUDIO_BASE_URL).strip().rstrip("/")
     model = (_load_env_value("LOCAL_RAG_MODEL") or LOCAL_RAG_MODEL).strip()
     if not base_url:
-        base_url = OLLAMA_BASE_URL
+        base_url = LMSTUDIO_BASE_URL
     if not model:
         model = LOCAL_RAG_MODEL
     return base_url, model
@@ -220,19 +220,17 @@ def _load_opus_compare_model() -> str:
     return model or OPUS_COMPARE_MODEL
 
 
-def _ollama_chat(messages: list[dict]) -> dict:
+def _lmstudio_chat(messages: list[dict]) -> dict:
     base_url, model = _load_local_model_config()
     payload = {
         "model": model,
         "messages": messages,
+        "temperature": 0.1,
         "stream": False,
-        "options": {
-            "temperature": 0.1,
-        },
     }
 
     try:
-        resp = requests.post(f"{base_url}/api/chat", json=payload, timeout=240)
+        resp = requests.post(f"{base_url}/v1/chat/completions", json=payload, timeout=240)
     except requests.RequestException as exc:
         raise HTTPException(
             status_code=502,
@@ -248,21 +246,15 @@ def _ollama_chat(messages: list[dict]) -> dict:
         raise HTTPException(status_code=resp.status_code, detail=msg)
 
     data = resp.json()
-    message = data.get("message", {}) if isinstance(data, dict) else {}
-    content = str(message.get("content", "")).strip()
+    content = str(data.get("choices", [{}])[0].get("message", {}).get("content", "")).strip()
+    usage = data.get("usage", {}) if isinstance(data, dict) else {}
     return {
         "content": content,
         "usage": {
-            "prompt_tokens": int(data.get("prompt_eval_count") or 0),
-            "completion_tokens": int(data.get("eval_count") or 0),
+            "prompt_tokens": int(usage.get("prompt_tokens") or 0),
+            "completion_tokens": int(usage.get("completion_tokens") or 0),
         },
-        "timing": {
-            "total_duration_s": float(data.get("total_duration") or 0) / 1_000_000_000.0,
-            "load_duration_s": float(data.get("load_duration") or 0) / 1_000_000_000.0,
-            "prompt_eval_duration_s": float(data.get("prompt_eval_duration") or 0) / 1_000_000_000.0,
-            "eval_duration_s": float(data.get("eval_duration") or 0) / 1_000_000_000.0,
-        },
-        "model": model,
+        "model": data.get("model", model),
     }
 
 
@@ -552,13 +544,12 @@ def _run_bedrock_model(
 
 
 
-def _run_ollama_model(messages: list[dict]) -> dict:
+def _run_lmstudio_model(messages: list[dict]) -> dict:
     llm_started = time.perf_counter()
-    local = _ollama_chat(messages=messages)
+    local = _lmstudio_chat(messages=messages)
     llm_elapsed_s = time.perf_counter() - llm_started
     content = local.get("content", "")
     usage = local.get("usage", {})
-    eval_duration_s = float(local.get("timing", {}).get("eval_duration_s") or 0.0)
     prompt_tokens = int(usage.get("prompt_tokens", 0))
     completion_tokens = int(usage.get("completion_tokens", 0))
     return {
@@ -567,13 +558,12 @@ def _run_ollama_model(messages: list[dict]) -> dict:
             "prompt_tokens": prompt_tokens,
             "completion_tokens": completion_tokens,
         },
-        "provider": "ollama",
+        "provider": "lmstudio",
         "model": local.get("model", LOCAL_RAG_MODEL),
         "metrics": _build_metrics(
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
             latency_s=llm_elapsed_s,
-            eval_duration_s=eval_duration_s,
         ),
     }
 
@@ -696,8 +686,8 @@ async def chat(
             model_name=MODEL,
             enable_web_search=web_meta["enabled"],
         )
-    elif provider == "ollama":
-        model_response = _run_ollama_model(
+    elif provider == "lmstudio":
+        model_response = _run_lmstudio_model(
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content},
@@ -734,24 +724,24 @@ def _get_available_models():
             models.append({"provider": provider, "model": model})
             seen.add(f"{provider}|{model}")
 
-    # Dynamically fetch Ollama models
-    base_url = (_load_env_value("OLLAMA_BASE_URL") or OLLAMA_BASE_URL).strip().rstrip("/")
+    # Dynamically fetch LM Studio models
+    base_url = (_load_env_value("LMSTUDIO_BASE_URL") or LMSTUDIO_BASE_URL).strip().rstrip("/")
     if not base_url.startswith("http"):
         base_url = "http://" + base_url
     
     try:
-        resp = requests.get(f"{base_url}/api/tags", timeout=2.0)
+        resp = requests.get(f"{base_url}/v1/models", timeout=2.0)
         if resp.status_code == 200:
-            data = resp.json().get("models", [])
+            data = resp.json().get("data", [])
             for m in data:
-                model_name = m.get("name")
+                model_name = m.get("id")
                 if model_name:
-                    key = f"ollama|{model_name}"
+                    key = f"lmstudio|{model_name}"
                     if key not in seen:
-                        models.append({"provider": "ollama", "model": model_name})
+                        models.append({"provider": "lmstudio", "model": model_name})
                         seen.add(key)
     except Exception:
-        pass # Ollama might not be running or reachable, which is fine
+        pass  # LM Studio might not be running or reachable, which is fine
 
     return models
 
@@ -873,27 +863,11 @@ async def chat_compare(
                 )
             except Exception as e:
                 return {"error": str(e), "content": f"Error: {e}"}
-        elif prov == "ollama":
-            # For Ollama, we can temporarily pass the requested model by just using the default, or if we modify 
-            # _run_ollama_model to accept it. But for now _run_ollama_model just calls whatever LOCAL_RAG_MODEL is setup.
-            # So let's patch LOCAL_RAG_MODEL for the duration or add model override to _run_ollama_model.
-            # We'll just temporarily assume it uses the _run_ollama_model that might be updated later.
-            # To be safe, adding a try catch
+        elif prov == "lmstudio":
             try:
-                # Need to run with the specific model somehow. I'll pass the model but the old function might not accept it.
-                # Actually _run_local_model doesn't take models! So let's just ignore the model parameter for ollama for now since we only have one usually, or patch the local config dynamically.
-                # Assuming _run_ollama_model doesn't take an argument... wait, let's look at `_run_ollama_model`
-                # Let's just submit without model info to local for now unless it errors.
-                # I will override `_load_local_model_config` manually here if possible, but actually we can just pass it as an argument!
-                # Wait, does _run_ollama_model take a model parameter? I don't know, let's try calling it.
-                # For safety, I'll provide `model=mod` via kwargs if supported or ignore it if not.
-                # But actually, I'll just change `_run_ollama_model` signature manually next if it fails.
-                return _run_ollama_model(msgs)
-            except TypeError:
-                try: 
-                    return _run_ollama_model(msgs, model_name=mod)
-                except Exception as e:
-                    return {"error": str(e), "content": f"Error: {e}"}
+                return _run_lmstudio_model(msgs)
+            except Exception as e:
+                return {"error": str(e), "content": f"Error: {e}"}
         else:
             return {"error": "Unknown provider", "content": f"Unknown provider {prov}"}
 

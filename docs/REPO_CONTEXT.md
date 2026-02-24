@@ -23,7 +23,7 @@ Last updated: 2026-02-17
 - `allow_fallbacks: false`
 - Objective routing:
 - Obj 1 and Obj 2 use OpenRouter Sonnet (`anthropic/claude-sonnet-4.5`)
-- Obj 3 uses local Ollama by default (`LOCAL_RAG_MODEL`)
+- Obj 3 uses local LM Studio by default (`LOCAL_RAG_MODEL`)
 - Obj 3 compare mode also runs OpenRouter Opus (`OPUS_COMPARE_MODEL`, default `anthropic/claude-opus-4.6`)
 
 ## Current UI Behavior
@@ -49,7 +49,7 @@ Last updated: 2026-02-17
 - Keep source corpora local; this repo intentionally keeps `Data/` gitignored.
 - `.env` is the expected credential/config source:
 - required: `OPENROUTER_API_KEY`
-- optional: `OLLAMA_BASE_URL`, `LOCAL_RAG_MODEL`, `OPUS_COMPARE_MODEL`
+- optional: `LMSTUDIO_BASE_URL`, `LOCAL_RAG_MODEL`, `OPUS_COMPARE_MODEL`
 
 ## Canonical Docs
 - `README.md`: primary user and operator documentation.

@@ -11,7 +11,7 @@ python3.12 -m venv .venv
 ```
 3. Ensure `.env` includes:
 - `OPENROUTER_API_KEY=...` (required)
-- `OLLAMA_BASE_URL=...` (optional, default `http://localhost:11434`)
+- `LMSTUDIO_BASE_URL=...` (optional, default `http://localhost:1234`)
 - `LOCAL_RAG_MODEL=...` (optional)
 - `OPUS_COMPARE_MODEL=...` (optional)
 

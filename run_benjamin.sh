@@ -61,9 +61,12 @@ else
   echo "✓ .env config file found."
 fi
 
-# 5. Check Ollama (Optional but recommended)
-if ! command -v ollama &> /dev/null; then
-  echo "ℹ️  Ollama is not installed. You will not be able to use local models."
+# 5. Check LM Studio (Optional but recommended)
+LMSTUDIO_URL="${LMSTUDIO_BASE_URL:-http://localhost:1234}"
+if curl -s --connect-timeout 2 "${LMSTUDIO_URL}/v1/models" > /dev/null 2>&1; then
+  echo "✓ LM Studio is reachable at ${LMSTUDIO_URL}"
+else
+  echo "ℹ️  LM Studio is not reachable at ${LMSTUDIO_URL}. You will not be able to use local models."
   echo "   (This is fine if you only plan to use AWS Bedrock models)"
 fi
 

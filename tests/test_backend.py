@@ -103,9 +103,8 @@ def test_chat_rag_insights_qa_uses_local_provider(tmp_path: Path, monkeypatch):
         return _DummyResponse(
             200,
             {
-                "message": {"content": "insights ok"},
-                "prompt_eval_count": 17,
-                "eval_count": 9,
+                "choices": [{"message": {"content": "insights ok"}}],
+                "usage": {"prompt_tokens": 17, "completion_tokens": 9},
             },
         )
     monkeypatch.setattr(backend.requests, "post", fake_post)
@@ -119,7 +118,7 @@ def test_chat_rag_insights_qa_uses_local_provider(tmp_path: Path, monkeypatch):
         },
     )
     assert resp.status_code == 200, resp.text
-    assert resp.json()["provider"] == "ollama"
+    assert resp.json()["provider"] == "lmstudio"
 
 def test_documents_endpoint_returns_list(tmp_path: Path, monkeypatch):
     _seed_v1_doc(tmp_path, monkeypatch)
@@ -174,15 +173,15 @@ def test_local_model_config_reads_dotenv_when_env_missing(tmp_path: Path, monkey
     env_file = tmp_path / ".env"
     env_file.write_text(
         "LOCAL_RAG_MODEL=qwen3:32b\n"
-        "OLLAMA_BASE_URL=http://127.0.0.1:11434/\n",
+        "LMSTUDIO_BASE_URL=http://127.0.0.1:1234/\n",
         encoding="utf-8",
     )
     monkeypatch.delenv("LOCAL_RAG_MODEL", raising=False)
-    monkeypatch.delenv("OLLAMA_BASE_URL", raising=False)
+    monkeypatch.delenv("LMSTUDIO_BASE_URL", raising=False)
     monkeypatch.setattr(backend, "APP_DIR", str(tmp_path))
     monkeypatch.chdir(tmp_path)
     base_url, model = backend._load_local_model_config()
-    assert base_url == "http://127.0.0.1:11434"
+    assert base_url == "http://127.0.0.1:1234"
     assert model == "qwen3:32b"
 
 def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
@@ -193,9 +192,8 @@ def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
         return _DummyResponse(
             200,
             {
-                "message": {"content": "local ok"},
-                "prompt_eval_count": 17,
-                "eval_count": 9,
+                "choices": [{"message": {"content": "local ok"}}],
+                "usage": {"prompt_tokens": 17, "completion_tokens": 9},
             },
         )
     monkeypatch.setattr(backend.requests, "post", fake_post)
@@ -206,14 +204,14 @@ def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
         data={
             "message": "In 1 sentence, who mentioned growth?",
             "objective": "insights_qa",
-            "model_left": "ollama|qwen2.5:32b",
+            "model_left": "lmstudio|qwen2.5:32b",
             "model_right": "bedrock|us.anthropic.claude-opus-4-6-v1",
         },
     )
     assert resp.status_code == 200, resp.text
     data = resp.json()
     assert data["left"]["content"] == "local ok"
-    assert data["left"]["provider"] == "ollama"
+    assert data["left"]["provider"] == "lmstudio"
     assert "content" in data["right"]
     assert data["right"]["provider"] == "bedrock"
 

@@ -221,7 +221,7 @@ function renderResponseHtml(payload, options = {}) {
       const cost = (promptTokens * inCostPerM + completionTokens * outCostPerM) / 1000000;
       costValue = cost === 0 ? '$0.00' : (cost < 0.0001 ? '<$0.0001' : '$' + cost.toFixed(4));
     }
-  } else if (data.provider === 'ollama') {
+  } else if (data.provider === 'lmstudio') {
     costValue = '$0.00';
   }
 
