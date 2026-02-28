@@ -205,14 +205,29 @@ def _reset_rag_services_for_tests() -> None:
 # _openrouter_chat removed in favor of direct boto3 calls directly inside _run_bedrock_model
 
 
-def _load_local_model_config() -> tuple[str, str]:
+def _load_lmstudio_base_url() -> str:
+    """Load LM Studio base URL from env, for connection only."""
     base_url = (_load_env_value("LMSTUDIO_BASE_URL") or LMSTUDIO_BASE_URL).strip().rstrip("/")
-    model = (_load_env_value("LOCAL_RAG_MODEL") or LOCAL_RAG_MODEL).strip()
     if not base_url:
         base_url = LMSTUDIO_BASE_URL
-    if not model:
-        model = LOCAL_RAG_MODEL
-    return base_url, model
+    return base_url
+
+
+def _get_first_loaded_lmstudio_model() -> str:
+    """Get the first loaded model from LM Studio, for legacy single-model endpoint."""
+    base_url = _load_lmstudio_base_url()
+    try:
+        resp = requests.get(f"{base_url}/v1/models", timeout=2.0)
+        if resp.status_code == 200:
+            data = resp.json().get("data", [])
+            if data:
+                return data[0].get("id", "")
+    except Exception:
+        pass
+    raise HTTPException(
+        status_code=503,
+        detail="No LM Studio model loaded. Please load a model in LM Studio first."
+    )
 
 
 def _load_opus_compare_model() -> str:
@@ -220,8 +235,12 @@ def _load_opus_compare_model() -> str:
     return model or OPUS_COMPARE_MODEL
 
 
-def _lmstudio_chat(messages: list[dict]) -> dict:
-    base_url, model = _load_local_model_config()
+def _lmstudio_chat(messages: list[dict], model: str) -> dict:
+    """Call LM Studio API with specified model."""
+    if not model:
+        raise ValueError("Model name is required for LM Studio calls")
+    
+    base_url = _load_lmstudio_base_url()
     payload = {
         "model": model,
         "messages": messages,
@@ -544,9 +563,33 @@ def _run_bedrock_model(
 
 
 
-def _run_lmstudio_model(messages: list[dict]) -> dict:
+def _run_lmstudio_model(messages: list[dict], model_name: str) -> dict:
+    """Run LM Studio model with specified model name."""
+    if not model_name:
+        raise ValueError("Model name is required for LM Studio")
+    
+    # LM Studio models often don't support system role, so convert to user messages
+    converted_messages = []
+    system_content = ""
+    
+    for msg in messages:
+        if msg["role"] == "system":
+            system_content = msg["content"]
+        else:
+            converted_messages.append(msg)
+    
+    # Prepend system content to first user message if exists
+    if system_content and converted_messages:
+        for i, msg in enumerate(converted_messages):
+            if msg["role"] == "user":
+                converted_messages[i] = {
+                    "role": "user",
+                    "content": f"{system_content}\n\n{msg['content']}"
+                }
+                break
+    
     llm_started = time.perf_counter()
-    local = _lmstudio_chat(messages=messages)
+    local = _lmstudio_chat(messages=converted_messages, model=model_name)
     llm_elapsed_s = time.perf_counter() - llm_started
     content = local.get("content", "")
     usage = local.get("usage", {})
@@ -559,7 +602,7 @@ def _run_lmstudio_model(messages: list[dict]) -> dict:
             "completion_tokens": completion_tokens,
         },
         "provider": "lmstudio",
-        "model": local.get("model", LOCAL_RAG_MODEL),
+        "model": local.get("model", model_name),
         "metrics": _build_metrics(
             prompt_tokens=prompt_tokens,
             completion_tokens=completion_tokens,
@@ -687,11 +730,13 @@ async def chat(
             enable_web_search=web_meta["enabled"],
         )
     elif provider == "lmstudio":
+        loaded_model = _get_first_loaded_lmstudio_model()
         model_response = _run_lmstudio_model(
             messages=[
                 {"role": "system", "content": system_prompt},
                 {"role": "user", "content": user_content},
-            ]
+            ],
+            model_name=loaded_model,
         )
     else:
         raise HTTPException(status_code=500, detail=f"Unsupported provider: {provider}")
@@ -725,9 +770,7 @@ def _get_available_models():
             seen.add(f"{provider}|{model}")
 
     # Dynamically fetch LM Studio models
-    base_url = (_load_env_value("LMSTUDIO_BASE_URL") or LMSTUDIO_BASE_URL).strip().rstrip("/")
-    if not base_url.startswith("http"):
-        base_url = "http://" + base_url
+    base_url = _load_lmstudio_base_url()
     
     try:
         resp = requests.get(f"{base_url}/v1/models", timeout=2.0)
@@ -865,7 +908,7 @@ async def chat_compare(
                 return {"error": str(e), "content": f"Error: {e}"}
         elif prov == "lmstudio":
             try:
-                return _run_lmstudio_model(msgs)
+                return _run_lmstudio_model(msgs, model_name=mod)
             except Exception as e:
                 return {"error": str(e), "content": f"Error: {e}"}
         else:

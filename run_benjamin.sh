@@ -5,23 +5,33 @@ echo "=========================================================="
 echo "Benjamin AI Strategy Assistant - Startup Script"
 echo "=========================================================="
 
-# 1. Check for Python 3.12
-PYTHON_BIN="python3.12"
-if ! command -v $PYTHON_BIN &> /dev/null; then
-  # Try basic "python3" and check if it's 3.12
-  if command -v python3 &> /dev/null && python3 --version 2>&1 | grep -q 'Python 3.12'; then
-    PYTHON_BIN="python3"
-  else
+# 1. Check for Python (3.9+ is fine)
+PYTHON_BIN=""
+if [ -d ".venv" ]; then
+  # Virtual environment already exists, use it
+  PYTHON_BIN="./.venv/bin/python"
+  echo "✓ Using existing virtual environment"
+else
+  # Need to create venv - find any Python 3.x
+  for py_cmd in python3.12 python3.11 python3.10 python3.9 python3; do
+    if command -v $py_cmd &> /dev/null; then
+      PYTHON_BIN=$py_cmd
+      echo "✓ Found Python: $($py_cmd --version)"
+      break
+    fi
+  done
+  
+  if [ -z "$PYTHON_BIN" ]; then
     echo "=========================================================="
-    echo "❌ Error: Python 3.12 could not be found."
+    echo "❌ Error: Python 3 could not be found."
     echo ""
-    echo "Benjamin specifically requires Python 3.12."
+    echo "Benjamin requires Python 3.9 or higher."
     echo ""
     echo "HOW TO FIX THIS (Mac):"
-    echo "1. If you don't have Homebrew installed, open a new Terminal and paste:"
+    echo "1. Install Homebrew if you don't have it:"
     echo '   /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"'
     echo ""
-    echo "2. Once Homebrew is installed, run:"
+    echo "2. Install Python:"
     echo "   brew install python@3.12"
     echo ""
     echo "Then come back and run this script again!"
@@ -29,8 +39,6 @@ if ! command -v $PYTHON_BIN &> /dev/null; then
     exit 1
   fi
 fi
-
-echo "✓ Found Python: $($PYTHON_BIN --version)"
 
 # 2. Setup Virtual Environment
 if [ ! -d ".venv" ]; then
@@ -75,5 +83,13 @@ echo "Starting Benjamin..."
 echo "=========================================================="
 PORT=${PORT:-8000}
 HOST=${HOST:-"127.0.0.1"}
+
+# Clear proxy variables to avoid boto3 connection issues
+unset HTTP_PROXY HTTPS_PROXY http_proxy https_proxy ALL_PROXY all_proxy
+unset NO_PROXY no_proxy SOCKS_PROXY socks_proxy SOCKS5_PROXY socks5_proxy
+unset GIT_HTTP_PROXY GIT_HTTPS_PROXY
+
+# Open browser after a short delay (in background)
+(sleep 3 && open "http://${HOST}:${PORT}") &
 
 ./.venv/bin/uvicorn backend:app --host $HOST --port $PORT --reload
