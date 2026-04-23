@@ -152,6 +152,46 @@ def test_chat_rag_empty_vertical_returns_error(tmp_path: Path, monkeypatch):
     )
     assert resp.status_code == 400
 
+
+def test_chat_rag_can_fallback_to_filename_match(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    vs, dm = backend._ensure_rag_services()
+    exec_content = b" a" * 200
+    other_content = b" b" * 200
+    doc_id = dm.save_document(exec_content, "Executive Summary.docx", backend.UNIFIED_COLLECTION, chunk_count=1)
+    vs.upsert_document(
+        collection_name=backend.UNIFIED_COLLECTION,
+        doc_id=doc_id,
+        chunks=["global tariffs and trade policy analysis"],
+        embeddings=[[0.0, 0.0, 1.0]],
+        metadata={"filename": "Executive Summary.docx", "vertical": backend.UNIFIED_COLLECTION},
+    )
+    other_doc_id = dm.save_document(other_content, "5.1 Phase 1 Wrap-up.pdf", backend.UNIFIED_COLLECTION, chunk_count=1)
+    vs.upsert_document(
+        collection_name=backend.UNIFIED_COLLECTION,
+        doc_id=other_doc_id,
+        chunks=["phase one wrap-up and software diligence findings"],
+        embeddings=[[0.6, 0.8, 0.0]],
+        metadata={"filename": "5.1 Phase 1 Wrap-up.pdf", "vertical": backend.UNIFIED_COLLECTION},
+    )
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat",
+        data={
+            "message": "summarize this executive summary",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+        },
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["sources"]
+    assert data["sources"][0]["filename"] == "Executive Summary.docx"
+
+
 def test_chat_rag_insights_qa_uses_local_provider(tmp_path: Path, monkeypatch):
     _seed_v3_doc(tmp_path, monkeypatch)
     monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
