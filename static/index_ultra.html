@@ -10,11 +10,6 @@
 </head>
 
 <body>
-    <nav class="nav-bar">
-        <a href="/" class="theme-btn">Classic</a>
-        <a href="/ultra" class="theme-btn active">Ultra</a>
-    </nav>
-
     <div class="container">
         <header class="hero">
             <div class="hero-seal">BM</div>
@@ -54,7 +49,7 @@
                         <select id="objective" name="objective">
                             <option value="expert_network_brief">Expert Brief</option>
                             <option value="interview_guide">Interview Guide</option>
-                            <option value="insights_qa">Insights Engine (Dual Model Analysis)</option>
+                            <option value="insights_qa">Insights Engine</option>
                         </select>
                         <div id="objectiveHint" class="hint">Compose an expert-network brief with ~5 screening questions
                             that test true knowledge depth.</div>
@@ -138,6 +133,19 @@
                             required></textarea>
                     </div>
 
+                    <div class="form-group compare-control">
+                        <label class="compare-toggle-label" for="compareToggle">
+                            <span>
+                                <strong>Compare two models</strong>
+                                <small>Off by default. Turn on to reveal and run the right-side model.</small>
+                            </span>
+                            <span class="switch">
+                                <input id="compareToggle" type="checkbox">
+                                <span class="slider"></span>
+                            </span>
+                        </label>
+                    </div>
+
                     <div class="actions">
                         <button type="submit" id="submitBtn">Initialize Analysis</button>
                     </div>
@@ -161,11 +169,23 @@
                     <h3>Knowledge Archive</h3>
                     <button class="btn-small" id="refreshDocsBtn" type="button">Sync Data</button>
                 </div>
+                <div class="archive-drop-zone" id="archiveDropZone" role="button" tabindex="0"
+                    aria-label="Drop files into the Knowledge Archive">
+                    <input type="file" id="archiveFileInput" multiple
+                        accept=".txt,.md,.docx,.pdf,.csv,.json,.xml,.yaml,.yml">
+                    <div>
+                        <strong>Drop files here</strong>
+                        <span>They will stage here first, then ingest when you press Sync Data.</span>
+                    </div>
+                </div>
+                <div id="pendingArchiveList" class="pending-archive-list" aria-live="polite"></div>
+                <div id="archiveSyncStatus" class="archive-sync-status" aria-live="polite"></div>
                 <div id="docList" style="flex-grow: 1; overflow-y: auto;"></div>
             </div>
 
-            <div class="card">
-                <div class="form-group" style="margin-bottom: 1rem;">
+            <div class="card result-card" id="primaryPanel">
+                <div class="result-toolbar">
+                    <label for="modelLeft">Primary Model</label>
                     <select id="modelLeft"></select>
                 </div>
                 <div id="response" class="response panel-response">
@@ -173,8 +193,9 @@
                 </div>
             </div>
 
-            <div class="card">
-                <div class="form-group" style="margin-bottom: 1rem;">
+            <div class="card result-card compare-result-card hidden" id="comparePanel">
+                <div class="result-toolbar">
+                    <label for="modelRight">Comparison Model</label>
                     <select id="modelRight"></select>
                 </div>
                 <div id="compareResponse" class="response panel-response">

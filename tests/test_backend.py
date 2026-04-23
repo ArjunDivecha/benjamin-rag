@@ -273,6 +273,42 @@ def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
     assert data["right"]["provider"] == "bedrock"
 
 
+def test_chat_compare_can_run_only_left_model_when_compare_disabled(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    calls = []
+
+    def fake_run_bedrock_model(messages, model_name, api_key=None, enable_web_search=False):
+        calls.append(model_name)
+        return {
+            "content": "left only",
+            "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+            "provider": "bedrock",
+            "model": model_name,
+            "metrics": {"total_tokens": 2, "latency_ms": 1.0, "tok_per_sec": 2.0},
+        }
+
+    monkeypatch.setattr(backend, "_load_bedrock_key", lambda: "test-key")
+    monkeypatch.setattr(backend, "_run_bedrock_model", fake_run_bedrock_model)
+
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat/compare",
+        data={
+            "message": "Draft a one-sentence brief.",
+            "mode": "direct",
+            "objective": "expert_network_brief",
+            "compare_enabled": "false",
+            "model_left": "bedrock|us.anthropic.claude-haiku-4-5-20251001-v1:0",
+        },
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["left"]["content"] == "left only"
+    assert data["right"] is None
+    assert calls == ["us.anthropic.claude-haiku-4-5-20251001-v1:0"]
+
+
 def test_chat_compare_enables_web_search_for_objective1_when_checked(tmp_path: Path, monkeypatch):
     _configure_rag_paths(tmp_path, monkeypatch)
     calls = []
@@ -398,3 +434,30 @@ def test_export_word_docx_download_contains_response_content():
     assert "Draft a screening brief for a software diligence." in full_text
     assert "Executive Summary" in full_text
     assert "Validate ICP" in full_text
+
+
+def test_export_word_docx_allows_single_model_payload():
+    client = TestClient(backend.app)
+    payload = _sample_export_payload()
+    payload["export_format"] = "word"
+    payload["right"] = None
+    resp = client.post("/api/export", json=payload)
+
+    assert resp.status_code == 200, resp.text
+    doc = Document(io.BytesIO(resp.content))
+    full_text = "\n".join(p.text for p in doc.paragraphs)
+    assert "Executive Summary" in full_text
+    assert "Validate ICP" not in full_text
+
+
+def test_root_serves_ultra_and_classic_redirects():
+    client = TestClient(backend.app)
+
+    root = client.get("/")
+    assert root.status_code == 200, root.text
+    assert "Ultra Research Engine" in root.text
+    assert "Classic" not in root.text
+
+    classic = client.get("/classic", follow_redirects=False)
+    assert classic.status_code == 307
+    assert classic.headers["location"] == "/"

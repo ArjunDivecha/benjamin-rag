@@ -29,6 +29,7 @@ import json
 import os
 import re
 import time
+from contextlib import redirect_stdout
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
 from html import escape
@@ -39,10 +40,10 @@ import boto3
 import requests
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import FileResponse, Response, StreamingResponse
+from fastapi.responses import FileResponse, RedirectResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
 
-from preprocess import _resolve_files, sync_collection
+from preprocess import SUPPORTED_SUFFIXES, _resolve_files, sync_collection
 
 # -----------------------------------------------------------------------------
 # Configuration
@@ -55,6 +56,7 @@ OPUS_COMPARE_MODEL = "us.anthropic.claude-opus-4-6-v1"
 LMSTUDIO_BASE_URL = "http://localhost:1234"
 LOCAL_RAG_MODEL = "qwen3:32b"
 MAX_FILE_SIZE = 2 * 1024 * 1024  # 2MB
+MAX_ARCHIVE_UPLOAD_SIZE = 50 * 1024 * 1024  # 50MB
 TEXT_ENCODINGS = ["utf-8", "latin-1", "cp1252"]
 VECTOR_DB_PATH = os.path.join(APP_DIR, "chroma_db")
 UPLOADED_DOCS_PATH = os.path.join(APP_DIR, "uploaded_docs")
@@ -218,6 +220,15 @@ def _reset_rag_services_for_tests() -> None:
     _vector_store = None
     _doc_manager = None
     _rag_import_error = None
+
+
+def _safe_archive_filename(filename: str) -> str:
+    """Return a basename-only upload filename suitable for the local Data folder."""
+    normalized = (filename or "").replace("\\", "/")
+    safe_name = os.path.basename(normalized).strip()
+    if not safe_name or safe_name in {".", ".."}:
+        raise ValueError("Archive upload is missing a usable filename")
+    return safe_name
 
 
 # _openrouter_chat removed in favor of direct boto3 calls directly inside _run_bedrock_model
@@ -1008,7 +1019,7 @@ def _build_export_html(payload: dict[str, Any]) -> str:
     generated_at = _format_timestamp(payload.get("generated_at"))
     prompt = _safe_text(payload.get("prompt")) or "No prompt captured."
     left = payload.get("left") if isinstance(payload.get("left"), dict) else {}
-    right = payload.get("right") if isinstance(payload.get("right"), dict) else {}
+    right = payload.get("right") if isinstance(payload.get("right"), dict) else None
 
     context_rows = [
         ("Module", objective_label),
@@ -1031,7 +1042,7 @@ def _build_export_html(payload: dict[str, Any]) -> str:
             pass
 
     left_title = _safe_text(left.get("export_label")) or "Left Model"
-    right_title = _safe_text(right.get("export_label")) or "Right Model"
+    right_title = _safe_text(right.get("export_label")) if right else ""
     sources = _coerce_sources(payload)
     web_sources = _coerce_web_sources(payload)
 
@@ -1095,6 +1106,16 @@ def _build_export_html(payload: dict[str, Any]) -> str:
         else ""
     )
 
+    right_output_html = ""
+    if right:
+        right_output_html = f"""
+          <div style="margin:0; padding:18px; border:1px solid #d6deea; border-radius:14px; background:#fbfdff;">
+            <h3 style="margin:0 0 8px; color:#10213c; font-size:20px;">{escape(right_title or "Comparison Model")}</h3>
+            {_render_key_value_table_html(_build_model_metric_rows(right))}
+            {_render_blocks_html(_safe_text(right.get("content")) or "No response text returned.")}
+          </div>
+        """
+
     return f"""<!DOCTYPE html>
 <html lang="en">
   <head>
@@ -1131,11 +1152,7 @@ def _build_export_html(payload: dict[str, Any]) -> str:
             {_render_blocks_html(_safe_text(left.get("content")) or "No response text returned.")}
           </div>
 
-          <div style="margin:0; padding:18px; border:1px solid #d6deea; border-radius:14px; background:#fbfdff;">
-            <h3 style="margin:0 0 8px; color:#10213c; font-size:20px;">{escape(right_title)}</h3>
-            {_render_key_value_table_html(_build_model_metric_rows(right))}
-            {_render_blocks_html(_safe_text(right.get("content")) or "No response text returned.")}
-          </div>
+          {right_output_html}
         </section>
 
         {rag_html}
@@ -1155,7 +1172,7 @@ def _build_export_docx(payload: dict[str, Any]) -> bytes:
     generated_at = _format_timestamp(payload.get("generated_at"))
     prompt = _safe_text(payload.get("prompt")) or "No prompt captured."
     left = payload.get("left") if isinstance(payload.get("left"), dict) else {}
-    right = payload.get("right") if isinstance(payload.get("right"), dict) else {}
+    right = payload.get("right") if isinstance(payload.get("right"), dict) else None
 
     document = Document()
     document.core_properties.title = "Benjamin Maurice Analysis Export"
@@ -1181,10 +1198,11 @@ def _build_export_docx(payload: dict[str, Any]) -> bytes:
     document.add_heading("Prompt", level=1)
     _append_markdownish_doc_content(document, prompt)
 
-    for section_title, model_payload in (
-        (_safe_text(left.get("export_label")) or "Left Model", left),
-        (_safe_text(right.get("export_label")) or "Right Model", right),
-    ):
+    model_sections = [(_safe_text(left.get("export_label")) or "Primary Model", left)]
+    if right:
+        model_sections.append((_safe_text(right.get("export_label")) or "Comparison Model", right))
+
+    for section_title, model_payload in model_sections:
         document.add_heading(section_title, level=1)
         for label, value in _build_model_metric_rows(model_payload):
             paragraph = document.add_paragraph()
@@ -1440,19 +1458,21 @@ async def chat_compare(
     mode: Optional[str] = Form("direct"),
     objective: str = Form(..., description="Objective to run the prompt for"),
     model_left: str = Form(..., description="Provider|Model for the left pane"),
-    model_right: str = Form(..., description="Provider|Model for the right pane"),
+    model_right: Optional[str] = Form(None, description="Provider|Model for the optional right pane"),
     top_k: int = Form(5),
     min_score: float = Form(0.5),
     file: Optional[UploadFile] = File(None),
     use_web_search: Optional[str] = Form("false"),
+    compare_enabled: Optional[str] = Form("true"),
 ):
     """
-    Compare endpoint for side-by-side answers for any objective.
-    Uses model_left and model_right format: "provider|model".
+    Chat endpoint for one selected model, with optional side-by-side comparison.
+    Uses model_left/model_right format: "provider|model".
     """
     mode = (mode or "direct").strip().lower()
     request_started = time.perf_counter()
     objective = (objective or "").strip()
+    compare_requested = _as_bool(compare_enabled, default=True)
     
     rag_summary = None
     sources = []
@@ -1554,19 +1574,25 @@ async def chat_compare(
         else:
             return {"error": "Unknown provider", "content": f"Unknown provider {prov}"}
 
-    with ThreadPoolExecutor(max_workers=2) as executor:
-        local_future = executor.submit(_run_selected_model, model_left, shared_messages)
-        opus_future = executor.submit(_run_selected_model, model_right, shared_messages)
-        
-        local_result = local_future.result()
-        opus_result = opus_future.result()
+    opus_result = None
+    if compare_requested:
+        if not model_right:
+            raise HTTPException(status_code=400, detail="model_right is required when compare_enabled is true")
+        with ThreadPoolExecutor(max_workers=2) as executor:
+            local_future = executor.submit(_run_selected_model, model_left, shared_messages)
+            opus_future = executor.submit(_run_selected_model, model_right, shared_messages)
+
+            local_result = local_future.result()
+            opus_result = opus_future.result()
+    else:
+        local_result = _run_selected_model(model_left, shared_messages)
 
     retrieval_ms = round(retrieval_elapsed_s * 1000.0, 1) if retrieval_elapsed_s else 0
     request_elapsed_s = time.perf_counter() - request_started
     
     if "metrics" in local_result and retrieval_ms:
         local_result["metrics"]["retrieval_ms"] = retrieval_ms
-    if "metrics" in opus_result and retrieval_ms:
+    if opus_result and "metrics" in opus_result and retrieval_ms:
         opus_result["metrics"]["retrieval_ms"] = retrieval_ms
 
     return {
@@ -1593,11 +1619,13 @@ async def export_analysis(payload: dict[str, Any]):
 
     left = payload.get("left")
     right = payload.get("right")
-    if not isinstance(left, dict) or not isinstance(right, dict):
+    if not isinstance(left, dict):
         raise HTTPException(
             status_code=400,
-            detail="left and right model payloads are required for export",
+            detail="left model payload is required for export",
         )
+    if right is not None and not isinstance(right, dict):
+        raise HTTPException(status_code=400, detail="right model payload must be an object when provided")
 
     if export_format == "email_html":
         content = _build_export_html(payload)
@@ -1627,21 +1655,76 @@ def documents(vertical: Optional[str] = None):
 
 
 @app.post("/api/documents/sync")
-def sync_documents():
-    """Sync the RAG backend with the files currently in the Data/ directory."""
+async def sync_documents(files: Optional[list[UploadFile]] = File(None)):
+    """Sync the RAG backend with Data/, optionally staging dropped archive files first."""
     try:
         vector_store, doc_manager = _ensure_rag_services()
     except RuntimeError as exc:
         raise HTTPException(status_code=500, detail=str(exc))
-        
-    data_dir = os.path.join(APP_DIR, "Data")
-    if not os.path.exists(data_dir):
-        return {"ingested": 0, "message": "Data directory not found."}
-        
+
+    data_dir = Path(APP_DIR) / "Data"
+    data_dir.mkdir(parents=True, exist_ok=True)
+
+    staged_uploads = []
+    rejected_uploads = []
+    detail_lines = []
+
+    for upload in files or []:
+        try:
+            filename = _safe_archive_filename(upload.filename or "")
+        except ValueError as exc:
+            rejected_uploads.append({"filename": upload.filename or "unknown", "reason": str(exc)})
+            continue
+
+        suffix = Path(filename).suffix.lower()
+        if suffix not in SUPPORTED_SUFFIXES:
+            reason = f"unsupported file type '{suffix or 'none'}'"
+            rejected_uploads.append({"filename": filename, "reason": reason})
+            detail_lines.append(f"{filename}: skipped before sync ({reason})")
+            continue
+
+        raw = await upload.read()
+        if len(raw) > MAX_ARCHIVE_UPLOAD_SIZE:
+            limit_mb = MAX_ARCHIVE_UPLOAD_SIZE // (1024 * 1024)
+            reason = f"file too large (max {limit_mb}MB)"
+            rejected_uploads.append({"filename": filename, "reason": reason})
+            detail_lines.append(f"{filename}: skipped before sync ({reason})")
+            continue
+
+        target_path = data_dir / filename
+        target_path.write_bytes(raw)
+        staged_uploads.append({"filename": filename, "bytes": len(raw)})
+        detail_lines.append(f"{filename}: staged in Data/ ({len(raw)} bytes)")
+
     try:
-        files = _resolve_files(None, data_dir)
-        ingested, removed = sync_collection(UNIFIED_COLLECTION, files, vector_store, doc_manager)
-        return {"ingested": ingested, "removed": removed, "message": "Sync successful."}
+        resolved_files = _resolve_files(None, str(data_dir))
+        sync_output = io.StringIO()
+        with redirect_stdout(sync_output):
+            ingested, removed = sync_collection(UNIFIED_COLLECTION, resolved_files, vector_store, doc_manager)
+        detail_lines.extend(line.strip() for line in sync_output.getvalue().splitlines() if line.strip())
+        if not detail_lines:
+            detail_lines.append("No file changes detected.")
+
+        summary_parts = []
+        if staged_uploads:
+            summary_parts.append(f"{len(staged_uploads)} file{'s' if len(staged_uploads) != 1 else ''} staged")
+        if ingested:
+            summary_parts.append(f"{ingested} ingested")
+        if removed:
+            summary_parts.append(f"{removed} removed")
+        if rejected_uploads:
+            summary_parts.append(f"{len(rejected_uploads)} rejected")
+        message = ", ".join(summary_parts) + "." if summary_parts else "No file changes detected."
+
+        return {
+            "ingested": ingested,
+            "removed": removed,
+            "uploaded": len(staged_uploads),
+            "staged": staged_uploads,
+            "rejected": rejected_uploads,
+            "details": detail_lines,
+            "message": message,
+        }
     except Exception as exc:
         raise HTTPException(status_code=500, detail=f"Sync failed: {str(exc)}")
 
@@ -1698,20 +1781,17 @@ def stats():
 
 @app.get("/")
 def index():
-    """Serve the legacy classic frontend."""
-    index_path = os.path.join(STATIC_DIR, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
-    return {"message": "Classic theme not found."}
+    """Serve the Ultra frontend as the only interface."""
+    ultra_path = os.path.join(STATIC_DIR, "index_ultra.html")
+    if os.path.exists(ultra_path):
+        return FileResponse(ultra_path)
+    return {"message": "Ultra theme not found."}
 
 
 @app.get("/classic")
 def index_classic():
-    """Serve the legacy classic frontend."""
-    index_path = os.path.join(STATIC_DIR, "index.html")
-    if os.path.exists(index_path):
-        return FileResponse(index_path)
-    return {"message": "Classic theme not found."}
+    """Redirect legacy classic links to the only retained Ultra interface."""
+    return RedirectResponse(url="/", status_code=307)
 
 
 @app.get("/ultra")

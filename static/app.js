@@ -1,6 +1,5 @@
 /* ==========================================================================
-   Benjamin Maurice AI — Shared Application Logic
-   This JS is identical for both French and Professional themes.
+   Benjamin Maurice AI — Ultra Application Logic
    ========================================================================== */
 
 const form = document.getElementById('chatForm');
@@ -37,13 +36,20 @@ const responseEl = document.getElementById('response');
 const compareResponseEl = document.getElementById('compareResponse');
 const docList = document.getElementById('docList');
 const refreshDocsBtn = document.getElementById('refreshDocsBtn');
+const archiveDropZone = document.getElementById('archiveDropZone');
+const archiveFileInput = document.getElementById('archiveFileInput');
+const pendingArchiveList = document.getElementById('pendingArchiveList');
+const archiveSyncStatus = document.getElementById('archiveSyncStatus');
 const modelLeft = document.getElementById('modelLeft');
 const modelRight = document.getElementById('modelRight');
+const compareToggle = document.getElementById('compareToggle');
+const comparePanel = document.getElementById('comparePanel');
 const exportFormat = document.getElementById('exportFormat');
 const exportBtn = document.getElementById('exportBtn');
 const exportStatus = document.getElementById('exportStatus');
 
 let currentExportPayload = null;
+let pendingArchiveFiles = [];
 
 const OBJECTIVE_META = {
   expert_network_brief: {
@@ -81,7 +87,7 @@ const OBJECTIVE_META = {
     },
   },
   insights_qa: {
-    hint: 'Runs side-by-side answers (local + Opus) over the same RAG context for transcript analysis.',
+    hint: 'Runs transcript analysis over the RAG archive. Turn on comparison only when you want a second model.',
     promptPlaceholder: 'Ask for counts, quotes, speaker mentions, or consensus views with source citations.',
     forceRag: true,
     fieldLabels: {
@@ -194,11 +200,22 @@ function formatNumber(value, digits = 1) {
 }
 
 function shouldRunCompare(mode, objectiveValue) {
-  return true;
+  return Boolean(compareToggle?.checked);
 }
 
 function comparePlaceholderHtml(isActive) {
-  return '<span class="side-placeholder">When you press Begin, the answer and stats will appear here.</span>';
+  return isActive
+    ? '<span class="side-placeholder">When you press Begin, the comparison answer and stats will appear here.</span>'
+    : '';
+}
+
+function syncCompareVisibility() {
+  const enabled = shouldRunCompare(currentMode(), objective.value);
+  comparePanel?.classList.toggle('hidden', !enabled);
+  if (modelRight) {
+    modelRight.disabled = !enabled;
+  }
+  resetComparePanel();
 }
 
 function setExportState(payload, statusText) {
@@ -208,7 +225,7 @@ function setExportState(payload, statusText) {
   }
   if (exportStatus) {
     exportStatus.textContent = statusText || (currentExportPayload
-      ? 'Ready to export the latest comparison.'
+      ? 'Ready to export the latest output.'
       : 'Run an analysis to enable export.');
   }
 }
@@ -242,10 +259,19 @@ function collectContextFields(mode) {
 }
 
 function buildExportPayload(data, mode) {
+  const compareEnabled = shouldRunCompare(mode, objective.value);
+  const rightPayload = compareEnabled && data.right
+    ? {
+      ...data.right,
+      export_label: selectedModelLabel(modelRight),
+    }
+    : null;
+
   return {
     export_format: exportFormat?.value || 'word',
     objective: objective.value,
     mode,
+    compare_enabled: compareEnabled,
     prompt: message.value.trim(),
     generated_at: new Date().toISOString(),
     context_fields: collectContextFields(mode),
@@ -253,10 +279,7 @@ function buildExportPayload(data, mode) {
       ...data.left,
       export_label: selectedModelLabel(modelLeft),
     },
-    right: {
-      ...data.right,
-      export_label: selectedModelLabel(modelRight),
-    },
+    right: rightPayload,
     rag: data.rag || null,
     sources: Array.isArray(data.sources) ? data.sources : [],
     web_search: data.web_search || null,
@@ -457,13 +480,19 @@ if (exportBtn) {
   exportBtn.addEventListener('click', exportCurrentResult);
 }
 
+compareToggle?.addEventListener('change', () => {
+  syncCompareVisibility();
+  setExportState(null, 'Run an analysis to enable export.');
+});
+
 atelierButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     objective.value = btn.dataset.objective;
     syncAtelierState();
     applyObjectivePresentation();
     toggleModeUI();
-    resetComparePanel();
+    syncCompareVisibility();
+    setExportState(null, 'Run an analysis to enable export.');
   });
 });
 
@@ -471,17 +500,19 @@ objective.addEventListener('change', () => {
   syncAtelierState();
   applyObjectivePresentation();
   toggleModeUI();
-  resetComparePanel();
+  syncCompareVisibility();
+  setExportState(null, 'Run an analysis to enable export.');
 });
 modeInputs.forEach(input => input.addEventListener('change', () => {
   toggleModeUI();
-  resetComparePanel();
+  syncCompareVisibility();
+  setExportState(null, 'Run an analysis to enable export.');
 }));
 
 syncAtelierState();
 applyObjectivePresentation();
 toggleModeUI();
-resetComparePanel();
+syncCompareVisibility();
 setExportState(null, 'Run an analysis to enable export.');
 
 sampleLinks.forEach(link => {
@@ -620,12 +651,13 @@ form.addEventListener('submit', async (e) => {
   responseEl.classList.remove('error');
   responseEl.innerHTML = '<span class="response-header">preparing...</span>';
   compareResponseEl.classList.remove('error');
-  compareResponseEl.innerHTML = '<span class="response-header">preparing...</span>';
+  compareResponseEl.innerHTML = compareMode ? '<span class="response-header">preparing...</span>' : '';
 
   const fd = new FormData();
   fd.append('mode', mode);
   fd.append('objective', objective.value);
   fd.append('use_web_search', useWebSearchInput.checked ? 'true' : 'false');
+  fd.append('compare_enabled', compareMode ? 'true' : 'false');
 
   let userMessage = message.value.trim();
   if (mode === 'rag') {
@@ -643,11 +675,12 @@ form.addEventListener('submit', async (e) => {
     fd.append('file', fileInput.files[0]);
   }
   fd.append('model_left', modelLeft.value);
-  fd.append('model_right', modelRight.value);
+  if (compareMode) {
+    fd.append('model_right', modelRight.value);
+  }
 
   try {
-    const endpoint = compareMode ? '/api/chat/compare' : '/api/chat';
-    const res = await fetch(endpoint, {
+    const res = await fetch('/api/chat/compare', {
       method: 'POST',
       body: fd,
     });
@@ -656,14 +689,19 @@ form.addEventListener('submit', async (e) => {
     if (!res.ok) {
       responseEl.classList.add('error');
       responseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
-      compareResponseEl.classList.add('error');
-      compareResponseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
+      if (compareMode) {
+        compareResponseEl.classList.add('error');
+        compareResponseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
+      }
       setExportState(null, 'Export unavailable until the next successful run.');
       return;
     }
 
-    if (!data.left || !data.right) {
-      throw new Error('Compare response missing left/right payload');
+    if (!data.left) {
+      throw new Error('Response missing primary model payload');
+    }
+    if (compareMode && !data.right) {
+      throw new Error('Comparison response missing right model payload');
     }
     const ragSummary = data.rag || null;
     const sharedRetrievalMs = Number(data.metrics?.retrieval_ms || 0);
@@ -677,20 +715,24 @@ form.addEventListener('submit', async (e) => {
       webSearch,
       includeSources: true,
     });
-    compareResponseEl.innerHTML = renderResponseHtml(data.right, {
-      rag: ragSummary,
-      retrievalMs: sharedRetrievalMs,
-      sources,
-      webSearch,
-      includeSources: true,
-    });
-    setExportState(buildExportPayload(data, mode), 'Ready to export the latest comparison.');
+    if (compareMode) {
+      compareResponseEl.innerHTML = renderResponseHtml(data.right, {
+        rag: ragSummary,
+        retrievalMs: sharedRetrievalMs,
+        sources,
+        webSearch,
+        includeSources: true,
+      });
+    }
+    setExportState(buildExportPayload(data, mode), 'Ready to export the latest output.');
     loadDocuments();
   } catch (err) {
     responseEl.classList.add('error');
     responseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
-    compareResponseEl.classList.add('error');
-    compareResponseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
+    if (compareMode) {
+      compareResponseEl.classList.add('error');
+      compareResponseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
+    }
     setExportState(null, 'Export unavailable until the next successful run.');
   } finally {
     submitBtn.disabled = false;
@@ -710,27 +752,33 @@ async function fetchModels() {
     const models = data.models || [];
     if (models.length === 0) {
       modelLeft.innerHTML = '<option value="">No models found</option>';
-      modelRight.innerHTML = '<option value="">No models found</option>';
+      if (modelRight) {
+        modelRight.innerHTML = '<option value="">No models found</option>';
+      }
       return;
     }
     modelLeft.innerHTML = '';
-    modelRight.innerHTML = '';
+    if (modelRight) {
+      modelRight.innerHTML = '';
+    }
     models.forEach((m, i) => {
       const opt1 = document.createElement('option');
       opt1.value = m.provider + "|" + m.model;
       opt1.textContent = m.provider + " · " + m.model;
 
-      const opt2 = document.createElement('option');
-      opt2.value = m.provider + "|" + m.model;
-      opt2.textContent = m.provider + " · " + m.model;
-
       modelLeft.appendChild(opt1);
-      modelRight.appendChild(opt2);
+      if (modelRight) {
+        const opt2 = document.createElement('option');
+        opt2.value = m.provider + "|" + m.model;
+        opt2.textContent = m.provider + " · " + m.model;
+        modelRight.appendChild(opt2);
+      }
     });
 
-    if (models.length > 1) {
+    if (modelRight && models.length > 1) {
       modelRight.selectedIndex = 1;
     }
+    syncCompareVisibility();
   } catch (e) {
     console.error("Failed to fetch models", e);
   }
