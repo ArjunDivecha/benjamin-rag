@@ -24,20 +24,23 @@ Then open http://localhost:8000
 =============================================================================
 """
 
+import io
+import json
 import os
+import re
 import time
 from concurrent.futures import ThreadPoolExecutor
 from datetime import datetime
+from html import escape
 from pathlib import Path
 from typing import Any, Optional
 
-import requests
 import boto3
-import json
+import requests
 from fastapi import FastAPI, File, Form, HTTPException, UploadFile
 from fastapi.middleware.cors import CORSMiddleware
+from fastapi.responses import FileResponse, Response, StreamingResponse
 from fastapi.staticfiles import StaticFiles
-from fastapi.responses import FileResponse
 
 from preprocess import _resolve_files, sync_collection
 
@@ -66,11 +69,26 @@ OBJECTIVE_TO_PROVIDER = {
     "interview_guide": "bedrock",
     "insights_qa": "lmstudio",
 }
+OBJECTIVE_LABELS = {
+    "expert_network_brief": "Expert Brief",
+    "interview_guide": "Interview Guide",
+    "insights_qa": "Insights Engine",
+}
+MODE_LABELS = {
+    "direct": "Attached File",
+    "rag": "RAG Archive",
+}
 WEB_SEARCH_OBJECTIVES = {"expert_network_brief", "interview_guide"}
 EXA_SEARCH_URL = "https://api.exa.ai/search"
 EXA_SEARCH_RESULT_LIMIT = 5
 EXA_SNIPPET_CHARS = 320
 EXA_SEARCH_TIMEOUT_S = 15
+INLINE_TOKEN_PATTERN = re.compile(
+    r"(\*\*.+?\*\*|__.+?__|`.+?`|\*[^*\n][^*\n]*\*|_[^_\n][^_\n]*_)"
+)
+HEADING_PATTERN = re.compile(r"^\s*(#{1,6})\s+(.+?)\s*$")
+UL_PATTERN = re.compile(r"^\s*[-*]\s+(.+?)\s*$")
+OL_PATTERN = re.compile(r"^\s*\d+[.)]\s+(.+?)\s*$")
 
 _vector_store = None
 _doc_manager = None
@@ -211,6 +229,13 @@ def _load_lmstudio_base_url() -> str:
     if not base_url:
         base_url = LMSTUDIO_BASE_URL
     return base_url
+
+
+def _load_local_model_config() -> tuple[str, str]:
+    """Load the local inference connection config from env or local dotenv files."""
+    base_url = _load_lmstudio_base_url()
+    model = (_load_env_value("LOCAL_RAG_MODEL") or LOCAL_RAG_MODEL).strip()
+    return base_url, (model or LOCAL_RAG_MODEL)
 
 
 def _get_first_loaded_lmstudio_model() -> str:
@@ -611,6 +636,621 @@ def _run_lmstudio_model(messages: list[dict], model_name: str) -> dict:
     }
 
 
+def _display_objective(value: Optional[str]) -> str:
+    key = (value or "").strip()
+    return OBJECTIVE_LABELS.get(key, key.replace("_", " ").title() or "Analysis")
+
+
+def _display_mode(value: Optional[str]) -> str:
+    key = (value or "").strip().lower()
+    return MODE_LABELS.get(key, key.title() or "Standard")
+
+
+def _safe_text(value: Any) -> str:
+    return str(value or "").strip()
+
+
+def _format_timestamp(value: Any) -> str:
+    raw = _safe_text(value)
+    if raw:
+        try:
+            parsed = datetime.fromisoformat(raw.replace("Z", "+00:00"))
+            return parsed.strftime("%B %d, %Y at %I:%M %p")
+        except ValueError:
+            return raw
+    return datetime.now().strftime("%B %d, %Y at %I:%M %p")
+
+
+def _slugify_filename(value: str) -> str:
+    slug = re.sub(r"[^a-z0-9]+", "-", value.lower()).strip("-")
+    return slug or "analysis"
+
+
+def _build_export_filename(payload: dict[str, Any], extension: str) -> str:
+    objective = _display_objective(payload.get("objective"))
+    timestamp = datetime.now().strftime("%Y%m%d-%H%M")
+    return f"benjamin-{_slugify_filename(objective)}-{timestamp}.{extension}"
+
+
+def _parse_markdownish_blocks(text: str) -> list[dict[str, Any]]:
+    normalized = str(text or "").replace("\r\n", "\n").replace("\r", "\n")
+    lines = normalized.split("\n")
+    blocks: list[dict[str, Any]] = []
+    idx = 0
+
+    while idx < len(lines):
+        current = lines[idx]
+        stripped = current.strip()
+
+        if not stripped:
+            idx += 1
+            continue
+
+        if stripped.startswith("```"):
+            code_lines: list[str] = []
+            idx += 1
+            while idx < len(lines) and not lines[idx].strip().startswith("```"):
+                code_lines.append(lines[idx])
+                idx += 1
+            if idx < len(lines):
+                idx += 1
+            blocks.append({"type": "code", "text": "\n".join(code_lines).rstrip()})
+            continue
+
+        heading_match = HEADING_PATTERN.match(stripped)
+        if heading_match:
+            blocks.append(
+                {
+                    "type": "heading",
+                    "level": min(len(heading_match.group(1)), 4),
+                    "text": heading_match.group(2).strip(),
+                }
+            )
+            idx += 1
+            continue
+
+        if UL_PATTERN.match(current):
+            items: list[str] = []
+            while idx < len(lines):
+                match = UL_PATTERN.match(lines[idx])
+                if not match:
+                    break
+                items.append(match.group(1).strip())
+                idx += 1
+            blocks.append({"type": "ul", "items": items})
+            continue
+
+        if OL_PATTERN.match(current):
+            items: list[str] = []
+            while idx < len(lines):
+                match = OL_PATTERN.match(lines[idx])
+                if not match:
+                    break
+                items.append(match.group(1).strip())
+                idx += 1
+            blocks.append({"type": "ol", "items": items})
+            continue
+
+        paragraph_lines: list[str] = []
+        while idx < len(lines):
+            candidate = lines[idx]
+            candidate_stripped = candidate.strip()
+            if not candidate_stripped:
+                break
+            if (
+                candidate_stripped.startswith("```")
+                or HEADING_PATTERN.match(candidate_stripped)
+                or UL_PATTERN.match(candidate)
+                or OL_PATTERN.match(candidate)
+            ):
+                break
+            paragraph_lines.append(candidate.rstrip())
+            idx += 1
+        blocks.append({"type": "paragraph", "text": "\n".join(paragraph_lines).strip()})
+
+    if not blocks and normalized.strip():
+        return [{"type": "paragraph", "text": normalized.strip()}]
+    return blocks
+
+
+def _render_inline_html(text: str) -> str:
+    raw = str(text or "")
+    parts: list[str] = []
+    cursor = 0
+    for match in INLINE_TOKEN_PATTERN.finditer(raw):
+        if match.start() > cursor:
+            parts.append(escape(raw[cursor:match.start()]))
+
+        token = match.group(0)
+        if token.startswith("**") and token.endswith("**"):
+            parts.append(f"<strong>{escape(token[2:-2])}</strong>")
+        elif token.startswith("__") and token.endswith("__"):
+            parts.append(f"<strong>{escape(token[2:-2])}</strong>")
+        elif token.startswith("`") and token.endswith("`"):
+            parts.append(
+                "<code style=\"font-family: 'SFMono-Regular', Consolas, monospace; "
+                "background:#eef3f8; border-radius:4px; padding:1px 4px;\">"
+                f"{escape(token[1:-1])}</code>"
+            )
+        elif token.startswith("*") and token.endswith("*"):
+            parts.append(f"<em>{escape(token[1:-1])}</em>")
+        elif token.startswith("_") and token.endswith("_"):
+            parts.append(f"<em>{escape(token[1:-1])}</em>")
+        else:
+            parts.append(escape(token))
+        cursor = match.end()
+
+    if cursor < len(raw):
+        parts.append(escape(raw[cursor:]))
+
+    return "".join(parts).replace("\n", "<br>")
+
+
+def _render_blocks_html(text: str) -> str:
+    blocks = _parse_markdownish_blocks(text)
+    if not blocks:
+        return "<p style=\"margin:0;\">No response text returned.</p>"
+
+    html_parts: list[str] = []
+    for block in blocks:
+        block_type = block.get("type")
+        if block_type == "heading":
+            level = min(int(block.get("level", 2)) + 2, 6)
+            html_parts.append(
+                f"<h{level} style=\"margin:18px 0 8px; color:#10213c; font-size:{max(18, 28 - level * 2)}px;\">"
+                f"{_render_inline_html(block.get('text', ''))}</h{level}>"
+            )
+        elif block_type == "ul":
+            items = "".join(
+                f"<li style=\"margin:0 0 6px;\">{_render_inline_html(item)}</li>"
+                for item in block.get("items", [])
+            )
+            html_parts.append(f"<ul style=\"margin:10px 0 14px 22px; padding:0;\">{items}</ul>")
+        elif block_type == "ol":
+            items = "".join(
+                f"<li style=\"margin:0 0 6px;\">{_render_inline_html(item)}</li>"
+                for item in block.get("items", [])
+            )
+            html_parts.append(f"<ol style=\"margin:10px 0 14px 22px; padding:0;\">{items}</ol>")
+        elif block_type == "code":
+            html_parts.append(
+                "<pre style=\"margin:10px 0 14px; padding:12px 14px; border-radius:10px; "
+                "background:#0f172a; color:#e2e8f0; overflow:auto; font-size:13px; line-height:1.5;\">"
+                f"{escape(block.get('text', ''))}</pre>"
+            )
+        else:
+            html_parts.append(
+                "<p style=\"margin:0 0 12px; color:#1f2f47; line-height:1.65;\">"
+                f"{_render_inline_html(block.get('text', ''))}</p>"
+            )
+    return "".join(html_parts)
+
+
+def _append_run_with_breaks(
+    paragraph: Any,
+    text: str,
+    *,
+    bold: bool = False,
+    italic: bool = False,
+    monospace: bool = False,
+) -> None:
+    parts = str(text or "").split("\n")
+    for idx, part in enumerate(parts):
+        run = paragraph.add_run(part)
+        run.bold = bold
+        run.italic = italic
+        if monospace:
+            run.font.name = "Courier New"
+        if idx < len(parts) - 1:
+            run.add_break()
+
+
+def _append_formatted_runs(paragraph: Any, text: str) -> None:
+    raw = str(text or "")
+    cursor = 0
+    for match in INLINE_TOKEN_PATTERN.finditer(raw):
+        if match.start() > cursor:
+            _append_run_with_breaks(paragraph, raw[cursor:match.start()])
+
+        token = match.group(0)
+        if token.startswith("**") and token.endswith("**"):
+            _append_run_with_breaks(paragraph, token[2:-2], bold=True)
+        elif token.startswith("__") and token.endswith("__"):
+            _append_run_with_breaks(paragraph, token[2:-2], bold=True)
+        elif token.startswith("`") and token.endswith("`"):
+            _append_run_with_breaks(paragraph, token[1:-1], monospace=True)
+        elif token.startswith("*") and token.endswith("*"):
+            _append_run_with_breaks(paragraph, token[1:-1], italic=True)
+        elif token.startswith("_") and token.endswith("_"):
+            _append_run_with_breaks(paragraph, token[1:-1], italic=True)
+        else:
+            _append_run_with_breaks(paragraph, token)
+        cursor = match.end()
+
+    if cursor < len(raw):
+        _append_run_with_breaks(paragraph, raw[cursor:])
+
+
+def _append_markdownish_doc_content(document: Any, text: str) -> None:
+    blocks = _parse_markdownish_blocks(text)
+    if not blocks:
+        document.add_paragraph("No response text returned.")
+        return
+
+    for block in blocks:
+        block_type = block.get("type")
+        if block_type == "heading":
+            paragraph = document.add_heading(level=min(int(block.get("level", 2)) + 1, 4))
+            _append_formatted_runs(paragraph, block.get("text", ""))
+        elif block_type == "ul":
+            for item in block.get("items", []):
+                paragraph = document.add_paragraph(style="List Bullet")
+                _append_formatted_runs(paragraph, item)
+        elif block_type == "ol":
+            for item in block.get("items", []):
+                paragraph = document.add_paragraph(style="List Number")
+                _append_formatted_runs(paragraph, item)
+        elif block_type == "code":
+            paragraph = document.add_paragraph()
+            _append_run_with_breaks(paragraph, block.get("text", ""), monospace=True)
+        else:
+            paragraph = document.add_paragraph()
+            _append_formatted_runs(paragraph, block.get("text", ""))
+
+
+def _format_metric_value(label: str, value: Any) -> str:
+    if value is None:
+        return ""
+    lower = label.lower()
+    if lower.endswith("ms"):
+        try:
+            return f"{float(value):.1f} ms"
+        except (TypeError, ValueError):
+            return str(value)
+    if lower.endswith("t/s"):
+        try:
+            return f"{float(value):.1f} t/s"
+        except (TypeError, ValueError):
+            return str(value)
+    return str(value)
+
+
+def _build_model_metric_rows(model_payload: dict[str, Any]) -> list[tuple[str, str]]:
+    usage = model_payload.get("usage") if isinstance(model_payload, dict) else {}
+    metrics = model_payload.get("metrics") if isinstance(model_payload, dict) else {}
+    rows: list[tuple[str, str]] = []
+
+    provider = _safe_text(model_payload.get("provider"))
+    model_name = _safe_text(model_payload.get("model"))
+    if provider:
+        rows.append(("Provider", provider))
+    if model_name:
+        rows.append(("Model", model_name))
+
+    prompt_tokens = usage.get("prompt_tokens") if isinstance(usage, dict) else None
+    completion_tokens = usage.get("completion_tokens") if isinstance(usage, dict) else None
+    total_tokens = metrics.get("total_tokens") if isinstance(metrics, dict) else None
+    latency_ms = metrics.get("latency_ms") if isinstance(metrics, dict) else None
+    tok_per_sec = metrics.get("tok_per_sec") if isinstance(metrics, dict) else None
+    retrieval_ms = metrics.get("retrieval_ms") if isinstance(metrics, dict) else None
+
+    if prompt_tokens not in (None, ""):
+        rows.append(("Prompt tokens", str(prompt_tokens)))
+    if completion_tokens not in (None, ""):
+        rows.append(("Completion tokens", str(completion_tokens)))
+    if total_tokens not in (None, ""):
+        rows.append(("Total tokens", str(total_tokens)))
+    if latency_ms not in (None, "", 0):
+        rows.append(("Latency ms", _format_metric_value("latency ms", latency_ms)))
+    if tok_per_sec not in (None, "", 0):
+        rows.append(("Speed t/s", _format_metric_value("speed t/s", tok_per_sec)))
+    if retrieval_ms not in (None, "", 0):
+        rows.append(("Retrieval ms", _format_metric_value("retrieval ms", retrieval_ms)))
+
+    return rows
+
+
+def _render_key_value_table_html(rows: list[tuple[str, str]]) -> str:
+    filtered_rows = [(label, value) for label, value in rows if value]
+    if not filtered_rows:
+        return ""
+
+    table_rows = "".join(
+        "<tr>"
+        f"<th align=\"left\" style=\"padding:8px 10px; border:1px solid #d6deea; background:#eef3f8; width:180px;\">{escape(label)}</th>"
+        f"<td style=\"padding:8px 10px; border:1px solid #d6deea;\">{escape(value)}</td>"
+        "</tr>"
+        for label, value in filtered_rows
+    )
+    return (
+        "<table role=\"presentation\" cellspacing=\"0\" cellpadding=\"0\" "
+        "style=\"border-collapse:collapse; width:100%; margin:10px 0 16px; font-size:14px;\">"
+        f"{table_rows}</table>"
+    )
+
+
+def _coerce_context_fields(payload: dict[str, Any]) -> list[tuple[str, str]]:
+    raw_fields = payload.get("context_fields")
+    if not isinstance(raw_fields, list):
+        return []
+
+    fields: list[tuple[str, str]] = []
+    for item in raw_fields:
+        if not isinstance(item, dict):
+            continue
+        label = _safe_text(item.get("label"))
+        value = _safe_text(item.get("value"))
+        if label and value:
+            fields.append((label, value))
+    return fields
+
+
+def _coerce_sources(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    raw_sources = payload.get("sources")
+    if not isinstance(raw_sources, list):
+        return []
+    return [source for source in raw_sources if isinstance(source, dict)]
+
+
+def _coerce_web_sources(payload: dict[str, Any]) -> list[dict[str, Any]]:
+    web_meta = payload.get("web_search")
+    if not isinstance(web_meta, dict):
+        return []
+    raw_sources = web_meta.get("sources")
+    if not isinstance(raw_sources, list):
+        return []
+    return [source for source in raw_sources if isinstance(source, dict)]
+
+
+def _build_export_html(payload: dict[str, Any]) -> str:
+    objective_label = _display_objective(payload.get("objective"))
+    mode_label = _display_mode(payload.get("mode"))
+    generated_at = _format_timestamp(payload.get("generated_at"))
+    prompt = _safe_text(payload.get("prompt")) or "No prompt captured."
+    left = payload.get("left") if isinstance(payload.get("left"), dict) else {}
+    right = payload.get("right") if isinstance(payload.get("right"), dict) else {}
+
+    context_rows = [
+        ("Module", objective_label),
+        ("Context mode", mode_label),
+        ("Exported", generated_at),
+    ]
+    context_rows.extend(_coerce_context_fields(payload))
+
+    rag = payload.get("rag") if isinstance(payload.get("rag"), dict) else {}
+    rag_rows: list[tuple[str, str]] = []
+    if rag:
+        rag_rows = [
+            ("Collection", _safe_text(rag.get("collection")) or "n/a"),
+            ("Chunks retrieved", str(rag.get("chunks_retrieved", 0))),
+            ("Documents retrieved", str(rag.get("documents_retrieved", 0))),
+        ]
+        try:
+            rag_rows.append(("Average confidence", f"{round(float(rag.get('avg_score', 0.0)) * 100)}%"))
+        except (TypeError, ValueError):
+            pass
+
+    left_title = _safe_text(left.get("export_label")) or "Left Model"
+    right_title = _safe_text(right.get("export_label")) or "Right Model"
+    sources = _coerce_sources(payload)
+    web_sources = _coerce_web_sources(payload)
+
+    source_html = ""
+    if sources:
+        source_items = []
+        for source in sources:
+            confidence_label = "n/a"
+            try:
+                confidence_label = f"{round(float(source.get('score', 0.0)) * 100)}%"
+            except (TypeError, ValueError):
+                pass
+            chunk_id = source.get("chunk_id")
+            chunk_label = f"Fragment {chunk_id + 1}" if isinstance(chunk_id, int) else "Fragment"
+            snippet = _safe_text(source.get("snippet"))
+            source_items.append(
+                "<li style=\"margin:0 0 12px; padding:12px 14px; border:1px solid #d6deea; border-radius:10px; background:#ffffff;\">"
+                f"<div style=\"font-weight:700; color:#10213c;\">{escape(_safe_text(source.get('filename')) or 'Untitled source')}</div>"
+                f"<div style=\"margin-top:4px; color:#4d5e78; font-size:13px;\">{escape(chunk_label)} | Confidence {escape(confidence_label)}</div>"
+                f"{f'<div style=\"margin-top:8px; color:#1f2f47;\">{escape(snippet)}</div>' if snippet else ''}"
+                "</li>"
+            )
+        source_html = (
+            "<section style=\"margin-top:28px;\">"
+            "<h2 style=\"margin:0 0 12px; color:#10213c; font-size:22px;\">Referenced Passages</h2>"
+            f"<ul style=\"list-style:none; margin:0; padding:0;\">{''.join(source_items)}</ul>"
+            "</section>"
+        )
+
+    web_html = ""
+    if web_sources:
+        web_items = []
+        for source in web_sources:
+            title = _safe_text(source.get("title")) or "Untitled source"
+            url = _safe_text(source.get("url"))
+            published = _safe_text(source.get("published_date")) or "Unknown date"
+            snippet = _safe_text(source.get("snippet"))
+            link_html = (
+                f"<div style=\"margin-top:6px;\"><a href=\"{escape(url)}\" style=\"color:#1d4ed8; text-decoration:none;\">{escape(url)}</a></div>"
+                if url
+                else ""
+            )
+            web_items.append(
+                "<li style=\"margin:0 0 12px; padding:12px 14px; border:1px solid #d6deea; border-radius:10px; background:#ffffff;\">"
+                f"<div style=\"font-weight:700; color:#10213c;\">{escape(title)}</div>"
+                f"<div style=\"margin-top:4px; color:#4d5e78; font-size:13px;\">{escape(published)}</div>"
+                f"{link_html}"
+                f"{f'<div style=\"margin-top:8px; color:#1f2f47;\">{escape(snippet)}</div>' if snippet else ''}"
+                "</li>"
+            )
+        web_html = (
+            "<section style=\"margin-top:28px;\">"
+            "<h2 style=\"margin:0 0 12px; color:#10213c; font-size:22px;\">Live Web Context</h2>"
+            f"<ul style=\"list-style:none; margin:0; padding:0;\">{''.join(web_items)}</ul>"
+            "</section>"
+        )
+
+    rag_html = (
+        f"<section style=\"margin-top:28px;\"><h2 style=\"margin:0 0 12px; color:#10213c; font-size:22px;\">RAG Summary</h2>{_render_key_value_table_html(rag_rows)}</section>"
+        if rag_rows
+        else ""
+    )
+
+    return f"""<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benjamin Maurice Analysis Export</title>
+  </head>
+  <body style="margin:0; padding:24px; background:#eef2f7; color:#132238; font-family:Calibri, Arial, sans-serif;">
+    <div style="max-width:960px; margin:0 auto; background:#ffffff; border:1px solid #d6deea; border-radius:18px; overflow:hidden;">
+      <div style="padding:28px 32px; background:linear-gradient(135deg, #10213c, #274b7a); color:#ffffff;">
+        <div style="font-size:12px; letter-spacing:0.12em; text-transform:uppercase; opacity:0.82;">Benjamin Maurice</div>
+        <h1 style="margin:8px 0 0; font-size:32px; line-height:1.15;">Analysis Export</h1>
+        <div style="margin-top:10px; font-size:15px; opacity:0.9;">{escape(objective_label)} | {escape(generated_at)}</div>
+      </div>
+      <div style="padding:28px 32px 34px;">
+        <section>
+          <h2 style="margin:0 0 12px; color:#10213c; font-size:22px;">Run Summary</h2>
+          {_render_key_value_table_html(context_rows)}
+        </section>
+
+        <section style="margin-top:24px;">
+          <h2 style="margin:0 0 12px; color:#10213c; font-size:22px;">Prompt</h2>
+          <div style="padding:16px 18px; border:1px solid #d6deea; border-radius:12px; background:#f8fafc; color:#1f2f47; line-height:1.7;">
+            {_render_blocks_html(prompt)}
+          </div>
+        </section>
+
+        <section style="margin-top:28px;">
+          <h2 style="margin:0 0 14px; color:#10213c; font-size:22px;">Model Outputs</h2>
+
+          <div style="margin:0 0 18px; padding:18px; border:1px solid #d6deea; border-radius:14px; background:#fbfdff;">
+            <h3 style="margin:0 0 8px; color:#10213c; font-size:20px;">{escape(left_title)}</h3>
+            {_render_key_value_table_html(_build_model_metric_rows(left))}
+            {_render_blocks_html(_safe_text(left.get("content")) or "No response text returned.")}
+          </div>
+
+          <div style="margin:0; padding:18px; border:1px solid #d6deea; border-radius:14px; background:#fbfdff;">
+            <h3 style="margin:0 0 8px; color:#10213c; font-size:20px;">{escape(right_title)}</h3>
+            {_render_key_value_table_html(_build_model_metric_rows(right))}
+            {_render_blocks_html(_safe_text(right.get("content")) or "No response text returned.")}
+          </div>
+        </section>
+
+        {rag_html}
+        {source_html}
+        {web_html}
+      </div>
+    </div>
+  </body>
+</html>"""
+
+
+def _build_export_docx(payload: dict[str, Any]) -> bytes:
+    from docx import Document
+
+    objective_label = _display_objective(payload.get("objective"))
+    mode_label = _display_mode(payload.get("mode"))
+    generated_at = _format_timestamp(payload.get("generated_at"))
+    prompt = _safe_text(payload.get("prompt")) or "No prompt captured."
+    left = payload.get("left") if isinstance(payload.get("left"), dict) else {}
+    right = payload.get("right") if isinstance(payload.get("right"), dict) else {}
+
+    document = Document()
+    document.core_properties.title = "Benjamin Maurice Analysis Export"
+    document.core_properties.subject = objective_label
+
+    title = document.add_heading("Benjamin Maurice Analysis Export", level=0)
+    if title.runs:
+        title.runs[0].bold = True
+    document.add_paragraph(f"{objective_label} | Exported {generated_at}")
+
+    document.add_heading("Run Summary", level=1)
+    summary_rows = [
+        ("Module", objective_label),
+        ("Context mode", mode_label),
+        ("Exported", generated_at),
+        *_coerce_context_fields(payload),
+    ]
+    for label, value in summary_rows:
+        paragraph = document.add_paragraph()
+        paragraph.add_run(f"{label}: ").bold = True
+        paragraph.add_run(value)
+
+    document.add_heading("Prompt", level=1)
+    _append_markdownish_doc_content(document, prompt)
+
+    for section_title, model_payload in (
+        (_safe_text(left.get("export_label")) or "Left Model", left),
+        (_safe_text(right.get("export_label")) or "Right Model", right),
+    ):
+        document.add_heading(section_title, level=1)
+        for label, value in _build_model_metric_rows(model_payload):
+            paragraph = document.add_paragraph()
+            paragraph.add_run(f"{label}: ").bold = True
+            paragraph.add_run(value)
+        _append_markdownish_doc_content(
+            document,
+            _safe_text(model_payload.get("content")) or "No response text returned.",
+        )
+
+    rag = payload.get("rag") if isinstance(payload.get("rag"), dict) else {}
+    if rag:
+        document.add_heading("RAG Summary", level=1)
+        rag_rows = [
+            ("Collection", _safe_text(rag.get("collection")) or "n/a"),
+            ("Chunks retrieved", str(rag.get("chunks_retrieved", 0))),
+            ("Documents retrieved", str(rag.get("documents_retrieved", 0))),
+        ]
+        try:
+            rag_rows.append(("Average confidence", f"{round(float(rag.get('avg_score', 0.0)) * 100)}%"))
+        except (TypeError, ValueError):
+            pass
+        for label, value in rag_rows:
+            paragraph = document.add_paragraph()
+            paragraph.add_run(f"{label}: ").bold = True
+            paragraph.add_run(value)
+
+    sources = _coerce_sources(payload)
+    if sources:
+        document.add_heading("Referenced Passages", level=1)
+        for source in sources:
+            heading = document.add_paragraph()
+            heading.add_run(_safe_text(source.get("filename")) or "Untitled source").bold = True
+            chunk_id = source.get("chunk_id")
+            if isinstance(chunk_id, int):
+                heading.add_run(f" | Fragment {chunk_id + 1}")
+            try:
+                heading.add_run(f" | Confidence {round(float(source.get('score', 0.0)) * 100)}%")
+            except (TypeError, ValueError):
+                pass
+            snippet = _safe_text(source.get("snippet"))
+            if snippet:
+                document.add_paragraph(snippet)
+
+    web_sources = _coerce_web_sources(payload)
+    if web_sources:
+        document.add_heading("Live Web Context", level=1)
+        for source in web_sources:
+            paragraph = document.add_paragraph()
+            paragraph.add_run(_safe_text(source.get("title")) or "Untitled source").bold = True
+            published = _safe_text(source.get("published_date"))
+            if published:
+                paragraph.add_run(f" | {published}")
+            url = _safe_text(source.get("url"))
+            if url:
+                document.add_paragraph(url)
+            snippet = _safe_text(source.get("snippet"))
+            if snippet:
+                document.add_paragraph(snippet)
+
+    buffer = io.BytesIO()
+    document.save(buffer)
+    buffer.seek(0)
+    return buffer.getvalue()
+
+
 # -----------------------------------------------------------------------------
 # Routes
 # -----------------------------------------------------------------------------
@@ -940,6 +1580,41 @@ async def chat_compare(
             "request_total_ms": round(request_elapsed_s * 1000.0, 1),
         },
     }
+
+
+@app.post("/api/export")
+async def export_analysis(payload: dict[str, Any]):
+    export_format = _safe_text(payload.get("export_format")).lower()
+    if export_format not in {"word", "email_html"}:
+        raise HTTPException(
+            status_code=400,
+            detail="export_format must be 'word' or 'email_html'",
+        )
+
+    left = payload.get("left")
+    right = payload.get("right")
+    if not isinstance(left, dict) or not isinstance(right, dict):
+        raise HTTPException(
+            status_code=400,
+            detail="left and right model payloads are required for export",
+        )
+
+    if export_format == "email_html":
+        content = _build_export_html(payload)
+        filename = _build_export_filename(payload, "html")
+        return Response(
+            content=content,
+            media_type="text/html",
+            headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+        )
+
+    content = _build_export_docx(payload)
+    filename = _build_export_filename(payload, "docx")
+    return StreamingResponse(
+        io.BytesIO(content),
+        media_type="application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+        headers={"Content-Disposition": f'attachment; filename="{filename}"'},
+    )
 
 
 @app.get("/api/documents")

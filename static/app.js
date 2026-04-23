@@ -39,6 +39,11 @@ const docList = document.getElementById('docList');
 const refreshDocsBtn = document.getElementById('refreshDocsBtn');
 const modelLeft = document.getElementById('modelLeft');
 const modelRight = document.getElementById('modelRight');
+const exportFormat = document.getElementById('exportFormat');
+const exportBtn = document.getElementById('exportBtn');
+const exportStatus = document.getElementById('exportStatus');
+
+let currentExportPayload = null;
 
 const OBJECTIVE_META = {
   expert_network_brief: {
@@ -196,6 +201,139 @@ function comparePlaceholderHtml(isActive) {
   return '<span class="side-placeholder">When you press Begin, the answer and stats will appear here.</span>';
 }
 
+function setExportState(payload, statusText) {
+  currentExportPayload = payload || null;
+  if (exportBtn) {
+    exportBtn.disabled = !currentExportPayload;
+  }
+  if (exportStatus) {
+    exportStatus.textContent = statusText || (currentExportPayload
+      ? 'Ready to export the latest comparison.'
+      : 'Run an analysis to enable export.');
+  }
+}
+
+function selectedModelLabel(selectEl) {
+  return selectEl?.selectedOptions?.[0]?.textContent?.trim() || selectEl?.value || 'Model';
+}
+
+function collectContextFields(mode) {
+  const fields = [];
+
+  if (mode === 'rag') {
+    if (industry.value.trim()) {
+      fields.push({ label: industryLabel.textContent.trim(), value: industry.value.trim() });
+    }
+    if (stakeholderType.value.trim()) {
+      fields.push({ label: stakeholderLabel.textContent.trim(), value: stakeholderType.value.trim() });
+    }
+    if (projectObjectives.value.trim()) {
+      fields.push({ label: projectObjectivesLabel.textContent.trim(), value: projectObjectives.value.trim() });
+    }
+    if (keyQuestions.value.trim()) {
+      fields.push({ label: keyQuestionsLabel.textContent.trim(), value: keyQuestions.value.trim() });
+    }
+  } else if (fileInput.files.length) {
+    fields.push({ label: 'attached file', value: fileInput.files[0].name });
+  }
+
+  fields.push({ label: 'live data', value: useWebSearchInput.checked ? 'Enabled' : 'Disabled' });
+  return fields;
+}
+
+function buildExportPayload(data, mode) {
+  return {
+    export_format: exportFormat?.value || 'word',
+    objective: objective.value,
+    mode,
+    prompt: message.value.trim(),
+    generated_at: new Date().toISOString(),
+    context_fields: collectContextFields(mode),
+    left: {
+      ...data.left,
+      export_label: selectedModelLabel(modelLeft),
+    },
+    right: {
+      ...data.right,
+      export_label: selectedModelLabel(modelRight),
+    },
+    rag: data.rag || null,
+    sources: Array.isArray(data.sources) ? data.sources : [],
+    web_search: data.web_search || null,
+  };
+}
+
+function filenameFromDisposition(headerValue) {
+  if (!headerValue) return '';
+  const utfMatch = headerValue.match(/filename\*=UTF-8''([^;]+)/i);
+  if (utfMatch?.[1]) {
+    try {
+      return decodeURIComponent(utfMatch[1]);
+    } catch (_) {
+      return utfMatch[1];
+    }
+  }
+  const plainMatch = headerValue.match(/filename="([^"]+)"/i) || headerValue.match(/filename=([^;]+)/i);
+  return plainMatch?.[1]?.trim() || '';
+}
+
+async function exportCurrentResult() {
+  if (!currentExportPayload || !exportBtn) {
+    return;
+  }
+
+  const originalLabel = exportBtn.textContent;
+  exportBtn.disabled = true;
+  exportBtn.textContent = 'Exporting...';
+  if (exportStatus) {
+    exportStatus.textContent = 'Preparing your download...';
+  }
+
+  try {
+    const payload = {
+      ...currentExportPayload,
+      export_format: exportFormat?.value || 'word',
+    };
+    const res = await fetch('/api/export', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(payload),
+    });
+
+    if (!res.ok) {
+      const data = await res.json().catch(() => ({}));
+      throw new Error(data.detail || `Export failed (${res.status})`);
+    }
+
+    const blob = await res.blob();
+    const contentDisposition = res.headers.get('content-disposition');
+    const filename = filenameFromDisposition(contentDisposition)
+      || `benjamin-export.${payload.export_format === 'word' ? 'docx' : 'html'}`;
+
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+
+    if (exportStatus) {
+      exportStatus.textContent = `Downloaded ${filename}.`;
+    }
+  } catch (err) {
+    if (exportStatus) {
+      exportStatus.textContent = err.message;
+    }
+  } finally {
+    exportBtn.disabled = !currentExportPayload;
+    exportBtn.textContent = originalLabel;
+  }
+}
+
 function renderResponseHtml(payload, options = {}) {
   const data = payload || {};
   const content = String(data.content || '').trim() || 'No response text returned.';
@@ -315,6 +453,10 @@ function resetComparePanel() {
   compareResponseEl.innerHTML = comparePlaceholderHtml(active);
 }
 
+if (exportBtn) {
+  exportBtn.addEventListener('click', exportCurrentResult);
+}
+
 atelierButtons.forEach(btn => {
   btn.addEventListener('click', () => {
     objective.value = btn.dataset.objective;
@@ -340,6 +482,7 @@ syncAtelierState();
 applyObjectivePresentation();
 toggleModeUI();
 resetComparePanel();
+setExportState(null, 'Run an analysis to enable export.');
 
 sampleLinks.forEach(link => {
   link.addEventListener('click', () => {
@@ -472,6 +615,7 @@ form.addEventListener('submit', async (e) => {
   const mode = currentMode();
   const compareMode = shouldRunCompare(mode, objective.value);
   submitBtn.disabled = true;
+  setExportState(null, 'Generating exportable output...');
   responseEl.style.display = 'block';
   responseEl.classList.remove('error');
   responseEl.innerHTML = '<span class="response-header">preparing...</span>';
@@ -514,6 +658,7 @@ form.addEventListener('submit', async (e) => {
       responseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
       compareResponseEl.classList.add('error');
       compareResponseEl.innerHTML = `<span class="response-header">request error ${res.status}</span>${escapeHtml(data.detail || res.statusText)}`;
+      setExportState(null, 'Export unavailable until the next successful run.');
       return;
     }
 
@@ -539,12 +684,14 @@ form.addEventListener('submit', async (e) => {
       webSearch,
       includeSources: true,
     });
+    setExportState(buildExportPayload(data, mode), 'Ready to export the latest comparison.');
     loadDocuments();
   } catch (err) {
     responseEl.classList.add('error');
     responseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
     compareResponseEl.classList.add('error');
     compareResponseEl.innerHTML = `<span class="response-header">request error</span>${escapeHtml(err.message)}`;
+    setExportState(null, 'Export unavailable until the next successful run.');
   } finally {
     submitBtn.disabled = false;
   }

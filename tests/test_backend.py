@@ -2,6 +2,7 @@ from pathlib import Path
 import json
 import io
 
+from docx import Document
 from fastapi.testclient import TestClient
 
 import backend
@@ -47,6 +48,62 @@ def _seed_v3_doc(tmp_path: Path, monkeypatch):
         metadata={"filename": "interview_notes.txt", "vertical": backend.UNIFIED_COLLECTION},
     )
     return doc_id
+
+
+def _sample_export_payload():
+    return {
+        "export_format": "email_html",
+        "objective": "expert_network_brief",
+        "mode": "rag",
+        "prompt": "Draft a screening brief for a software diligence.",
+        "generated_at": "2026-04-22T10:30:00",
+        "context_fields": [
+            {"label": "industry", "value": "Vertical software"},
+            {"label": "live data", "value": "Enabled"},
+        ],
+        "left": {
+            "export_label": "bedrock - claude-sonnet",
+            "provider": "bedrock",
+            "model": "claude-sonnet",
+            "content": "# Executive Summary\n- Strong retention\n- Clear upsell path",
+            "usage": {"prompt_tokens": 120, "completion_tokens": 80},
+            "metrics": {"total_tokens": 200, "latency_ms": 980.2, "tok_per_sec": 12.8, "retrieval_ms": 140.0},
+        },
+        "right": {
+            "export_label": "lmstudio - qwen3",
+            "provider": "lmstudio",
+            "model": "qwen3",
+            "content": "1. Validate ICP\n2. Pressure-test churn",
+            "usage": {"prompt_tokens": 110, "completion_tokens": 60},
+            "metrics": {"total_tokens": 170, "latency_ms": 1240.0, "tok_per_sec": 9.6, "retrieval_ms": 140.0},
+        },
+        "rag": {
+            "collection": "ALL",
+            "chunks_retrieved": 5,
+            "documents_retrieved": 2,
+            "avg_score": 0.81,
+        },
+        "sources": [
+            {
+                "filename": "notes.txt",
+                "chunk_id": 0,
+                "score": 0.92,
+                "snippet": "Customers describe the workflow as mission critical.",
+            }
+        ],
+        "web_search": {
+            "requested": True,
+            "enabled": True,
+            "sources": [
+                {
+                    "title": "Market update",
+                    "url": "https://example.com/update",
+                    "published_date": "2026-04-20",
+                    "snippet": "Growth in the category remained resilient.",
+                }
+            ],
+        },
+    }
 
 def test_chat_direct_mode_with_file_still_works(tmp_path: Path, monkeypatch):
     _configure_rag_paths(tmp_path, monkeypatch)
@@ -307,3 +364,37 @@ def test_chat_compare_disables_web_search_for_objective3_even_when_checked(tmp_p
     assert all(flag is False for flag in calls)
     assert resp.json()["web_search"]["requested"] is True
     assert resp.json()["web_search"]["reason"] == "objective_not_supported"
+
+
+def test_export_email_html_download_contains_formatted_sections():
+    client = TestClient(backend.app)
+    payload = _sample_export_payload()
+    resp = client.post("/api/export", json=payload)
+
+    assert resp.status_code == 200, resp.text
+    assert resp.headers["content-type"].startswith("text/html")
+    assert "attachment; filename=" in resp.headers["content-disposition"]
+    assert "Benjamin Maurice Analysis Export" in resp.text
+    assert "Run Summary" in resp.text
+    assert "bedrock - claude-sonnet" in resp.text
+    assert "Referenced Passages" in resp.text
+
+
+def test_export_word_docx_download_contains_response_content():
+    client = TestClient(backend.app)
+    payload = _sample_export_payload()
+    payload["export_format"] = "word"
+    resp = client.post("/api/export", json=payload)
+
+    assert resp.status_code == 200, resp.text
+    assert resp.headers["content-type"].startswith(
+        "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    )
+    assert "attachment; filename=" in resp.headers["content-disposition"]
+
+    doc = Document(io.BytesIO(resp.content))
+    full_text = "\n".join(p.text for p in doc.paragraphs)
+    assert "Benjamin Maurice Analysis Export" in full_text
+    assert "Draft a screening brief for a software diligence." in full_text
+    assert "Executive Summary" in full_text
+    assert "Validate ICP" in full_text

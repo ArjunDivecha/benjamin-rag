@@ -141,6 +141,18 @@
                     <div class="actions">
                         <button type="submit" id="submitBtn">Initialize Analysis</button>
                     </div>
+
+                    <div class="export-controls">
+                        <label class="export-label" for="exportFormat">Export current output</label>
+                        <div class="export-row">
+                            <select id="exportFormat" aria-label="Export format">
+                                <option value="word">Microsoft Word (.docx)</option>
+                                <option value="email_html">Outlook / Email HTML (.html)</option>
+                            </select>
+                            <button type="button" id="exportBtn" class="export-btn" disabled>Export</button>
+                        </div>
+                        <div id="exportStatus" class="export-status">Run an analysis to enable export.</div>
+                    </div>
                 </form>
             </div>
 
