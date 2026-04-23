@@ -201,6 +201,51 @@ def test_stats_endpoint_returns_expected_keys(tmp_path: Path, monkeypatch):
     resp = client.get("/api/stats")
     assert resp.status_code == 200, resp.text
 
+
+def test_documents_sync_accepts_dropped_archive_files(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(backend, "APP_DIR", str(tmp_path))
+    monkeypatch.setattr(
+        "preprocess.get_embeddings_batch",
+        lambda chunks: [[1.0, 0.0, 0.0] for _ in chunks],
+    )
+
+    client = TestClient(backend.app)
+    content = ("market growth and procurement feedback " * 140).encode("utf-8")
+    resp = client.post(
+        "/api/documents/sync",
+        files=[("files", ("dropped-notes.txt", content, "text/plain"))],
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["uploaded"] == 1
+    assert data["ingested"] == 1
+    assert data["removed"] == 0
+    assert data["staged"][0]["filename"] == "dropped-notes.txt"
+    assert any("staged in Data/" in line for line in data["details"])
+    assert any("ingested" in line for line in data["details"])
+    assert (tmp_path / "Data" / "dropped-notes.txt").exists()
+
+    docs = client.get("/api/documents").json()
+    assert docs[0]["filename"] == "dropped-notes.txt"
+    assert docs[0]["vertical"] == backend.UNIFIED_COLLECTION
+
+
+def test_documents_sync_returns_detailed_no_change_message(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    monkeypatch.setattr(backend, "APP_DIR", str(tmp_path))
+
+    client = TestClient(backend.app)
+    resp = client.post("/api/documents/sync")
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert data["ingested"] == 0
+    assert data["removed"] == 0
+    assert data["details"] == ["No file changes detected."]
+
+
 def test_system_prompt_included_in_rag_payload(tmp_path: Path, monkeypatch):
     _seed_v1_doc(tmp_path, monkeypatch)
     monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])

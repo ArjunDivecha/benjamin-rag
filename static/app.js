@@ -199,6 +199,84 @@ function formatNumber(value, digits = 1) {
   return n.toFixed(digits);
 }
 
+function formatBytes(bytes) {
+  const n = Number(bytes) || 0;
+  if (n < 1024) return `${n} B`;
+  if (n < 1024 * 1024) return `${formatNumber(n / 1024, 1)} KB`;
+  return `${formatNumber(n / (1024 * 1024), 1)} MB`;
+}
+
+function renderPendingArchiveFiles() {
+  if (!pendingArchiveList || !archiveDropZone) {
+    return;
+  }
+
+  archiveDropZone.classList.toggle('has-pending', pendingArchiveFiles.length > 0);
+  if (!pendingArchiveFiles.length) {
+    pendingArchiveList.innerHTML = '<div class="pending-archive-empty">No dropped files waiting to sync.</div>';
+    return;
+  }
+
+  pendingArchiveList.innerHTML = pendingArchiveFiles.map((file, index) => `
+    <div class="pending-archive-item">
+      <span class="pending-archive-name">${escapeHtml(file.name)}</span>
+      <span class="pending-archive-meta">${escapeHtml(formatBytes(file.size))}</span>
+      <button class="pending-archive-remove" type="button" data-remove-pending-index="${index}">Remove</button>
+    </div>
+  `).join('');
+}
+
+function setArchiveSyncStatus(message, details = [], state = '') {
+  if (!archiveSyncStatus) {
+    return;
+  }
+
+  archiveSyncStatus.classList.toggle('has-message', Boolean(message));
+  archiveSyncStatus.classList.toggle('is-success', state === 'success');
+  archiveSyncStatus.classList.toggle('is-error', state === 'error');
+
+  if (!message) {
+    archiveSyncStatus.innerHTML = '';
+    return;
+  }
+
+  const detailItems = Array.isArray(details)
+    ? details.slice(0, 12).map(item => `<li>${escapeHtml(item)}</li>`).join('')
+    : '';
+  const overflow = Array.isArray(details) && details.length > 12
+    ? `<li>${escapeHtml(`${details.length - 12} more detail lines omitted`)}</li>`
+    : '';
+  archiveSyncStatus.innerHTML = `
+    <strong>${escapeHtml(message)}</strong>
+    ${detailItems || overflow ? `<ul>${detailItems}${overflow}</ul>` : ''}
+  `;
+}
+
+function addPendingArchiveFiles(fileList) {
+  const incoming = Array.from(fileList || []).filter(file => file && file.name);
+  if (!incoming.length) {
+    return;
+  }
+
+  incoming.forEach(file => {
+    pendingArchiveFiles = pendingArchiveFiles.filter(existing => existing.name !== file.name);
+    pendingArchiveFiles.push(file);
+  });
+  renderPendingArchiveFiles();
+  setArchiveSyncStatus(
+    `${pendingArchiveFiles.length} file${pendingArchiveFiles.length === 1 ? '' : 's'} ready for Sync Data.`,
+    pendingArchiveFiles.map(file => `${file.name} (${formatBytes(file.size)})`),
+  );
+}
+
+function clearPendingArchiveFiles() {
+  pendingArchiveFiles = [];
+  if (archiveFileInput) {
+    archiveFileInput.value = '';
+  }
+  renderPendingArchiveFiles();
+}
+
 function shouldRunCompare(mode, objectiveValue) {
   return Boolean(compareToggle?.checked);
 }
@@ -543,6 +621,61 @@ fileClear.addEventListener('click', (e) => {
   fileClear.style.display = 'none';
 });
 
+if (archiveDropZone) {
+  archiveDropZone.addEventListener('click', () => archiveFileInput?.click());
+  archiveDropZone.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      archiveFileInput?.click();
+    }
+  });
+
+  ['dragenter', 'dragover'].forEach(eventName => {
+    archiveDropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      archiveDropZone.classList.add('is-dragover');
+    });
+  });
+
+  ['dragleave', 'drop'].forEach(eventName => {
+    archiveDropZone.addEventListener(eventName, (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      archiveDropZone.classList.remove('is-dragover');
+    });
+  });
+
+  archiveDropZone.addEventListener('drop', (e) => {
+    addPendingArchiveFiles(e.dataTransfer?.files);
+  });
+}
+
+archiveFileInput?.addEventListener('change', () => {
+  addPendingArchiveFiles(archiveFileInput.files);
+  archiveFileInput.value = '';
+});
+
+pendingArchiveList?.addEventListener('click', (e) => {
+  const removeBtn = e.target.closest('[data-remove-pending-index]');
+  if (!removeBtn) {
+    return;
+  }
+  const index = Number(removeBtn.dataset.removePendingIndex);
+  if (!Number.isInteger(index)) {
+    return;
+  }
+  pendingArchiveFiles.splice(index, 1);
+  renderPendingArchiveFiles();
+  if (pendingArchiveFiles.length) {
+    setArchiveSyncStatus(`${pendingArchiveFiles.length} file${pendingArchiveFiles.length === 1 ? '' : 's'} ready for Sync Data.`);
+  } else {
+    setArchiveSyncStatus('');
+  }
+});
+
+renderPendingArchiveFiles();
+
 async function loadDocuments() {
   docList.innerHTML = '<div class="doc-item">Loading library...</div>';
   try {
@@ -611,13 +744,21 @@ refreshDocsBtn.addEventListener('click', async () => {
   const originalText = refreshDocsBtn.textContent;
   refreshDocsBtn.textContent = 'Processing...';
   refreshDocsBtn.disabled = true;
+  setArchiveSyncStatus('Syncing Knowledge Archive...', pendingArchiveFiles.map(file => `Uploading ${file.name}`));
 
   try {
-    const res = await fetch('/api/documents/sync', { method: 'POST' });
-    if (!res.ok) {
-      throw new Error(`Sync failed (${res.status})`);
+    const request = { method: 'POST' };
+    if (pendingArchiveFiles.length) {
+      const fd = new FormData();
+      pendingArchiveFiles.forEach(file => fd.append('files', file, file.name));
+      request.body = fd;
     }
-    const data = await res.json();
+
+    const res = await fetch('/api/documents/sync', request);
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok) {
+      throw new Error(data.detail || `Sync failed (${res.status})`);
+    }
     if (data.ingested === 0 && data.removed === 0) {
       refreshDocsBtn.textContent = 'No New Files';
     } else if (data.ingested > 0 && data.removed > 0) {
@@ -627,10 +768,13 @@ refreshDocsBtn.addEventListener('click', async () => {
     } else if (data.removed > 0) {
       refreshDocsBtn.textContent = `${data.removed} File${data.removed === 1 ? '' : 's'} Removed`;
     }
+    clearPendingArchiveFiles();
+    setArchiveSyncStatus(data.message || 'Sync complete.', data.details || [], 'success');
     await loadDocuments();
   } catch (err) {
     console.error('Sync error:', err);
     refreshDocsBtn.textContent = 'Error syncing';
+    setArchiveSyncStatus(err.message, [], 'error');
   } finally {
     setTimeout(() => {
       refreshDocsBtn.textContent = originalText;
