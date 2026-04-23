@@ -9,6 +9,7 @@ __pycache__/
 chroma_db/
 uploaded_docs/
 /Data/
+.pks/
 
 # Secrets / local config
 .env
