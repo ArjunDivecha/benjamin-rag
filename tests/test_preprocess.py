@@ -135,6 +135,25 @@ def test_dir_ingests_all_supported_files(tmp_path: Path, monkeypatch):
     assert len(dm.list_documents("V1")) == 3
 
 
+def test_dir_ingests_nested_files_with_relative_source_paths(tmp_path: Path, monkeypatch):
+    _patch_embeddings(monkeypatch)
+    storage = tmp_path / "uploaded_docs"
+    vector = tmp_path / "chroma_db"
+    src = tmp_path / "src"
+    nested = src / "Research" / "Calls"
+    nested.mkdir(parents=True)
+
+    (src / "root.txt").write_text(_long_text(120))
+    (nested / "note.txt").write_text(_long_text(130))
+
+    rc = preprocess.main(["--vertical", "V1", "--dir", str(src), *_base_args(storage, vector)])
+    assert rc == 0
+
+    dm = DocumentManager(str(storage))
+    source_paths = {doc["source_path"] for doc in dm.list_documents("V1")}
+    assert source_paths == {"root.txt", "Research/Calls/note.txt"}
+
+
 def test_stats_shows_correct_counts_per_vertical(tmp_path: Path, capsys, monkeypatch):
     _patch_embeddings(monkeypatch)
     storage = tmp_path / "uploaded_docs"

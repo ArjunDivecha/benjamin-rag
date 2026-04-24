@@ -40,6 +40,7 @@ const archiveDropZone = document.getElementById('archiveDropZone');
 const archiveFileInput = document.getElementById('archiveFileInput');
 const pendingArchiveList = document.getElementById('pendingArchiveList');
 const archiveSyncStatus = document.getElementById('archiveSyncStatus');
+const ragScopeStatus = document.getElementById('ragScopeStatus');
 const modelLeft = document.getElementById('modelLeft');
 const modelRight = document.getElementById('modelRight');
 const compareToggle = document.getElementById('compareToggle');
@@ -50,6 +51,10 @@ const exportStatus = document.getElementById('exportStatus');
 
 let currentExportPayload = null;
 let pendingArchiveFiles = [];
+let archiveDocuments = [];
+let ragSelectedDocIds = new Set();
+let knownArchiveDocIds = new Set();
+let ragSelectionInitialized = false;
 
 const OBJECTIVE_META = {
   expert_network_brief: {
@@ -172,6 +177,183 @@ function collectionLabel(vertical) {
   if (vertical === 'V2') return 'Interview Atelier';
   if (vertical === 'V3') return 'Insights Parlour';
   return vertical ? `Collection ${vertical}` : 'Unsorted Collection';
+}
+
+function normalizeSourcePath(doc) {
+  const fallback = doc?.filename || 'Untitled note';
+  const rawPath = String(doc?.source_path || fallback).replace(/\\/g, '/').trim();
+  const parts = rawPath.split('/').filter(part => part && part !== '.' && part !== '..');
+  return parts.join('/') || fallback;
+}
+
+function archiveFileName(sourcePath) {
+  const parts = String(sourcePath || '').split('/').filter(Boolean);
+  return parts[parts.length - 1] || 'Untitled note';
+}
+
+function archiveFolderPath(sourcePath) {
+  const parts = String(sourcePath || '').split('/').filter(Boolean);
+  parts.pop();
+  return parts.join('/');
+}
+
+function createArchiveFolder(name, path) {
+  return {
+    name,
+    path,
+    folders: new Map(),
+    files: [],
+  };
+}
+
+function buildArchiveTree(docs) {
+  const root = createArchiveFolder('Data', '');
+  docs.forEach(doc => {
+    const sourcePath = normalizeSourcePath(doc);
+    const parts = sourcePath.split('/').filter(Boolean);
+    const filename = parts.pop() || doc.filename || 'Untitled note';
+    let node = root;
+    let currentPath = '';
+
+    parts.forEach(part => {
+      currentPath = currentPath ? `${currentPath}/${part}` : part;
+      if (!node.folders.has(part)) {
+        node.folders.set(part, createArchiveFolder(part, currentPath));
+      }
+      node = node.folders.get(part);
+    });
+
+    node.files.push({
+      ...doc,
+      displayName: filename,
+      sourcePath,
+      folderPath: archiveFolderPath(sourcePath),
+    });
+  });
+  return root;
+}
+
+function sortedArchiveFolders(node) {
+  return Array.from(node.folders.values()).sort((a, b) => a.name.localeCompare(b.name));
+}
+
+function sortedArchiveFiles(node) {
+  return node.files.slice().sort((a, b) => a.displayName.localeCompare(b.displayName));
+}
+
+function getDocsForFolder(folderPath) {
+  const normalized = String(folderPath || '').replace(/\\/g, '/').replace(/^\/+|\/+$/g, '');
+  if (!normalized) {
+    return archiveDocuments.filter(doc => doc.doc_id);
+  }
+  return archiveDocuments.filter(doc => {
+    const sourcePath = normalizeSourcePath(doc);
+    return doc.doc_id && sourcePath.startsWith(`${normalized}/`);
+  });
+}
+
+function getSelectedRagDocIds() {
+  const validIds = new Set(archiveDocuments.map(doc => String(doc.doc_id || '')).filter(Boolean));
+  return Array.from(ragSelectedDocIds).filter(docId => validIds.has(docId));
+}
+
+function ragScopeLabel() {
+  const total = archiveDocuments.filter(doc => doc.doc_id).length;
+  const selected = getSelectedRagDocIds().length;
+  if (!total) {
+    return 'No archive files active';
+  }
+  return `${selected} of ${total} archive file${total === 1 ? '' : 's'} active`;
+}
+
+function updateRagScopeStatus() {
+  if (!ragScopeStatus) {
+    return;
+  }
+  ragScopeStatus.textContent = ragScopeLabel();
+  ragScopeStatus.classList.toggle('is-empty', getSelectedRagDocIds().length === 0);
+}
+
+function syncArchiveSelection(docs) {
+  const nextIds = new Set(docs.map(doc => String(doc.doc_id || '')).filter(Boolean));
+  if (!ragSelectionInitialized) {
+    ragSelectedDocIds = new Set();
+    ragSelectionInitialized = true;
+  } else {
+    ragSelectedDocIds = new Set(Array.from(ragSelectedDocIds).filter(docId => nextIds.has(docId)));
+  }
+  knownArchiveDocIds = nextIds;
+}
+
+function applyArchiveSelectionState() {
+  if (!docList) {
+    return;
+  }
+
+  docList.querySelectorAll('[data-file-checkbox]').forEach(input => {
+    input.checked = ragSelectedDocIds.has(input.dataset.fileCheckbox);
+  });
+
+  docList.querySelectorAll('[data-folder-checkbox]').forEach(input => {
+    const docs = getDocsForFolder(input.dataset.folderCheckbox);
+    const selectedCount = docs.filter(doc => ragSelectedDocIds.has(String(doc.doc_id))).length;
+    input.disabled = docs.length === 0;
+    input.checked = docs.length > 0 && selectedCount === docs.length;
+    input.indeterminate = selectedCount > 0 && selectedCount < docs.length;
+  });
+
+  updateRagScopeStatus();
+}
+
+function renderArchiveFile(doc, depth) {
+  const docId = String(doc.doc_id || '');
+  const sourcePath = doc.sourcePath || normalizeSourcePath(doc);
+  const folderPath = doc.folderPath || archiveFolderPath(sourcePath);
+  const indent = `${Math.max(0, depth - 1) * 0.55}rem`;
+  const meta = folderPath
+    ? `${folderPath} · ${fragmentLabel(doc.chunk_count)}`
+    : fragmentLabel(doc.chunk_count);
+  const openLink = docId
+    ? `<a class="doc-link" href="/api/documents/${encodeURIComponent(docId)}/file" target="_blank" rel="noopener noreferrer">Open original document</a>`
+    : '';
+  return `
+    <div class="doc-item rag-file" style="--folder-indent:${escapeAttr(indent)}">
+      <label class="scope-check-label file-scope">
+        <input type="checkbox" data-file-checkbox="${escapeAttr(docId)}">
+        <span class="scope-file-name">${escapeHtml(doc.displayName || archiveFileName(sourcePath))}</span>
+      </label>
+      <div class="doc-meta">${escapeHtml(meta)}</div>
+      ${openLink}
+    </div>
+  `;
+}
+
+function renderArchiveFolder(node, depth = 0) {
+  const foldersHtml = sortedArchiveFolders(node)
+    .map(folder => renderArchiveFolder(folder, depth + 1))
+    .join('');
+  const filesHtml = sortedArchiveFiles(node)
+    .map(doc => renderArchiveFile(doc, depth + 1))
+    .join('');
+  const folderDocs = getDocsForFolder(node.path);
+  const openAttr = depth <= 1 ? ' open' : '';
+  const indent = `${Math.max(0, depth - 1) * 0.55}rem`;
+
+  return `
+    <details class="library-folder rag-folder" data-folder-path="${escapeAttr(node.path)}" style="--folder-indent:${escapeAttr(indent)}"${openAttr}>
+      <summary class="folder-summary">
+        <label class="scope-check-label folder-scope">
+          <input type="checkbox" data-folder-checkbox="${escapeAttr(node.path)}">
+          <span class="folder-title">${escapeHtml(node.name)}</span>
+        </label>
+        <span class="folder-side">
+          <span>${folderDocs.length} file${folderDocs.length === 1 ? '' : 's'}</span>
+          <span class="folder-chevron">&#9654;</span>
+        </span>
+      </summary>
+      <div class="folder-items">${foldersHtml}${filesHtml}</div>
+    </details>
+  `;
 }
 
 function fragmentLabel(count) {
@@ -316,6 +498,7 @@ function collectContextFields(mode) {
   const fields = [];
 
   if (mode === 'rag') {
+    fields.push({ label: 'RAG access', value: ragScopeLabel() });
     if (industry.value.trim()) {
       fields.push({ label: industryLabel.textContent.trim(), value: industry.value.trim() });
     }
@@ -485,6 +668,7 @@ function renderResponseHtml(payload, options = {}) {
     const collection = escapeHtml(rag.collection || 'n/a');
     const chunks = Number(rag.chunks_retrieved || 0);
     const docs = Number(rag.documents_retrieved || 0);
+    const scopeDocs = Number(rag.scope_documents || 0);
     const avgScore = safePercent(rag.avg_score);
     html += `
       <div class="rag-summary">
@@ -493,6 +677,7 @@ function renderResponseHtml(payload, options = {}) {
           <span class="rag-pill">Collection: ${collection}</span>
           <span class="rag-pill">${chunks} chunks</span>
           <span class="rag-pill">${docs} documents</span>
+          ${Number.isFinite(scopeDocs) && scopeDocs > 0 ? `<span class="rag-pill">${scopeDocs} active files</span>` : ''}
           <span class="rag-pill">Avg confidence: ${avgScore}</span>
         </div>
       </div>
@@ -505,6 +690,7 @@ function renderResponseHtml(payload, options = {}) {
     html += '<div class="sources"><h4>Referenced Passages</h4><ul>';
     html += sources.map((s) => {
       const filename = s.filename || 'Untitled source';
+      const sourcePath = s.source_path || filename;
       const chunkNum = Number.isInteger(s.chunk_id) ? s.chunk_id + 1 : '?';
       const confidence = safePercent(s.score);
       const klass = confidenceClass(s.score);
@@ -515,7 +701,7 @@ function renderResponseHtml(payload, options = {}) {
             <span class="source-title">${escapeHtml(filename)}</span>
             <span class="confidence-pill ${klass}">${confidence}</span>
           </div>
-          <div class="source-subline">Archive fragment ${chunkNum}</div>
+          <div class="source-subline">${escapeHtml(sourcePath)} · Archive fragment ${chunkNum}</div>
           ${snippet}
         </li>
       `;
@@ -686,59 +872,68 @@ async function loadDocuments() {
       return;
     }
     if (!docs.length) {
+      archiveDocuments = [];
+      syncArchiveSelection([]);
+      updateRagScopeStatus();
       docList.innerHTML = '<div class="doc-item">No documents are in the library yet.</div>';
       return;
     }
 
-    const grouped = docs.reduce((acc, doc) => {
-      const folderName = collectionLabel(doc.vertical);
-      if (!acc[folderName]) {
-        acc[folderName] = [];
-      }
-      acc[folderName].push(doc);
-      return acc;
-    }, {});
-
-    const preferredOrder = ['Brief Salon', 'Interview Atelier', 'Insights Parlour'];
-    const folderNames = Object.keys(grouped).sort((a, b) => {
-      const aIdx = preferredOrder.indexOf(a);
-      const bIdx = preferredOrder.indexOf(b);
-      const aRank = aIdx === -1 ? 999 : aIdx;
-      const bRank = bIdx === -1 ? 999 : bIdx;
-      if (aRank !== bRank) return aRank - bRank;
-      return a.localeCompare(b);
-    });
-
-    docList.innerHTML = folderNames.map((folderName, index) => {
-      const entries = grouped[folderName] || [];
-      const itemsHtml = entries.map(d => `
-        <div class="doc-item">
-          <strong>${escapeHtml(d.filename || 'Untitled note')}</strong>
-          <div class="doc-meta">${escapeHtml(fragmentLabel(d.chunk_count))}</div>
-          ${d.doc_id
-          ? `<a class="doc-link" href="/api/documents/${encodeURIComponent(d.doc_id)}/file" target="_blank" rel="noopener noreferrer">Open original document</a>`
-          : ''
-        }
-        </div>
-      `).join('');
-
-      return `
-        <details class="library-folder">
-          <summary class="folder-summary">
-            <span class="folder-title">${escapeHtml(folderName)}</span>
-            <span class="folder-side">
-              <span>${entries.length} file${entries.length === 1 ? '' : 's'}</span>
-              <span class="folder-chevron">&#9654;</span>
-            </span>
-          </summary>
-          <div class="folder-items">${itemsHtml}</div>
-        </details>
-      `;
-    }).join('');
+    archiveDocuments = docs
+      .filter(doc => doc && doc.doc_id)
+      .map(doc => ({
+        ...doc,
+        source_path: normalizeSourcePath(doc),
+      }));
+    syncArchiveSelection(archiveDocuments);
+    const tree = buildArchiveTree(archiveDocuments);
+    docList.innerHTML = renderArchiveFolder(tree, 0);
+    applyArchiveSelectionState();
   } catch (err) {
+    updateRagScopeStatus();
     docList.innerHTML = `<div class="doc-item">${escapeHtml(err.message)}</div>`;
   }
 }
+
+docList?.addEventListener('click', (e) => {
+  if (e.target.closest('.scope-check-label') || e.target.closest('.doc-link')) {
+    e.stopPropagation();
+  }
+});
+
+docList?.addEventListener('change', (e) => {
+  const fileCheckbox = e.target.closest('[data-file-checkbox]');
+  const folderCheckbox = e.target.closest('[data-folder-checkbox]');
+
+  if (fileCheckbox) {
+    const docId = fileCheckbox.dataset.fileCheckbox;
+    if (fileCheckbox.checked) {
+      ragSelectedDocIds.add(docId);
+    } else {
+      ragSelectedDocIds.delete(docId);
+    }
+  } else if (folderCheckbox) {
+    const folderDocs = getDocsForFolder(folderCheckbox.dataset.folderCheckbox);
+    folderDocs.forEach(doc => {
+      const docId = String(doc.doc_id || '');
+      if (!docId) {
+        return;
+      }
+      if (folderCheckbox.checked) {
+        ragSelectedDocIds.add(docId);
+      } else {
+        ragSelectedDocIds.delete(docId);
+      }
+    });
+  } else {
+    return;
+  }
+
+  applyArchiveSelectionState();
+  if (currentMode() === 'rag') {
+    setExportState(null, 'Run an analysis to enable export.');
+  }
+});
 
 refreshDocsBtn.addEventListener('click', async () => {
   const originalText = refreshDocsBtn.textContent;
@@ -789,6 +984,16 @@ form.addEventListener('submit', async (e) => {
   e.preventDefault();
   const mode = currentMode();
   const compareMode = shouldRunCompare(mode, objective.value);
+  const selectedRagDocIds = mode === 'rag' ? getSelectedRagDocIds() : [];
+  if (mode === 'rag' && selectedRagDocIds.length === 0) {
+    responseEl.style.display = 'block';
+    responseEl.classList.add('error');
+    responseEl.innerHTML = '<span class="response-header">request error</span>Select at least one Knowledge Archive file for RAG access.';
+    compareResponseEl.classList.remove('error');
+    compareResponseEl.innerHTML = compareMode ? '<span class="side-placeholder">Awaiting execution...</span>' : '';
+    setExportState(null, 'Export unavailable until the next successful run.');
+    return;
+  }
   submitBtn.disabled = true;
   setExportState(null, 'Generating exportable output...');
   responseEl.style.display = 'block';
@@ -802,6 +1007,9 @@ form.addEventListener('submit', async (e) => {
   fd.append('objective', objective.value);
   fd.append('use_web_search', useWebSearchInput.checked ? 'true' : 'false');
   fd.append('compare_enabled', compareMode ? 'true' : 'false');
+  if (mode === 'rag') {
+    fd.append('rag_doc_ids', JSON.stringify(selectedRagDocIds));
+  }
 
   let userMessage = message.value.trim();
   if (mode === 'rag') {
@@ -887,6 +1095,14 @@ function escapeHtml(value) {
   const div = document.createElement('div');
   div.textContent = String(value ?? '');
   return div.innerHTML;
+}
+
+function escapeAttr(value) {
+  return String(value ?? '')
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
 }
 
 async function fetchModels() {

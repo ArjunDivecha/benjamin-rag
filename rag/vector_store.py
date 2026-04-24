@@ -87,13 +87,17 @@ class VectorStore:
         query_embedding: List[float],
         top_k: int = 5,
         min_score: float = 0.0,
+        where: Optional[Dict] = None,
     ) -> List[Dict]:
         collection = self.get_collection(collection_name)
-        result = collection.query(
-            query_embeddings=[query_embedding],
-            n_results=top_k,
-            include=["documents", "metadatas", "distances"],
-        )
+        query_kwargs = {
+            "query_embeddings": [query_embedding],
+            "n_results": top_k,
+            "include": ["documents", "metadatas", "distances"],
+        }
+        if where:
+            query_kwargs["where"] = where
+        result = collection.query(**query_kwargs)
 
         docs = result.get("documents", [[]])[0]
         metas = result.get("metadatas", [[]])[0]
@@ -140,6 +144,8 @@ class VectorStore:
             entry = by_doc[doc_id]
             entry["doc_id"] = doc_id
             entry["filename"] = meta.get("filename")
+            entry["source_path"] = meta.get("source_path") or meta.get("filename")
+            entry["folder_path"] = meta.get("folder_path") or ""
             entry["chunk_count"] += 1
 
         return list(by_doc.values())

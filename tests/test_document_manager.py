@@ -15,11 +15,13 @@ def test_save_document_returns_doc_id(tmp_path: Path):
 
 def test_get_document_returns_metadata(tmp_path: Path):
     manager = _make_manager(tmp_path)
-    doc_id = manager.save_document(b"hello world", "sample.txt", "V1")
+    doc_id = manager.save_document(b"hello world", "sample.txt", "V1", source_path="Research/sample.txt")
     doc = manager.get_document(doc_id)
     assert doc is not None
     assert doc["doc_id"] == doc_id
     assert doc["filename"] == "sample.txt"
+    assert doc["source_path"] == "Research/sample.txt"
+    assert doc["folder_path"] == "Research"
     assert doc["vertical"] == "V1"
 
 
@@ -53,9 +55,10 @@ def test_delete_document_removes_file_and_metadata(tmp_path: Path):
 def test_is_unchanged_true_for_same_content_false_for_different(tmp_path: Path):
     manager = _make_manager(tmp_path)
     content = b"constant content"
-    manager.save_document(content, "same.txt", "V1")
-    assert manager.is_unchanged(content, "same.txt")
-    assert not manager.is_unchanged(b"updated content", "same.txt")
+    manager.save_document(content, "same.txt", "V1", source_path="Folder/same.txt")
+    assert manager.is_unchanged(content, "same.txt", source_path="Folder/same.txt")
+    assert not manager.is_unchanged(content, "same.txt", source_path="Other/same.txt")
+    assert not manager.is_unchanged(b"updated content", "same.txt", source_path="Folder/same.txt")
 
 
 def test_resaving_same_file_returns_same_doc_id(tmp_path: Path):

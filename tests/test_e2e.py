@@ -52,11 +52,17 @@ def test_full_pipeline_ingest_and_query(tmp_path: Path, monkeypatch):
         ["--vertical", backend.UNIFIED_COLLECTION, "--files", str(f), "--storage-path", str(storage), "--vector-path", str(vector)]
     )
     assert rc == 0
+    doc_ids = [d["doc_id"] for d in DocumentManager(str(storage)).list_documents(backend.UNIFIED_COLLECTION)]
 
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat",
-        data={"message": "Draft brief", "mode": "rag", "objective": "expert_network_brief"},
+        data={
+            "message": "Draft brief",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps(doc_ids),
+        },
     )
     assert resp.status_code == 200
     data = resp.json()
@@ -75,11 +81,18 @@ def test_incremental_update_add_second_doc_and_query_both(tmp_path: Path, monkey
 
     preprocess.main(["--vertical", backend.UNIFIED_COLLECTION, "--files", str(f1), "--storage-path", str(storage), "--vector-path", str(vector)])
     preprocess.main(["--vertical", backend.UNIFIED_COLLECTION, "--files", str(f2), "--storage-path", str(storage), "--vector-path", str(vector)])
+    doc_ids = [d["doc_id"] for d in DocumentManager(str(storage)).list_documents(backend.UNIFIED_COLLECTION)]
 
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat",
-        data={"message": "Summarize", "mode": "rag", "objective": "expert_network_brief", "top_k": 5},
+        data={
+            "message": "Summarize",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+            "top_k": 5,
+            "rag_doc_ids": json.dumps(doc_ids),
+        },
     )
     assert resp.status_code == 200
     source_doc_ids = {s["doc_id"] for s in resp.json()["sources"]}
@@ -102,7 +115,12 @@ def test_remove_doc_and_query_no_longer_returns_it(tmp_path: Path, monkeypatch):
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat",
-        data={"message": "Any context?", "mode": "rag", "objective": "expert_network_brief"},
+        data={
+            "message": "Any context?",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps([doc_id]),
+        },
     )
     assert resp.status_code == 400
 
@@ -126,7 +144,12 @@ def test_unified_collection_is_shared_across_objectives(tmp_path: Path, monkeypa
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat",
-        data={"message": "Interview questions", "mode": "rag", "objective": "interview_guide"},
+        data={
+            "message": "Interview questions",
+            "mode": "rag",
+            "objective": "interview_guide",
+            "rag_doc_ids": json.dumps(sorted(unified_doc_ids)),
+        },
     )
     assert resp.status_code == 200
     result_doc_ids = {s["doc_id"] for s in resp.json()["sources"]}
@@ -142,11 +165,17 @@ def test_security_bedrock_only_with_aws_params(tmp_path: Path, monkeypatch):
     f = tmp_path / "secure.txt"
     f.write_text(_long_text(130, "secure"))
     preprocess.main(["--vertical", backend.UNIFIED_COLLECTION, "--files", str(f), "--storage-path", str(storage), "--vector-path", str(vector)])
+    doc_ids = [d["doc_id"] for d in DocumentManager(str(storage)).list_documents(backend.UNIFIED_COLLECTION)]
 
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat",
-        data={"message": "Check", "mode": "rag", "objective": "expert_network_brief"},
+        data={
+            "message": "Check",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps(doc_ids),
+        },
     )
     assert resp.status_code == 200
     assert "content" in resp.json()
@@ -163,11 +192,17 @@ def test_persistence_after_backend_reinit(tmp_path: Path, monkeypatch):
 
     # Simulate backend restart by resetting lazy service singletons.
     backend._reset_rag_services_for_tests()
+    doc_ids = [d["doc_id"] for d in DocumentManager(str(storage)).list_documents(backend.UNIFIED_COLLECTION)]
 
     client = TestClient(backend.app)
     resp = client.post(
         "/api/chat",
-        data={"message": "Use persisted data", "mode": "rag", "objective": "expert_network_brief"},
+        data={
+            "message": "Use persisted data",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps(doc_ids),
+        },
     )
     assert resp.status_code == 200
     assert resp.json()["sources"]

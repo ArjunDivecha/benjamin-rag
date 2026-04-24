@@ -152,3 +152,74 @@ def test_filename_match_beats_weak_semantic_hit(tmp_path: Path, monkeypatch):
 
     assert results
     assert all(result["metadata"]["filename"] == "Executive Summary.docx" for result in results)
+
+
+def test_doc_id_scope_filters_retrieval(tmp_path: Path, monkeypatch):
+    store = VectorStore(str(tmp_path / "chroma"))
+    store.create_collection("ALL")
+    store.upsert_document(
+        "ALL",
+        "doc_alpha",
+        ["alpha customer renewal notes"],
+        [[1.0, 0.0, 0.0]],
+        metadata={"filename": "alpha.txt", "source_path": "Alpha/alpha.txt"},
+    )
+    store.upsert_document(
+        "ALL",
+        "doc_beta",
+        ["beta pricing pressure notes"],
+        [[1.0, 0.0, 0.0]],
+        metadata={"filename": "beta.txt", "source_path": "Beta/beta.txt"},
+    )
+
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+    results = retrieve_context(
+        "pricing pressure",
+        store,
+        "ALL",
+        top_k=5,
+        min_score=0.0,
+        doc_ids=["doc_beta"],
+    )
+
+    assert results
+    assert {result["metadata"]["doc_id"] for result in results} == {"doc_beta"}
+
+
+def test_folder_query_prefers_source_path_over_semantic_hit(tmp_path: Path, monkeypatch):
+    store = VectorStore(str(tmp_path / "chroma"))
+    store.create_collection("ALL")
+    store.upsert_document(
+        "ALL",
+        "doc_two_a",
+        ["expert brief ai services details"],
+        [[0.0, 0.0, 1.0]],
+        metadata={"filename": "2. Expert Network Brief - AI Services.docx", "source_path": "Two/2. Expert Network Brief - AI Services.docx", "folder_path": "Two"},
+    )
+    store.upsert_document(
+        "ALL",
+        "doc_two_b",
+        ["expert brief nitrogen services details"],
+        [[0.0, 0.0, 1.0]],
+        metadata={"filename": "2. Expert Network Briefs - Nitrogen Services.docx", "source_path": "Two/2. Expert Network Briefs - Nitrogen Services.docx", "folder_path": "Two"},
+    )
+    store.upsert_document(
+        "ALL",
+        "doc_four",
+        ["interview notes with a strong semantic hit"],
+        [[1.0, 0.0, 0.0]],
+        metadata={"filename": "4. Interview Notes.docx", "source_path": "Four/4. Interview Notes.docx", "folder_path": "Four"},
+    )
+
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+    results = retrieve_context(
+        "give me details of the files in folder two",
+        store,
+        "ALL",
+        top_k=5,
+        min_score=0.0,
+        doc_ids=["doc_two_a", "doc_two_b", "doc_four"],
+    )
+
+    assert results
+    assert {result["metadata"]["folder_path"] for result in results} == {"Two"}

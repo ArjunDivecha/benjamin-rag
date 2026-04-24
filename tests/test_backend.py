@@ -119,7 +119,7 @@ def test_chat_direct_mode_with_file_still_works(tmp_path: Path, monkeypatch):
     assert isinstance(data["content"], str)
 
 def test_chat_rag_mode_returns_response_with_sources(tmp_path: Path, monkeypatch):
-    _seed_v1_doc(tmp_path, monkeypatch)
+    doc_id = _seed_v1_doc(tmp_path, monkeypatch)
     monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
 
     client = TestClient(backend.app)
@@ -129,6 +129,7 @@ def test_chat_rag_mode_returns_response_with_sources(tmp_path: Path, monkeypatch
             "message": "Draft a tiny 1-sentence brief exactly.",
             "mode": "rag",
             "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps([doc_id]),
         },
     )
     assert resp.status_code == 200, resp.text
@@ -151,6 +152,24 @@ def test_chat_rag_empty_vertical_returns_error(tmp_path: Path, monkeypatch):
         },
     )
     assert resp.status_code == 400
+
+
+def test_chat_rag_requires_explicit_document_scope(tmp_path: Path, monkeypatch):
+    _seed_v1_doc(tmp_path, monkeypatch)
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat",
+        data={
+            "message": "Draft a tiny brief.",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+        },
+    )
+
+    assert resp.status_code == 400
+    assert "Select at least one" in resp.json()["detail"]
 
 
 def test_chat_rag_can_fallback_to_filename_match(tmp_path: Path, monkeypatch):
@@ -183,6 +202,7 @@ def test_chat_rag_can_fallback_to_filename_match(tmp_path: Path, monkeypatch):
             "message": "summarize this executive summary",
             "mode": "rag",
             "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps([doc_id]),
         },
     )
 
@@ -193,7 +213,7 @@ def test_chat_rag_can_fallback_to_filename_match(tmp_path: Path, monkeypatch):
 
 
 def test_chat_rag_insights_qa_uses_local_provider(tmp_path: Path, monkeypatch):
-    _seed_v3_doc(tmp_path, monkeypatch)
+    doc_id = _seed_v3_doc(tmp_path, monkeypatch)
     monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
 
     def fake_post(url, *args, **kwargs):
@@ -212,6 +232,7 @@ def test_chat_rag_insights_qa_uses_local_provider(tmp_path: Path, monkeypatch):
             "message": "Who mentioned market growth?",
             "mode": "rag",
             "objective": "insights_qa",
+            "rag_doc_ids": json.dumps([doc_id]),
         },
     )
     assert resp.status_code == 200, resp.text
@@ -287,7 +308,7 @@ def test_documents_sync_returns_detailed_no_change_message(tmp_path: Path, monke
 
 
 def test_system_prompt_included_in_rag_payload(tmp_path: Path, monkeypatch):
-    _seed_v1_doc(tmp_path, monkeypatch)
+    doc_id = _seed_v1_doc(tmp_path, monkeypatch)
     monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
 
     client = TestClient(backend.app)
@@ -297,6 +318,7 @@ def test_system_prompt_included_in_rag_payload(tmp_path: Path, monkeypatch):
             "message": "Write a 5 word screening question.",
             "mode": "rag",
             "objective": "expert_network_brief",
+            "rag_doc_ids": json.dumps([doc_id]),
         },
     )
     assert resp.status_code == 200, resp.text
@@ -327,7 +349,7 @@ def test_local_model_config_reads_dotenv_when_env_missing(tmp_path: Path, monkey
     assert model == "qwen3:32b"
 
 def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
-    _seed_v3_doc(tmp_path, monkeypatch)
+    doc_id = _seed_v3_doc(tmp_path, monkeypatch)
     monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
 
     def fake_post(url, *args, **kwargs):
@@ -346,8 +368,10 @@ def test_chat_compare_returns_local_and_opus(tmp_path: Path, monkeypatch):
         data={
             "message": "In 1 sentence, who mentioned growth?",
             "objective": "insights_qa",
+            "mode": "rag",
             "model_left": "lmstudio|qwen2.5:32b",
             "model_right": "bedrock|us.anthropic.claude-opus-4-6-v1",
+            "rag_doc_ids": json.dumps([doc_id]),
         },
     )
     assert resp.status_code == 200, resp.text
@@ -392,6 +416,80 @@ def test_chat_compare_can_run_only_left_model_when_compare_disabled(tmp_path: Pa
     assert data["left"]["content"] == "left only"
     assert data["right"] is None
     assert calls == ["us.anthropic.claude-haiku-4-5-20251001-v1:0"]
+
+
+def test_chat_compare_rag_limits_retrieval_to_selected_documents(tmp_path: Path, monkeypatch):
+    _configure_rag_paths(tmp_path, monkeypatch)
+    vs, dm = backend._ensure_rag_services()
+
+    alpha_id = dm.save_document(
+        b"alpha " * 200,
+        "alpha.txt",
+        backend.UNIFIED_COLLECTION,
+        chunk_count=1,
+        source_path="Alpha/alpha.txt",
+    )
+    beta_id = dm.save_document(
+        b"beta " * 200,
+        "beta.txt",
+        backend.UNIFIED_COLLECTION,
+        chunk_count=1,
+        source_path="Beta/beta.txt",
+    )
+    vs.upsert_document(
+        backend.UNIFIED_COLLECTION,
+        alpha_id,
+        ["alpha renewal notes"],
+        [[1.0, 0.0, 0.0]],
+        metadata={"filename": "alpha.txt", "source_path": "Alpha/alpha.txt", "folder_path": "Alpha", "vertical": backend.UNIFIED_COLLECTION},
+    )
+    vs.upsert_document(
+        backend.UNIFIED_COLLECTION,
+        beta_id,
+        ["beta pricing pressure notes"],
+        [[1.0, 0.0, 0.0]],
+        metadata={"filename": "beta.txt", "source_path": "Beta/beta.txt", "folder_path": "Beta", "vertical": backend.UNIFIED_COLLECTION},
+    )
+    monkeypatch.setattr("rag.retrieval.get_embedding", lambda _: [1.0, 0.0, 0.0])
+    captured_messages = []
+
+    def fake_run_bedrock_model(messages, model_name, api_key=None, enable_web_search=False):
+        captured_messages.append(messages)
+        return {
+            "content": "scoped ok",
+            "usage": {"prompt_tokens": 1, "completion_tokens": 1},
+            "provider": "bedrock",
+            "model": model_name,
+            "metrics": {"total_tokens": 2, "latency_ms": 1.0, "tok_per_sec": 2.0},
+        }
+
+    monkeypatch.setattr(backend, "_load_bedrock_key", lambda: "test-key")
+    monkeypatch.setattr(backend, "_run_bedrock_model", fake_run_bedrock_model)
+
+    client = TestClient(backend.app)
+    resp = client.post(
+        "/api/chat/compare",
+        data={
+            "message": "Summarize pricing pressure.",
+            "mode": "rag",
+            "objective": "expert_network_brief",
+            "compare_enabled": "false",
+            "model_left": "bedrock|us.anthropic.claude-haiku-4-5-20251001-v1:0",
+            "rag_doc_ids": json.dumps([beta_id]),
+        },
+    )
+
+    assert resp.status_code == 200, resp.text
+    data = resp.json()
+    assert {source["doc_id"] for source in data["sources"]} == {beta_id}
+    assert data["sources"][0]["source_path"] == "Beta/beta.txt"
+    assert data["rag"]["scope_documents"] == 1
+    system_content = captured_messages[0][0]["content"]
+    user_content = captured_messages[0][1]["content"]
+    assert "Use only the selected files" in system_content
+    assert "<rag_scope>" in user_content
+    assert "Beta/beta.txt" in user_content
+    assert "Alpha/alpha.txt" not in user_content
 
 
 def test_chat_compare_enables_web_search_for_objective1_when_checked(tmp_path: Path, monkeypatch):

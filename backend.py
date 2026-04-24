@@ -333,19 +333,145 @@ def _build_metrics(
     }
 
 
-def _build_rag_summary(collection_name: str, chunks: list[dict]) -> dict:
+def _parse_rag_doc_ids(raw_value: Optional[str]) -> Optional[list[str]]:
+    if raw_value is None:
+        return None
+    raw_value = str(raw_value).strip()
+    if not raw_value:
+        return None
+
+    try:
+        parsed = json.loads(raw_value)
+    except json.JSONDecodeError:
+        parsed = raw_value.split(",")
+
+    if not isinstance(parsed, list):
+        raise HTTPException(status_code=400, detail="rag_doc_ids must be a JSON array of document ids")
+
+    doc_ids = []
+    seen = set()
+    for item in parsed:
+        doc_id = str(item or "").strip()
+        if not doc_id or doc_id in seen:
+            continue
+        seen.add(doc_id)
+        doc_ids.append(doc_id)
+    return doc_ids
+
+
+def _require_rag_doc_scope(raw_value: Optional[str]) -> list[str]:
+    doc_ids = _parse_rag_doc_ids(raw_value)
+    if not doc_ids:
+        raise HTTPException(
+            status_code=400,
+            detail="Select at least one Knowledge Archive file for RAG access.",
+        )
+    return doc_ids
+
+
+def _validate_rag_doc_scope(
+    doc_manager: Any,
+    collection_name: str,
+    selected_doc_ids: list[str],
+) -> list[str]:
+    available_doc_ids = {
+        str(doc.get("doc_id") or "")
+        for doc in doc_manager.list_documents(vertical=collection_name)
+    }
+    unknown_doc_ids = [
+        doc_id
+        for doc_id in selected_doc_ids
+        if doc_id not in available_doc_ids
+    ]
+    if unknown_doc_ids:
+        raise HTTPException(
+            status_code=400,
+            detail="One or more selected Knowledge Archive files are no longer available. Refresh and try again.",
+        )
+    return selected_doc_ids
+
+
+def _build_rag_system_guard() -> str:
+    return (
+        "RAG scope rule: the user has explicitly selected the Knowledge Archive files available for this request. "
+        "Use only the selected files listed in <rag_scope> and the passages in <retrieved_context>. "
+        "Do not use or infer from unchecked folders or files. "
+        "If the user asks about selected folders or files, answer from the <rag_scope> manifest and retrieved passages; "
+        "do not say you cannot access folders when the selected manifest provides folder/file paths."
+    )
+
+
+def _folder_path_from_source(source_path: str) -> str:
+    parent = Path(source_path).parent
+    if str(parent) == ".":
+        return ""
+    return parent.as_posix()
+
+
+def _build_rag_scope_context(
+    doc_manager: Any,
+    collection_name: str,
+    selected_doc_ids: list[str],
+) -> str:
+    docs_by_id = {
+        str(doc.get("doc_id") or ""): doc
+        for doc in doc_manager.list_documents(vertical=collection_name)
+    }
+    selected_docs = [
+        docs_by_id[doc_id]
+        for doc_id in selected_doc_ids
+        if doc_id in docs_by_id
+    ]
+
+    folder_counts: dict[str, int] = {}
+    file_lines = []
+    for doc in selected_docs:
+        source_path = _safe_text(doc.get("source_path") or doc.get("filename"))
+        folder_path = _safe_text(doc.get("folder_path")) or _folder_path_from_source(source_path)
+        folder_label = folder_path or "Data"
+        folder_counts[folder_label] = folder_counts.get(folder_label, 0) + 1
+        chunks = int(doc.get("chunk_count") or 0)
+        file_lines.append(
+            f"- {escape(source_path)} | folder={escape(folder_label)} | chunks={chunks}"
+        )
+
+    folder_lines = [
+        f"- {escape(folder)}: {count} file{'s' if count != 1 else ''}"
+        for folder, count in sorted(folder_counts.items())
+    ]
+
+    return (
+        "<rag_scope>\n"
+        f"Selected files available to this request: {len(selected_docs)}.\n"
+        "Unchecked folders/files are not available and must not be used.\n"
+        "Folders:\n"
+        f"{chr(10).join(folder_lines) if folder_lines else '- none'}\n"
+        "Files:\n"
+        f"{chr(10).join(file_lines) if file_lines else '- none'}\n"
+        "</rag_scope>"
+    )
+
+
+def _build_rag_summary(
+    collection_name: str,
+    chunks: list[dict],
+    selected_doc_ids: Optional[list[str]] = None,
+) -> dict:
     docs_retrieved = {
         c.get("metadata", {}).get("doc_id")
         for c in chunks
         if c.get("metadata", {}).get("doc_id")
     }
     scores = [float(c.get("score", 0.0)) for c in chunks]
-    return {
+    summary = {
         "collection": collection_name,
         "chunks_retrieved": len(chunks),
         "documents_retrieved": len(docs_retrieved),
         "avg_score": round(sum(scores) / len(scores), 3) if scores else 0.0,
     }
+    if selected_doc_ids is not None:
+        summary["scope_documents"] = len(set(selected_doc_ids))
+    return summary
 
 
 def _build_sources(chunks: list[dict]) -> list[dict]:
@@ -355,6 +481,9 @@ def _build_sources(chunks: list[dict]) -> list[dict]:
             "chunk_id": c.get("metadata", {}).get("chunk_id"),
             "score": c.get("score", 0.0),
             "filename": c.get("metadata", {}).get("filename"),
+            "source_path": c.get("metadata", {}).get("source_path")
+            or c.get("metadata", {}).get("filename"),
+            "folder_path": c.get("metadata", {}).get("folder_path") or "",
             "snippet": (c.get("text", "") or "").strip()[:280],
         }
         for c in chunks
@@ -1036,6 +1165,8 @@ def _build_export_html(payload: dict[str, Any]) -> str:
             ("Chunks retrieved", str(rag.get("chunks_retrieved", 0))),
             ("Documents retrieved", str(rag.get("documents_retrieved", 0))),
         ]
+        if rag.get("scope_documents") is not None:
+            rag_rows.append(("Accessible documents", str(rag.get("scope_documents", 0))))
         try:
             rag_rows.append(("Average confidence", f"{round(float(rag.get('avg_score', 0.0)) * 100)}%"))
         except (TypeError, ValueError):
@@ -1221,6 +1352,8 @@ def _build_export_docx(payload: dict[str, Any]) -> bytes:
             ("Chunks retrieved", str(rag.get("chunks_retrieved", 0))),
             ("Documents retrieved", str(rag.get("documents_retrieved", 0))),
         ]
+        if rag.get("scope_documents") is not None:
+            rag_rows.append(("Accessible documents", str(rag.get("scope_documents", 0))))
         try:
             rag_rows.append(("Average confidence", f"{round(float(rag.get('avg_score', 0.0)) * 100)}%"))
         except (TypeError, ValueError):
@@ -1281,6 +1414,7 @@ async def chat(
     top_k: int = Form(5),
     min_score: float = Form(0.5),
     use_web_search: Optional[str] = Form("false"),
+    rag_doc_ids: Optional[str] = Form(None),
 ):
     """
     Chat endpoint with two modes:
@@ -1338,15 +1472,17 @@ async def chat(
             status_code=400,
             detail="objective must be 'expert_network_brief', 'interview_guide', or 'insights_qa' in rag mode",
         )
+    selected_doc_ids = _require_rag_doc_scope(rag_doc_ids)
 
     try:
-        vector_store, _ = _ensure_rag_services()
+        vector_store, doc_manager = _ensure_rag_services()
         from rag.retrieval import assemble_context, retrieve_context
         from rag.system_prompts import load_system_prompt
     except RuntimeError as exc:
         raise HTTPException(status_code=500, detail=str(exc))
 
     collection_name = OBJECTIVE_TO_COLLECTION[objective]
+    selected_doc_ids = _validate_rag_doc_scope(doc_manager, collection_name, selected_doc_ids)
     retrieval_started = time.perf_counter()
     chunks = retrieve_context(
         query=message.strip(),
@@ -1354,6 +1490,7 @@ async def chat(
         collection_name=collection_name,
         top_k=max(1, min(top_k, 20)),
         min_score=min_score,
+        doc_ids=selected_doc_ids,
     )
     retrieval_elapsed_s = time.perf_counter() - retrieval_started
     if not chunks:
@@ -1363,10 +1500,12 @@ async def chat(
         )
 
     context = assemble_context(chunks)
-    system_prompt = load_system_prompt(objective)
+    rag_scope_context = _build_rag_scope_context(doc_manager, collection_name, selected_doc_ids)
+    system_prompt = f"{load_system_prompt(objective)}\n\n{_build_rag_system_guard()}"
     if _objective_uses_web_search(objective):
         system_prompt = f"{system_prompt}\n\n{_build_recency_guard()}"
     user_sections = [
+        rag_scope_context,
         "<retrieved_context>\n"
         f"{context}\n"
         "</retrieved_context>"
@@ -1399,7 +1538,11 @@ async def chat(
     else:
         raise HTTPException(status_code=500, detail=f"Unsupported provider: {provider}")
 
-    rag_summary = _build_rag_summary(collection_name=collection_name, chunks=chunks)
+    rag_summary = _build_rag_summary(
+        collection_name=collection_name,
+        chunks=chunks,
+        selected_doc_ids=selected_doc_ids,
+    )
     sources = _build_sources(chunks)
     request_elapsed_s = time.perf_counter() - request_started
     model_response["metrics"]["retrieval_ms"] = round(retrieval_elapsed_s * 1000.0, 1)
@@ -1464,6 +1607,7 @@ async def chat_compare(
     file: Optional[UploadFile] = File(None),
     use_web_search: Optional[str] = Form("false"),
     compare_enabled: Optional[str] = Form("true"),
+    rag_doc_ids: Optional[str] = Form(None),
 ):
     """
     Chat endpoint for one selected model, with optional side-by-side comparison.
@@ -1473,6 +1617,7 @@ async def chat_compare(
     request_started = time.perf_counter()
     objective = (objective or "").strip()
     compare_requested = _as_bool(compare_enabled, default=True)
+    selected_doc_ids = None
     
     rag_summary = None
     sources = []
@@ -1508,15 +1653,17 @@ async def chat_compare(
     else:
         if objective not in OBJECTIVE_TO_COLLECTION:
             raise HTTPException(status_code=400, detail="invalid objective")
+        selected_doc_ids = _require_rag_doc_scope(rag_doc_ids)
 
         try:
-            vector_store, _ = _ensure_rag_services()
+            vector_store, doc_manager = _ensure_rag_services()
             from rag.retrieval import assemble_context, retrieve_context
             from rag.system_prompts import load_system_prompt
         except RuntimeError as exc:
             raise HTTPException(status_code=500, detail=str(exc))
 
         collection_name = OBJECTIVE_TO_COLLECTION[objective]
+        selected_doc_ids = _validate_rag_doc_scope(doc_manager, collection_name, selected_doc_ids)
         retrieval_started = time.perf_counter()
         chunks = retrieve_context(
             query=message.strip(),
@@ -1524,16 +1671,19 @@ async def chat_compare(
             collection_name=collection_name,
             top_k=max(1, min(top_k, 20)),
             min_score=min_score,
+            doc_ids=selected_doc_ids,
         )
         retrieval_elapsed_s = time.perf_counter() - retrieval_started
         if not chunks:
             raise HTTPException(status_code=400, detail=f"No relevant context found in collection '{collection_name}'")
 
         context = assemble_context(chunks)
-        system_prompt = load_system_prompt(objective)
+        rag_scope_context = _build_rag_scope_context(doc_manager, collection_name, selected_doc_ids)
+        system_prompt = f"{load_system_prompt(objective)}\n\n{_build_rag_system_guard()}"
         if _objective_uses_web_search(objective):
             system_prompt = f"{system_prompt}\n\n{_build_recency_guard()}"
         user_sections = [
+            rag_scope_context,
             "<retrieved_context>\n"
             f"{context}\n"
             "</retrieved_context>"
@@ -1546,7 +1696,11 @@ async def chat_compare(
             {"role": "system", "content": system_prompt},
             {"role": "user", "content": user_content},
         ]
-        rag_summary = _build_rag_summary(collection_name=collection_name, chunks=chunks)
+        rag_summary = _build_rag_summary(
+            collection_name=collection_name,
+            chunks=chunks,
+            selected_doc_ids=selected_doc_ids,
+        )
         sources = _build_sources(chunks)
 
     def _run_selected_model(model_identifier, msgs):
@@ -1700,7 +1854,13 @@ async def sync_documents(files: Optional[list[UploadFile]] = File(None)):
         resolved_files = _resolve_files(None, str(data_dir))
         sync_output = io.StringIO()
         with redirect_stdout(sync_output):
-            ingested, removed = sync_collection(UNIFIED_COLLECTION, resolved_files, vector_store, doc_manager)
+            ingested, removed = sync_collection(
+                UNIFIED_COLLECTION,
+                resolved_files,
+                vector_store,
+                doc_manager,
+                base_dir=data_dir,
+            )
         detail_lines.extend(line.strip() for line in sync_output.getvalue().splitlines() if line.strip())
         if not detail_lines:
             detail_lines.append("No file changes detected.")

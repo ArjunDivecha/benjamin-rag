@@ -60,7 +60,7 @@ def _resolve_files(files: List[str] | None, directory: str | None) -> List[Path]
         resolved.extend(Path(f).expanduser().resolve() for f in files)
     if directory:
         dir_path = Path(directory).expanduser().resolve()
-        for p in sorted(dir_path.iterdir()):
+        for p in sorted(dir_path.rglob("*")):
             if p.is_file():
                 resolved.append(p)
     deduped = []
@@ -73,43 +73,68 @@ def _resolve_files(files: List[str] | None, directory: str | None) -> List[Path]
     return deduped
 
 
+def _source_path_for(path: Path, base_dir: str | Path | None = None) -> str:
+    if base_dir:
+        try:
+            relative = path.resolve().relative_to(Path(base_dir).expanduser().resolve())
+            return relative.as_posix()
+        except ValueError:
+            pass
+    return path.name
+
+
+def _folder_path_for(source_path: str) -> str:
+    parent = Path(source_path).parent
+    if str(parent) == ".":
+        return ""
+    return parent.as_posix()
+
+
 def ingest_files(
     vertical: str,
     files: Iterable[Path],
     vector_store: VectorStore,
     doc_manager: DocumentManager,
+    base_dir: str | Path | None = None,
 ) -> int:
     ingested = 0
     vector_store.create_collection(vertical)
 
     for path in files:
         filename = path.name
+        source_path = _source_path_for(path, base_dir=base_dir)
+        folder_path = _folder_path_for(source_path)
         suffix = path.suffix.lower()
 
         if not path.exists() or not path.is_file():
             print(f"{path}: skipped (not found)")
             continue
         if suffix not in SUPPORTED_SUFFIXES:
-            print(f"{filename}: skipped (unsupported file type)")
+            print(f"{source_path}: skipped (unsupported file type)")
             continue
 
         started = time.time()
         file_bytes = path.read_bytes()
 
-        if doc_manager.is_unchanged(file_bytes, filename, vertical=vertical):
-            print(f"{filename}: skipped (unchanged)")
+        if doc_manager.is_unchanged(
+            file_bytes,
+            filename,
+            vertical=vertical,
+            source_path=source_path,
+        ):
+            print(f"{source_path}: skipped (unchanged)")
             continue
 
         # Replace prior versions of same file in this vertical.
         for existing in doc_manager.list_documents(vertical=vertical):
-            if existing["filename"] == filename:
+            if (existing.get("source_path") or existing["filename"]) == source_path:
                 vector_store.delete_document(vertical, existing["doc_id"])
                 doc_manager.delete_document(existing["doc_id"])
 
         try:
             text = read_file_content(path)
         except Exception as exc:
-            print(f"{filename}: skipped (read error: {exc})")
+            print(f"{source_path}: skipped (read error: {exc})")
             continue
 
         chunks = chunk_text(text)
@@ -120,6 +145,7 @@ def ingest_files(
             filename=filename,
             vertical=vertical,
             chunk_count=len(chunks),
+            source_path=source_path,
         )
         vector_store.upsert_document(
             collection_name=vertical,
@@ -128,12 +154,14 @@ def ingest_files(
             embeddings=embeddings,
             metadata={
                 "filename": filename,
+                "source_path": source_path,
+                "folder_path": folder_path,
                 "vertical": vertical,
             },
         )
 
         elapsed = time.time() - started
-        print(f"{filename}: ingested ({len(chunks)} chunks, {elapsed:.2f}s, doc_id={doc_id})")
+        print(f"{source_path}: ingested ({len(chunks)} chunks, {elapsed:.2f}s, doc_id={doc_id})")
         ingested += 1
 
     return ingested
@@ -144,27 +172,29 @@ def sync_collection(
     files: Iterable[Path],
     vector_store: VectorStore,
     doc_manager: DocumentManager,
+    base_dir: str | Path | None = None,
 ) -> tuple[int, int]:
     """Sync the RAG to exactly match the provided files.
 
     1. Ingest new/changed files.
-    2. Remove any documents in this vertical whose filename is not in the file list.
+    2. Remove any documents in this vertical whose source path is not in the file list.
     """
     file_list = list(files)
-    ingested = ingest_files(vertical, file_list, vector_store, doc_manager)
+    ingested = ingest_files(vertical, file_list, vector_store, doc_manager, base_dir=base_dir)
 
-    current_filenames = set()
+    current_source_paths = set()
     for p in file_list:
         suffix = p.suffix.lower()
         if p.exists() and p.is_file() and suffix in SUPPORTED_SUFFIXES:
-            current_filenames.add(p.name)
+            current_source_paths.add(_source_path_for(p, base_dir=base_dir))
 
     removed = 0
     for doc in doc_manager.list_documents(vertical=vertical):
-        if doc["filename"] not in current_filenames:
+        doc_source_path = doc.get("source_path") or doc["filename"]
+        if doc_source_path not in current_source_paths:
             vector_store.delete_document(vertical, doc["doc_id"])
             doc_manager.delete_document(doc["doc_id"])
-            print(f"{doc['filename']}: removed (no longer in directory)")
+            print(f"{doc_source_path}: removed (no longer in directory)")
             removed += 1
 
     if removed:
@@ -190,8 +220,9 @@ def list_documents(doc_manager: DocumentManager, vertical: str | None = None) ->
         print("No documents found.")
         return 0
     for d in docs:
+        source_path = d.get("source_path") or d["filename"]
         print(
-            f'{d["doc_id"]} | vertical={d["vertical"]} | file={d["filename"]} | chunks={d["chunk_count"]}'
+            f'{d["doc_id"]} | vertical={d["vertical"]} | path={source_path} | chunks={d["chunk_count"]}'
         )
     return 0
 
@@ -259,9 +290,9 @@ def main(argv: List[str] | None = None) -> int:
         parser.error("Provide --files and/or --dir with at least one file")
 
     if args.sync:
-        sync_collection(args.vertical, files, vector_store, doc_manager)
+        sync_collection(args.vertical, files, vector_store, doc_manager, base_dir=args.directory)
     else:
-        ingest_files(args.vertical, files, vector_store, doc_manager)
+        ingest_files(args.vertical, files, vector_store, doc_manager, base_dir=args.directory)
     return 0
 
 
